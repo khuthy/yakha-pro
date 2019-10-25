@@ -1,0 +1,64 @@
+
+<ion-header>
+<ion-toolbar class="builderHeader">
+
+</ion-toolbar>
+</ion-header>
+
+<ion-content >
+<ion-grid >
+
+  <!-- logo -->
+  <ion-row justify-content-center>
+      <ion-col id="logo" col-4>
+             <img src="../../assets/icon/Logo.svg">
+      </ion-col>
+    </ion-row>
+
+    <!-- inputs -->
+    <ion-row justify-content-center no-padding>
+
+  <ion-col col-10 >
+     <ion-input type="text" placeholder="Username"></ion-input>
+        </ion-col>
+
+        <ion-col col-10>
+          <ion-input type="password" placeholder="Password"></ion-input>
+          </ion-col>
+
+         <ion-col col-10>
+          <P text-right>Forgot Password</P>
+         </ion-col>
+</ion-row>
+</ion-grid>
+
+<!-- grid 2 for the buttons -->
+<ion-grid id="btns" no-padding>
+  <ion-row no-padding>
+  <ion-col id="signin" col-5  position="left">
+        <div style="border: 1px solid red;display: flex;margin:0 !important">
+            <button  ion-fab mini>
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+          <p style="border: 1px solid red">Sign-In</p></div>
+      </ion-col>
+
+      <ion-col col-2></ion-col>
+
+      <!-- <ion-col id="signup" col-5 position="right">
+         <button block  ion-button>Sign-Up</button>
+       </ion-col>  -->
+       <ion-buttons position="left">
+          <button  ion-fab>
+              <ion-icon name="arrow-back"></ion-icon>
+          </button>
+        </ion-buttons>
+
+  </ion-row>
+</ion-grid> 
+</ion-content>
+
+<!-- footer -->
+<ion-footer  no-border >
+    <ion-toolbar class="footer"></ion-toolbar>
+  </ion-footer>

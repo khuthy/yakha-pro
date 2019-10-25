@@ -1,0 +1,63 @@
+page-login {
+    .builderHeader {
+        .toolbar-background {
+            background: url('../../assets/icon/BuilderShape2.svg');
+            background-position: top right;
+            background-size: 50%;
+            background-repeat: no-repeat;
+        }
+  
+        
+    }
+  
+    .scroll-content {
+        border: 1px solid blue;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-content: center;
+    }
+    #logo {
+        justify-content: center;
+        display: flex;
+    }
+  
+    .footer {
+      .toolbar-background {
+          background: url('../../assets/icon/BuilderShapes.svg');
+          background-position: bottom left;
+          background-size: 50%;
+          background-repeat: no-repeat;
+      }
+  }
+   
+  .input {
+      border: 1px solid rgb(207, 202, 202);
+      border-radius: 50px;
+  }
+
+  #btns {
+      display: flex;
+
+      #signin {
+          button {
+              border-top-right-radius: 30px;
+              border-bottom-right-radius: 30px;
+
+          }
+      }
+
+      #signup {
+          button {
+                  border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px; 
+          } }
+  }
+
+  div {
+      button.fab.fab-md {
+          padding:0 !important;
+          margin: 0 !important;
+      }
+  }
+}

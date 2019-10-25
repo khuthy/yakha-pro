@@ -1,5 +1,7 @@
+import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+
 
 @Component({
   selector: 'page-home',
@@ -11,4 +13,9 @@ export class HomePage {
 
   }
 
+
+  //METHOD THAT TAKES LOGIN BUTTON TO LOGIN PAGE
+  loginpage(){
+    this.navCtrl.push(LoginPage);
+  }
 }
