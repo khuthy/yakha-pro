@@ -1,21 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar class="tool-header">
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-  <button ion-button secondary menuToggle>Toggle Menu</button>
-
-  <button (click)="loginpage()" ion-button secondary menuToggle>Login</button> -->
- <!--  <h2 *ngIf="isAuthenticated()" text-center>User is logged in!</h2>
-  <h2 *ngIf="!isAuthenticated()" text-center>User is not logged in!</h2>
-
-  <button full ion-button color="primary" (click)="loginUser()">Login</button>
-  <button full ion-button color="danger" (click)="logoutUser()">Logout</button>
-  <button full ion-button color="secondary" (click)="nextPage()">Next Page</button> -->
-<!-- </ion-content> -->
-
-
 
 <ion-content >
   <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
@@ -114,7 +96,7 @@
              </div>
         </div>
         <div class="rate" *ngIf="b.certified"><p style="font-size: 2.5vh;">C</p></div>
-        <!-- <div *ngFor="let a of buildesAverage" >
+      <!--   <div *ngFor="let a of buildesAverage" >
           <ionic3-star-rating #rating id="ratings" *ngIf="b.uid==a.uid"
           activeIcon = "ios-star"
           defaultIcon = "ios-star-outline"
@@ -171,8 +153,7 @@
 </ion-range>
 </ion-item> -->
 
-
-  <button (click)="loginpage()" ion-button secondary menuToggle>Login</button>
-  <button (click)="registerpage()" ion-button secondary menuToggle>register</button>
-
 </ion-content>
+
+<!-- <button ion-button clear style="font-size: 25px;float: right;top:5px;" (click)="callJoint(o.hOwnerPhone)"><ion-icon name="call"></ion-icon> </button>
+-->

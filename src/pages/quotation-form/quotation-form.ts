@@ -1,15 +1,18 @@
 import { HomePage } from './../home/home';
 import { Component, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController, Popover, PopoverController, Slides, MenuController, ActionSheetController } from 'ionic-angular';
-import * as firebase from 'firebase'
+// import { SuccessPage } from '../success/success';
+import * as firebase from "firebase/app";
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
+// import { MessagesPage } from '../messages/messages';
 import { Quotations, WallType, Extra, Comments } from '../../app/model/bricks';
 
 import { brickType, wallTypes, Extras, comment } from '../../app/model/bricks.model';
+import { ProfileComponent } from '../../components/profile/profile';
 import { DescriptionComponent } from '../../components/description/description';
-//import { OneSignal } from '@ionic-native/onesignal';
+// import { OneSignal } from '@ionic-native/onesignal';
 /**
  * Generated class for the QuotationFormPage page.
  *
@@ -125,7 +128,7 @@ export class QuotationFormPage {
     private renderer: Renderer2,
     public menuCtrl: MenuController, public actionSheetCtrl: ActionSheetController) {
     this.uid = firebase.auth().currentUser.uid;
-   // this.authUser.setUser(this.uid);
+    this.authUser.setUser(this.uid);
     this.HomeOwnerQuotation.hOwnerUid = this.uid;
     this.HomeOwnerQuotation.builderUID = this.navParams.data;
     this.quotationForm = this.formBuilder.group({
@@ -346,8 +349,8 @@ export class QuotationFormPage {
     // this.extras = firebase.firestore().collection('extras')
     console.log(this.uid);
     // this. HomeOwnerQuotation.uid = this.authUser.getUser().uid;
-    //this.authUser.getUser();
-   // console.log(this.authUser.getUser());
+    this.authUser.getUser();
+    console.log(this.authUser.getUser());
   }
 
   //method to hide divs on keyboard show

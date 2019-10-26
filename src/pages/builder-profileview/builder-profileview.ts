@@ -1,7 +1,7 @@
 import { QuotationFormPage } from './../quotation-form/quotation-form';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController, PopoverController } from 'ionic-angular';
-import * as firebase from 'firebase'
+import * as firebase from "firebase/app";
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 //import { PopoverPage } from '../popover/popover';
 
