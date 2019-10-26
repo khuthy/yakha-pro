@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import * as firebase from 'firebase';
 import { firebaseConfig } from './app.firebase.config';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { LoginPage } from '../pages/login/login';
 @Component({
   templateUrl: 'app.html'
 })
@@ -36,12 +37,11 @@ export class MyApp {
     public splashScreen: SplashScreen, private statusBar: StatusBar,
     public alert: AlertController) {
 
-    this.statusBar.overlaysWebView(false);
+  
     // set status bar to white
 
     this.initializeApp();
-    firebase.initializeApp(firebaseConfig);
-    this.db = firebase.firestore();
+    
     // oneSignal.startInit(this.signal_app_id, this.firebase_id);
     // // oneSignal.getIds().then((userID) => {
     // //   console.log(userID.userId);
@@ -64,13 +64,17 @@ export class MyApp {
     this.platform.ready().then(() => {
      // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       this.statusBar.backgroundColorByHexString('#203550');
+      this.statusBar.overlaysWebView(false);
+      firebase.initializeApp(firebaseConfig);
+      this.db = firebase.firestore();
       this.splashScreen.hide();
       if (this.platform.is('cordova')) {
         //  this.setupPush()
       }
       this.db.collection('Users');
       firebase.auth().onAuthStateChanged((user) => {
-        firebase.firestore().collection('Users').doc(user.uid).onSnapshot((profile) => {
+        if(user) {
+            firebase.firestore().collection('Users').doc(user.uid).onSnapshot((profile) => {
           if (profile.exists) {
             // firebase.firestore().collection('Users').doc(user.uid).update({tokenID: this.token})
             /*        firebase.firestore().collection('Request').where('hOwnerUid', '==', firebase.auth().currentUser.uid).onSnapshot((request)=>{
@@ -125,6 +129,11 @@ export class MyApp {
             }
           }
         })
+        }else {
+          console.log('Logged out');
+          this.rootPage = LoginPage
+        }
+      
       });
     });
   }
