@@ -14,30 +14,281 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+@import '~magic.css/magic.min.css';
 
-* ::-webkit-scrollbar {
-    display: none;
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    
 }
-.side-menu-toolbar {
-    .toolbar-background {
-        background: transparent;
-        
+
+.class_used_to_set_icon {
+    display: block;
+    padding: 1px;
+    width: 100%;
+    border-radius: 0;
+    border-color: #5e7496;
+    background-color: transparent;
+    color: #007aff;
+    font-size: 21px;
+  }
+.scroll-content {
+    padding-bottom: 0 !important;
+}
+
+.error {
+    color: color($colors, danger);
+    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    margin-left: 20px;
+    font-size: 3vw;
+    margin-bottom: 0;
+}
+/* 
+ .side-menu {
+    background:  linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.637)), url('../assets/imgs/splash.png');
+    background-position: left;
+    background-size: cover;
+}
+
+.btn-side-menu {
+    background: transparent;
+    color: rgb(201, 201, 201);
+     font-weight: 200;
+    font-size: 20px;
+    text-align: left; 
+  
+  &:active {
+      background: rgb(255, 60, 0);
+      color: #fff;
+  }  
+}
+
+ 
+.profile {
+   //border:1px solid red;
+    height: 20%;
+    width: 100%;
+    background: rgb(0, 0, 0);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.938);
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    //justify-content: space-around;
+    color: rgb(207, 201, 201);
+    padding-left: 20px;
+    font-weight: 80;
+    font-size: 20px;
+    .thumb {
+        width: 10vh;
+        height: 10vh;
+        border-radius: 50%;
+        border: 5px solid rgba(0, 0, 0, 0.301);
+        object-fit: cover;
     }
 }
-.container-side-menu {
+.signout {
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+} 
+  */
+//   .side-menu {
+  
+//     overflow:hidden;
+//     position: relative;
+// }
+//   .profile {
+//       height: 30%;
+//       width: 100%;
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       flex-direction: column;
+//       position: relative;
+//       color: color($colors, light);
+//       font-family: Arial, Helvetica, sans-serif;
+//       //border: 1px solid red;
+//       &::after {
+//           height: 1px;
+//           width: 100%;
+//           background: #707070;
+//           position: absolute;
+//           content: '';
+//           bottom: 0;
+//       }
+//       .thumb {
+//           width: 120px;
+//           height: 120px;
+//           border-radius: 50%;
+//           object-fit: cover;
+//       }
+//   }
+  
+
+// .boxes {
+//     height: 70%;
+    
+//     display: flex;
+//     flex-direction: column;
+//    /*  flex-wrap: wrap; */
+//     //border: 1px solid rgb(32, 23, 23);
+//     justify-content: center;
+//     align-items: center; 
+//     position: relative; 
+//     .version {
+//         text-align: right;
+//         color: #fff;
+//         position: absolute;
+//         bottom: 1%;
+      
+//     }
+//     .box {
+//         min-width: 90%;   
+//         height: 21%;
+//         background: rgb(255, 255, 255);
+//          margin: 2%; 
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         flex-direction: column;
+//         border-radius: 6px;
+//         box-shadow: 0 1px 2px #292929;
+      
+//          p {
+//             margin: 2%;
+//             font-size: 16px;
+//         }
+//         .icon {
+//             font-size: 28px;
+//         }
+//         .move {
+//             position: relative;
+//             top: 15%;
+//             left: 10%;
+//             background: color($colors, danger);
+//         }
+        
+//     }
+    
+// }
+
+.sidemenu {
+   
     height: 100%;
     width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: color($colors, secondary);
-    .side-menu-profile {
-        height: 30%;
+    margin: 0 auto;
+
+    .profile {
+        height: 25%;
         width: 100%;
+        //border: 1px solid rgb(160, 40, 40);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .owner {
+            height: 15vh;
+            width: 15vh;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .builder {
+            height: 15vh;
+            width: 15vh;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        article {
+            height: 30%;
+            //border: 1px solid rgb(43, 43, 99);
+            width: 90%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            &::after {
+               height: 1px;
+            
+               background: #707070;
+               position: absolute;
+               content: '';
+                 bottom: -20%;
+                left: 0;
+                right: 0;
+             }      
+
+            p {
+                font-size: 3vh;
+                line-height: 0.9;
+                text-align: center;
+                margin: auto;
+                color: #fff;
+                font-weight: 500;
+                letter-spacing: .1em;
+                font-family: Arial, Helvetica, sans-serif;
+
+            }
+        }
+
     }
+    .list {
+        height: 70%;
+        width: 100%;
+        //border: 1px solid rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .box {
+            height: 20%;
+            width: 80%;
+            background: #fff;   
+            margin: 3%;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            p {
+                margin: 2%;
+                font-size: 2.5vh;
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                }
+              .icon {
+               font-size: 6.5vh
+               
+            }
+            .badge {
+               font-size: 2vh;
+            }
+            .move {
+              position: relative;
+              top: 15%;
+              left: 10%;
+              background: color($colors, danger);
+          }
+        }
+    }
+    .versions {
+        height: 5%;
+        width: 100%;
+       // border: 1px solid rgb(151, 106, 106);
+        .version {
+            color: #fff;
+            text-align: right;
+            width: 90%;
+            margin: auto;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    }
+
 }
-// image profile
-.profile-image-side-menu {
-    max-width: 100%;
-    border-radius: 50%;
-}
+
+
+
+
+
