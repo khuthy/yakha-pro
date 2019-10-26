@@ -20,24 +20,91 @@
 }
 .side-menu-toolbar {
     .toolbar-background {
-        background: transparent;
-        
+        background: color($colors, secondary);
+       
     }
 }
+.side-menu-background {
+    background: color($colors, secondary); 
+}
+
 .container-side-menu {
     height: 100%;
     width: 100%;
     position: absolute;
     bottom: 0;
     left: 0;
-    background: color($colors, secondary);
+   
     .side-menu-profile {
-        height: 30%;
+        height: 35%;
         width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            right: 5%;
+            height: 1px;
+            width: 90%;
+            background: grey;
+        }
+
+        .profile-image-side-menu {
+            width: 15vh;
+            height: 15vh;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .text-name-side-menu , .text-email-side-menu{
+            line-height: .2;
+            color: color($colors, 'light');
+        }
+        .text-name-side-menu {
+            font-size: 4vh
+        }
+        .text-email-side-menu {
+            font-size: 2.5vh; 
+        }
+
+     }
+     .cards {
+    height: 65%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+
+    .card {
+        height: 25%;
+        margin: 5%;
+        width: 80%;
+        align-self: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 7px;
+        background: color($colors, light);
+        .icon {
+            font-size: 6vh;
+        }
+        p {
+          font-size: 3vh; 
+          line-height: .1; 
+        }
     }
+    
 }
-// image profile
-.profile-image-side-menu {
-    max-width: 100%;
-    border-radius: 50%;
 }
+.version {
+    color: color($colors, light);
+}
+
+
