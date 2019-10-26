@@ -1,5 +1,5 @@
 
-<ion-header>
+<ion-header no-border>
 <ion-toolbar class="builderHeader">
 
 </ion-toolbar>
@@ -11,7 +11,7 @@
   <!-- logo -->
   <ion-row justify-content-center>
       <ion-col id="logo" col-4>
-             <img src="../../assets/icon/Logo.svg">
+             <img src="../../assets/icon/WhiteLogo.svg">
       </ion-col>
     </ion-row>
 
@@ -27,7 +27,7 @@
           </ion-col>
 
          <ion-col col-10>
-          <P text-right>Forgot Password</P>
+          <P id="password" text-right (click)="'presentPrompt()'">Forgot Password</P>
          </ion-col>
 </ion-row>
 </ion-grid>
@@ -35,24 +35,22 @@
 <!-- grid 2 for the buttons -->
 <ion-grid id="btns" no-padding>
   <ion-row no-padding>
-  <ion-col id="signin" col-5  position="left">
-        <div style="border: 1px solid red;display: flex;margin:0 !important">
-            <button  ion-fab mini>
-                <ion-icon name="arrow-back"></ion-icon>
-            </button>
-          <p style="border: 1px solid red">Sign-In</p></div>
+
+  <ion-col id="signup" col-5  position="left" >
+    <div class="button-group-l"   (click)="''">
+        <button ion-fab mini color="light" ><ion-icon name="arrow-back"></ion-icon></button>
+      <p>Sign-Up</p>   
+     </div>
       </ion-col>
 
       <ion-col col-2></ion-col>
 
-      <!-- <ion-col id="signup" col-5 position="right">
-         <button block  ion-button>Sign-Up</button>
-       </ion-col>  -->
-       <ion-buttons position="left">
-          <button  ion-fab>
-              <ion-icon name="arrow-back"></ion-icon>
-          </button>
-        </ion-buttons>
+      <ion-col id="signin" col-5  >
+          <div class="button-group-l"   (click)="''">
+              <p>Sign-In</p>   
+              <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
+         </div>
+            </ion-col>
 
   </ion-row>
 </ion-grid> 
