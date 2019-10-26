@@ -1,0 +1,104 @@
+<!--    <ion-header no-border>
+        <ion-navbar>
+          <ion-title></ion-title>
+        </ion-navbar>
+      </ion-header> -->
+      <ion-content fullscreen >
+ 
+        <!--   <div class="container">
+            <div class="image-holder" [style.backgroundImage]="getProfileImageStyle()">
+                <div class="address-info">
+                  <div class="information">
+                    <h2>{{dat.fullName}}</h2>
+                    <p>{{dat.address}}</p>
+                  </div>
+                </div>
+            </div>
+            <div class="request-info">
+                  <div class="certified">
+                    <div class="rate"></div>
+                    <h4>Profile</h4>
+                  </div>
+                  <div class="infocontent">
+                       
+              
+                      <p>Gender</p>
+                      <h5>{{dat.gender}}</h5>
+              
+                      <p>Experience</p>
+                      <h5>{{dat.experiences}} years.</h5>
+              
+                      <p>Cost</p>
+                      <h5>{{dat.price | currency:'&#82;'}}(p/&#13217;)</h5>
+              
+                      <p>Cost include roofing</p>
+                      <h5>{{dat.roof}}</h5>
+                      </div>
+                      <div class="group">
+      
+                      </div>
+            </div>
+          </div> -->
+      
+            <div class="container">
+      
+              <div class="propic">
+                  <img *ngIf="dat.image" src="{{dat.image}}" class="thumbavatar" >
+                  <img *ngIf="!dat.image" src="../../assets/imgs/team-avatar.jpg" class="thumbavatar" >
+                  <button (click)="navCtrl.pop()" style="position:absolute;top:10px;left:10px;z-index:5;background:rgb(204, 158, 20)" ion-fab ><ion-icon name="arrow-back" ></ion-icon></button>
+      
+                  <div class="names">
+            
+                       <h4>{{dat.fullName}}</h4>
+                      <p id="adres">{{dat.address}}</p>
+                <div class="certified"><p>C</p></div>
+               </div>
+              </div>
+      
+              <div class="infocontent">
+              <h3>PROFILE</h3>
+      
+              <p>Gender</p>
+              <h5>{{dat.gender}}</h5>
+      
+              <p>Experience</p>
+              <h5>{{dat.experiences}} years.</h5>
+      
+              <p>Cost</p>
+              <h5>{{dat.price | currency:'&#82;'}}(p/&#13217;)</h5>
+      
+              <p>Cost include roofing</p>
+              <h5 *ngIf="dat.roof">Yes</h5>
+              <h5 *ngIf="!dat.roof">No</h5>
+              </div>
+      
+         <!--      <div class="button">
+                  <button slot="start" ion-button (click)="presentPopover()">Review</button>
+                <div class="btn" (click)="next()">
+                  <p>Request Quote</p>
+                  <button ion-fab mini><ion-icon name="arrow-forward" style="color: black" ></ion-icon></button>
+                
+                </div>
+                
+                    
+                  
+                
+              </div> -->
+              <div class="button-request" (click)="next()">
+                  <p>Request Quote</p>
+                   <button class="send-quotes" ion-fab color="light">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                   
+                  </button>
+                </div>
+      
+                <div class="button-group2"  id="btnHide" (click)="presentPopover()">
+                   <button class="send-quotes" ion-fab (click)="presentPopover()" color="light">
+                      <ion-icon name="arrow-back"></ion-icon> </button> 
+                    <p>Review</p>
+                  </div>
+              
+              </div> 
+          
+      </ion-content>
+      

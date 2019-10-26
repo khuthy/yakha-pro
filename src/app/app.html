@@ -1,25 +1,56 @@
 <ion-menu [content]="content" type="overlay">
-  <ion-content  class="side-menu-background">
-    <div class="container-side-menu">
-       <div class="side-menu-profile">
-          <img src="../assets/imgs/logo.png" class="profile-image-side-menu" alt="">
-          <h3 text-center class="text-name-side-menu">Khuthy</h3>
-          <p text-center class="text-email-side-menu">muwnda@gmail.com</p>
-      
-       </div>
-       <div class="cards">
-         <div class="card" menuClose *ngFor="let p of pages" (click)="openPage(p)">
-       <ion-icon name="{{p.icon}}"></ion-icon>
-         <p>{{p.title}}</p>
-       </div>
-       </div>
+
+  <ion-content class="side-menu" [style.backgroundColor]="userLoggedinNow.builder ? '#464137'  : '#203959'">
+     <!--    <div class="profile">
+          <img *ngIf="userLoggedinNow.image" src="{{userLoggedinNow.image}}" class="thumb" alt="profile">
+          <img *ngIf="!userLoggedinNow.image" src="../assets/imgs/team-avatar.jpg" class="thumb" alt="profile">
+          <p style="font-size: 19px;">{{userLoggedinNow.fullname}}</p>
+          <p style="font-size: 13px;">{{userLoggedinNow.email}}</p>
+        </div>
+
+ 
+      <button class="btn-side-menu" style="background: transparent; color: #fff;" clear menuClose ion-button >
+        <ion-icon  name="{{p.icon}}"></ion-icon>
        
-    </div>
+       <hr style="border: rgba(0, 0, 0, 0.699); color: rgba(0, 0, 0, 0.685);">
+      </button> 
+      <div class="boxes">
+        <div class="box" *ngFor="let p of pages;" menuClose (click)="openPage(p)">
+          <span *ngIf="p.title == 'Messages'" class="badge move">{{messages | number}}</span>
+          <ion-icon name="{{p.icon}}"></ion-icon>
+          <p style=" font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">{{p.title}}</p>
+        </div>
+      
+      </div>
+      -->
+
+      <div class="sidemenu">
+        <div class="profile">
+            <img *ngIf="userLoggedinNow.image" src="{{userLoggedinNow.image}}" [ngClass]="{'builder': userLoggedinNow.builder, 'owner': !userLoggedinNow.builder}" alt="profile">
+            <img *ngIf="!userLoggedinNow.image" src="../assets/imgs/team-avatar.jpg" [ngClass]="{'builder': userLoggedinNow.builder, 'owner': !userLoggedinNow.builder}" alt="profile">
+            <article>
+               <p>{{userLoggedinNow.fullname}}</p>
+            <p style="font-weight: lighter; font-size:2vh;">{{userLoggedinNow.email}}</p>
+            </article>
+           
+        </div>
+        <div class="list">
+            <div class="box" *ngFor="let p of pages;" menuClose (click)="openPage(p)">
+                <ion-badge [style.display]="messages == 0 ? 'none' : 'block'" *ngIf="p.title == 'Messages'" class="move">{{messages | number}}</ion-badge>
+                <ion-icon [name]="p.icon"></ion-icon>
+                <p>{{p.title | uppercase}}</p>
+            </div>
+        </div>
+        <div class="versions">
+            <p class="version"><small>{{version}}</small></p>
+        </div>
+      </div>
+     
+    
   </ion-content>
-  <ion-footer no-border class="side-menu-toolbar">
-    <ion-toolbar>
-      <p text-right class="version">V1.0.0</p>
-    </ion-toolbar>
-  </ion-footer>
+ 
+
 </ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

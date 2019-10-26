@@ -1,46 +1,172 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-
+import * as firebase from 'firebase';
+import { firebaseConfig } from './app.firebase.config';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any;
+  db: any;
+  predefined: string;
+  pages: Array<{ title: string, icon: string }>;
+  /*  signal_app_id: string = 'e144f8b8-2305-4546-85dc-9b565d716dd2';
+   firebase_id: string = '587617081134'; */
+  userLoggedinNow = {
+    fullname: '',
+    email: '',
+    image: '',
+    builder: false,
+  }
 
-  pages: Array<{title: string, component: any, icon: string}>;
+  version = 'v1.0.0';
+  messages = 0
+  token: string;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, 
+   // private screenOrientation: ScreenOrientation, 
+    public splashScreen: SplashScreen, private statusBar: StatusBar,
+    public alert: AlertController) {
+
+    this.statusBar.overlaysWebView(false);
+    // set status bar to white
+
     this.initializeApp();
+    firebase.initializeApp(firebaseConfig);
+    this.db = firebase.firestore();
+    // oneSignal.startInit(this.signal_app_id, this.firebase_id);
+    // // oneSignal.getIds().then((userID) => {
+    // //   console.log(userID.userId);
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'View Profile', component: HomePage, icon: 'ios-person' },
-      { title: 'Tips', component: HomePage, icon: 'information-circle' },
-      { title: 'Version', component: HomePage, icon: 'help' }
+    // // })
+    //    oneSignal.inFocusDisplaying(oneSignal.OSInFocusDisplayOption.InAppAlert);
+    //   oneSignal.handleNotificationReceived().subscribe((res) => {
 
-    ];
+    //   })
+    //   oneSignal.handleNotificationOpened().subscribe((res) => {
+
+    //   })
+    //   oneSignal.endInit();
+
+
 
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
+     // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      this.statusBar.backgroundColorByHexString('#203550');
       this.splashScreen.hide();
+      if (this.platform.is('cordova')) {
+        //  this.setupPush()
+      }
+      this.db.collection('Users');
+      firebase.auth().onAuthStateChanged((user) => {
+        firebase.firestore().collection('Users').doc(user.uid).onSnapshot((profile) => {
+          if (profile.exists) {
+            // firebase.firestore().collection('Users').doc(user.uid).update({tokenID: this.token})
+            /*        firebase.firestore().collection('Request').where('hOwnerUid', '==', firebase.auth().currentUser.uid).onSnapshot((request)=>{
+                     if(!request.empty) {
+                       request.forEach(list => {
+                         firebase.firestore().collection('Respond').doc(list.id).onSnapshot(res => {
+                           if(res.exists) {
+                             if(res.data().viewed == false) {
+                               this.messages = res.data.length;
+                             }
+                            
+                           }
+                           })
+                       });
+                     }
+                   }) */
+            //   firebase.firestore().collection('Users').doc(user.uid).update({tokenID: this.token})
+            if (profile.data().isProfile == true && profile.data().status == true) {
+              if (profile.data().builder == true) {
+                this.rootPage = HomePage;
+                this.userLoggedinNow.image = profile.data().image
+                this.userLoggedinNow.fullname = profile.data().fullName
+                this.userLoggedinNow.email = user.email;
+                this.userLoggedinNow.builder = profile.data().builder;
+                this.pages = [
+                  { title: 'View Profile', icon: 'ios-person' },
+                  { title: 'Tips', icon: 'information-circle' },
+                  { title: 'Version', icon: 'help' }
+
+                ];
+              } else {
+                this.rootPage = HomePage;
+                this.pages = [
+                  { title: 'View Profile', icon: 'ios-person' },
+                  { title: 'Messages', icon: 'chatbubbles' },
+                  { title: 'Tips', icon: 'information-circle' },
+                  { title: 'Help', icon: 'help' }
+                ];
+                this.userLoggedinNow.image = profile.data().image
+                this.userLoggedinNow.fullname = profile.data().fullName
+                this.userLoggedinNow.email = user.email;
+                this.userLoggedinNow.builder = false;
+              }
+
+            } else {
+              if (profile.data().builder == true) {
+                /// this.rootPage = BaccountSetupPage;
+              } else {
+                //  this.rootPage = AccountSetupPage;
+              }
+
+            }
+          }
+        })
+      });
     });
   }
+  exit() {
+    let alert = this.alert.create({
+      title: 'Confirm',
+      message: 'Do you want to exit?',
+      buttons: [{
+        text: "Exit",
+        handler: () => { this.exitApp() }
+      }, {
+        text: "Cancel",
+        role: 'cancel'
+      }]
+    })
+    alert.present();
+  }
+  exitApp() {
+    this.platform.exitApp();
+  }
+  /*   setupPush(){
+      
+        this.oneSignal.startInit(this.signal_app_id, this.firebase_id);
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+        this.oneSignal.handleNotificationReceived().subscribe((res) => {
+      })
+        this.oneSignal.handleNotificationOpened().subscribe((res) => {
+        
+        })
+        this.oneSignal.getIds().then((token)=>{
+          this.token = token.userId;
+        })
+        this.oneSignal.endInit();
+    } */
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    this.nav.push(page.component);
   }
+  /* viewProfile() {
+    this.nav.push(AccountSetupPage);
+  }
+  viewProfileB() {
+   this.nav.push(BaccountSetupPage);
+  } */
 }
