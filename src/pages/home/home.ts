@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { NavController, MenuController, Platform, Slides, PopoverController, AlertController, NavParams, LoadingController } from 'ionic-angular';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 //import { BuilderProfileviewPage } from '../builder-profileview/builder-profileview';
-import * as firebase from 'firebase';
+import * as firebase from "firebase/app";
 //import { CallNumber } from '@ionic-native/call-number';
 //import { ProfileComponent } from '../../components/profile/profile';
 //import { ViewmessagePage } from '../viewmessage/viewmessage';
