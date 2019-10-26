@@ -14,3 +14,30 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+* ::-webkit-scrollbar {
+    display: none;
+}
+.side-menu-toolbar {
+    .toolbar-background {
+        background: transparent;
+        
+    }
+}
+.container-side-menu {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: color($colors, secondary);
+    .side-menu-profile {
+        height: 30%;
+        width: 100%;
+    }
+}
+// image profile
+.profile-image-side-menu {
+    max-width: 100%;
+    border-radius: 50%;
+}
