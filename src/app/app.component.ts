@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import * as firebase from "firebase/app";
-import { firebaseConfig } from './app.firebase.config';
+
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { LoginPage } from '../pages/login/login';
 import { WelcomePage } from '../pages/welcome/welcome';
@@ -16,7 +16,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any;
+  rootPage: any = WelcomePage;
   db: any;
   predefined: string;
   pages: Array<{ title: string, icon: string }>;
@@ -38,15 +38,16 @@ export class MyApp {
     public splashScreen: SplashScreen, private statusBar: StatusBar,
     public alert: AlertController) {
 
-      firebase.initializeApp(firebaseConfig);
+    
     // set status bar to white
 
    
 
     
     this.initializeApp();
-
-     
+    
+  
+   
     
     // oneSignal.startInit(this.signal_app_id, this.firebase_id);
     // // oneSignal.getIds().then((userID) => {
@@ -62,7 +63,7 @@ export class MyApp {
     //   })
     //   oneSignal.endInit();
 
-
+   
 
   }
 
@@ -78,7 +79,7 @@ export class MyApp {
       }
       this.statusBar.backgroundColorByHexString('#203550');
       this.statusBar.overlaysWebView(false);
-      this.userAuthentication();
+      this.userAuthentication(); 
       this.splashScreen.hide();
       
     });
@@ -190,7 +191,7 @@ export class MyApp {
       })
       }else {
         console.log('Logged out');
-        this.rootPage = WelcomePage
+        this.rootPage = WelcomePage;
       }
     
     });

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { RegisterPage } from '../register/register';
 
 /**
  * Generated class for the LoginPage page.
@@ -37,5 +38,7 @@ export class LoginPage {
 /*   ionViewCanEnter(){
    return this.authService.authenticated();
   } */
-
+  gotoRegister() {
+    this.navCtrl.push(RegisterPage);
+  }
 }

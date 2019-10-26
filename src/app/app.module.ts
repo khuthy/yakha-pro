@@ -69,12 +69,14 @@ import { DescriptionComponent } from '../components/description/description';
 import { AccountSetupPage } from '../pages/account-setup/account-setup';
 import { RegisterPage } from '../pages/register/register';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { firebaseConfig } from './app.firebase.config';
+import * as firebase from 'firebase';
 //import { OneSignal } from '@ionic-native/onesignal';
 //import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 //import { SMS } from '@ionic-native/sms';
 //import { ChannelsPage } from '../pages/channels/channels';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
-
+firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
     MyApp,
