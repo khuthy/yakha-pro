@@ -1,5 +1,5 @@
 // import { TestPage } from './../pages/test/test';
-// import { OnboardingBuilderPage } from './../pages/onboarding-builder/onboarding-builder';
+import { OnboardingBuilderPage } from './../pages/onboarding-builder/onboarding-builder';
 import { Keyboard } from '@ionic-native/keyboard';
 /* import { GoogleMapsComponent } from './../components/google-maps/google-maps'; */
 import { HttpClient } from '@angular/common/http';
@@ -18,7 +18,7 @@ import { BuilderProfileviewPage } from './../pages/builder-profileview/builder-p
 // import { MessagesPage } from './../pages/messages/messages';
 
 // import { AccountSetupPage} from './../pages/account-setup/account-setup';
-// import { OnboardingPage } from './../pages/onboarding/onboarding';
+ import { OnboardingPage } from './../pages/onboarding/onboarding';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -28,6 +28,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+
 
 
 
@@ -67,6 +68,7 @@ import { ProfileComponent } from '../components/profile/profile';
 import { DescriptionComponent } from '../components/description/description';
 import { AccountSetupPage } from '../pages/account-setup/account-setup';
 import { RegisterPage } from '../pages/register/register';
+import { WelcomePage } from '../pages/welcome/welcome';
 //import { OneSignal } from '@ionic-native/onesignal';
 //import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 //import { SMS } from '@ionic-native/sms';
@@ -79,14 +81,20 @@ import { RegisterPage } from '../pages/register/register';
     HomePage,
     ListPage,
     LoginPage,
+    WelcomePage,
     QuotationFormPage,
     BuilderProfileviewPage,
     AccountSetupPage,
-    RegisterPage
+    RegisterPage,
+    OnboardingPage,
+    OnboardingBuilderPage
+
+  
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -94,11 +102,14 @@ import { RegisterPage } from '../pages/register/register';
     HomePage,
     ListPage,
     LoginPage,
+    WelcomePage,
     QuotationFormPage,
     BuilderProfileviewPage,
     AccountSetupPage,
-
-    RegisterPage
+    RegisterPage,
+    OnboardingPage,
+    OnboardingBuilderPage
+    
   ],
   providers: [
     StatusBar,

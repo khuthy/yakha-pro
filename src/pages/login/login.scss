@@ -1,9 +1,9 @@
 page-login {
-    background:#203959 ;
+    
     .builderHeader {
-        background:#203959 ;
+        background: color($colors, light);
         .toolbar-background {
-            background: url('../../assets/icon/ownerShape.svg');
+            background: url('../../assets/icon/BuilderShape2.svg');
             background-position: top right;
             background-size: 40%;
             background-repeat: no-repeat;
@@ -11,9 +11,20 @@ page-login {
   
         
     }
+    /* Owner */
+    .ownerHeader {
+      background:#203959;
+      .toolbar-background {
+          background: url('../../assets/icon/ownerShape.svg');
+          background-position: top right;
+          background-size: 40%;
+          background-repeat: no-repeat;
+      }
+
+      
+  }
   
     .scroll-content {
-        background:#203959 ;
        display: flex;
        flex-direction: column;
        justify-content: center;
@@ -33,25 +44,32 @@ page-login {
           background-repeat: no-repeat;
       }
   }
+  .footerBuilder {
+    background: color($colors, light);
+  .toolbar-background {
+      background: url('../../assets/icon/BuilderShapes.svg');
+      background-position: -5% 100%;
+      background-size: 35%;
+      background-repeat: no-repeat;
+  }
+}
    
   .input {
       border: 1px solid rgb(207, 202, 202);
       border-radius: 50px;
       outline: none;
-      color: white;
+      color: rgba(32, 57, 89, 0.336);
       letter-spacing: 1px;
       font-weight:250;
       padding-left: 5%;
   }
 
   #builder {
-    color: whitesmoke;
     text-align: center;
     font-size: 5vw;
     letter-spacing: 1px;;
 }
   #password {
-      color: white;
       font-size: 4vw;
       letter-spacing: 1px;
   }
@@ -66,7 +84,7 @@ page-login {
             // right: 0;
             height: 8vh;
             width: 90%;
-            background: #015272;
+            //background: #015272;
             display: flex;
             justify-content: space-between;
             align-items: center;

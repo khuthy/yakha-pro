@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 /**
@@ -15,12 +16,23 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  builder: boolean;
+  userLoggingIn: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthServiceProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('ionViewDidLoad LoginPage', this.authService.manageUsers());
+    if(this.authService.manageUsers()) {
+
+      this.builder = true;
+      this.userLoggingIn = "Home Builder";
+    }else {
+      this.builder = false;
+      this.userLoggingIn = "Home Owner";
+
+    }
   }
 /*   ionViewCanEnter(){
    return this.authService.authenticated();
