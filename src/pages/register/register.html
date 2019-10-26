@@ -1,0 +1,64 @@
+
+<ion-header no-border>
+    <ion-toolbar class="builderHeader">
+    
+    </ion-toolbar>
+    </ion-header>
+    
+    <ion-content >
+    <ion-grid >
+    
+      <!-- logo -->
+      <ion-row justify-content-center>
+          <ion-col id="logo" col-4>
+                 <img src="../../assets/icon/WhiteLogo.svg">
+          </ion-col>
+        </ion-row>
+
+        <ion-row  justify-content-center>
+            <ion-col col-12 >
+                <p id="builder">Register here Home Builders</p>
+            </ion-col>
+          </ion-row>
+    
+        <!-- inputs -->
+        <ion-row justify-content-center no-padding>
+    
+      <ion-col col-10 >
+         <ion-input type="text" placeholder="Username"></ion-input>
+            </ion-col>
+    
+            <ion-col col-10>
+              <ion-input type="password" placeholder="Password"></ion-input>
+              </ion-col>
+    </ion-row>
+    </ion-grid>
+    
+    <!-- grid 2 for the buttons -->
+    <ion-grid id="btns" no-padding>
+      <ion-row no-padding>
+    
+      <ion-col id="signup" col-5  position="left" >
+        <div class="button-group-l"   (click)="''">
+            <button ion-fab mini color="light" ><ion-icon name="arrow-back"></ion-icon></button>
+          <p>Sign-Up</p>   
+         </div>
+          </ion-col>
+    
+          <ion-col col-2></ion-col>
+    
+          <ion-col id="signin" col-5  >
+              <div class="button-group-l"   (click)="''">
+                  <p>Sign-In</p>   
+                  <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
+             </div>
+                </ion-col>
+    
+      </ion-row>
+    </ion-grid> 
+    </ion-content>
+    
+    <!-- footer -->
+    <ion-footer  no-border >
+        <ion-toolbar class="footer"></ion-toolbar>
+      </ion-footer>

@@ -5,7 +5,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { HttpClient } from '@angular/common/http';
 // import { PlacePage } from './../pages/place/place';
 //import { AddBricklayerPage } from './../pages/add-bricklayer/add-bricklayer';
-import { StatusBar } from '@ionic-native/status-bar';
+
 // import { BaccountSetupPage } from './../pages/baccount-setup/baccount-setup';
 // import { Downloader } from '@ionic-native/downloader';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
@@ -19,6 +19,7 @@ import { BuilderProfileviewPage } from './../pages/builder-profileview/builder-p
 
 // import { AccountSetupPage} from './../pages/account-setup/account-setup';
 // import { OnboardingPage } from './../pages/onboarding/onboarding';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -28,7 +29,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
-/* import { StatusBar } from '@ionic-native/status-bar'; */
+
+
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
@@ -41,6 +43,8 @@ import { QuotationFormPage } from '../pages/quotation-form/quotation-form';
 //import { SuccessPage } from '../pages/success/success';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+import { StatusBar } from '@ionic-native/status-bar';
 
 import { HttpClientModule, /* other http imports */ } from "@angular/common/http";
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
@@ -62,6 +66,7 @@ import { ProfileComponent } from '../components/profile/profile';
 //import { PopoverPage } from '../pages/popover/popover';
 import { DescriptionComponent } from '../components/description/description';
 import { AccountSetupPage } from '../pages/account-setup/account-setup';
+import { RegisterPage } from '../pages/register/register';
 //import { OneSignal } from '@ionic-native/onesignal';
 //import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 //import { SMS } from '@ionic-native/sms';
@@ -76,7 +81,8 @@ import { AccountSetupPage } from '../pages/account-setup/account-setup';
     LoginPage,
     QuotationFormPage,
     BuilderProfileviewPage,
-    AccountSetupPage
+    AccountSetupPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -90,8 +96,9 @@ import { AccountSetupPage } from '../pages/account-setup/account-setup';
     LoginPage,
     QuotationFormPage,
     BuilderProfileviewPage,
-    AccountSetupPage
+    AccountSetupPage,
 
+    RegisterPage
   ],
   providers: [
     StatusBar,

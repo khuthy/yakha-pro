@@ -13,6 +13,12 @@ import { BuilderProfileviewPage } from '../builder-profileview/builder-profilevi
 //import { QuotationFormPage } from '../quotation-form/quotation-form';
 //import { TestPage } from '../test/test';
 declare var google;
+import { RegisterPage } from './../register/register';
+import { LoginPage } from './../login/login';
+//import { Component } from '@angular/core';
+//import { NavController } from 'ionic-angular';
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
