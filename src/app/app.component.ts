@@ -168,7 +168,7 @@ export class MyApp {
             } else {
               this.rootPage = HomePage;
               this.pages = [
-                { title: 'View Profile', icon: 'ios-person' },
+                { title: 'View Profile',   icon: 'ios-person' },
                 { title: 'Messages', icon: 'chatbubbles' },
                 { title: 'Tips', icon: 'information-circle' },
                 { title: 'Help', icon: 'help' }
