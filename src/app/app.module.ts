@@ -41,7 +41,7 @@ import { Camera } from '@ionic-native/camera';
 //import { SignoutPage } from '../pages/signout/signout';
 
 import { QuotationFormPage } from '../pages/quotation-form/quotation-form';
-//import { SuccessPage } from '../pages/success/success';
+import { SuccessPage } from '../pages/success/success';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -89,7 +89,8 @@ firebase.initializeApp(firebaseConfig);
     AccountSetupPage,
     RegisterPage,
     OnboardingPage,
-    OnboardingBuilderPage
+    OnboardingBuilderPage,
+    SuccessPage
 
   
   ],
@@ -110,7 +111,8 @@ firebase.initializeApp(firebaseConfig);
     AccountSetupPage,
     RegisterPage,
     OnboardingPage,
-    OnboardingBuilderPage
+    OnboardingBuilderPage,
+    SuccessPage
     
   ],
   providers: [
