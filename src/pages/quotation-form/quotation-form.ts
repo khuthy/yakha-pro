@@ -28,7 +28,7 @@ import { SuccessPage } from '../success/success';
 })
 export class QuotationFormPage {
   @ViewChild('slides') slides: Slides;
-
+  Extra = [];
   isProfile = false;
   db = firebase.firestore();
   storage = firebase.storage().ref();
@@ -125,7 +125,7 @@ export class QuotationFormPage {
     public camera: Camera,
     public popoverCtrl: PopoverController,
     private formBuilder: FormBuilder,
-   // public oneSignal: OneSignal,
+    // public oneSignal: OneSignal,
     private renderer: Renderer2,
     public menuCtrl: MenuController, public actionSheetCtrl: ActionSheetController) {
     this.uid = firebase.auth().currentUser.uid;
@@ -268,20 +268,20 @@ export class QuotationFormPage {
   }
   checkClicked(extra, event) {
     // console.log(event);
-    
-    if(event.checked) {
-      this.HomeOwnerQuotation.extras.push(extra);
-    }else {
-      var filtered = this.HomeOwnerQuotation.extras.filter((value, index, arr)=>{
 
-       return value !== extra;
-    
-    });
-    this.HomeOwnerQuotation.extras = filtered
-    console.log(this.HomeOwnerQuotation.extras);
-    
+    if (event.checked) {
+      this.HomeOwnerQuotation.extras.push(extra);
+    } else {
+      var filtered = this.HomeOwnerQuotation.extras.filter((value, index, arr) => {
+
+        return value !== extra;
+
+      });
+      this.HomeOwnerQuotation.extras = filtered
+      console.log(this.HomeOwnerQuotation.extras);
+
     }
-// console.log(this.HomeOwnerQuotation.extras);
+    // console.log(this.HomeOwnerQuotation.extras);
 
     // console.log(this.HomeOwnerQuotation.extras);
   }
@@ -534,47 +534,65 @@ export class QuotationFormPage {
         }).present();
       }
       else {
-     /*    this.db.collection('Request').where('builderUID','==',this.HomeOwnerQuotation.builderUID).onSnapshot((resReq)=>{
-          resReq.forEach((doc)=>{
-
-          })
-        }) */
-          this.db.collection('Request').doc(this.HomeOwnerQuotation.builderUID).set(this.HomeOwnerQuotation).then((res) => {  
+        /*    this.db.collection('Request').where('builderUID','==',this.HomeOwnerQuotation.builderUID).onSnapshot((resReq)=>{
+             resReq.forEach((doc)=>{
+   
+             })
+           }) */
+        this.db.collection('Request').doc(this.HomeOwnerQuotation.builderUID).set(this.HomeOwnerQuotation).then((res) => {
           //  res.onSnapshot((doc)=>{
-            //  doc.exists
+          //  doc.exists
           /*   this.db.collection('Request').doc(res.id).onSnapshot((query)=>{
               if(query.data().builderUID == this.HomeOwnerQuotation.builderUID)
               this.db.collection('Request').doc(query.id).delete().then((delRes)=>{
                  console.log('Request deleted....');
               })
             })
-                */    
-           // })
+                */
+          // })
           /*   setTimeout(() => {
               this.hideHeader = true;
             }, 2000); */
-            this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).add(this.HomeOwnerQuotation).then((res) => {
-              this.HomeOwnerQuotation.extras.forEach((item) => {
-                res.collection('extras').doc(item).set({ price: 0, quantity: 0 });
+          this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).add(this.HomeOwnerQuotation).then((res) => {
+            /*   this.HomeOwnerQuotation.extras.forEach((item) => {
+                this.Extra.push({ extra: item, price: 0, quatity: 0 });
+              }) */
+            // console.log('Extra000000', this.Extra);
+
+            //  res.update({ extras: this.Extra })
+            let extra = [];
+            this.HomeOwnerQuotation.extras.forEach((item) => {
+              console.log('Each item...', item);
+              
+              extra.push({item, price: 0, quantity: 0})
+              console.log('Array of extras..', extra);
+              console.log('Doc id....', res.id);
+              
+              this.db.collection('extras').doc(res.id).set({
+                extra: extra,
+                builder: this.HomeOwnerQuotation.builderUID,
+                owner: this.HomeOwnerQuotation.hOwnerUid,
+                docID: res.id
               });
-            })
-            this.HomeOwnerQuotation = {
-              hOwnerUid: '',
-              startDate: '',
-              endDate: '',
-              extras: [],
-              wallType: '',
-              brickType: '',
-              houseImage: '',
-              comment: '',
-              date: Date(),
-              view: false,
-              builderUID: '',
-              docID: ''
-            };
-            this.navCtrl.setRoot(SuccessPage);
-          });
-          this.isProfile = false;
+            });
+          })
+          this.HomeOwnerQuotation = {
+            hOwnerUid: '',
+            startDate: '',
+            endDate: '',
+            extras: [],
+            wallType: '',
+            brickType: '',
+            houseImage: '',
+            comment: '',
+            date: Date(),
+            view: false,
+            builderUID: '',
+            docID: ''
+          };
+          this.navCtrl.setRoot(SuccessPage);
+        });
+        this.isProfile = false;
       }
     }
 
