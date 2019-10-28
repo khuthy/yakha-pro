@@ -71,7 +71,8 @@ import { VersionPage } from '../pages/version/version';
 //import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 //import { SMS } from '@ionic-native/sms';
 import { ChannelsPage } from '../pages/channels/channels';
-
+import { TipsPage } from '../pages/tips/tips';
+import { MessagesPage } from '../pages/messages/messages';
 import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages';
 import { TipsPageModule } from '../pages/tips/tips.module';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
@@ -93,11 +94,12 @@ import { TipsPageModule } from '../pages/tips/tips.module';
     HelpPage,
     ChannelsPage,
     VersionPage,
-   
+    TipsPage,
+    MessagesPage,
+    DescriptionComponent,
     BuilderquotesPage,
     BuilderMessagesPage
 
-  
   ],
   imports: [
     BrowserModule,
@@ -122,7 +124,9 @@ import { TipsPageModule } from '../pages/tips/tips.module';
     HelpPage,
     VersionPage,
     ChannelsPage,
-    
+    TipsPage,
+    MessagesPage,
+    DescriptionComponent,
     BuilderquotesPage,
     BuilderMessagesPage
     

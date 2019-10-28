@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, PopoverController } from 'ionic-angular';
+import * as firebase from 'firebase';
 
 /**
  * Generated class for the TipsPage page.
@@ -13,22 +14,40 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-tips',
   templateUrl: 'tips.html',
 })
-export class TipsPage { tsProperty = '';
-toggle: boolean = false;
-// db = firebase.firestore().collection('feedback');
-// dbU = firebase.firestore().collection('Users');
-// dbRequest = firebase.firestore().collection('Respond');
-// uid = firebase.auth().currentUser.uid;
-// rateAvg;
-// numRate;
-// rateValue;
-// msg: string | number;
-// comment: any;
-// date: any;
-// feed = [];
-// img: any;
-// docs;
-// rateBuilderNow='';
+export class TipsPage {
+  tsProperty = '';
+  toggle: boolean = false;
+  // db = firebase.firestore().collection('feedback');
+  // dbU = firebase.firestore().collection('Users');
+  // dbRequest = firebase.firestore().collection('Respond');
+  // uid = firebase.auth().currentUser.uid;
+  // rateAvg;
+  // numRate;
+  // rateValue;
+  // msg: string | number;
+  // comment: any;
+  // date: any;
+  // feed = [];
+  // img: any;
+  // docs;
+  // rateBuilderNow='';
+  
+  // constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+  //   public toastCtrl: ToastController, public popoverCtrl: PopoverController) {
+  //  // this.feed=[];
+  // //  this.dbRequest.onSnapshot((res)=>{
+  // //     res.forEach((doc)=>{
+  // //       this.db.where('uid','==',this.uid).onSnapshot((user)=>{
+  // //       user.forEach((doc)=>{
+  // //         this.rateValue = doc.data().rating;
+  // //       })
+  // //       })
+  // //       if(doc.data().hOwnerUID == this.uid) {
+  // //         this.rateBuilderNow = 'rateNow';
+  // //       }
+  // //     })
+  // //  })
+  // }
 
 constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
   public toastCtrl: ToastController, public popoverCtrl: PopoverController) {
