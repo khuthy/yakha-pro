@@ -34,7 +34,7 @@
     <ion-row id="inputrow" justify-content-center no-padding>
       <!-- <ion-item> -->
         <ion-col col-10 class="inputs" >
-          <ion-input [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" placeholder="Email"
+          <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" placeholder="Email"
             formControlName="email" type="email"></ion-input>
         </ion-col>
         <p class="error message-error" *ngIf="loginForm.get('email').hasError('required') && (loginForm.get('email').dirty || loginForm.get('email').touched)">Email address is required</p>
@@ -43,7 +43,7 @@
 
       <!-- <ion-item> -->
         <ion-col col-10 class="inputs">
-          <ion-input [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" placeholder="Password"
+          <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" placeholder="Password"
             formControlName="password" type="password"></ion-input>
         </ion-col>
       <!-- </ion-item> -->
@@ -88,7 +88,7 @@
 </ion-content>
 
 <!-- footer -->
-<ion-footer no-border *ngIf="hideElement">
+<ion-footer no-border *ngIf="!hideElement">
   <ion-toolbar *ngIf="!builder" class="footer"></ion-toolbar>
   <ion-toolbar *ngIf="builder" class="footerBuilder"></ion-toolbar>
 </ion-footer>

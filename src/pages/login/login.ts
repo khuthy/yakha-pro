@@ -88,7 +88,7 @@ export class LoginPage {
    this.authService.authState();
   } */
 
-  checkKeyboard() {
+  checkKeyBoardEvents() {
     if(this.keyboard.isOpen()) {
       this.hideElement = true;
     }else {
