@@ -4,7 +4,7 @@
     <ion-toolbar *ngIf="!builder" class="ownerHeader"></ion-toolbar>
     </ion-header>
     
-    <ion-content [style.backgroundColor]="builder ? '#F2F2F2' : '#203959'">
+    <ion-content fullscreen [style.backgroundColor]="builder ? '#F2F2F2' : '#203959'">
     <ion-grid >
     
       <!-- logo -->
@@ -19,19 +19,19 @@
     
     <ion-row  justify-content-center>
       <ion-col col-12 >
-          <p [style.color]="builder ? '#262014' : '#F2F2F2'" id="builder">Register here {{userLoggingIn}}</p>
+          <p class="loginuser" [style.color]="builder ? '#262014' : '#F2F2F2'" id="builder">Register here {{userLoggingIn}}</p>
       </ion-col>
     </ion-row>
     
         <!-- inputs -->
-        <ion-row justify-content-center no-padding>
+        <ion-row justify-content-center no-padding id="inputrow">
     
-      <ion-col col-10 >
-         <ion-input [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="text" placeholder="Username"></ion-input>
+      <ion-col col-10 class="inputs">
+         <ion-input  (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="text" placeholder="Username"></ion-input>
             </ion-col>
     
-            <ion-col col-10>
-              <ion-input [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="password" placeholder="Password"></ion-input>
+            <ion-col col-10 class="inputs">
+              <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="password" placeholder="Password"></ion-input>
               </ion-col>
     </ion-row>
     </ion-grid>
@@ -61,7 +61,7 @@
     </ion-content>
     
     <!-- footer -->
-    <ion-footer  no-border>
+    <ion-footer  no-border *ngIf="!hideElement">
         <ion-toolbar *ngIf="!builder" class="footer"></ion-toolbar>
         <ion-toolbar *ngIf="builder" class="footerBuilder"></ion-toolbar>
       </ion-footer>
