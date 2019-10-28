@@ -1,3 +1,4 @@
+import { AccountSetupPage } from './../account-setup/account-setup';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
@@ -31,6 +32,11 @@ export class WelcomePage {
   
   }
 
+  //method navigating to account setup of homebuilder
+  accountSetup(){
+    this.navCtrl.push(AccountSetupPage);
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad WelcomePage');
     this.statusBar.overlaysWebView(true); 
@@ -54,15 +60,15 @@ export class WelcomePage {
       this.authService.status = false;
       console.log('builder not verified: ',this.authService.getBuilderStatus());
       // this.storage.get('onboarding').then((val) => {
-        if(val == true)  {
-          console.log('onboarding has already been seen: ',val);
-          this.navCtrl.setRoot(LoginPage);
+      //   if(val == true)  {
+      //     console.log('onboarding has already been seen: ',val);
+      //     this.navCtrl.setRoot(LoginPage);
           
-        }else {
-           console.log('not seen', false);
-           this.navCtrl.setRoot(OnboardingBuilderPage);
-        }
-      });
+      //   }else {
+      //      console.log('not seen', false);
+      //      this.navCtrl.setRoot(OnboardingBuilderPage);
+      //   }
+      // });
      
     }else {
      
@@ -70,18 +76,24 @@ export class WelcomePage {
        this.authService.status = true;
        console.log('Home owners status is always true: ',this.authService.getBuilderStatus()); 
        
-      this.storage.get('homeOwner').then((val) => {
-        if(val == true)  {
-          console.log('onboard already been seen: ',val);
-          this.navCtrl.setRoot(LoginPage);
+      // this.storage.get('homeOwner').then((val) => {
+      //   if(val == true)  {
+      //     console.log('onboard already been seen: ',val);
+      //     this.navCtrl.setRoot(LoginPage);
           
-        }else {
-          console.log('on-boarding now');
-           this.navCtrl.setRoot(OnboardingPage);
-        }
-      });
+      //   }else {
+      //     console.log('on-boarding now');
+      //      this.navCtrl.setRoot(OnboardingPage);
+      //   }
+      // });
     }
    
   }
 
 }
+
+
+/* Commented out storage on the following lines PLEASE DONT BITE MY HEAD OFF!!!! */
+// line 4
+// line 56 - 65
+// 73 - 82
