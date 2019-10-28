@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController, MenuController, PopoverController,Slides, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController, MenuController, PopoverController,Slides, ActionSheetController, Keyboard } from 'ionic-angular';
 import * as firebase from 'firebase'
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
@@ -11,6 +11,7 @@ import { HomePage } from '../home/home';
 import { ProfileComponent } from '../../components/profile/profile';
 //import { OneSignal } from '@ionic-native/onesignal';
 import { LoginPage } from '../login/login';
+
 /**
  * Generated class for the BaccountSetupPage page.
  *
@@ -83,6 +84,7 @@ export class BaccountSetupPage {
     public popoverCtrl: PopoverController,
     //public oneSignal: OneSignal, 
     public actionSheetCtrl: ActionSheetController,
+    private keyboard: Keyboard
    /*  public Slides: Slides */
   ) {
     this.authUser.setUser(firebase.auth().currentUser.uid);
@@ -151,6 +153,14 @@ export class BaccountSetupPage {
         this.current = 2;
       }
   }
+
+ checkKeyBoardEvents(){
+   if(this.keyboard.isOpen()) {
+      
+   }else {
+
+   }
+ }
 
   nextslides(){
    this.slides.lockSwipes(false);
@@ -432,7 +442,7 @@ export class BaccountSetupPage {
   }
   getStatus() {
 
-    this.db.doc(this.authUser.getUser()).onSnapshot((check) => {
+    this.db.doc(firebase.auth().currentUser.uid).onSnapshot((check) => {
       if (check.data().status == true) {
         this.status = true;
       } else {

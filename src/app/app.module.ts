@@ -1,6 +1,6 @@
 // import { TestPage } from './../pages/test/test';
 import { OnboardingBuilderPage } from './../pages/onboarding-builder/onboarding-builder';
-import { Keyboard } from '@ionic-native/keyboard';
+
 // import { File } from '@ionic-native/file';
 /* import { GoogleMapsComponent } from './../components/google-maps/google-maps'; */
 import { HttpClient } from '@angular/common/http';
@@ -142,7 +142,6 @@ import { TipsPage } from '../pages/tips/tips';
     Camera,
     File,
     CallNumber,
-    Keyboard,
     GooglePlaceModule,
 
   ]
