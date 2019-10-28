@@ -139,6 +139,7 @@ export class MyApp {
    
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
+         console.log('My uid', user.uid);
          
           firebase.firestore().collection('Users').doc(user.uid).onSnapshot((profile) => {
         if (profile.exists) {

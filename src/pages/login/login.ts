@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+//import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RegisterPage } from '../register/register';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -83,7 +83,9 @@ export class LoginPage {
   gotoRegister() {
     this.navCtrl.push(RegisterPage);
   }
-
+/*   ionViewWillLeave(){
+   this.authService.authState();
+  } */
   loginUser() {
     this.loaderAnimate = true;
     if (!this.loginForm.valid) {
