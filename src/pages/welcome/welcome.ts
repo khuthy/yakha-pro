@@ -2,7 +2,7 @@ import { AccountSetupPage } from './../account-setup/account-setup';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-//import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { OnboardingBuilderPage } from '../onboarding-builder/onboarding-builder';
@@ -25,7 +25,7 @@ export class WelcomePage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private authService: AuthServiceProvider, 
-    private menuCtrl: MenuController,  public statusBar: StatusBar) {
+    private menuCtrl: MenuController,  public statusBar: StatusBar, private storage: Storage) {
       
   
       // set status bar to white
@@ -59,16 +59,16 @@ export class WelcomePage {
       /* setting status to false will prevent builders from creating their profile */
       this.authService.status = false;
       console.log('builder not verified: ',this.authService.getBuilderStatus());
-      // this.storage.get('onboarding').then((val) => {
-      //   if(val == true)  {
-      //     console.log('onboarding has already been seen: ',val);
-      //     this.navCtrl.setRoot(LoginPage);
+      this.storage.get('onboarding').then((val) => {
+        if(val == true)  {
+          console.log('onboarding has already been seen: ',val);
+          this.navCtrl.setRoot(LoginPage);
           
-      //   }else {
-      //      console.log('not seen', false);
-      //      this.navCtrl.setRoot(OnboardingBuilderPage);
-      //   }
-      // });
+        }else {
+           console.log('not seen', false);
+           this.navCtrl.setRoot(OnboardingBuilderPage);
+        }
+      });
      
     }else {
      
@@ -76,16 +76,16 @@ export class WelcomePage {
        this.authService.status = true;
        console.log('Home owners status is always true: ',this.authService.getBuilderStatus()); 
        
-      // this.storage.get('homeOwner').then((val) => {
-      //   if(val == true)  {
-      //     console.log('onboard already been seen: ',val);
-      //     this.navCtrl.setRoot(LoginPage);
+      this.storage.get('homeOwner').then((val) => {
+        if(val == true)  {
+          console.log('onboard already been seen: ',val);
+          this.navCtrl.setRoot(LoginPage);
           
-      //   }else {
-      //     console.log('on-boarding now');
-      //      this.navCtrl.setRoot(OnboardingPage);
-      //   }
-      // });
+        }else {
+          console.log('on-boarding now');
+           this.navCtrl.setRoot(OnboardingPage);
+        }
+      });
     }
    
   }
