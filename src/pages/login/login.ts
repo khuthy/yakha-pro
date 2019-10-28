@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { RegisterPage } from '../register/register';
 
 /**
  * Generated class for the LoginPage page.
@@ -15,6 +17,8 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  builder: boolean;
+  userLoggingIn: string;
 
   input = document.getElementsByClassName('input');
   renderer: any;
@@ -39,11 +43,22 @@ export class LoginPage {
 
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('ionViewDidLoad LoginPage', this.authService.manageUsers());
+    if(this.authService.manageUsers()) {
+
+      this.builder = true;
+      this.userLoggingIn = "Home Builder";
+    }else {
+      this.builder = false;
+      this.userLoggingIn = "Home Owner";
+
+    }
   }
 
 /*   ionViewCanEnter(){
    return this.authService.authenticated();
   } */
-
+  gotoRegister() {
+    this.navCtrl.push(RegisterPage);
+  }
 }

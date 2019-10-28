@@ -1,5 +1,5 @@
 // import { TestPage } from './../pages/test/test';
-// import { OnboardingBuilderPage } from './../pages/onboarding-builder/onboarding-builder';
+import { OnboardingBuilderPage } from './../pages/onboarding-builder/onboarding-builder';
 import { Keyboard } from '@ionic-native/keyboard';
 /* import { GoogleMapsComponent } from './../components/google-maps/google-maps'; */
 import { HttpClient } from '@angular/common/http';
@@ -18,7 +18,7 @@ import { BuilderProfileviewPage } from './../pages/builder-profileview/builder-p
 // import { MessagesPage } from './../pages/messages/messages';
 
 // import { AccountSetupPage} from './../pages/account-setup/account-setup';
-// import { OnboardingPage } from './../pages/onboarding/onboarding';
+ import { OnboardingPage } from './../pages/onboarding/onboarding';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -31,6 +31,7 @@ import { ListPage } from '../pages/list/list';
 
 
 
+
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
@@ -40,7 +41,7 @@ import { Camera } from '@ionic-native/camera';
 //import { SignoutPage } from '../pages/signout/signout';
 
 import { QuotationFormPage } from '../pages/quotation-form/quotation-form';
-//import { SuccessPage } from '../pages/success/success';
+import { SuccessPage } from '../pages/success/success';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -69,26 +70,36 @@ import { ProfileComponent } from '../components/profile/profile';
 import { DescriptionComponent } from '../components/description/description';
 import { AccountSetupPage } from '../pages/account-setup/account-setup';
 import { RegisterPage } from '../pages/register/register';
+import { WelcomePage } from '../pages/welcome/welcome';
+import { firebaseConfig } from './app.firebase.config';
+import * as firebase from 'firebase';
 //import { OneSignal } from '@ionic-native/onesignal';
 //import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 //import { SMS } from '@ionic-native/sms';
 //import { ChannelsPage } from '../pages/channels/channels';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
-
+firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
     LoginPage,
+    WelcomePage,
     QuotationFormPage,
     BuilderProfileviewPage,
     AccountSetupPage,
-    RegisterPage
+    RegisterPage,
+    OnboardingPage,
+    OnboardingBuilderPage,
+    SuccessPage
+
+  
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -96,11 +107,15 @@ import { RegisterPage } from '../pages/register/register';
     HomePage,
     ListPage,
     LoginPage,
+    WelcomePage,
     QuotationFormPage,
     BuilderProfileviewPage,
     AccountSetupPage,
-
-    RegisterPage
+    RegisterPage,
+    OnboardingPage,
+    OnboardingBuilderPage,
+    SuccessPage
+    
   ],
   providers: [
     StatusBar,

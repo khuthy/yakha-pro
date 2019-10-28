@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 
+
 @Injectable()
 export class AuthServiceProvider {
  // private isLoggedIn = false;
@@ -30,6 +31,7 @@ export class AuthServiceProvider {
   getBuilderStatus() {
    return this.status;
   }
+
  
   loginUser(email: string,password: string): Promise<firebase.auth.UserCredential> {
     

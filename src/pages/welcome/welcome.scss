@@ -1,0 +1,129 @@
+page-welcome {
+    .container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+         background:   url('../../assets/imgs/builders.png') no-repeat;
+         background-size: cover;
+         background-position: center;
+         z-index: -2;
+
+         &::before, &::after {
+             background: url('../../assets/imgs/builders.png') no-repeat;
+             background-size: cover;
+             background-position: center;
+             -webkit-filter: blur(10px);
+             -moz-filter: blur(10px);
+             -o-filter: blur(10px);
+             -ms-filter: blur(10px);
+             filter: blur(10px);
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0%;
+             width: 100vw;
+             height: 100vh;
+
+
+         }
+         &::before {
+             transform: scale(1,1);
+         }
+
+    }
+    .contain {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        .slogan {
+            height: 20%;
+            width: 100%;
+            
+            //border: 1px solid rgb(15, 14, 14);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            p {
+               // border:1px solid green;
+                width:90%;
+                text-align: center;
+                font-size: 3vh;
+                color:color($colors, light);
+                font-family:'Segoe UI';
+            }
+        }
+
+        
+    .logo {
+        height: 35%;
+        width: 100%;
+       // border: 1px solid red;
+        z-index:7;
+        position: relative;
+         display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+       .continue {
+           //border:1px solid blue;
+           height:45%;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+      //  z-index: -5;/
+           button {
+               border-radius: 50px;
+              // border: 2px solid gold;
+              font-size:2vh;
+              width:70%;
+              margin-top: 3.5%;
+              height: 48px;
+               color:white;
+               letter-spacing: 1px;
+               outline:none;
+           }
+    
+       }
+    }
+
+
+
+    
+    @media only screen and(min-width: 600px) {
+      
+        .bottomWelcome {
+            height: 508px;
+            align-items: center;
+            transition: 1s;
+        }
+        .contain {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            margin: auto;
+        }
+
+        button {
+            height: 30px;
+        }
+        .slogan p {
+           font-size: 23px;
+        }
+
+       
+    }
+}
