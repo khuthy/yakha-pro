@@ -81,6 +81,7 @@ import { VersionPage } from '../pages/version/version';
 //import { SMS } from '@ionic-native/sms';
 import { ChannelsPage } from '../pages/channels/channels';
 import { TipsPage } from '../pages/tips/tips';
+import { MessagesPage } from '../pages/messages/messages';
 import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
 
@@ -102,10 +103,11 @@ import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages'
     ChannelsPage,
     VersionPage,
     TipsPage,
+    MessagesPage,
+    DescriptionComponent,
     BuilderquotesPage,
     BuilderMessagesPage
 
-  
   ],
   imports: [
     BrowserModule,
@@ -131,6 +133,8 @@ import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages'
     VersionPage,
     ChannelsPage,
     TipsPage,
+    MessagesPage,
+    DescriptionComponent,
     BuilderquotesPage,
     BuilderMessagesPage
     

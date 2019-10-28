@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MessagesPage } from '../messages/messages';
+import * as firebase from 'firebase'
 
-/**
- * Generated class for the ChannelsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -14,12 +10,54 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'channels.html',
 })
 export class ChannelsPage {
+  dbRequest = firebase.firestore().collection('Request');
+  dbUser = firebase.firestore().collection('Users');
+  dbChat = firebase.firestore().collection('chat_msg');
+  uid = firebase.auth().currentUser.uid;
+  dat = {} as builderProfile;
+  builder;
+  respond = [];
+  user;
+  docID;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChannelsPage');
+    let data = { data: {}, user: {} }
+    this.dbRequest.where('hOwnerUid','==',this.uid).get().then((res) => {
+     // data = { data: {}, user: {} }
+      this.respond = [];
+    res.forEach((reqInfo)=>{    
+    //  data.data.forEach((b_uid)=>{
+        this.dbUser.doc(reqInfo.data().builderUID).onSnapshot((userDoc) => {
+          data.data = reqInfo.data();
+          data.user = userDoc.data();
+          this.respond.push(data);
+      data = { data: {}, user: {} }
+      })
+      
+    })
+    
+    })
   }
-
+  gotoMessages(id, name) {
+    /*  firebase.firestore().collection('Respond').doc(id).update('viewed',true).then(val=>{
+   }) */
+    this.navCtrl.push(MessagesPage, { id, name });
+  // console.log('Info clicked..', data);
+   
+  }
+}
+export interface builderProfile {
+  uid: '',
+  image: '',
+  fullName: '',
+  certified: false,
+  experiences: '',
+  address: '',
+  price: '',
+  location: '',
+  roof: '',
+  gender: ''
 }

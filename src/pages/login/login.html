@@ -31,9 +31,9 @@
     </ion-row>
 
     <!-- inputs -->
-    <ion-row id="inputrow" justify-content-center no-padding>
+    <ion-row id="inputrow" justify-content-center no-padding >
       <!-- <ion-item> -->
-        <ion-col col-10 class="inputs" >
+        <ion-col col-10 class="inputs" id="email" >
           <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" placeholder="Email"
             formControlName="email" type="email"></ion-input>
         </ion-col>
@@ -75,9 +75,9 @@
       <ion-col col-2></ion-col>
 
       <ion-col id="signin" col-5>
-        <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'">
+        <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'" (click)="loginUser()">
           <p>Sign-In</p>
-          <button ion-fab mini color="light" (click)="loginUser()">
+          <button ion-fab mini color="light" >
             <ion-icon name="arrow-forward"></ion-icon>
           </button>
         </div>

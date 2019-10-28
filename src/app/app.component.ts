@@ -14,8 +14,8 @@ import { BaccountSetupPage } from '../pages/baccount-setup/baccount-setup';
 import { VersionPage } from '../pages/version/version';
 import { HelpPage } from '../pages/help/help';
 import { ChannelsPage } from '../pages/channels/channels';
-import { TipsPage } from '../pages/tips/tips';
 import { firebaseConfig } from './app.firebase.config';
+import { TipsPage } from '../pages/tips/tips';
 @Component({
   templateUrl: 'app.html'
 })
@@ -159,8 +159,8 @@ export class MyApp {
               this.userLoggedinNow.builder = profile.data().builder;
               this.pages = [
                 { title: 'View Profile', component: BaccountSetupPage, icon: 'ios-person' },
-                { title: 'Tips', component: HelpPage, icon: 'information-circle' },
-                { title: 'Version', component: VersionPage, icon: 'help' }
+                { title: 'Tips', component: TipsPage, icon: 'information-circle' },
+                { title: 'Help', component: HelpPage, icon: 'help' }
 
               ];
             } else {

@@ -22,21 +22,21 @@
     
     <ion-row  justify-content-center>
       <ion-col col-12 >
-          <p [style.color]="builder ? '#262014' : '#F2F2F2'" id="builder">Register here {{userLoggingIn}}</p>
+          <p class="loginuser" [style.color]="builder ? '#262014' : '#F2F2F2'" id="builder">Register here {{userLoggingIn}}</p>
       </ion-col>
     </ion-row>
     
         <!-- inputs -->
-        <ion-row justify-content-center no-padding>
+        <ion-row justify-content-center no-padding id="inputrow">
     
       <ion-col col-10 >
-         <ion-input formControlName="email" ngDefaultControl [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="text" placeholder="Email address"></ion-input>
+         <ion-input formControlName="email" (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" ngDefaultControl [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="text" placeholder="Email address"></ion-input>
          <p class="error message-error" *ngIf="signupForm.get('email').hasError('required') && (signupForm.get('email').dirty || signupForm.get('email').touched)">Email address is required</p>
          <p class="error message-error" *ngIf="signupForm.get('email').hasError('pattern') && (signupForm.get('email').dirty || signupForm.get('email').touched)">Please enter a valid email address</p>  
         </ion-col>
            
             <ion-col col-10>
-              <ion-input ngDefaultControl formControlName="password" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="password" placeholder="Password"></ion-input>
+              <ion-input ngDefaultControl (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" formControlName="password" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="password" placeholder="Password"></ion-input>
               <p class="error message-error" *ngIf="signupForm.get('password').hasError('required') && (signupForm.get('password').dirty || signupForm.get('password').touched)">password is required</p>
               <p class="error message-error" *ngIf="signupForm.get('password').hasError('minlength') && (signupForm.get('password').dirty || signupForm.get('password').touched)">Password must be more than 6 characters </p>    
             </ion-col>
@@ -69,7 +69,7 @@
     </ion-content>
     
     <!-- footer -->
-    <ion-footer  no-border>
+    <ion-footer  no-border *ngIf="!hideElement">
         <ion-toolbar *ngIf="!builder" class="footer"></ion-toolbar>
         <ion-toolbar *ngIf="builder" class="footerBuilder"></ion-toolbar>
       </ion-footer>
