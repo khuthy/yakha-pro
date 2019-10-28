@@ -5,6 +5,9 @@
     </ion-header>
     
     <ion-content [style.backgroundColor]="builder ? '#F2F2F2' : '#203959'">
+      <form [formGroup]="signupForm">
+
+     
     <ion-grid >
     
       <!-- logo -->
@@ -27,12 +30,16 @@
         <ion-row justify-content-center no-padding>
     
       <ion-col col-10 >
-         <ion-input [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="text" placeholder="Username"></ion-input>
-            </ion-col>
-    
+         <ion-input formControlName="email" ngDefaultControl [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="text" placeholder="Email address"></ion-input>
+         <p class="error message-error" *ngIf="signupForm.get('email').hasError('required') && (signupForm.get('email').dirty || signupForm.get('email').touched)">Email address is required</p>
+         <p class="error message-error" *ngIf="signupForm.get('email').hasError('pattern') && (signupForm.get('email').dirty || signupForm.get('email').touched)">Please enter a valid email address</p>  
+        </ion-col>
+           
             <ion-col col-10>
-              <ion-input [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="password" placeholder="Password"></ion-input>
-              </ion-col>
+              <ion-input ngDefaultControl formControlName="password" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="password" placeholder="Password"></ion-input>
+              <p class="error message-error" *ngIf="signupForm.get('password').hasError('required') && (signupForm.get('password').dirty || signupForm.get('password').touched)">password is required</p>
+              <p class="error message-error" *ngIf="signupForm.get('password').hasError('minlength') && (signupForm.get('password').dirty || signupForm.get('password').touched)">Password must be more than 6 characters </p>    
+            </ion-col>
     </ion-row>
     </ion-grid>
     
@@ -52,12 +59,13 @@
           <ion-col id="signin" col-5  >
               <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'"  (click)="''">
                   <p>Sign-Up</p>   
-                  <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
+                  <button ion-fab mini color="light" (click)="signupUser(signupForm)" ><ion-icon name="arrow-forward"></ion-icon></button>
              </div>
                 </ion-col>
     
       </ion-row>
-    </ion-grid> 
+    </ion-grid>
+  </form> 
     </ion-content>
     
     <!-- footer -->
