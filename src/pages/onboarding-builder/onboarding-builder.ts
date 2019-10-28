@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-//import {Storage} from '@ionic/storage';
+import {Storage} from '@ionic/storage';
 import { LoginPage } from '../login/login';
 /**
  * Generated class for the OnboardingBuilderPage page.
@@ -16,7 +16,7 @@ import { LoginPage } from '../login/login';
 })
 export class OnboardingBuilderPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -25,7 +25,7 @@ export class OnboardingBuilderPage {
 
   getStarted(){
     // set a key/value
-    // this.storage.set('onboarding', true);
+    this.storage.set('onboarding', true);
     this.navCtrl.setRoot(LoginPage);
     }
 
