@@ -108,7 +108,8 @@ import { TipsPage } from '../pages/tips/tips';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    GooglePlaceModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -142,6 +143,7 @@ import { TipsPage } from '../pages/tips/tips';
     File,
     CallNumber,
     Keyboard,
+    GooglePlaceModule,
 
   ]
 })
