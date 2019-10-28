@@ -81,6 +81,7 @@ import { VersionPage } from '../pages/version/version';
 //import { SMS } from '@ionic-native/sms';
 import { ChannelsPage } from '../pages/channels/channels';
 import { TipsPage } from '../pages/tips/tips';
+import { MessagesPage } from '../pages/messages/messages';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
 
 @NgModule({
@@ -101,14 +102,16 @@ import { TipsPage } from '../pages/tips/tips';
     HelpPage,
     ChannelsPage,
     VersionPage,
-    TipsPage
+    TipsPage,
+    MessagesPage,
+    DescriptionComponent
 
-  
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    GooglePlaceModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -128,7 +131,9 @@ import { TipsPage } from '../pages/tips/tips';
     HelpPage,
     VersionPage,
     ChannelsPage,
-    TipsPage
+    TipsPage,
+    MessagesPage,
+    DescriptionComponent
     
   ],
   providers: [

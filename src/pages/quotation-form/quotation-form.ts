@@ -12,6 +12,7 @@ import { Quotations, WallType, Extra, Comments } from '../../app/model/bricks';
 import { brickType, wallTypes, Extras, comment } from '../../app/model/bricks.model';
 import { ProfileComponent } from '../../components/profile/profile';
 import { DescriptionComponent } from '../../components/description/description';
+import { SuccessPage } from '../success/success';
 // import { OneSignal } from '@ionic-native/onesignal';
 /**
  * Generated class for the QuotationFormPage page.
@@ -533,11 +534,25 @@ export class QuotationFormPage {
         }).present();
       }
       else {
-        
-          this.db.collection('Request').doc(this.uid).set(this.HomeOwnerQuotation).then((res) => {
-            setTimeout(() => {
+     /*    this.db.collection('Request').where('builderUID','==',this.HomeOwnerQuotation.builderUID).onSnapshot((resReq)=>{
+          resReq.forEach((doc)=>{
+
+          })
+        }) */
+          this.db.collection('Request').doc(this.HomeOwnerQuotation.builderUID).set(this.HomeOwnerQuotation).then((res) => {  
+          //  res.onSnapshot((doc)=>{
+            //  doc.exists
+          /*   this.db.collection('Request').doc(res.id).onSnapshot((query)=>{
+              if(query.data().builderUID == this.HomeOwnerQuotation.builderUID)
+              this.db.collection('Request').doc(query.id).delete().then((delRes)=>{
+                 console.log('Request deleted....');
+              })
+            })
+                */    
+           // })
+          /*   setTimeout(() => {
               this.hideHeader = true;
-            }, 2000);
+            }, 2000); */
             this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).add(this.HomeOwnerQuotation).then((res) => {
               this.HomeOwnerQuotation.extras.forEach((item) => {
                 res.collection('extras').doc(item).set({ price: 0, quantity: 0 });
@@ -557,11 +572,9 @@ export class QuotationFormPage {
               builderUID: '',
               docID: ''
             };
-            //this.navCtrl.setRoot(SuccessPage);
+            this.navCtrl.setRoot(SuccessPage);
           });
           this.isProfile = false;
-        
-
       }
     }
 
