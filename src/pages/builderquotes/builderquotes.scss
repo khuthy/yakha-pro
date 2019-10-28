@@ -5,10 +5,14 @@ page-builderquotes {
     height: 120px;
     background: color($colors, dark);
     border-radius: 13px;
+  
     .toolbar {
         box-shadow: none;
         font-weight: 200;
-      
+        display: flex;
+        align-content: flex-start;
+        align-items: flex-start;
+        justify-content: flex-start;
  
         button {
             background: color($colors, primary);

@@ -2,18 +2,18 @@ import { Component, ViewChild, ChangeDetectorRef, AfterContentChecked } from '@a
 import { IonicPage, NavController, NavParams, Platform, LoadingController, ToastController, Header } from 'ionic-angular';
 import { SuccessPage } from '../success/success';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
- import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts'; 
- pdfMake.vfs = pdfFonts.pdfMake.vfs; 
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { File } from '@ionic-native/file';
+import { FileOpener } from '@ionic-native/file-opener';
 import * as firebase from 'firebase';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete/ngx-google-places-autocomplete.directive';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { FileOpener } from '@ionic-native/file-opener';
-//import { OneSignal } from '@ionic-native/onesignal';
-/* import { SMS } from '@ionic-native/sms'; */
-/* import { Downloader } from '@ionic-native/downloader'; */
+/* import { OneSignal } from '@ionic-native/onesignal';
+import { SMS } from '@ionic-native/sms';
+import { Downloader } from '@ionic-native/downloader'; */
 
 
 
@@ -122,8 +122,8 @@ export class BuilderquotesPage {
     private loader: LoadingController,
     private cdRef: ChangeDetectorRef,
     public toastCtrl: ToastController,
-    //public oneSignal: OneSignal,
-    //private sms: SMS,
+   /*  public oneSignal: OneSignal,
+    private sms: SMS, */
 
   ) {
     this.userMsg = this.navParams.data;
@@ -151,13 +151,13 @@ export class BuilderquotesPage {
   }
 
   ionViewDidLoad() {
-    this.dbRequest.doc(this.navParams.data.docID).collection('extras').onSnapshot((res) => {
+   /*  this.dbRequest.doc(this.navParams.data.docID).collection('extras').onSnapshot((res) => {
       res.forEach((doc) => {
         console.log(doc.data())
         this.extras.push({ item: doc.id, data: doc.data() });
         console.log('My extras......', this.extras);
       })
-    })
+    }) */
     // this.dbRequest.doc(this.userMsg).collection('extras').onSnapshot((res) => {
     //   console.log(res.docs);
     //   res.forEach((doc) => {
@@ -179,7 +179,7 @@ export class BuilderquotesPage {
         }
       })
     })
-    this.dbUsers.doc(firebase.auth().currentUser.uid).onSnapshot((doc) => {
+    this.dbUsers.doc(this.uid).onSnapshot((doc) => {
       this.quotes.address = doc.data().address;
       this.quotes.fullName = doc.data().fullName;
       this.quotes.price = doc.data().price;
@@ -437,7 +437,7 @@ export class BuilderquotesPage {
           viewed: false,
           msgStatus: ''
         } 
-      /*   resDoc.onSnapshot((doc)=>{
+        /* resDoc.onSnapshot((doc)=>{
           this.dbUsers.doc(doc.data().hOwnerUid).onSnapshot((resUser) => {
             if (resUser.data().tokenID) {
               var notificationObj = {
@@ -458,4 +458,3 @@ export class BuilderquotesPage {
   }
   
 }
-

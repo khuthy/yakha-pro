@@ -41,7 +41,7 @@
         
         <ion-col col-12 align-self-center>
            <ion-item no-lines>
-             <ion-input type="text" placeholder="Full Name" (ionFocus)="checkKeyboard('open')" (ionBlur)="checkKeyboard('close')" formControlName="fullName" [(ngModel)]="HomeOwnerProfile.fullName" ngDefaultControl></ion-input>
+             <ion-input type="text" placeholder="Full Name" (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" formControlName="fullName" [(ngModel)]="HomeOwnerProfile.fullName" ngDefaultControl></ion-input>
            </ion-item>
            <p class="error"  *ngIf="profileForm.get('fullName').hasError('required') && (profileForm.get('fullName').dirty || profileForm.get('fullName').touched)">Name is required.</p>
            <p class="error"  *ngIf="profileForm.get('fullName').hasError('minlength') && (profileForm.get('fullName').dirty || profileForm.get('fullName').touched)">Name must be at least 4 characters long.</p>
@@ -60,12 +60,12 @@
         </ion-col>
         <ion-col col-12 align-self-center>
             <ion-item no-lines>
-                <ion-input (ionFocus)="checkKeyboard('open')" (ionBlur)="checkKeyboard('close')" type="text" placeholder="Cell Phone Number" maxlength="10" formControlName="personalNumber"  [(ngModel)]="HomeOwnerProfile.personalNumber" ngDefaultControl></ion-input>
+                <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" type="text" placeholder="Cell Phone Number" maxlength="10" formControlName="personalNumber"  [(ngModel)]="HomeOwnerProfile.personalNumber" ngDefaultControl></ion-input>
               </ion-item>
               <p class="error" *ngIf="profileForm.get('personalNumber').hasError('required') && (profileForm.get('personalNumber').dirty || profileForm.get('personalNumber').touched)">Cell number is required.</p>
         </ion-col>
         <ion-col col-12 align-self-center>
-                <!-- <input class="address" formControlName="address" ngx-google-places-autocomplete options='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
+                 <input (focus)="checkKeyBoardEvents()" (blur)="checkKeyBoardEvents()" class="address" formControlName="address" ngx-google-places-autocomplete options='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
               <p class="error" *ngIf="profileForm.get('address').hasError('required') && (profileForm.get('address').dirty || profileForm.get('address').touched)"> Please specify your Address.</p>
         </ion-col>
       </ion-row>
