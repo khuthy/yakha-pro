@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
+import { NavController } from 'ionic-angular';
+import { HomePage } from '../../pages/home/home';
+import { LoginPage } from '../../pages/login/login';
 
 
 @Injectable()
@@ -31,7 +34,17 @@ export class AuthServiceProvider {
   getBuilderStatus() {
    return this.status;
   }
+ /*  authState() {
+  const auth =  firebase.auth().onAuthStateChanged((user)=>{
+      if (user.uid) {
+        this.navCtrl.setRoot(HomePage)
+      } else {
+        this.navCtrl.setRoot(LoginPage)
+      }
+    })
 
+    return auth;
+  } */
  
   loginUser(email: string,password: string): Promise<firebase.auth.UserCredential> {
     

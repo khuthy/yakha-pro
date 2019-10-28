@@ -10,6 +10,12 @@ import * as firebase from "firebase/app";
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { LoginPage } from '../pages/login/login';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { AccountSetupPage } from '../pages/account-setup/account-setup';
+import { BaccountSetupPage } from '../pages/baccount-setup/baccount-setup';
+import { VersionPage } from '../pages/version/version';
+import { HelpPage } from '../pages/help/help';
+import { ChannelsPage } from '../pages/channels/channels';
+import { TipsPage } from '../pages/tips/tips';
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,7 +25,7 @@ export class MyApp {
   rootPage: any = WelcomePage;
   db: any;
   predefined: string;
-  pages: Array<{ title: string, icon: string }>;
+  pages: Array<{ title: string, component: any, icon: string }>;
   /*  signal_app_id: string = 'e144f8b8-2305-4546-85dc-9b565d716dd2';
    firebase_id: string = '587617081134'; */
   userLoggedinNow = {
@@ -133,6 +139,7 @@ export class MyApp {
    
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
+         console.log('My uid', user.uid);
          
           firebase.firestore().collection('Users').doc(user.uid).onSnapshot((profile) => {
         if (profile.exists) {
@@ -160,18 +167,18 @@ export class MyApp {
               this.userLoggedinNow.email = user.email;
               this.userLoggedinNow.builder = profile.data().builder;
               this.pages = [
-                { title: 'View Profile', icon: 'ios-person' },
-                { title: 'Tips', icon: 'information-circle' },
-                { title: 'Version', icon: 'help' }
+                { title: 'View Profile', component: BaccountSetupPage, icon: 'ios-person' },
+                { title: 'Tips', component: HelpPage, icon: 'information-circle' },
+                { title: 'Version', component: VersionPage, icon: 'help' }
 
               ];
             } else {
               this.rootPage = HomePage;
               this.pages = [
-                { title: 'View Profile',   icon: 'ios-person' },
-                { title: 'Messages', icon: 'chatbubbles' },
-                { title: 'Tips', icon: 'information-circle' },
-                { title: 'Help', icon: 'help' }
+                { title: 'View Profile', component: AccountSetupPage, icon: 'ios-person' },
+                { title: 'Messages', component: ChannelsPage, icon: 'chatbubbles' },
+                { title: 'Tips', component: TipsPage, icon: 'information-circle' },
+                { title: 'Help', component: HelpPage, icon: 'help' }
               ];
               this.userLoggedinNow.image = profile.data().image
               this.userLoggedinNow.fullname = profile.data().fullName
