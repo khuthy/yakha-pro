@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-//import {Storage} from '@ionic/storage';
+import {Storage} from '@ionic/storage';
 import { LoginPage } from '../login/login';
 
 /**
@@ -17,11 +17,11 @@ import { LoginPage } from '../login/login';
 })
 export class OnboardingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
   }
   getStarted(){
     // set a key/value
-    /* this.storage.set('homeOwner', true); */
+    this.storage.set('homeOwner', true);
     this.navCtrl.setRoot(LoginPage);
     }
 

@@ -16,13 +16,14 @@ import { VersionPage } from '../pages/version/version';
 import { HelpPage } from '../pages/help/help';
 import { ChannelsPage } from '../pages/channels/channels';
 import { TipsPage } from '../pages/tips/tips';
+import { firebaseConfig } from './app.firebase.config';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = WelcomePage;
+  rootPage: any ;
   db: any;
   predefined: string;
   pages: Array<{ title: string, component: any, icon: string }>;
@@ -43,18 +44,10 @@ export class MyApp {
     private screenOrientation: ScreenOrientation, 
     public splashScreen: SplashScreen, private statusBar: StatusBar,
     public alert: AlertController) {
-
-    
     // set status bar to white
 
-   
-
-    
     this.initializeApp();
-    
-  
-   
-    
+    firebase.initializeApp(firebaseConfig);
     // oneSignal.startInit(this.signal_app_id, this.firebase_id);
     // // oneSignal.getIds().then((userID) => {
     // //   console.log(userID.userId);
@@ -81,7 +74,6 @@ export class MyApp {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       }else {
         console.log('cannot perform portrait');
-        
       }
       this.statusBar.backgroundColorByHexString('#203550');
       this.statusBar.overlaysWebView(false);
@@ -90,23 +82,23 @@ export class MyApp {
       
     });
   }
-  exit() {
-    let alert = this.alert.create({
-      title: 'Confirm',
-      message: 'Do you want to exit?',
-      buttons: [{
-        text: "Exit",
-        handler: () => { this.exitApp() }
-      }, {
-        text: "Cancel",
-        role: 'cancel'
-      }]
-    })
-    alert.present();
-  }
-  exitApp() {
-    this.platform.exitApp();
-  }
+  // exit() {
+  //   let alert = this.alert.create({
+  //     title: 'Confirm',
+  //     message: 'Do you want to exit?',
+  //     buttons: [{
+  //       text: "Exit",
+  //       handler: () => { this.exitApp() }
+  //     }, {
+  //       text: "Cancel",
+  //       role: 'cancel'
+  //     }]
+  //   })
+  //   alert.present();
+  // }
+  // exitApp() {
+  //   this.platform.exitApp();
+  // }
   /*   setupPush(){
       
         this.oneSignal.startInit(this.signal_app_id, this.firebase_id);

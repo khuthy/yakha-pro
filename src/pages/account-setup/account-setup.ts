@@ -333,7 +333,7 @@ export class AccountSetupPage {
   }
  
   SignOut() {
-     this.alertCtrl.create({
+     let alert = this.alertCtrl.create({
       title: 'Are you sure you want to logout?',
       buttons: [
         {
@@ -354,7 +354,9 @@ export class AccountSetupPage {
           }
         }
       ]
-    }).present();
+    })
+    alert.present();
+   // alert.dismiss();
   }
   viewHouse(myEvent) {
     console.log('image', myEvent);

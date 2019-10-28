@@ -56,7 +56,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 //import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';
 
-// import { File } from '@ionic-native/file';
+//import { File } from '@ionic-native/file';
 
 //import { FileOpener } from '@ionic-native/file-opener';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -82,7 +82,7 @@ import { VersionPage } from '../pages/version/version';
 import { ChannelsPage } from '../pages/channels/channels';
 import { TipsPage } from '../pages/tips/tips';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
-firebase.initializeApp(firebaseConfig);
+
 @NgModule({
   declarations: [
     MyApp,
