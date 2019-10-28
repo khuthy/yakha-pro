@@ -67,6 +67,8 @@ export class BaccountSetupPage {
   }
   location: string;
   current: number = 1;
+  back: boolean;
+  hideElement: boolean;
   
   get regNo() {
     return this.profileForm.get('profileFormSecondSlide').get('regNo');
@@ -134,9 +136,9 @@ export class BaccountSetupPage {
        //this.HomeOwnerQuotation.extras = [];
      }, 2000);
    //this.slides.lockSwipes(true) // when the page loads
-    // this.oneSignal.getIds().then((res) => {
-    //   this.builderProfile.tokenID = res.userId;
-    // })
+    /* this.oneSignal.getIds().then((res) => {
+      this.builderProfile.tokenID = res.userId;
+    }) */
     this.getStatus();
     console.log(this.authUser.getUser());
     this.builderProfile.price = 0;
@@ -144,6 +146,14 @@ export class BaccountSetupPage {
     console.log(this.builderProfile.price);
     console.log(this.slides.getActiveIndex);
     this.slides.lockSwipes(true);
+
+  firebase.firestore().collection('Users').doc(firebase.auth().currentUser.uid).onSnapshot((res) => {
+    if(res.data().isProfile == true) {
+      this.back = true;
+    }else {
+      this.back = false;
+    }
+  })
    
   }
 
@@ -156,9 +166,9 @@ export class BaccountSetupPage {
 
  checkKeyBoardEvents(){
    if(this.keyboard.isOpen()) {
-      
+        this.hideElement = true;
    }else {
-
+      this.hideElement = false;
    }
  }
 

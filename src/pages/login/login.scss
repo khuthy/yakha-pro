@@ -1,7 +1,7 @@
 page-login {
     
     .builderHeader {
-        background: red;
+       // background: red;
         .toolbar-background {
             background: url('../../assets/icon/BuilderShape2.svg');
             background-position: top right;
@@ -13,7 +13,7 @@ page-login {
     }
     /* Owner */
     .ownerHeader {
-      background:#203959;
+     // background:#203959;
       .toolbar-background {
           background: url('../../assets/icon/ownerShape.svg');
           background-position: top right;
@@ -38,7 +38,7 @@ page-login {
 
   }
     .footer {
-        background:#203959 ;
+        //background:#203959 ;
       .toolbar-background {
           background: url('../../assets/icon/OwnerShapes.svg');
           background-position: -5% 100%;

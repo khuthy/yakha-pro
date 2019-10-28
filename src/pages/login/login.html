@@ -88,7 +88,7 @@
 </ion-content>
 
 <!-- footer -->
-<ion-footer no-border>
+<ion-footer no-border *ngIf="hideElement">
   <ion-toolbar *ngIf="!builder" class="footer"></ion-toolbar>
   <ion-toolbar *ngIf="builder" class="footerBuilder"></ion-toolbar>
 </ion-footer>
