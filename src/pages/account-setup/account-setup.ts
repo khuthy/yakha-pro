@@ -94,7 +94,7 @@ export class AccountSetupPage {
    /*  oneSignal.getIds().then((res) => {
       this.HomeOwnerProfile.tokenID = res.userId;
     }); */
-
+    this.backButton()
   
   }
   public handleAddressChange(addr: Address) {
@@ -243,7 +243,9 @@ export class AccountSetupPage {
   }
  backButton() {
    this.plt.registerBackButtonAction(() => {
-     
+     if(this.back == true) {
+       this.isProfile = true;
+     }
    })
  }
 

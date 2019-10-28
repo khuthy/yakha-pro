@@ -7,6 +7,13 @@ page-baccount-setup {
         border-radius: 50%;
         border: 1px solid #ddd;
     }
+
+    .scroll-content {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+    }
     
   .statusApproval {
     display: flex;
@@ -85,10 +92,10 @@ page-baccount-setup {
   }
 
     .image-profile-builder {
-      height: 100px;
-      width: 100px;
+      height: 150px;
+      width: 150px;
       border-radius: 50%;
-      border: 2px solid color($colors, dark);
+      border: 4px solid color($colors, dark);
       margin: auto;
       display: flex;
       justify-content: center;
@@ -98,20 +105,17 @@ page-baccount-setup {
         max-height: 12vh;
       }
       .thumbnail-image {
-        height: 100px;
-        width: 100px;
+       width: 100%;
+    height: 100%;
         border-radius: 50%;
         object-fit: cover;
       }
       .btn-create {
         position: absolute;
-        bottom: 0;
+        bottom: 5%;
         right: 0;
-        height: 30px;
-        width: 30px;
-        .icon {
-          font-size: 2.8vh;
-        }
+      
+        
       }
     } 
     .next {
