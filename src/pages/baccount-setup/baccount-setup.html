@@ -30,7 +30,7 @@
   
   <ion-content fullscreen>
   <!--  -->
-  <form padding [formGroup]="profileForm" *ngIf="!isProfile">
+  <form [formGroup]="profileForm" *ngIf="!isProfile">
   
      <ion-slides (ionSlideDidChange)="currentSlide($event)" #slides>
       <ion-slide formGroupName="profileFormFirstSlide">
@@ -87,7 +87,7 @@
                     
                   </ion-row>
                   <ion-row justify-content-center>
-                      <ion-col col-6>
+                      <ion-col col-8>
                           <button round block ion-button color="dark" [disabled]="this.profileForm.get('profileFormFirstSlide').invalid"  (click)="nextslides()">Next</button>
                       </ion-col>
                     </ion-row>
@@ -146,8 +146,8 @@
                 
               </ion-row>
               <ion-row justify-content-center>
-                  <ion-col col-6>
-                      <button round ion-button color="dark"  (click)="createprofile(profileForm)">Done</button>
+                  <ion-col col-8>
+                      <button round block ion-button color="dark"  (click)="createprofile(profileForm)">Done</button>
                   </ion-col>
                 </ion-row>
             </ion-grid>

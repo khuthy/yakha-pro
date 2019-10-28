@@ -1,8 +1,7 @@
 page-baccount-setup {
     .item {
         border-radius: 50px;
-        border: none;
-        border: 1px solid rgb(163, 163, 163);
+        border: 1px solid rgb(114, 114, 114);
     }
     .image {
         border-radius: 50%;
@@ -48,7 +47,7 @@ page-baccount-setup {
     
   }
   .tools-header {
-    background: url('../../assets/imgs/BuilderShape2.svg');
+    background: url('../../assets/icon/BuilderShape2.svg');
     background-position: top right;
     background-size: 40%;
     background-repeat: no-repeat;
@@ -56,7 +55,7 @@ page-baccount-setup {
     
   }
   .tools-footer {
-    background: url('../../assets/imgs/BuilderShapes.svg');
+    background: url('../../assets/icon/BuilderShapes.svg');
     background-position: bottom left;
     background-size: 40%;
     background-repeat: no-repeat;
