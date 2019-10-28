@@ -1,28 +1,38 @@
 <ion-header no-border>
-    <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
-        <div class="maploader">
-          <div class="lds-facebook"><div></div><div></div><div></div></div>
-        </div>
-        <div class="loading-text">
-      
-        </div>
+  <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
+    <div class="maploader">
+      <div class="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
+    </div>
+    <div class="loading-text">
+
+    </div>
+  </div>
   <ion-toolbar class="tools-header" *ngIf="!isProfile">
     <ion-buttons left start>
-      <button ion-fab *ngIf="back" (click)="cancelProfile()"><ion-icon name="arrow-back"></ion-icon></button>
+      <button ion-fab *ngIf="back" (click)="cancelProfile()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar  *ngIf="isProfile">
+  <ion-toolbar *ngIf="isProfile">
     <ion-buttons left>
-      <button ion-fab (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+      <button ion-fab (click)="navCtrl.pop()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
     </ion-buttons>
     <ion-buttons right>
-       
-            <div class="group-button" (click)="SignOut()">
-                <p>Logout</p>
-                <button ion-fab color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
-              </div> 
-        
+
+      <div class="group-button" (click)="SignOut()">
+        <p>Logout</p>
+        <button ion-fab color="light">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </div>
+
     </ion-buttons>
   </ion-toolbar>
   
@@ -75,14 +85,14 @@
                           <p class="error" *ngIf="profileForm.get('profileFormFirstSlide').get('personalNumber').hasError('required') && (profileForm.get('profileFormFirstSlide').get('personalNumber').dirty || profileForm.get('profileFormFirstSlide').get('personalNumber').touched)">Phone number is required</p>
                    
                     </ion-col>
-                   <!--  <ion-col col-12>
+                    <ion-col col-12>
                    <ion-item no-lines>
                      <input placeholder="Address" formControlName="address" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" class="address">
            
                    </ion-item>
                     <p class="error" *ngIf="profileForm.get('profileFormFirstSlide').get('address').hasError('required') && (profileForm.get('profileFormFirstSlide').get('address').dirty || profileForm.get('profileFormFirstSlide').get('address').touched)">Address is required</p>
                    
-                    </ion-col>  -->
+                    </ion-col>
   
                     
                   </ion-row>
@@ -101,7 +111,7 @@
          
        
       </ion-slide>
-  
+
       <ion-slide formGroupName="profileFormSecondSlide">
   
            <ion-grid padding>
@@ -159,29 +169,29 @@
      
     
     <div class="propic">
-      <img *ngIf="builderProfile.image" src="{{builderProfile.image}}" class="thumbavatar" >
-      <img *ngIf="!builderProfile.image" src="../../assets/imgs/team-avatar.jpg" class="thumbavatar" >
+      <img *ngIf="builderProfile.image" src="{{builderProfile.image}}" class="thumbavatar">
+      <img *ngIf="!builderProfile.image" src="../../assets/imgs/team-avatar.jpg" class="thumbavatar">
       <div class="names">
-     <h4>{{builderProfile.fullName}}</h4>
-     <p id="adres">{{builderProfile.address}}</p>
-   </div>
-   
-     
-  </div>
-  
-  <div class="infocontent">
-    <div class="cert">
+        <h4>{{builderProfile.fullName}}</h4>
+        <p id="adres">{{builderProfile.address}}</p>
+      </div>
+
+
+    </div>
+
+    <div class="infocontent">
+      <div class="cert">
         <h3>PROFILE</h3>
-     <div class="flag" *ngIf="builderProfile.certified">
-      <span>C</span>
-     </div>
-  
-   </div>
-  
-  
-    <div class="infor" padding>
+        <div class="flag" *ngIf="builderProfile.certified">
+          <span>C</span>
+        </div>
+
+      </div>
+
+
+      <div class="infor" padding>
         <p>Gender</p>
-        <h5>{{builderProfile.gender}}</h5> 
+        <h5>{{builderProfile.gender}}</h5>
         <p>Experience</p>
         <h5>{{builderProfile.experiences}} years.</h5>
         <p>Cost</p>
@@ -189,6 +199,9 @@
         <p>Roofing</p>
         <h5 *ngIf="builderProfile.roof">Including roofing</h5>
         <h5 *ngIf="!builderProfile.roof">Do not include roofing</h5>
+      </div>
+
+
     </div>
     
     
@@ -204,7 +217,7 @@
    
   
   
-<!--   <div class="statusApproval">
+ <div class="statusApproval" *ngIf="!status">
   <div class="top">
     <img src="../../assets/icon/Yakha-assets/LogoOnSpash.svg">
   </div>
@@ -212,7 +225,7 @@
     Please wait while we process your application.
     This might take up to 24 hours.</h5>
   <div class="bottom"></div>
-  </div> -->
+  </div> 
   
   
   
