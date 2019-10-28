@@ -30,7 +30,7 @@
   
   <ion-content fullscreen>
   <!--  -->
-  <form padding [style.display]="status ? 'block' : 'none'" [formGroup]="profileForm" *ngIf="!isProfile">
+  <form padding [formGroup]="profileForm" *ngIf="!isProfile">
   
      <ion-slides (ionSlideDidChange)="currentSlide($event)" #slides>
       <ion-slide formGroupName="profileFormFirstSlide">
@@ -86,9 +86,9 @@
   
                     
                   </ion-row>
-                  <ion-row align-items-center>
-                      <ion-col>
-                          <button class="next" round ion-button color="dark" [disabled]="this.profileForm.get('profileFormFirstSlide').invalid"  (click)="nextslides()">Next</button>
+                  <ion-row justify-content-center>
+                      <ion-col col-6>
+                          <button round block ion-button color="dark" [disabled]="this.profileForm.get('profileFormFirstSlide').invalid"  (click)="nextslides()">Next</button>
                       </ion-col>
                     </ion-row>
                 </ion-grid>
@@ -145,9 +145,9 @@
                 </ion-col>
                 
               </ion-row>
-              <ion-row align-items-center>
-                  <ion-col>
-                      <button class="next" round ion-button color="dark"  (click)="createprofile(profileForm)">Done</button>
+              <ion-row justify-content-center>
+                  <ion-col col-6>
+                      <button round ion-button color="dark"  (click)="createprofile(profileForm)">Done</button>
                   </ion-col>
                 </ion-row>
             </ion-grid>
@@ -155,7 +155,7 @@
     </ion-slides>
   </form>
    
-   <div id="pro" [style.display]="status ? 'block' : 'none'" class="profiles" *ngIf="isProfile">
+   <div id="pro" class="profiles" *ngIf="isProfile">
      
     
     <div class="propic">
@@ -204,7 +204,7 @@
    
   
   
-  <div class="statusApproval" *ngIf="!status">
+<!--   <div class="statusApproval">
   <div class="top">
     <img src="../../assets/icon/Yakha-assets/LogoOnSpash.svg">
   </div>
@@ -212,7 +212,7 @@
     Please wait while we process your application.
     This might take up to 24 hours.</h5>
   <div class="bottom"></div>
-  </div>
+  </div> -->
   
   
   

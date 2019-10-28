@@ -432,7 +432,7 @@ export class BaccountSetupPage {
   }
   getStatus() {
 
-    this.db.doc(this.authUser.getUser()).onSnapshot((check) => {
+    this.db.doc(firebase.auth().currentUser.uid).onSnapshot((check) => {
       if (check.data().status == true) {
         this.status = true;
       } else {
