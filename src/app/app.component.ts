@@ -159,8 +159,8 @@ export class MyApp {
               this.userLoggedinNow.builder = profile.data().builder;
               this.pages = [
                 { title: 'View Profile', component: BaccountSetupPage, icon: 'ios-person' },
-                { title: 'Tips', component: HelpPage, icon: 'information-circle' },
-                { title: 'Version', component: VersionPage, icon: 'help' }
+                { title: 'Tips', component: TipsPage, icon: 'information-circle' },
+                { title: 'Help', component: HelpPage, icon: 'help' }
 
               ];
             } else {
