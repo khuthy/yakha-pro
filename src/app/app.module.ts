@@ -58,7 +58,7 @@ import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';
 
 //import { File } from '@ionic-native/file';
 
-//import { FileOpener } from '@ionic-native/file-opener';
+import { FileOpener } from '@ionic-native/file-opener';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CallNumber } from '@ionic-native/call-number';
 import { ProfileComponent } from '../components/profile/profile';
@@ -144,6 +144,7 @@ import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages'
     Geolocation,
     Camera,
     File,
+    FileOpener,
     CallNumber,
     GooglePlaceModule,
 
