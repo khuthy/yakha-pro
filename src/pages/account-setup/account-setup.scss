@@ -61,6 +61,12 @@ page-account-setup {
       }
       
     }
+    .scroll-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+     }
   
      .tools-header {
       background:url(../../assets/imgs/ownerShape.svg);            

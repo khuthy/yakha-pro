@@ -27,26 +27,17 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-
-
-
-
-
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { LoginPage } from '../pages/login/login';
 //import { RegisterPage } from '../pages/register/register';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { Camera } from '@ionic-native/camera';
 //import { SignoutPage } from '../pages/signout/signout';
-
 import { QuotationFormPage } from '../pages/quotation-form/quotation-form';
 import { SuccessPage } from '../pages/success/success';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 import { StatusBar } from '@ionic-native/status-bar';
-
 import { HttpClientModule, /* other http imports */ } from "@angular/common/http";
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //import { WelcomePage } from '../pages/welcome/welcome';
@@ -66,7 +57,7 @@ import { ProfileComponent } from '../components/profile/profile';
 //import { FileTransfer } from '@ionic-native/file-transfer';
 //import { DocumentViewer } from '@ionic-native/document-viewer';
 //import { StarRatingModule } from 'ionic3-star-rating';
-//import { PopoverPage } from '../pages/popover/popover';
+// import { PopoverPage } from '../pages/popover/popover';
 import { DescriptionComponent } from '../components/description/description';
 import { AccountSetupPage } from '../pages/account-setup/account-setup';
 import { RegisterPage } from '../pages/register/register';
@@ -81,7 +72,9 @@ import { VersionPage } from '../pages/version/version';
 //import { SMS } from '@ionic-native/sms';
 import { ChannelsPage } from '../pages/channels/channels';
 import { TipsPage } from '../pages/tips/tips';
+import { MessagesPage } from '../pages/messages/messages';
 import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages';
+import { TipsPageModule } from '../pages/tips/tips.module';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
 
 @NgModule({
@@ -102,10 +95,11 @@ import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages'
     ChannelsPage,
     VersionPage,
     TipsPage,
+    MessagesPage,
+    DescriptionComponent,
     BuilderquotesPage,
     BuilderMessagesPage
 
-  
   ],
   imports: [
     BrowserModule,
@@ -131,6 +125,8 @@ import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages'
     VersionPage,
     ChannelsPage,
     TipsPage,
+    MessagesPage,
+    DescriptionComponent,
     BuilderquotesPage,
     BuilderMessagesPage
     

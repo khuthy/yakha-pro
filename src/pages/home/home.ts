@@ -10,7 +10,6 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { ProfileComponent } from '../../components/profile/profile';
 import { QuotationFormPage } from '../quotation-form/quotation-form';
 import { BuilderProfileviewPage } from '../builder-profileview/builder-profileview';
-import { LoaderComponent } from '../../components/loader/loader'
 //import { QuotationFormPage } from '../quotation-form/quotation-form';
 //import { TestPage } from '../test/test';
 declare var google;
@@ -119,7 +118,7 @@ export class HomePage {
   RangeSearch() {
     this.range = !this.range;
   }
-  
+
   ionViewDidLoad() {
     setTimeout(() => {
       this.AutoComplete()

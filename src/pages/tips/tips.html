@@ -1,15 +1,63 @@
-<!--
-  Generated template for the TipsPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-  <ion-navbar>
-    <ion-title>tips</ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding>
+<ion-content>
 
+  <div class="container">
+    
+      <div id="topnav" [ngClass]="{'header' : builder, 'headerOwner' : !builder}">
+          <button id="bckbtn" ion-fab (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
+          </div>
+
+          <div class="logo">
+              <img src="../../assets/icon/Group 180.svg" style="max-width: 70px; height: auto">
+             </div>
+
+             <div class="inform">
+      
+              <div [ngClass]="{'aboutus1': tsProperty=='about' , 'aboutus2': tsProperty!='about'}">
+                  <div  class="aboutus" (click)="activate('about')">
+                      <h4 text-center>Type of house is key to your search</h4>
+                      <p style="font-size:2vh"></p>
+                        </div>
+                        <p style =""> Builders may specialize in tract, spec or custom homes so learn the differences and figure out which one is right for you and your home-buying budget.</p>
+                
+              </div>
+             
+              <div [ngClass]="{'aboutus1': tsProperty=='terms' , 'aboutus2': tsProperty!='terms'}">
+                  <div class="aboutus" (click)="activate('terms')">
+                      <h4 text-center>10 Tricks for the beginner handyman</h4>
+                        </div>
+                  
+                  <p style="border:2px solid #203959">Being handy with tools is more than showing off. Being “that guy” in your circle of friends is nice—if not a little tiring, what with all the requests to fix everything—but for those of you who want to become the guy who knows how to fix little problems here and there, there’s usually one obstacle.
+
+                      How the hell do you learn? Watch reruns of Bob Vila on TV? (Who was not available, very unfortunately, for this piece.).
+                      
+                      1. Pull the Ole Nintendo on Your Garbage Disposal
+                      Before you begin, make sure you get under the sink and unplug the disposal unit itself (Many sinks have an outlet underneath them, just open the door and poke around for it.). If you can’t find that, flip the circuit breaker that gives power to the disposal. Seriously. You can’t skip this step because, if for some reason it turns on while you’re removing any stuck-on food in there, you will regret it..
+                      
+                      2. Stop a Toilet that Doesn’t Stop Running
+                      That sound.  It’s a torturous sound that can keep a guy up at night. Sure, the severity varies (there was once a toilet in the basement of the apartment building in which I was living that blew something so hard – it was spraying water up with enough force that it hit the ceiling – and shook the floors of my first-floor apartment), but a toilet’s importance can never be understated.
+                      
+                      3. Hammer a Nail—Not Your Hand
+                      There’s nothing like hammering a nail perfectly. There’s an art to it. Hitting the nail square on the head.
+                      
+                      The problem is, it might not happen all the time—just like the idiom suggests.
+                      
+                      To assuage your fear of bashing your fingertips while driving a nail into a harder material that requires some force, set the nail in place and hold the rod with pliers as you hammer away..
+                      
+                      4. Fix a Clogged Drain
+                      Many clogs can be fixed with liquid or gel drain cleaners, but if you’re facing something that’s got the whole thing backed up, get ready for a potentially messy fix.
+                      
+                      5. Know Your Homemade Cleaning Solutions
+                      Before you go mixing all the industrial-strength chemicals you have under your sink to create a Frankenstein mega cleaner, know a few things about what you’re mixing first—you could go Walter Whiting yourself without realizing it.</p>
+              </div>
+<div id="hide-bottom" [ngClass]="{'bottomdeco' : builder, 'bottomdecoOwner' : !builder}">
+    
+      </div>
+    
+    </div>
+     
+      </div>
+    
 </ion-content>
+
