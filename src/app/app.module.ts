@@ -27,7 +27,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+
 
 
 
@@ -54,11 +54,11 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //import { ViewmessagePage } from '../pages/viewmessage/viewmessage';
 import { IonicStorageModule } from '@ionic/storage';
 
-//import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';
+import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';
 
 //import { File } from '@ionic-native/file';
 
-//import { FileOpener } from '@ionic-native/file-opener';
+import { FileOpener } from '@ionic-native/file-opener';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CallNumber } from '@ionic-native/call-number';
 import { ProfileComponent } from '../components/profile/profile';
@@ -81,13 +81,13 @@ import { VersionPage } from '../pages/version/version';
 //import { SMS } from '@ionic-native/sms';
 import { ChannelsPage } from '../pages/channels/channels';
 import { TipsPage } from '../pages/tips/tips';
+import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
     WelcomePage,
     QuotationFormPage,
@@ -101,7 +101,9 @@ import { TipsPage } from '../pages/tips/tips';
     HelpPage,
     ChannelsPage,
     VersionPage,
-    TipsPage
+    TipsPage,
+    BuilderquotesPage,
+    BuilderMessagesPage
 
   
   ],
@@ -115,7 +117,6 @@ import { TipsPage } from '../pages/tips/tips';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
     WelcomePage,
     QuotationFormPage,
@@ -129,7 +130,9 @@ import { TipsPage } from '../pages/tips/tips';
     HelpPage,
     VersionPage,
     ChannelsPage,
-    TipsPage
+    TipsPage,
+    BuilderquotesPage,
+    BuilderMessagesPage
     
   ],
   providers: [
@@ -141,6 +144,7 @@ import { TipsPage } from '../pages/tips/tips';
     Geolocation,
     Camera,
     File,
+    FileOpener,
     CallNumber,
     GooglePlaceModule,
 

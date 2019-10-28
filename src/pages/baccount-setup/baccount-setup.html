@@ -1,41 +1,23 @@
 <ion-header no-border>
-  <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
-    <div class="maploader">
-      <div class="lds-facebook">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-    <div class="loading-text">
-
-    </div>
-  </div>
-  <ion-toolbar class="tools-header" *ngIf="!isProfile">
-    <ion-buttons left start>
-      <button ion-fab *ngIf="back" (click)="cancelProfile()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-  <ion-toolbar *ngIf="isProfile">
-    <ion-buttons left>
-      <button ion-fab (click)="navCtrl.pop()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-buttons right>
-
-      <div class="group-button" (click)="SignOut()">
-        <p>Logout</p>
-        <button ion-fab color="light">
-          <ion-icon name="arrow-forward"></ion-icon>
-        </button>
-      </div>
-
-    </ion-buttons>
-  </ion-toolbar>
-  
+ 
+    <ion-toolbar class="tools-header" *ngIf="!isProfile">
+      <ion-buttons left start>
+        <p color="dark" style="font-size: 22px; font-weight: 700;">{{current | number}}/2</p>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar  *ngIf="isProfile">
+      <ion-buttons left>
+        <button ion-fab (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+      </ion-buttons>
+      <ion-buttons right>
+         
+              <div class="group-button" (click)="SignOut()">
+                  <p>Logout</p>
+                  <button ion-fab color="light" (click)="SignOut()"><ion-icon name="arrow-forward"></ion-icon></button>
+                </div> 
+          
+      </ion-buttons>
+    </ion-toolbar>
   </ion-header>
   
   <ion-content fullscreen>
