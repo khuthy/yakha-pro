@@ -73,6 +73,7 @@ import { RegisterPage } from '../pages/register/register';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { firebaseConfig } from './app.firebase.config';
 import * as firebase from 'firebase';
+import { File } from '@ionic-native/file';
 //import { OneSignal } from '@ionic-native/onesignal';
 //import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 //import { SMS } from '@ionic-native/sms';
