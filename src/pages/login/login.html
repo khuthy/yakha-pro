@@ -1,71 +1,94 @@
-
 <ion-header no-border>
-<ion-toolbar *ngIf="builder" class="builderHeader"></ion-toolbar>
-<ion-toolbar *ngIf="!builder" class="ownerHeader"></ion-toolbar>
+  <ion-toolbar *ngIf="builder" class="builderHeader"></ion-toolbar>
+  <ion-toolbar *ngIf="!builder" class="ownerHeader"></ion-toolbar>
 </ion-header>
 
 <ion-content [style.backgroundColor]="builder ? '#F2F2F2' : '#203959'">
-<ion-grid >
+    <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
+        <div class="maploader">
+          <div class="lds-facebook"><div></div><div></div><div></div></div>
+        </div>
+       <!--  <div class="loading-text">
+          <p>Loading Map</p>
+        </div> -->
+      </div>
+  <ion-grid [formGroup]="loginForm">
 
-  <!-- logo -->
-  <ion-row justify-content-center>
+    <!-- logo -->
+    <ion-row justify-content-center>
       <ion-col *ngIf="!builder" id="logo" col-3>
-             <img src="../../assets/icon/WhiteLogo.svg">
+        <img src="../../assets/icon/WhiteLogo.svg">
       </ion-col>
       <ion-col *ngIf="builder" id="logo" col-3>
-          <img src="../../assets/icon/Logo.svg">
-   </ion-col>
+        <img src="../../assets/icon/Logo.svg">
+      </ion-col>
     </ion-row>
 
-<ion-row  justify-content-center>
-  <ion-col col-12 >
-      <p [style.color]="builder ? '#262014' : '#F2F2F2'" id="builder">Login here {{userLoggingIn}}</p>
-  </ion-col>
-</ion-row>
+    <ion-row justify-content-center>
+      <ion-col col-12>
+        <p [style.color]="builder ? '#262014' : '#F2F2F2'" id="builder">Login here {{userLoggingIn}}</p>
+      </ion-col>
+    </ion-row>
 
     <!-- inputs -->
     <ion-row justify-content-center no-padding>
-
-  <ion-col col-10 >
-     <ion-input [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="text" placeholder="Username"></ion-input>
-        </ion-col>
-
+      <!-- <ion-item> -->
         <ion-col col-10>
-          <ion-input [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="password" placeholder="Password"></ion-input>
-          </ion-col>
+          <ion-input [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" placeholder="Email"
+            formControlName="email" type="email"></ion-input>
+        </ion-col>
+        <p class="error message-error" *ngIf="loginForm.get('email').hasError('required') && (loginForm.get('email').dirty || loginForm.get('email').touched)">Email address is required</p>
+        <p class="error message-error" *ngIf="loginForm.get('email').hasError('pattern') && (loginForm.get('email').dirty || loginForm.get('email').touched)">Please enter a valid email address</p>
+      <!-- </ion-item> -->
 
-         <ion-col col-10>
-          <P id="password" [style.color]="builder ? '#262014' : '#F2F2F2'" text-right (click)="'presentPrompt()'">Forgot Password?</P>
-         </ion-col>
-</ion-row>
-</ion-grid>
+      <!-- <ion-item> -->
+        <ion-col col-10>
+          <ion-input [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" placeholder="Password"
+            formControlName="password" type="password"></ion-input>
+        </ion-col>
+      <!-- </ion-item> -->
+      <p class="error message-error" *ngIf="loginForm.get('password').hasError('required') && (loginForm.get('password').dirty || loginForm.get('password').touched)">password is required</p>
+      <p class="error message-error" *ngIf="loginForm.get('password').hasError('minlength') && (loginForm.get('password').dirty || loginForm.get('password').touched)">Password must be more than 6 characters </p>
 
-<!-- grid 2 for the buttons -->
-<ion-grid id="btns" no-padding>
-  <ion-row no-padding>
 
-  <ion-col id="signup" col-5  position="left" >
-    <div class="button-group-l" [style.backgroundColor]="builder ?  '#A49078 ' : '#015272'"   (click)="''">
-        <button ion-fab mini color="light" (click)="gotoRegister()"><ion-icon name="arrow-back"></ion-icon></button>
-      <p>Sign-Up</p>   
-     </div>
+
+      <ion-col col-10>
+        <P id="password" [style.color]="builder ? '#262014' : '#F2F2F2'" text-right (click)="'presentPrompt()'">Forgot
+          Password?</P>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- grid 2 for the buttons -->
+  <ion-grid id="btns" no-padding>
+    <ion-row no-padding>
+
+      <ion-col id="signup" col-5 position="left">
+        <div class="button-group-l" [style.backgroundColor]="builder ?  '#A49078 ' : '#015272'" (click)="''">
+          <button ion-fab mini color="light" (click)="gotoRegister()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+          <p>Sign-Up</p>
+        </div>
       </ion-col>
 
       <ion-col col-2></ion-col>
 
-      <ion-col id="signin" col-5  >
-          <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'"  (click)="''">
-              <p>Sign-In</p>   
-              <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
-         </div>
-            </ion-col>
+      <ion-col id="signin" col-5>
+        <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'" (click)="''">
+          <p>Sign-In</p>
+          <button ion-fab mini color="light">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+        </div>
+      </ion-col>
 
-  </ion-row>
-</ion-grid> 
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <!-- footer -->
-<ion-footer  no-border>
-    <ion-toolbar *ngIf="!builder" class="footer"></ion-toolbar>
-    <ion-toolbar *ngIf="builder" class="footerBuilder"></ion-toolbar>
-  </ion-footer>
+<ion-footer no-border>
+  <ion-toolbar *ngIf="!builder" class="footer"></ion-toolbar>
+  <ion-toolbar *ngIf="builder" class="footerBuilder"></ion-toolbar>
+</ion-footer>
