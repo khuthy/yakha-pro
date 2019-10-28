@@ -4,6 +4,14 @@
 </ion-header>
 
 <ion-content [style.backgroundColor]="builder ? '#F2F2F2' : '#203959'">
+    <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
+        <div class="maploader">
+          <div class="lds-facebook"><div></div><div></div><div></div></div>
+        </div>
+       <!--  <div class="loading-text">
+          <p>Loading Map</p>
+        </div> -->
+      </div>
   <ion-grid [formGroup]="loginForm">
 
     <!-- logo -->
