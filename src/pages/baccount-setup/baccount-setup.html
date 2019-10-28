@@ -28,9 +28,9 @@
   
   </ion-header>
   
-  <ion-content fullscreen>
+  <ion-content fullscreen (click)="checkKeyBoardEvents()">
   <!--  -->
-  <form [formGroup]="profileForm" *ngIf="!isProfile">
+  <form [formGroup]="profileForm" *ngIf="isProfile">
   
      <ion-slides (ionSlideDidChange)="currentSlide($event)" #slides>
       <ion-slide formGroupName="profileFormFirstSlide">
@@ -155,7 +155,7 @@
     </ion-slides>
   </form>
    
-   <div id="pro" class="profiles" *ngIf="isProfile">
+   <div id="pro" class="profiles" *ngIf="!isProfile">
      
     
     <div class="propic">
