@@ -44,7 +44,8 @@ export class MyApp {
     public splashScreen: SplashScreen, private statusBar: StatusBar,
     public alert: AlertController) {
     // set status bar to white
-
+    this.statusBar.backgroundColorByHexString('#203550');
+    this.statusBar.overlaysWebView(false);
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
     // oneSignal.startInit(this.signal_app_id, this.firebase_id);
@@ -74,8 +75,7 @@ export class MyApp {
       }else {
         console.log('cannot perform portrait');
       }
-      this.statusBar.backgroundColorByHexString('#203550');
-      this.statusBar.overlaysWebView(false);
+     
       this.userAuthentication(); 
       this.splashScreen.hide();
       
