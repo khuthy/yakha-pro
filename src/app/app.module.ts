@@ -6,8 +6,7 @@ import { File } from '@ionic-native/file';
 import { HttpClient } from '@angular/common/http';
 // import { PlacePage } from './../pages/place/place';
 //import { AddBricklayerPage } from './../pages/add-bricklayer/add-bricklayer';
-
-// import { BaccountSetupPage } from './../pages/baccount-setup/baccount-setup';
+ import { BaccountSetupPage } from './../pages/baccount-setup/baccount-setup';
 // import { Downloader } from '@ionic-native/downloader';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { BuilderProfileviewPage } from './../pages/builder-profileview/builder-profileview';
@@ -15,7 +14,7 @@ import { BuilderProfileviewPage } from './../pages/builder-profileview/builder-p
 // import { VersionPage } from './../pages/version/version';
 
 // import { FeedbackPage } from './../pages/feedback/feedback';
-// import { HelpPage } from './../pages/help/help';
+ import { HelpPage } from './../pages/help/help';
 // import { MessagesPage } from './../pages/messages/messages';
 
 // import { AccountSetupPage} from './../pages/account-setup/account-setup';
@@ -74,11 +73,12 @@ import { RegisterPage } from '../pages/register/register';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { firebaseConfig } from './app.firebase.config';
 import * as firebase from 'firebase';
-import { BaccountSetupPage } from '../pages/baccount-setup/baccount-setup';
+import { VersionPage } from '../pages/version/version';
 //import { OneSignal } from '@ionic-native/onesignal';
 //import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 //import { SMS } from '@ionic-native/sms';
-//import { ChannelsPage } from '../pages/channels/channels';
+import { ChannelsPage } from '../pages/channels/channels';
+import { TipsPage } from '../pages/tips/tips';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
 firebase.initializeApp(firebaseConfig);
 @NgModule({
@@ -95,7 +95,11 @@ firebase.initializeApp(firebaseConfig);
     OnboardingPage,
     OnboardingBuilderPage,
     SuccessPage,
-    BaccountSetupPage
+    BaccountSetupPage,
+    HelpPage,
+    ChannelsPage,
+    VersionPage,
+    TipsPage
 
   
   ],
@@ -118,7 +122,11 @@ firebase.initializeApp(firebaseConfig);
     OnboardingPage,
     OnboardingBuilderPage,
     SuccessPage,
-    BaccountSetupPage
+    BaccountSetupPage,
+    HelpPage,
+    VersionPage,
+    ChannelsPage,
+    TipsPage
     
   ],
   providers: [
