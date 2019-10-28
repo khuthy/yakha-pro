@@ -16,6 +16,7 @@ import { LoaderComponent } from '../../components/loader/loader'
 declare var google;
 import { RegisterPage } from './../register/register';
 import { LoginPage } from './../login/login';
+import { BuilderMessagesPage } from '../builder-messages/builder-messages';
 //import { Component } from '@angular/core';
 //import { NavController } from 'ionic-angular';
 
@@ -658,11 +659,11 @@ export class HomePage {
     this.navCtrl.push(BuilderProfileviewPage, builder);
   } 
 
-  /* viewRequest(docID, uid) {
+ viewRequest(docID, uid) {
 
-    this.navCtrl.push(TestPage, { docID, uid });
-    //  console.log('Doc id>>>>',docID,'user id===', uid);
-  } */
+    this.navCtrl.push(BuilderMessagesPage, { docID, uid });
+    console.log('Doc id>>>>',docID,'user id===', uid);
+  } 
 
   requestForm() {
     this.navCtrl.push(QuotationFormPage)
