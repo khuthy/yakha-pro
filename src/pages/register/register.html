@@ -4,7 +4,10 @@
     <ion-toolbar *ngIf="!builder" class="ownerHeader"></ion-toolbar>
     </ion-header>
     
-    <ion-content fullscreen [style.backgroundColor]="builder ? '#F2F2F2' : '#203959'">
+    <ion-content [style.backgroundColor]="builder ? '#F2F2F2' : '#203959'">
+      <form [formGroup]="signupForm">
+
+     
     <ion-grid >
     
       <!-- logo -->
@@ -26,13 +29,17 @@
         <!-- inputs -->
         <ion-row justify-content-center no-padding id="inputrow">
     
-      <ion-col col-10 class="inputs">
-         <ion-input  (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="text" placeholder="Username"></ion-input>
+      <ion-col col-10 >
+         <ion-input formControlName="email" (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" ngDefaultControl [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="text" placeholder="Email address"></ion-input>
+         <p class="error message-error" *ngIf="signupForm.get('email').hasError('required') && (signupForm.get('email').dirty || signupForm.get('email').touched)">Email address is required</p>
+         <p class="error message-error" *ngIf="signupForm.get('email').hasError('pattern') && (signupForm.get('email').dirty || signupForm.get('email').touched)">Please enter a valid email address</p>  
+        </ion-col>
+           
+            <ion-col col-10>
+              <ion-input ngDefaultControl (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" formControlName="password" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="password" placeholder="Password"></ion-input>
+              <p class="error message-error" *ngIf="signupForm.get('password').hasError('required') && (signupForm.get('password').dirty || signupForm.get('password').touched)">password is required</p>
+              <p class="error message-error" *ngIf="signupForm.get('password').hasError('minlength') && (signupForm.get('password').dirty || signupForm.get('password').touched)">Password must be more than 6 characters </p>    
             </ion-col>
-    
-            <ion-col col-10 class="inputs">
-              <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" type="password" placeholder="Password"></ion-input>
-              </ion-col>
     </ion-row>
     </ion-grid>
     
@@ -52,12 +59,13 @@
           <ion-col id="signin" col-5  >
               <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'"  (click)="''">
                   <p>Sign-Up</p>   
-                  <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
+                  <button ion-fab mini color="light" (click)="signupUser(signupForm)" ><ion-icon name="arrow-forward"></ion-icon></button>
              </div>
                 </ion-col>
     
       </ion-row>
-    </ion-grid> 
+    </ion-grid>
+  </form> 
     </ion-content>
     
     <!-- footer -->
