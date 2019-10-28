@@ -25,7 +25,7 @@ export class WelcomePage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private authService: AuthServiceProvider, 
-    private menuCtrl: MenuController,  public statusBar: StatusBar, public storage: Storage) {
+    private menuCtrl: MenuController,  public statusBar: StatusBar, private storage: Storage) {
       
   
       // set status bar to white
