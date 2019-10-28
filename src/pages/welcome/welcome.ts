@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-import { Storage } from '@ionic/storage';
+//import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { OnboardingBuilderPage } from '../onboarding-builder/onboarding-builder';
@@ -24,7 +24,7 @@ export class WelcomePage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     private authService: AuthServiceProvider, 
-    private menuCtrl: MenuController, private storage: Storage, public statusBar: StatusBar) {
+    private menuCtrl: MenuController,  public statusBar: StatusBar) {
       
   
       // set status bar to white
@@ -53,7 +53,7 @@ export class WelcomePage {
       /* setting status to false will prevent builders from creating their profile */
       this.authService.status = false;
       console.log('builder not verified: ',this.authService.getBuilderStatus());
-      this.storage.get('onboarding').then((val) => {
+      // this.storage.get('onboarding').then((val) => {
         if(val == true)  {
           console.log('onboarding has already been seen: ',val);
           this.navCtrl.setRoot(LoginPage);

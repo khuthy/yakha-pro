@@ -1,6 +1,7 @@
 // import { TestPage } from './../pages/test/test';
 import { OnboardingBuilderPage } from './../pages/onboarding-builder/onboarding-builder';
 import { Keyboard } from '@ionic-native/keyboard';
+import { File } from '@ionic-native/file';
 /* import { GoogleMapsComponent } from './../components/google-maps/google-maps'; */
 import { HttpClient } from '@angular/common/http';
 // import { PlacePage } from './../pages/place/place';
@@ -52,7 +53,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //import { WelcomePage } from '../pages/welcome/welcome';
 //import { BricklayerlandingPage } from '../pages/bricklayerlanding/bricklayerlanding';
 //import { ViewmessagePage } from '../pages/viewmessage/viewmessage';
-import { IonicStorageModule } from '@ionic/storage';
+//import { IonicStorageModule } from '@ionic/storage';
 
 //import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';
 
@@ -99,7 +100,7 @@ firebase.initializeApp(firebaseConfig);
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    //IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
