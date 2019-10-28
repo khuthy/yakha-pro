@@ -14,8 +14,8 @@ import { BaccountSetupPage } from '../pages/baccount-setup/baccount-setup';
 import { VersionPage } from '../pages/version/version';
 import { HelpPage } from '../pages/help/help';
 import { ChannelsPage } from '../pages/channels/channels';
-import { TipsPage } from '../pages/tips/tips';
 import { firebaseConfig } from './app.firebase.config';
+import { TipsPage } from '../pages/tips/tips';
 @Component({
   templateUrl: 'app.html'
 })

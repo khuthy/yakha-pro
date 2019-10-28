@@ -104,7 +104,7 @@ import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages'
     VersionPage,
     TipsPage,
     MessagesPage,
-    DescriptionComponent
+    DescriptionComponent,
     BuilderquotesPage,
     BuilderMessagesPage
 
@@ -134,7 +134,7 @@ import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages'
     ChannelsPage,
     TipsPage,
     MessagesPage,
-    DescriptionComponent
+    DescriptionComponent,
     BuilderquotesPage,
     BuilderMessagesPage
     

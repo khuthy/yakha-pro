@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, PopoverController } from 'ionic-angular';
 import * as firebase from 'firebase';
-import { HelpPage } from '../help/help';
-import { PopoverPage } from '../popover/popover';
 
 /**
  * Generated class for the FeedbackPage page.
@@ -13,10 +11,10 @@ import { PopoverPage } from '../popover/popover';
 
 @IonicPage()
 @Component({
-  selector: 'page-feedback',
-  templateUrl: 'feedback.html',
+  selector: 'page-tips',
+  templateUrl: 'tips.html',
 })
-export class FeedbackPage {
+export class TipsPage {
   tsProperty = '';
   toggle: boolean = false;
   // db = firebase.firestore().collection('feedback');
