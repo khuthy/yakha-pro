@@ -49,6 +49,21 @@ export class LoginPage {
     })
   }
 
+
+//allowing the keyboard to sit on top of buttons and pattern
+/*   checkKeyboard(data) {
+    if (data == 'open') {
+      //this.hid='value';
+      this.renderer.setStyle(this.input[0], 'transform', 'translateY(40vh)');
+      this.menuShow = false;
+
+    } else {
+      this.renderer.setStyle(this.input[0], 'transform', 'translateY(0)');
+      this.menuShow = true
+    }
+    // console.log(data);
+
+  } */
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage', this.authService.manageUsers());
     if(this.authService.manageUsers()) {
@@ -61,6 +76,7 @@ export class LoginPage {
 
     }
   }
+
 /*   ionViewCanEnter(){
    return this.authService.authenticated();
   } */
