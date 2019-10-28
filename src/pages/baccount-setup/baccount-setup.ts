@@ -128,22 +128,22 @@ export class BaccountSetupPage {
     
   }
   ionViewDidLoad() {
-  //   setTimeout(() => {
-  //     this.loaderAnimate = false;
-  //      //  this.hide12='';
-  //      //this.HomeOwnerQuotation.extras = [];
-  //    }, 2000);
-  //  //this.slides.lockSwipes(true) // when the page loads
-  //   this.oneSignal.getIds().then((res) => {
-  //     this.builderProfile.tokenID = res.userId;
-  //   })
-  //   this.getStatus();
-  //   console.log(this.authUser.getUser());
-  //   this.builderProfile.price = 0;
-  //   this.getProfile();
-  //   console.log(this.builderProfile.price);
-  //   console.log(this.slides.getActiveIndex);
-  //   this.slides.lockSwipes(true);
+    setTimeout(() => {
+      this.loaderAnimate = false;
+       //  this.hide12='';
+       //this.HomeOwnerQuotation.extras = [];
+     }, 2000);
+   //this.slides.lockSwipes(true) // when the page loads
+    // this.oneSignal.getIds().then((res) => {
+    //   this.builderProfile.tokenID = res.userId;
+    // })
+    this.getStatus();
+    console.log(this.authUser.getUser());
+    this.builderProfile.price = 0;
+    this.getProfile();
+    console.log(this.builderProfile.price);
+    console.log(this.slides.getActiveIndex);
+    this.slides.lockSwipes(true);
    
   }
 
