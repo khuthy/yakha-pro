@@ -92,8 +92,8 @@ page-baccount-setup {
   }
 
     .image-profile-builder {
-      height: 150px;
-      width: 150px;
+      height: 35vw;
+      width: 35vw;
       border-radius: 50%;
       border: 4px solid color($colors, dark);
       margin: auto;
@@ -102,7 +102,8 @@ page-baccount-setup {
       align-items: center;
       position: relative;
       img.holder {
-        max-height: 12vh;
+      height: 100%;
+      width: 100%;
       }
       .thumbnail-image {
        width: 100%;
@@ -112,7 +113,7 @@ page-baccount-setup {
       }
       .btn-create {
         position: absolute;
-        bottom: 5%;
+        bottom: -5%;
         right: 0;
       
         
