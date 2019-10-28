@@ -25,11 +25,11 @@
     <ion-row justify-content-center no-padding>
 
   <ion-col col-10 >
-     <ion-input type="text" placeholder="Username"></ion-input>
+     <ion-input type="text" placeholder="Username" (ionFocus)="checkKeyboard('open')" (ionBlur)="checkKeyboard('close')"></ion-input>
         </ion-col>
 
         <ion-col col-10>
-          <ion-input type="password" placeholder="Password"></ion-input>
+          <ion-input type="password" placeholder="Password" (ionFocus)="checkKeyboard('open')" (ionBlur)="checkKeyboard('close')"></ion-input>
           </ion-col>
 
          <ion-col col-10>

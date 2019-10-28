@@ -16,12 +16,32 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 })
 export class LoginPage {
 
+  input = document.getElementsByClassName('input');
+  renderer: any;
+  menuShow: boolean;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthServiceProvider) {
   }
 
+
+//allowing the keyboard to sit on top of buttons and pattern
+  checkKeyboard(data) {
+    if (data == 'open') {
+      //this.hid='value';
+      this.renderer.setStyle(this.input[0], 'transform', 'translateY(40vh)');
+      this.menuShow = false;
+
+    } else {
+      this.renderer.setStyle(this.input[0], 'transform', 'translateY(0)');
+      this.menuShow = true
+    }
+    // console.log(data);
+
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
+
 /*   ionViewCanEnter(){
    return this.authService.authenticated();
   } */
