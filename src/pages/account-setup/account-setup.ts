@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController, MenuController, PopoverController, ActionSheetController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController, AlertController, MenuController, PopoverController, ActionSheetController, Platform, Keyboard } from 'ionic-angular';
 import * as firebase from "firebase/app";
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
@@ -12,7 +12,7 @@ import { ProfileComponent } from '../../components/profile/profile';
 import { LoginPage } from '../login/login';
 import { text } from '@angular/core/src/render3/instructions';
 import { File, FileEntry } from '@ionic-native/file';
-import { Keyboard } from '@ionic-native/keyboard';
+
 
 /**
  * Generated class for the AccountSetupPage page.
@@ -63,6 +63,7 @@ export class AccountSetupPage {
   loaderAnimate = true;
   back: boolean;
   hid: string = '';
+  hideElement: boolean;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private authUser: AuthServiceProvider,
@@ -77,7 +78,7 @@ export class AccountSetupPage {
    // oneSignal: OneSignal,
     public actionSheetCtrl: ActionSheetController,
     public file: File,
-    public keyBoard: Keyboard,
+    public keyboard: Keyboard,
     public plt: Platform
     // public readFile : FileReader
   ) {
@@ -94,7 +95,7 @@ export class AccountSetupPage {
    /*  oneSignal.getIds().then((res) => {
       this.HomeOwnerProfile.tokenID = res.userId;
     }); */
-
+    this.backButton()
   
   }
   public handleAddressChange(addr: Address) {
@@ -120,15 +121,7 @@ export class AccountSetupPage {
     this.getProfile();
   }
 
-  checkKeyboard(data) {
-    //  this.keyBoard.onKeyboardHide
-    //  console.log(data);
-      if (data =='open') {
-        this.hid='value';
-      } else {
-        this.hid=''
-      }
-    }
+ 
   ionViewWillEnter() {
     this.menuCtrl.swipeEnable(false);
   }
@@ -243,9 +236,18 @@ export class AccountSetupPage {
   }
  backButton() {
    this.plt.registerBackButtonAction(() => {
-     
+     if(this.back == true) {
+       this.isProfile = true;
+     }
    })
  }
+ checkKeyBoardEvents(){
+  if(this.keyboard.isOpen()) {
+       this.hideElement = true;
+  }else {
+     this.hideElement = false;
+  }
+}
 
   validation_messages = {
     'fullName': [

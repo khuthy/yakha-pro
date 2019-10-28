@@ -1,6 +1,6 @@
 // import { TestPage } from './../pages/test/test';
 import { OnboardingBuilderPage } from './../pages/onboarding-builder/onboarding-builder';
-import { Keyboard } from '@ionic-native/keyboard';
+
 // import { File } from '@ionic-native/file';
 /* import { GoogleMapsComponent } from './../components/google-maps/google-maps'; */
 import { HttpClient } from '@angular/common/http';
@@ -27,7 +27,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+
 
 
 
@@ -54,11 +54,11 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //import { ViewmessagePage } from '../pages/viewmessage/viewmessage';
 import { IonicStorageModule } from '@ionic/storage';
 
-//import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';
+import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';
 
 //import { File } from '@ionic-native/file';
 
-//import { FileOpener } from '@ionic-native/file-opener';
+import { FileOpener } from '@ionic-native/file-opener';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CallNumber } from '@ionic-native/call-number';
 import { ProfileComponent } from '../components/profile/profile';
@@ -82,13 +82,13 @@ import { VersionPage } from '../pages/version/version';
 import { ChannelsPage } from '../pages/channels/channels';
 import { TipsPage } from '../pages/tips/tips';
 import { MessagesPage } from '../pages/messages/messages';
+import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
     WelcomePage,
     QuotationFormPage,
@@ -105,6 +105,8 @@ import { MessagesPage } from '../pages/messages/messages';
     TipsPage,
     MessagesPage,
     DescriptionComponent
+    BuilderquotesPage,
+    BuilderMessagesPage
 
   ],
   imports: [
@@ -117,7 +119,6 @@ import { MessagesPage } from '../pages/messages/messages';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
     WelcomePage,
     QuotationFormPage,
@@ -134,6 +135,8 @@ import { MessagesPage } from '../pages/messages/messages';
     TipsPage,
     MessagesPage,
     DescriptionComponent
+    BuilderquotesPage,
+    BuilderMessagesPage
     
   ],
   providers: [
@@ -145,8 +148,9 @@ import { MessagesPage } from '../pages/messages/messages';
     Geolocation,
     Camera,
     File,
+    FileOpener,
     CallNumber,
-    Keyboard,
+    GooglePlaceModule,
 
   ]
 })

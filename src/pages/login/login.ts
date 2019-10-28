@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Keyboard } from 'ionic-angular';
 //import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RegisterPage } from '../register/register';
@@ -39,9 +39,10 @@ export class LoginPage {
     ]
 
   }
+  hideElement: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthServiceProvider, private formBuilder: FormBuilder,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController, private keyboard: Keyboard) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')])),
       password: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(10)]))
@@ -86,6 +87,14 @@ export class LoginPage {
 /*   ionViewWillLeave(){
    this.authService.authState();
   } */
+
+  checkKeyBoardEvents() {
+    if(this.keyboard.isOpen()) {
+      this.hideElement = true;
+    }else {
+      this.hideElement = false;
+    }
+  }
   loginUser() {
     this.loaderAnimate = true;
     if (!this.loginForm.valid) {

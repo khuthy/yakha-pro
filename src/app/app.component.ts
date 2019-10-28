@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import * as firebase from "firebase/app";
 
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
@@ -45,7 +44,8 @@ export class MyApp {
     public splashScreen: SplashScreen, private statusBar: StatusBar,
     public alert: AlertController) {
     // set status bar to white
-
+    this.statusBar.backgroundColorByHexString('#203550');
+    this.statusBar.overlaysWebView(false);
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
     // oneSignal.startInit(this.signal_app_id, this.firebase_id);
@@ -75,8 +75,7 @@ export class MyApp {
       }else {
         console.log('cannot perform portrait');
       }
-      this.statusBar.backgroundColorByHexString('#203550');
-      this.statusBar.overlaysWebView(false);
+     
       this.userAuthentication(); 
       this.splashScreen.hide();
       
@@ -160,8 +159,8 @@ export class MyApp {
               this.userLoggedinNow.builder = profile.data().builder;
               this.pages = [
                 { title: 'View Profile', component: BaccountSetupPage, icon: 'ios-person' },
-                { title: 'Tips', component: HelpPage, icon: 'information-circle' },
-                { title: 'Version', component: VersionPage, icon: 'help' }
+                { title: 'Tips', component: TipsPage, icon: 'information-circle' },
+                { title: 'Help', component: HelpPage, icon: 'help' }
 
               ];
             } else {
