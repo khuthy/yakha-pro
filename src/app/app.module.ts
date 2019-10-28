@@ -56,7 +56,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 //import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';
 
-import { File } from '@ionic-native/file';
+//import { File } from '@ionic-native/file';
 
 //import { FileOpener } from '@ionic-native/file-opener';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
