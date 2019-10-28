@@ -52,7 +52,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //import { WelcomePage } from '../pages/welcome/welcome';
 //import { BricklayerlandingPage } from '../pages/bricklayerlanding/bricklayerlanding';
 //import { ViewmessagePage } from '../pages/viewmessage/viewmessage';
-//import { IonicStorageModule } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 
 //import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';
 
@@ -108,7 +108,7 @@ firebase.initializeApp(firebaseConfig);
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    //IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
