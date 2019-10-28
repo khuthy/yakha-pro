@@ -57,7 +57,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 //import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';
 
-//import { File } from '@ionic-native/file';
+import { File } from '@ionic-native/file';
 
 //import { FileOpener } from '@ionic-native/file-opener';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -74,6 +74,7 @@ import { RegisterPage } from '../pages/register/register';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { firebaseConfig } from './app.firebase.config';
 import * as firebase from 'firebase';
+import { BaccountSetupPage } from '../pages/baccount-setup/baccount-setup';
 //import { OneSignal } from '@ionic-native/onesignal';
 //import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 //import { SMS } from '@ionic-native/sms';
@@ -93,7 +94,8 @@ firebase.initializeApp(firebaseConfig);
     RegisterPage,
     OnboardingPage,
     OnboardingBuilderPage,
-    SuccessPage
+    SuccessPage,
+    BaccountSetupPage
 
   
   ],
@@ -115,7 +117,8 @@ firebase.initializeApp(firebaseConfig);
     RegisterPage,
     OnboardingPage,
     OnboardingBuilderPage,
-    SuccessPage
+    SuccessPage,
+    BaccountSetupPage
     
   ],
   providers: [
