@@ -83,7 +83,9 @@ export class LoginPage {
   gotoRegister() {
     this.navCtrl.push(RegisterPage);
   }
-
+/*   ionViewWillLeave(){
+   this.authService.authState();
+  } */
   loginUser() {
     this.loaderAnimate = true;
     if (!this.loginForm.valid) {
