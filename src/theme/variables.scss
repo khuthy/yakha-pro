@@ -50,7 +50,14 @@ $colors: (
     contrast  : #555555
        ),
   builder     : #A49078,
-  customcall: rgb(1, 153, 1),    
+  customcall:  (
+    base      : #DAE0BC,
+    contrast  : #f2f2f2
+       ),
+       customsend: (
+         base: #233827,
+         contrast: #fff
+       )    
 );
 
 
@@ -61,10 +68,12 @@ $font-size: 12px;
 $fab-box-shadow: 0 1px 1px #000000;
 $menu-width: 200px;
 $fab-mini-size: 35px;
-$fab-size: 39px;
+$fab-size: 45px;
 $text-input-md-highlight-color-valid: transparent;
 $text-input-md-highlight-color-invalid: transparent;
 $text-input-md-show-focus-highlight: false;
+$text-input-md-margin-top: 0;
+$text-input-md-margin-bottom: 0;
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here

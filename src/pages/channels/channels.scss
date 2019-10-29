@@ -64,6 +64,10 @@ page-channels {
                  object-fit: cover;
                }
              }
+             .informative {
+              justify-self: flex-start;
+              flex: 2;
+             }
              .informative p {
                position: absolute;
                top: 1%;
