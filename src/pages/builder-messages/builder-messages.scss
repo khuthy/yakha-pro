@@ -1,12 +1,35 @@
 page-builder-messages {
+    .arrows {
+        width: 10%;
+        text-align: center;
+        position: absolute;
+        bottom: -24%;
+        left: 45%;
+        animation: bounce 800ms ease-in-out 100ms 5 forwards;
+       //border: 1px solid pink;
+    }
+    @keyframes bounce {
+        0% {bottom: -28px;}
+        100%{bottom: -35px;}
+    }
+    .arrowsUp {
+        
+        width: 10%;
+        text-align: center;
+        position: absolute;
+        bottom: -9%;
+        left: 45%;
+       //border: 1px solid pink;
+    }
     .slide-all {
         z-index: -30;
         position: relative;
         .house {
-            position: absolute;
-            z-index: 100000;
+            position: fixed;
+            z-index: 1000 !important;
             left: 0;
-            bottom: 0;
+            
+            top: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.472);
@@ -21,13 +44,13 @@ page-builder-messages {
    
     .swiper-pagination
             {
-        top: 20% !important;
+        top: 30vw !important;
         }   
     .container-fluid {
         top: 0;
         left: 0;
         width: 100%;
-        height: 25%;
+        height: 40vw;
         background: #FFFFFF;
         box-shadow: 0 2px 2px rgba(0, 0, 0, 0.205);
         border-radius: 0 0 13px 13px;
@@ -52,6 +75,7 @@ page-builder-messages {
        
         }
     }
+   
     .container-drop-fluid {
         top: 0;
         left: 0;
@@ -199,7 +223,7 @@ page-builder-messages {
     }
         .header {
             background: color($colors, secondary);
-            height: 25%;
+            height: 40vw;
             border-radius: 0 0 13px 13px;
             .back-button {
                 background: color($colors, primary);
@@ -237,7 +261,6 @@ page-builder-messages {
                 .chat {
                      padding: 5px; 
                     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.13);
-                    font-size: 2vh;
                     max-width: 100%;
 
                     .texts {
@@ -249,12 +272,12 @@ page-builder-messages {
                         } 
                         #text-message {
                           
-                            font-size: 2.6vh;
+                            font-size: 4vw;
                         
                         }
                         #time-message {
                           
-                            font-size: 1.6vh;
+                            font-size: 2.5vw;
                             color: rgb(136, 136, 136);
                         }
                     }
@@ -285,6 +308,7 @@ page-builder-messages {
         .tool-footer {
             background: linear-gradient(#FFFFFF, #F1F1F1);
             z-index: 100;
+            position: absolute;
         }
         .text-input {
             margin-top: 0 !important;

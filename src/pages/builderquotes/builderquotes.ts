@@ -76,7 +76,7 @@ export class BuilderquotesPage {
     viewed: false,
     msgStatus: ''
   }
-  meter = 2;
+
   pdfObj = null;
   dbChatting = firebase.firestore().collection('chatting');
   dbRespond = firebase.firestore().collection('Respond'); //sdk
@@ -94,7 +94,6 @@ export class BuilderquotesPage {
     'dimension': [{
       type: 'required', message: 'Extra costs are required'
     }],
-
   }
   ownerAddress: any;
   count = 0;
@@ -108,6 +107,11 @@ export class BuilderquotesPage {
   itemtotals = {
 
   }
+
+ get BuilderQuotes() {
+   return this.quotesForm.get('dimensions');
+ }
+
   userUID = firebase.auth().currentUser.uid;
   chatMessage: string;
   loaderAnimate: boolean;
@@ -134,13 +138,16 @@ export class BuilderquotesPage {
     this.quotes.uid = this.uid;
     this.quotesForm = this.forms.group({
       expiry: new FormControl('', Validators.compose([Validators.required])),
-      dimension: new FormControl('', Validators.compose([Validators.required])),
-
+      dimensions: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(9)])),
+      dimension: [null],
+      discount: new FormControl('', Validators.compose([Validators.min(0), Validators.max(100)])),
+      extrasDiscount: new FormControl('', Validators.compose([Validators.min(0), Validators.max(100)]))
     })
 
     this.date = new Date();
     this.maxDate = this.formatDate(this.date);
-
+ 
+    this.quotesForm.get('dimension').clearValidators();
 
   }
 
@@ -174,19 +181,17 @@ this.extras = [];
       this.extras = res.data().extras
     //  console.log('Extras.....',this.extras);
     })
- /*    this.dbRequest.doc(this.navParams.data.docID).onSnapshot((res) => {
-      this.quotes.hOwnerUID = res.data().hOwnerUid;
+    this.dbRequest.doc(this.navParams.data.docID).onSnapshot((res) => {
+     // this.quotes.hOwnerUID = res.data().hOwnerUid;
       this.dbUsers.doc(res.data().hOwnerUid).onSnapshot((res) => {
         if (res.data().builder == false) {
           // this.quotes.ownerUID = this.quotes.hOwnerUID;
           this.quotes.ownerAddress = res.data().ownerAddress;
           this.quotes.ownerName = res.data().fullName;
-          this.quotes.dimension = 'Whole House measurement' + this.quotes.meter + 'per meter squared';
-        } else {
-          console.log('this is a builder, sorry');
+        
         }
       })
-    }) */
+    })
     this.dbUsers.doc(this.uid).onSnapshot((doc) => {
       this.quotes.address = doc.data().address;
       this.quotes.fullName = doc.data().fullName;
@@ -258,7 +263,9 @@ this.extras = [];
     this.quotes.discountPrice = (this.value) * this.quotes.discountAmount / 100;
     console.log('total with extras: ', this.quotes.total, 'total without extras:', this.quotes.subtotal);
     var items = this.extras.map((item) => {
-      return [item.item, item.quantity, 'R' + item.price + '.00'];
+      console.log('Extras in table...', item);
+      
+      return [item.name, item.quantity, 'R' + item.price + '.00'];
     });
     var docDefinition = {
       watermark: { text: "YAKHA", color: "gray", opacity: 0.3, bold: true, alignment: "right" },
@@ -412,7 +419,7 @@ this.extras = [];
     this.loaderAnimate = true;
     setTimeout(() => {
       this.loaderAnimate = false;
-    }, 2000);
+    }, 3000);
     //console.log('pdf link............:', this.pdfDoc);
     this.dbRespond.doc(this.navParams.data.docID).set(this.quotes).then(()=>{
      // this.quotes.pdfLink = this.pdfDoc;

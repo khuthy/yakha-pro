@@ -120,17 +120,18 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    setTimeout(() => {
-      this.AutoComplete()
-    }, 1000);
+  
     setTimeout(() => {
       this.loaderAnimate = false
     }, 2000);
     this.db.doc(this.uid).onSnapshot((res) => {
       if (res.data().builder == false) {
+        setTimeout(() => {
+          this.AutoComplete();
+          this.getPosition();
+        }, 3000);
         //this.loadCtrl();
-        //document.getElementById('header').style.display = "none";
-        this.getPosition();
+        //document.getElementById('header').style.display = "none" 
         this.loadMap();
 
       }
@@ -200,11 +201,19 @@ export class HomePage {
     })
   }
 
-  getPosition(): any {
-    this.geolocation.getCurrentPosition().then(resp => {
-      this.setMapCenter(resp);
+  setMapCenter(position: Geoposition) {
+    let myLatLng = { lat: position.coords.latitude, lng: position.coords.longitude };
+    this.map.setCenter(myLatLng);
 
-    })
+    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      let marker = new google.maps.Marker({
+        position: myLatLng,
+        map: this.map,
+        icon: 'https://img.icons8.com/nolan/40/000000/user-location.png'
+        //  title: 'Hello World!'
+      });
+      //  this.map.classList.add('map');
+    });
   }
   loadCtrl() {
     this.loadingCtrl.create({
@@ -328,6 +337,12 @@ export class HomePage {
       buttons: ['OK']
     });
     alert.present();
+  }
+  getPosition(): any {
+    this.geolocation.getCurrentPosition().then(resp => {
+      console.log('Response from get current position', resp);
+      this.setMapCenter(resp);
+    })
   }
   loadMap() {
 
@@ -577,20 +592,7 @@ export class HomePage {
     // this.directionsDisplay.setPanel(document.getElementById('right-panel'));
   }
 
-  setMapCenter(position: Geoposition) {
-    let myLatLng = { lat: position.coords.latitude, lng: position.coords.longitude };
-    this.map.setCenter(myLatLng);
 
-    google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      let marker = new google.maps.Marker({
-        position: myLatLng,
-        map: this.map,
-        icon: 'https://img.icons8.com/nolan/40/000000/user-location.png'
-        //  title: 'Hello World!'
-      });
-      //  this.map.classList.add('map');
-    });
-  }
 
   search(event) {
     let searchKey: string = event;

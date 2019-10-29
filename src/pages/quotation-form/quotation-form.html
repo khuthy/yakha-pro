@@ -1,92 +1,109 @@
-<ion-header *ngIf="steps=='steone'"  [style.display]="!hideHeader ? 'none' : 'block' " no-border style="background: transparent;">
-
-      <ion-toolbar  class="ownerHeader"></ion-toolbar>
-
+<ion-header *ngIf="steps=='steone'" [style.display]="!hideHeader ? 'none' : 'block' " no-border
+  style="background: transparent;">
+  <ion-navbar class="tools-header">
+    <!--     <ion-title> <p style="border:1px solid gold;margin-left: -5px;margin-top:5px;"> {{homeBuilderPrice | currency: '&#82;'}}(p/&#13217;)<br>{{homeBuilderName}}</p></ion-title>
+ -->
+  </ion-navbar>
 </ion-header>
 
- 
+
 
 <ion-content fullscreen>
-    <button (click)="popForm()" *ngIf="steps=='stepone'"  id="switchback" style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;min-height:45px;width:45px;z-index:5"  ion-fab ><ion-icon color="light" name="arrow-back"></ion-icon></button>
-   <button (click)="backSlide()" *ngIf="steps=='steptwo'"  id="switchback" style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;min-height:45px;width:45px;z-index:5"  ion-fab ><ion-icon color="light" name="arrow-back"></ion-icon></button>
-    
-<div class="topDecor">
+  <button (click)="popForm()" *ngIf="steps=='stepone'" id="switchback"
+    style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;min-height:45px;width:45px;z-index:5"
+    ion-fab>
+    <ion-icon color="light" name="arrow-back"></ion-icon>
+  </button>
+  <button (click)="backSlide()" *ngIf="steps=='steptwo'" id="switchback"
+    style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;min-height:45px;width:45px;z-index:5"
+    ion-fab>
+    <ion-icon color="light" name="arrow-back"></ion-icon>
+  </button>
 
-</div>
+  <div class="topDecor">
 
-<div class="footer"  *ngIf="!hid">
-    <div class="button-group"  *ngIf="steps=='steptwo'||steps=='stepone'" (click)="slideState()">
-        <p>Next step</p>
-         <button class="send-quotes" ion-fab color="light">
-          <ion-icon name="arrow-forward"></ion-icon>
-         
-        </button>
-      </div>
+  </div>
 
-      <div class="button-group"  *ngIf="steps=='stepthree'" (click)="createQuations()">
-        <p>Submit</p>
-         <button class="send-quotes" ion-fab color="light">
-          <ion-icon name="arrow-forward"></ion-icon>
-         
-        </button>
-      </div>
-<!-- edit buttton -->
-      <div class="button-group" id="edit" *ngIf="steps=='stepthree'" >
-          <button class="send-quotes" (click)="editQuotes()" ion-fab color="light">
-              <ion-icon name="arrow-back"></ion-icon>
-             
-            </button>
-        <p>Edit</p>
-         
-      </div>
-<div class="names">
-  <p style="color:rgb(204, 158, 20);margin-top:4px;">{{homeBuilderPrice | currency: '&#82;'}}(p/&#13217;)</p>
-  <p style="letter-spacing: 1px;font-family:'impact'">{{homeBuilderName}}</p>
-</div>
+  <div class="footer" *ngIf="!hid">
+    <div class="button-group" *ngIf="steps=='steptwo'||steps=='stepone'" (click)="slideState()">
+      <p>Next step</p>
+      <button (click)="slideState()" class="send-quotes" ion-fab color="light">
+        <ion-icon name="arrow-forward"></ion-icon>
 
-</div>
+      </button>
+    </div>
 
- 
+    <div class="button-group" *ngIf="steps=='stepthree'" (click)="createQuations()">
+      <p>Submit</p>
+      <button class="send-quotes" (click)="createQuations()" ion-fab color="light">
+        <ion-icon name="arrow-forward"></ion-icon>
+
+      </button>
+    </div>
+    <!-- edit buttton -->
+    <div class="button-group" id="edit" *ngIf="steps=='stepthree'" (click)="editQuotes()">
+      <button class="send-quotes" (click)="editQuotes()" ion-fab color="light">
+        <ion-icon name="arrow-back"></ion-icon>
+
+      </button>
+      <p>Edit</p>
+
+    </div>
+    <div class="names">
+      <p style="color:rgb(204, 158, 20);margin-top:4px;">{{homeBuilderPrice | currency: '&#82;'}}(p/&#13217;)</p>
+      <p style="letter-spacing: 1px;font-family:'impact'">{{homeBuilderName}}</p>
+    </div>
+
+  </div>
+
+
   <form class="information" [formGroup]="quotationForm">
-  
+
 
     <!-- slide one starts here -->
     <div class="slideone" formGroupName="firstCountValid">
-       
+
       <div class="imageCont">
-        
-        <img *ngIf="HomeOwnerQuotation.houseImage" src="{{HomeOwnerQuotation.houseImage}}" class="image" (click)="selectImage()">
+
+        <img *ngIf="HomeOwnerQuotation.houseImage" src="{{HomeOwnerQuotation.houseImage}}" class="image"
+          (click)="selectImage()">
         <ion-icon *ngIf="!HomeOwnerQuotation.houseImage" style="color:gray; font-size:8vh;text-align: center"
           (click)="selectImage()" name="cloud-upload"></ion-icon>
-        <p [class]="houseimage ? 'error' : 'normal'" *ngIf="!quotationForm.get('firstCountValid').get('houseimage').value">Please upload your house plan here</p>
+        <p [class]="houseimage ? 'error' : 'normal'"
+          *ngIf="!quotationForm.get('firstCountValid').get('houseimage').value">Please upload your house plan here</p>
       </div>
       <div class="dates">
         <p>I prefer the starting date to be around:</p>
         <ion-item no-lines>
           <ion-label style="padding-left:4px">Start</ion-label>
-          <ion-datetime name="startDate" formControlName="startDate" displayFormat="MMM DDD,YYYY" pickerFormat="MMM/DDD/YYYY" [min]="maxDate" max="2022-01-01"
-            [(ngModel)]="HomeOwnerQuotation.startDate"></ion-datetime>
+          <ion-datetime name="startDate" formControlName="startDate" displayFormat="MMM DDD,YYYY"
+            pickerFormat="MMM/DDD/YYYY" [min]="maxDate" max="2022-01-01" [(ngModel)]="HomeOwnerQuotation.startDate">
+          </ion-datetime>
         </ion-item>
-      <p class="error" *ngIf="quotationForm.get('firstCountValid').get('startDate').hasError('required') && (quotationForm.get('firstCountValid').get('startDate').dirty || quotationForm.get('firstCountValid').get('startDate').touched)">Please specify the starting date.</p>
-         <ion-item no-lines style="margin-top:3%">
-          <ion-label >End</ion-label> 
-          <ion-datetime formControlName="endDate" displayFormat="MMM DDD,YYYY" pickerFormat="MMM/DDD/YYYY" [min]="maxDate" max="2022-01-01"
-            [(ngModel)]="HomeOwnerQuotation.endDate"></ion-datetime>
+        <p class="error"
+          *ngIf="quotationForm.get('firstCountValid').get('startDate').hasError('required') && (quotationForm.get('firstCountValid').get('startDate').dirty || quotationForm.get('firstCountValid').get('startDate').touched)">
+          Please specify the starting date.</p>
+        <ion-item no-lines style="margin-top:3%">
+          <ion-label>End</ion-label>
+          <ion-datetime formControlName="endDate" displayFormat="MMM DDD,YYYY" pickerFormat="MMM/DDD/YYYY"
+            [min]="maxDate" max="2022-01-01" [(ngModel)]="HomeOwnerQuotation.endDate"></ion-datetime>
         </ion-item>
-        <p class="error" *ngIf="quotationForm.get('firstCountValid').get('endDate').hasError('required') && (quotationForm.get('firstCountValid').get('endDate').dirty || quotationForm.get('firstCountValid').get('endDate').touched)">Please specify the Ending date.</p>
-        
+        <p class="error"
+          *ngIf="quotationForm.get('firstCountValid').get('endDate').hasError('required') && (quotationForm.get('firstCountValid').get('endDate').dirty || quotationForm.get('firstCountValid').get('endDate').touched)">
+          Please specify the Ending date.</p>
+
       </div>
       <p style="text-align:center; font-size:4vw;letter-spacing: 1px;padding-top:3px">Please select your brick type</p>
       <div class="bricks">
 
         <div class="cards" *ngFor="let n of bricks" (click)="highlight(n, $event)">
-          
-          <div class="details-inactive" >
 
-              <div class="closeB" (click)="viewProfile(n)">
-                  <ion-icon color="custom" style="color: rgb(204, 158, 20)" name="information-circle"></ion-icon>
-                </div>
-         
+          <div class="details-inactive">
+
+            <div class="closeB" (click)="viewProfile(n)">
+              <ion-icon color="custom" style="color: rgb(204, 158, 20)" name="information-circle"></ion-icon>
+            </div>
+
             <!-- <p>{{n.description}}</p> -->
           </div>
           <div class="brickName">
@@ -96,58 +113,64 @@
             <img src="{{n.image}}">
           </div>
 
-          
+
         </div>
-        
+
       </div>
-      <p [class]="brickType ? 'error': 'normal'" *ngIf="!HomeOwnerQuotation.brickType">Please Specify the type of Wall Type</p>
+      <p [class]="brickType ? 'error': 'normal'" *ngIf="!HomeOwnerQuotation.brickType">Please Specify the type of Wall
+        Type</p>
       <div class="walltype">
         <p>Select wall type</p>
-        <ion-list radio-group class="inputs" formControlName="wallType"  [(ngModel)]="HomeOwnerQuotation.wallType">
+        <ion-list radio-group class="inputs" formControlName="wallType" [(ngModel)]="HomeOwnerQuotation.wallType">
           <ion-item no-lines style="width: 50%;color:white">
             <ion-label style="color:black">Double</ion-label>
             <ion-radio style="width:30px;" value="double"></ion-radio>
           </ion-item>
-       
+
           <ion-item no-lines style="width: 50%;">
             <ion-label style="color:black">Single</ion-label>
-            <ion-radio  style="width:30px;"  value="single"></ion-radio>
+            <ion-radio style="width:30px;" value="single"></ion-radio>
           </ion-item>
-      </ion-list>
-      <p class="error" *ngIf="quotationForm.get('firstCountValid').get('wallType').hasError('required')  && (quotationForm.get('firstCountValid').get('wallType').dirty || quotationForm.get('firstCountValid').get('wallType').touched)">Please specify the Wall type</p>
-     
+        </ion-list>
+        <p class="error"
+          *ngIf="quotationForm.get('firstCountValid').get('wallType').hasError('required')  && (quotationForm.get('firstCountValid').get('wallType').dirty || quotationForm.get('firstCountValid').get('wallType').touched)">
+          Please specify the Wall type</p>
+
       </div>
     </div>
 
     <!-- start of info2  slide -->
     <div class="secon" scroll id="step2" formGroupName="secondValid">
-      <div class="extrawork"  >
-<div class="eForm">
+      <div class="extrawork">
+        <div class="eForm">
           <!-- hide this whole div when the keyboard opens -->
-          <div  id="extrajob">
-            <h2 id="hide-div" class="hidelist"  class="hidepara">Would you like to include the
-            following?</h2>
-  
-          <ion-list no-lines>
-  
-            <ion-item class="gray"  style="background: whitesmoke;" *ngFor="let e of extras; let i=index">
-              <ion-label>{{e.service}}</ion-label>
-              <ion-checkbox style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);border-radius:2px;
-                  "(ionChange)="checkClicked(e.service, $event, i)"></ion-checkbox>
-            </ion-item>
-        </ion-list>
-        <ion-textarea  (ionFocus)="checkKeyboard('open')"
-          (ionBlur)="checkKeyboard('close')"  placeholder="Type message here" formControlName="comment"  name="comment" [(ngModel)]="HomeOwnerQuotation.comment" class="comment" cols="50" rows="5"></ion-textarea>
-        <p *ngIf="quotationForm.get('secondValid').get('comment').hasError('required') && (quotationForm.get('secondValid').get('comment').dirty || quotationForm.get('secondValid').get('comment').touched)"></p>
+          <div id="extrajob">
+            <h2 id="hide-div" class="hidelist" class="hidepara">Would you like to include the
+              following?</h2>
+
+            <ion-list no-lines>
+
+              <ion-item class="gray" style="background: whitesmoke;" *ngFor="let e of extras; let i=index">
+                <ion-label>{{e.service}}</ion-label>
+                <ion-checkbox style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);border-radius:2px;
+                  " (ionChange)="checkClicked(e.service, $event, i)"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+            <ion-textarea (ionFocus)="checkKeyboard('open')" (ionBlur)="checkKeyboard('close')"
+              placeholder="Type message here" formControlName="comment" name="comment"
+              [(ngModel)]="HomeOwnerQuotation.comment" class="comment" cols="50" rows="5"></ion-textarea>
+            <p
+              *ngIf="quotationForm.get('secondValid').get('comment').hasError('required') && (quotationForm.get('secondValid').get('comment').dirty || quotationForm.get('secondValid').get('comment').touched)">
+            </p>
           </div>
 
-  <div class="textarea">
-       <!-- textarea -->
-          
+          <div class="textarea">
+            <!-- textarea -->
+
+          </div>
+
         </div>
-       
-</div>
-        
+
       </div>
 
       <!-- comment area -->
@@ -156,8 +179,8 @@
     <!-- slide three starts here -->
     <div class="confirm" style="overflow:auto" id="step3">
       <div class="title">
-          <h4>CONFIRM</h4>
-          <p>Please confirm if everything is <br> as you need it to be.</p>
+        <h4>CONFIRM</h4>
+        <p>Please confirm if everything is <br> as you need it to be.</p>
       </div>
 
       <!-- div containing houseplan and details -->
@@ -172,7 +195,7 @@
           <h4>Request Details</h4>
           <h5>Project Duration</h5>
 
-         <p>{{HomeOwnerQuotation.startDate | date}} to {{HomeOwnerQuotation.endDate | date}} </p>
+          <p>{{HomeOwnerQuotation.startDate | date}} to {{HomeOwnerQuotation.endDate | date}} </p>
 
           <h5>WallType</h5>
           <p>{{HomeOwnerQuotation.wallType}}</p>
@@ -181,24 +204,24 @@
           <p>{{HomeOwnerQuotation.brickType}}</p>
 
           <h5>Your message</h5>
-          <p>{{HomeOwnerQuotation.comment}}</p> 
+          <p>{{HomeOwnerQuotation.comment}}</p>
 
         </div>
-      </div> 
-      <div class="extraz" >
-     <h4>Extras</h4>  
-     <div>
-        <p *ngFor="let e of HomeOwnerQuotation.extras">{{e.name}}</p>
+      </div>
+      <div class="extraz">
+        <h4>Extras</h4>
+        <div>
+          <p *ngFor="let e of HomeOwnerQuotation.extras">{{e.name}}</p>
 
-   
-     </div>
-       
+
+        </div>
+
       </div>
     </div>
     <!-- end of info2 slide -->
-    
+
   </form>
-  
+
   <!-- <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
       <div class="maploader">
         <div class="lds-facebook"><div></div><div></div><div></div></div>
@@ -208,5 +231,5 @@
       </div>
     </div> -->
 
-   
+
 </ion-content>
