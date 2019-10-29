@@ -15,9 +15,7 @@ page-builder-messages {
             align-content: center;
             justify-content: center;
            
-            .house {
-                
-            }
+            
         }
     }
    
@@ -284,6 +282,10 @@ page-builder-messages {
         .tool-footer {
             background: linear-gradient(#FFFFFF, #F1F1F1);
             z-index: 100;
+        }
+        .text-input {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
         }
 
         @keyframes showSlow {
