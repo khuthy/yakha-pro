@@ -19,7 +19,6 @@
     <button ion-fab (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
   </ion-buttons>
   <ion-buttons right>
-     
           <div class="group-button" (click)="SignOut()">
               <p>Logout</p>
               <button ion-fab color="light" mini ><ion-icon name="arrow-forward"></ion-icon></button>
@@ -92,9 +91,7 @@
       <p>{{HomeOwnerProfile.personalNumber}}</p>
       <p>{{HomeOwnerProfile.gender}}</p>
     </div>
-   
-
-  </div>
+   </div>
   <div class="location">
          <p>{{HomeOwnerProfile.ownerAddress}}</p>
     </div>
@@ -110,6 +107,4 @@
 <ion-footer no-border *ngIf="!hid">
   <ion-toolbar class="tools-footer" *ngIf="!isProfile">
     </ion-toolbar>
-   
-    
 </ion-footer>
