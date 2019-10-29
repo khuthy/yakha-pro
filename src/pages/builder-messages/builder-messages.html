@@ -75,9 +75,9 @@
 
 
       </div>
-      <div class="chats" padding>
+      <div class="chats" #chats padding>
         <div class="messaging" *ngFor="let chat of msgInfo;">
-          <div class="messages" *ngIf="!chat.builder">
+          <div class="messages" *ngIf="chat.builder">
             <div class="chat right">
               <div class="texts">
                 <p text-left id="text-message">{{chat.chat}}</p> <!-- Message -->
@@ -94,7 +94,7 @@
 
             </div>
           </div>
-          <div class="messages" *ngIf="chat.builder">
+          <div class="messages" *ngIf="!chat.builder">
             <div class="chat left">
               <div class="texts">
                 <p text-left id="text-message">{{chat.chat}} </p>

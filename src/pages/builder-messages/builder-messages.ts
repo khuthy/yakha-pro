@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, Slides, Content, List } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { CallNumber } from '@ionic-native/call-number';
 import { BuilderquotesPage } from '../builderquotes/builderquotes';
@@ -19,6 +19,10 @@ export class BuilderMessagesPage {
   drop: boolean = false;
   imageBuilder: string;
   @ViewChild('slides') slides: Slides;
+ 
+
+  private mutationObserver: MutationObserver;
+
   dbChat = firebase.firestore().collection('chat_msg');
   dbChatting = firebase.firestore().collection('chatting');
   dbIncoming = firebase.firestore().collection('Request');
@@ -46,7 +50,9 @@ export class BuilderMessagesPage {
   quoteStatus: any;
   constructor(public navCtrl: NavController,
     private callNumber: CallNumber,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    private elementRef: ElementRef
+    ) {
     // this.imageBuilder = this.navParams.data.img;
     console.log('Nav params', this.navParams.data);
     this.messages = [];
@@ -66,6 +72,7 @@ export class BuilderMessagesPage {
   }
 
   ionViewDidLoad() {
+
     setTimeout(() => {
       this.slideChanged();
     }, 1000);
@@ -128,6 +135,7 @@ export class BuilderMessagesPage {
         console.log('This is what I sent now...', doc.data());
       })
     })
+    
   }
   respond() {
     this.navCtrl.push(BuilderquotesPage, { docID: this.currentUid, uid: this.navParams.data.uid });
