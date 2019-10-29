@@ -23,6 +23,9 @@
 
     
 }
+*::-webkit-scrollbar{
+    display: none;
+}
 
 .class_used_to_set_icon {
     display: block;

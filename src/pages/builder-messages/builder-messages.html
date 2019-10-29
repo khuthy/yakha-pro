@@ -31,8 +31,10 @@
         <p text-center style="color: #fff;">Quotation Y001</p>
       </ion-header>
       <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
-        <button ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
+          <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
           class="container-after-pseudo">Quotation details</button>
+          <button *ngIf="drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
+          class="container-after-pseudo">Close details</button>
         <div class="hide-div"></div>
         <div class="content-info" *ngIf="drop">
           <div class="bricks">
@@ -78,7 +80,7 @@
           <div class="messages" *ngIf="!chat.builder">
             <div class="chat right">
               <div class="texts">
-                <p>{{chat.chat}}</p> <!-- Message -->
+                <p text-left id="text-message">{{chat.chat}}</p> <!-- Message -->
               </div>
 
 
@@ -87,7 +89,7 @@
                 <!-- <button ion-button block (click)="DownloadPDF()"><ion-icon name="download"></ion-icon></button> -->
               </div>
               <div class="texts">
-                <p text-right>{{chat.date | date: "shortTime" : "GMT+2"}}</p>
+                <p text-right id="time-message">{{chat.date | date: "shortTime" : "GMT+2"}}</p>
               </div>
 
             </div>
@@ -95,10 +97,10 @@
           <div class="messages" *ngIf="chat.builder">
             <div class="chat left">
               <div class="texts">
-                <p>{{chat.chat}} </p>
+                <p text-left id="text-message">{{chat.chat}} </p>
               </div>
               <div class="texts">
-                <p text-left>{{chat.date | date: "shortTime" : "GMT+2"}}</p>
+                <p text-left id="time-message">{{chat.date | date: "shortTime" : "GMT+2"}}</p>
               </div>
 
             </div>
