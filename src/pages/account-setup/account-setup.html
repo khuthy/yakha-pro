@@ -7,11 +7,13 @@
     
       </div>
     </div>
+
 <ion-toolbar class="tools-header" *ngIf="!isProfile">
   <ion-buttons left start>
     <button ion-fab *ngIf="back" (click)="cancelProfile()"><ion-icon name="arrow-back"></ion-icon></button>
   </ion-buttons>
 </ion-toolbar>
+
 <ion-toolbar  *ngIf="isProfile">
   <ion-buttons left>
     <button ion-fab (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
@@ -20,10 +22,9 @@
      
           <div class="group-button" (click)="SignOut()">
               <p>Logout</p>
-              <button ion-fab color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
+              <button ion-fab color="light" mini ><ion-icon name="arrow-forward"></ion-icon></button>
             </div> 
-      
-  </ion-buttons>
+    </ion-buttons>
 </ion-toolbar>
 
 </ion-header>
@@ -39,7 +40,7 @@
             </div> 
         </ion-col>
         
-        <ion-col col-12 align-self-center>
+        <ion-col id="inputs" col-12 align-self-center>
            <ion-item no-lines>
              <ion-input type="text" placeholder="Full Name" (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" formControlName="fullName" [(ngModel)]="HomeOwnerProfile.fullName" ngDefaultControl></ion-input>
            </ion-item>
