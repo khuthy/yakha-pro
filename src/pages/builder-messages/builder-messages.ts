@@ -32,87 +32,96 @@ export class BuilderMessagesPage {
   getowners = {
     image: '',
     fullName: '',
-    personalNumber:'',
+    personalNumber: '',
   };
   currentUid: any;
   incomingMsg = [];
   msgInfo = [];
   chat = [];
- 
+
   toggle: boolean = false;
   icon: string = 'ios-arrow-down';
-  extras=[];
+  extras = [];
   number: any;
   quoteStatus: any;
-  constructor(public navCtrl: NavController, 
-    private callNumber:CallNumber,
+  constructor(public navCtrl: NavController,
+    private callNumber: CallNumber,
     public navParams: NavParams) {
     // this.imageBuilder = this.navParams.data.img;
     console.log('Nav params', this.navParams.data);
     this.messages = [];
-   
+
   }
   open() {
     if (this.toggle == true) {
       this.toggle = false;
       this.icon = 'ios-arrow-down';
-      
+
     } else {
       this.icon = 'ios-arrow-up';
       this.toggle = true;
-     
+
     }
 
   }
 
   ionViewDidLoad() {
-//     let info = {data:{}, id: {}, user: {}}
-//     this.dbChat.doc(this.navParams.data.uid).collection(this.uid).where('hOwnerUid', '==',this.navParams.data.uid ).where('builderUID','==',this.uid).onSnapshot((res) => {
-//      //  console.log('This doc ', res.docs);
-//       this.msgSent = [];
-//       res.forEach((doc) => {
-//        // console.log('Message data', doc.data());
-//         // quering builder personal number
-//           this.dbProfile.doc(doc.data().builderUID).onSnapshot((response)=>{
-//            info.data = doc.data();
-//             info.id = doc.id;
-//             info.user = response.data();
-//         this.msgSent.push(info)
-//         info = {data:{}, id: {}, user: {}}
-//        // console.log('Message sent', this.msgSent);
-        
-//         //this.number = doc.data().personalNumber;
-//       })
-//     })
-//    /// console.log('Messages found..', this.msgSent);
-    
-//     })
-//     /*  setTimeout(() => {
-//       this.getOwnerDetails();
-//      }, 3000);
-//  */
-  
+    setTimeout(() => {
+      this.slideChanged();
+    }, 1000);
+    let info = { data: {}, id: {}, user: {} }
+    this.dbChat.doc(this.navParams.data.uid).collection(this.uid).where('hOwnerUid', '==', this.navParams.data.uid).where('builderUID', '==', this.uid).onSnapshot((res) => {
+      //  console.log('This doc ', res.docs);
+      this.msgSent = [];
+      res.forEach((doc) => {
+        // console.log('Message data', doc.data());
+        // quering builder personal number
+        this.dbProfile.doc(doc.data().builderUID).onSnapshot((response) => {
+          info.data = doc.data();
+          info.id = doc.id;
+          info.user = response.data();
+          this.msgSent.push(info)
+          info = { data: {}, id: {}, user: {} }
+          console.log('Message sent', this.msgSent);
+
+          //         //this.number = doc.data().personalNumber;
+          //       })
+          //     })
+          //    /// console.log('Messages found..', this.msgSent);
+
+          //     })
+          //     /*  setTimeout(() => {
+          //       this.getOwnerDetails();
+          //      }, 3000);
+          //  */
+
+        })
+      })
+    })
   }
-  // slideChanged() {
-  //   let currentIndex = this.slides.getActiveIndex();
-  //   this.currentUid = this.msgSent[currentIndex].id;
-  //    this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).where('id','==',this.msgSent[currentIndex].id).orderBy('date').onSnapshot((res) => {
-  //     this.msgInfo=[];
-  //     for (let i = 0; i < res.docs.length; i++) {
-  //       this.msgInfo.push(res.docs[i].data())
-  //     }
-  //   //  console.log('Message...', this.msgInfo);  
-  //   }) 
-  //   this.dbSent.doc(this.currentUid).onSnapshot((doc)=>{
-  //     if (doc.data().msgStatus!=="") {
-  //    ///  this.hideCard = '';
-  //      this.quoteStatus = doc.data().msgStatus;
-  //     // console.log('Status............................', this.quoteStatus);
-  //     } 
-  //   })
-  // }
+  slideChanged() {
+    let currentIndex = this.slides.getActiveIndex();
+    this.currentUid = this.msgSent[currentIndex].id;
+    console.log('Current doc id', this.currentUid);
+    console.log('Nav params', this.navParams.data);
+    
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).where('id','==',this.msgSent[currentIndex].id).orderBy('date').onSnapshot((res) => {
+      this.msgInfo=[];
+      for (let i = 0; i < res.docs.length; i++) {
+        this.msgInfo.push(res.docs[i].data())
+      }
+      console.log('Message...', this.msgInfo);  
+    }) 
+    this.dbSent.doc(this.currentUid).onSnapshot((doc)=>{
+      if (doc.data().msgStatus!=="") {
+     ///  this.hideCard = '';
+       this.quoteStatus = doc.data().msgStatus;
+      // console.log('Status............................', this.quoteStatus);
+      } 
+    }) 
+  }
   getChats() {
-    this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: this.chatMessage, date: Date.now(), builder: true, id:  this.currentUid }).then((res) => {
+    this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: this.chatMessage, date: Date.now(), builder: true, id: this.currentUid }).then((res) => {
       res.onSnapshot((doc) => {
         this.chatMessage = '';
         this.myMsg = doc.data().chat
@@ -121,13 +130,13 @@ export class BuilderMessagesPage {
     })
   }
   respond() {
-    this.navCtrl.push(BuilderquotesPage, {docID: this.currentUid, uid: this.navParams.data.uid});
+    this.navCtrl.push(BuilderquotesPage, { docID: this.currentUid, uid: this.navParams.data.uid });
   }
   getOwnerDetails() {
     this.dbProfile.doc(this.navParams.data.uid).onSnapshot(owners => {
-       this.getowners.image = owners.data().image;
+      this.getowners.image = owners.data().image;
       this.getowners.fullName = owners.data().fullName;
-      this.getowners.personalNumber= owners.data().personalNumber;
+      this.getowners.personalNumber = owners.data().personalNumber;
     })
   }
   getProfileImageStyle() {
@@ -137,9 +146,9 @@ export class BuilderMessagesPage {
     this.callNumber.callNumber(number, true);
   }
   dropDown() {
-    if(this.drop == true) {
+    if (this.drop == true) {
       this.drop = false;
-    }else {
+    } else {
       this.drop = true;
     }
   }
