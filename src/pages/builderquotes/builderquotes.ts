@@ -174,19 +174,17 @@ this.extras = [];
       this.extras = res.data().extras
     //  console.log('Extras.....',this.extras);
     })
- /*    this.dbRequest.doc(this.navParams.data.docID).onSnapshot((res) => {
-      this.quotes.hOwnerUID = res.data().hOwnerUid;
+    this.dbRequest.doc(this.navParams.data.docID).onSnapshot((res) => {
+     // this.quotes.hOwnerUID = res.data().hOwnerUid;
       this.dbUsers.doc(res.data().hOwnerUid).onSnapshot((res) => {
         if (res.data().builder == false) {
           // this.quotes.ownerUID = this.quotes.hOwnerUID;
           this.quotes.ownerAddress = res.data().ownerAddress;
           this.quotes.ownerName = res.data().fullName;
-          this.quotes.dimension = 'Whole House measurement' + this.quotes.meter + 'per meter squared';
-        } else {
-          console.log('this is a builder, sorry');
+        
         }
       })
-    }) */
+    })
     this.dbUsers.doc(this.uid).onSnapshot((doc) => {
       this.quotes.address = doc.data().address;
       this.quotes.fullName = doc.data().fullName;
@@ -258,7 +256,9 @@ this.extras = [];
     this.quotes.discountPrice = (this.value) * this.quotes.discountAmount / 100;
     console.log('total with extras: ', this.quotes.total, 'total without extras:', this.quotes.subtotal);
     var items = this.extras.map((item) => {
-      return [item.item, item.quantity, 'R' + item.price + '.00'];
+      console.log('Extras in table...', item);
+      
+      return [item.name, item.quantity, 'R' + item.price + '.00'];
     });
     var docDefinition = {
       watermark: { text: "YAKHA", color: "gray", opacity: 0.3, bold: true, alignment: "right" },
@@ -412,7 +412,7 @@ this.extras = [];
     this.loaderAnimate = true;
     setTimeout(() => {
       this.loaderAnimate = false;
-    }, 2000);
+    }, 3000);
     //console.log('pdf link............:', this.pdfDoc);
     this.dbRespond.doc(this.navParams.data.docID).set(this.quotes).then(()=>{
      // this.quotes.pdfLink = this.pdfDoc;

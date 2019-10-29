@@ -25,7 +25,7 @@ export class ChannelsPage {
 
   ionViewDidLoad() {
     let data = { data: {}, user: {} }
-    this.dbRequest.where('hOwnerUid','==',this.uid).get().then((res) => {
+    this.dbRequest.where('hOwnerUid','==',this.uid).onSnapshot((res) => {
      // data = { data: {}, user: {} }
       this.respond = [];
     res.forEach((reqInfo)=>{    
@@ -38,6 +38,7 @@ export class ChannelsPage {
       })
       
     })
+    console.log('My messages', this.respond);
     
     })
   }
