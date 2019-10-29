@@ -15,6 +15,7 @@ import { BuilderquotesPage } from '../builderquotes/builderquotes';
   templateUrl: 'builder-messages.html',
 })
 export class BuilderMessagesPage {
+  drop: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -25,6 +26,13 @@ export class BuilderMessagesPage {
 
   sendPdf() {
     this.navCtrl.push(BuilderquotesPage)
+  }
+  dropDown() {
+    if(this.drop == true) {
+      this.drop = false;
+    }else {
+      this.drop = true;
+    }
   }
 
 }
