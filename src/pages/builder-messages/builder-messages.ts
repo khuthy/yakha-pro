@@ -66,6 +66,9 @@ export class BuilderMessagesPage {
   }
 
   ionViewDidLoad() {
+    setTimeout(() => {
+      this.slideChanged();
+    }, 1000);
     let info = { data: {}, id: {}, user: {} }
     this.dbChat.doc(this.navParams.data.uid).collection(this.uid).where('hOwnerUid', '==', this.navParams.data.uid).where('builderUID', '==', this.uid).onSnapshot((res) => {
       //  console.log('This doc ', res.docs);
@@ -96,24 +99,27 @@ export class BuilderMessagesPage {
       })
     })
   }
-  // slideChanged() {
-  //   let currentIndex = this.slides.getActiveIndex();
-  //   this.currentUid = this.msgSent[currentIndex].id;
-  //    this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).where('id','==',this.msgSent[currentIndex].id).orderBy('date').onSnapshot((res) => {
-  //     this.msgInfo=[];
-  //     for (let i = 0; i < res.docs.length; i++) {
-  //       this.msgInfo.push(res.docs[i].data())
-  //     }
-  //   //  console.log('Message...', this.msgInfo);  
-  //   }) 
-  //   this.dbSent.doc(this.currentUid).onSnapshot((doc)=>{
-  //     if (doc.data().msgStatus!=="") {
-  //    ///  this.hideCard = '';
-  //      this.quoteStatus = doc.data().msgStatus;
-  //     // console.log('Status............................', this.quoteStatus);
-  //     } 
-  //   })
-  // }
+  slideChanged() {
+    let currentIndex = this.slides.getActiveIndex();
+    this.currentUid = this.msgSent[currentIndex].id;
+    console.log('Current doc id', this.currentUid);
+    console.log('Nav params', this.navParams.data);
+    
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).where('id','==',this.msgSent[currentIndex].id).orderBy('date').onSnapshot((res) => {
+      this.msgInfo=[];
+      for (let i = 0; i < res.docs.length; i++) {
+        this.msgInfo.push(res.docs[i].data())
+      }
+      console.log('Message...', this.msgInfo);  
+    }) 
+    this.dbSent.doc(this.currentUid).onSnapshot((doc)=>{
+      if (doc.data().msgStatus!=="") {
+     ///  this.hideCard = '';
+       this.quoteStatus = doc.data().msgStatus;
+      // console.log('Status............................', this.quoteStatus);
+      } 
+    }) 
+  }
   getChats() {
     this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: this.chatMessage, date: Date.now(), builder: true, id: this.currentUid }).then((res) => {
       res.onSnapshot((doc) => {

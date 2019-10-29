@@ -158,19 +158,21 @@ export class BuilderquotesPage {
         console.log('My extras......', this.extras);
       })
     }) */
-    this.dbRequest.doc(this.userMsg).collection('extras').onSnapshot((res) => {
+  /*   this.dbRequest.doc(this.userMsg).collection('extras').onSnapshot((res) => {
       console.log(res.docs);
       res.forEach((doc) => {
         console.log(doc.data())
         this.extras.push({ item: doc.id, data: doc.data() });
         console.log(this.extras);
       })
-    })
+    }) */
     /* docID: "v0r9u3oUPuLzuxg4XDCS"
 uid: "Na18VBBzV5aSuOEh7eARHj6jYeD2" */
+this.extras = [];
     this.dbChat.doc(this.navParams.data.uid).collection(this.uid).doc(this.navParams.data.docID).onSnapshot((res)=>{
-      console.log('Doc', res.data());
-      
+     
+      this.extras = res.data().extras
+    //  console.log('Extras.....',this.extras);
     })
  /*    this.dbRequest.doc(this.navParams.data.docID).onSnapshot((res) => {
       this.quotes.hOwnerUID = res.data().hOwnerUid;
@@ -209,20 +211,18 @@ uid: "Na18VBBzV5aSuOEh7eARHj6jYeD2" */
   input = 0;
   onChange(event) {
     console.log(event);
-
-
   }
 
   childPlus(i, index) {
-    this.extras[index].data.quantity++;
+    this.extras[index].quantity++;
     console.log('item: ', i, 'index: ', index);
-    if (i.data.price > 0 && i.data.quantity >= 0) {
+    if (i.price > 0 && i.quantity >= 0) {
 
-      this.value = (this.value + parseFloat(i.data.price));
+      this.value = (this.value + parseFloat(i.price));
 
     } else {
       this.value = this.value;
-      i.data.quantity = 0;
+      i.quantity = 0;
       this.toastCtrl.create({
         message: 'Please specify the price first',
         duration: 3000
@@ -231,14 +231,14 @@ uid: "Na18VBBzV5aSuOEh7eARHj6jYeD2" */
 
   }
   childMinus(i, index) {
-    this.extras[index].data.quantity--;
+    this.extras[index].quantity--;
     console.log('item: ', i, 'index: ', index);
-    if (i.data.quantity < 0) {
-      i.data.quantity = 0;
+    if (i.quantity < 0) {
+      i.quantity = 0;
 
     } else {
-      if ((i.data.price >= 0 && i.data.quantity >= 0) || (i.data.price != null && i.data.quantity != null)) {
-        this.value -= i.data.price;
+      if ((i.price >= 0 && i.quantity >= 0) || (i.price != null && i.quantity != null)) {
+        this.value -= i.price;
       } else {
         this.value = this.value;
       }
@@ -258,7 +258,7 @@ uid: "Na18VBBzV5aSuOEh7eARHj6jYeD2" */
     this.quotes.discountPrice = (this.value) * this.quotes.discountAmount / 100;
     console.log('total with extras: ', this.quotes.total, 'total without extras:', this.quotes.subtotal);
     var items = this.extras.map((item) => {
-      return [item.item, item.data.quantity, 'R' + item.data.price + '.00'];
+      return [item.item, item.quantity, 'R' + item.price + '.00'];
     });
     var docDefinition = {
       watermark: { text: "YAKHA", color: "gray", opacity: 0.3, bold: true, alignment: "right" },

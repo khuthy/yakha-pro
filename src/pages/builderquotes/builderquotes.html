@@ -91,16 +91,16 @@
           <p style="text-align: center;">Specify the price of the extras included by the owner</p>
         <div class="extra"  *ngFor="let item of extras; let i=index;">
           <div class="pricing">
-               <h5 style="text-align: center;">{{item.item}}</h5>
+               <h5 style="text-align: center;">{{item.name}}</h5>
             <ion-item no-lines>
-            <ion-input placeholder="Price" type="tel" maxLength="6" formControlName="dimension" [(ngModel)]="extras[i].data.price" (ngModelChange)="onChange($event)"></ion-input>
+            <ion-input placeholder="Price" type="tel" maxLength="6" formControlName="dimension" [(ngModel)]="item.price" (ngModelChange)="onChange($event)"></ion-input>
           </ion-item>
           </div>
           <div class="quantity">
               <button end class="btn-border" ion-fab mini style="background: transparent; box-shadow: none;color: #333;" (click)="childMinus(item,i)">
               <ion-icon ios="ios-remove" md="md-remove" end></ion-icon>
             </button>
-            <button ion-fab color="light">{{extras[i].data.quantity}}</button>
+            <button ion-fab color="light">{{item.quantity}}</button>
             <button class="btn-border" style="background: transparent; box-shadow: none;color: #333;" ion-fab mini
             (click)="childPlus(item, i)">
             <ion-icon ios="ios-add" md="md-add"></ion-icon>
