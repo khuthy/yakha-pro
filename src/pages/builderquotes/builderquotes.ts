@@ -76,7 +76,7 @@ export class BuilderquotesPage {
     viewed: false,
     msgStatus: ''
   }
-  meter = 2;
+
   pdfObj = null;
   dbChatting = firebase.firestore().collection('chatting');
   dbRespond = firebase.firestore().collection('Respond'); //sdk
@@ -94,7 +94,6 @@ export class BuilderquotesPage {
     'dimension': [{
       type: 'required', message: 'Extra costs are required'
     }],
-
   }
   ownerAddress: any;
   count = 0;
@@ -108,6 +107,11 @@ export class BuilderquotesPage {
   itemtotals = {
 
   }
+
+ get BuilderQuotes() {
+   return this.quotesForm.get('dimensions');
+ }
+
   userUID = firebase.auth().currentUser.uid;
   chatMessage: string;
   loaderAnimate: boolean;
@@ -134,13 +138,16 @@ export class BuilderquotesPage {
     this.quotes.uid = this.uid;
     this.quotesForm = this.forms.group({
       expiry: new FormControl('', Validators.compose([Validators.required])),
-      dimension: new FormControl('', Validators.compose([Validators.required])),
-
+      dimensions: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(9)])),
+      dimension: [null],
+      discount: new FormControl('', Validators.compose([Validators.min(0), Validators.max(100)])),
+      extrasDiscount: new FormControl('', Validators.compose([Validators.min(0), Validators.max(100)]))
     })
 
     this.date = new Date();
     this.maxDate = this.formatDate(this.date);
-
+ 
+    this.quotesForm.get('dimension').clearValidators();
 
   }
 

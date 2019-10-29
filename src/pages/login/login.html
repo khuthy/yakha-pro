@@ -64,7 +64,7 @@
     <ion-row no-padding>
 
       <ion-col id="signup" col-5 position="left">
-        <div class="button-group-l" [style.backgroundColor]="builder ?  '#A49078 ' : '#015272'">
+        <div class="button-group-l" [style.backgroundColor]="builder ?  '#A49078 ' : '#015272'" (click)="gotoRegister()">
           <button ion-fab mini color="light" (click)="gotoRegister()">
             <ion-icon name="arrow-back"></ion-icon>
           </button>
@@ -77,7 +77,7 @@
       <ion-col id="signin" col-5>
         <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'" (click)="loginUser()">
           <p>Sign-In</p>
-          <button ion-fab mini color="light" >
+          <button (click)="loginUser()" ion-fab mini color="light" >
             <ion-icon name="arrow-forward"></ion-icon>
           </button>
         </div>

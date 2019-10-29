@@ -114,14 +114,6 @@ export class MessagesPage {
     }
 
   }
-
-  dropDown() {
-    if (this.drop == true) {
-      this.drop = false;
-    } else {
-      this.drop = true;
-    }
-  }
   /* Tesing if chats works */
   chats = [];
 
@@ -267,6 +259,14 @@ export class MessagesPage {
    } */
   userProfile() {
     console.log(this.hownerName);
+  }
+
+  dropDown() {
+    if (this.drop == true) {
+      this.drop = false;
+    } else {
+      this.drop = true;
+    }
   }
 
 }
