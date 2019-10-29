@@ -69,10 +69,11 @@ page-account-setup {
      }
   
      .tools-header {
-      background:url(../../assets/imgs/ownerShape.svg);            
+      background:url(../../assets/icon/ownerShape.svg);            
       background-position: top right;
       background-repeat: no-repeat;
       background-size: 38%;
+      border: 1px solid red;
   
      }
     
@@ -100,8 +101,8 @@ page-account-setup {
      }
    
      .thumb {
-         height: 150px;
-         width: 150px;
+         height: 35%;
+         width: 35%;
          border-radius: 50%;
          border: 1px solid #ddd;
          margin: 0 auto;
