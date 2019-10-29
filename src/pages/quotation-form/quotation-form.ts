@@ -267,21 +267,25 @@ export class QuotationFormPage {
     }
   }
   checkClicked(extra, event) {
-    // console.log(event);
+    let data = {
+      name: extra,
+      quantity: 0,
+      price: 0
+    }
 
     if (event.checked) {
-      this.HomeOwnerQuotation.extras.push(extra);
+      this.HomeOwnerQuotation.extras.push(data);
     } else {
       var filtered = this.HomeOwnerQuotation.extras.filter((value, index, arr) => {
 
-        return value !== extra;
+        return value.name !== extra;
 
       });
       this.HomeOwnerQuotation.extras = filtered
       console.log(this.HomeOwnerQuotation.extras);
 
     }
-    // console.log(this.HomeOwnerQuotation.extras);
+    console.log(this.HomeOwnerQuotation.extras);
 
     // console.log(this.HomeOwnerQuotation.extras);
   }

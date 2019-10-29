@@ -79,7 +79,7 @@ export class BuilderMessagesPage {
             info.user = response.data();
         this.msgSent.push(info)
         info = {data:{}, id: {}, user: {}}
-       // console.log('Message sent', this.msgSent);
+        console.log('Message sent', this.msgSent);
         
         //this.number = doc.data().personalNumber;
       })
