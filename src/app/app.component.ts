@@ -16,13 +16,14 @@ import { HelpPage } from '../pages/help/help';
 import { ChannelsPage } from '../pages/channels/channels';
 import { firebaseConfig } from './app.firebase.config';
 import { TipsPage } from '../pages/tips/tips';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any ;
+  rootPage: any;
   db: any;
   predefined: string;
   pages: Array<{ title: string, component: any, icon: string }>;
