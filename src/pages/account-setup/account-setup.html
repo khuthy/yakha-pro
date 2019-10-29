@@ -18,7 +18,8 @@
   <ion-buttons left>
     <button ion-fab (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
   </ion-buttons>
-  <ion-buttons right>
+
+  <ion-buttons right id="logout">
           <div class="group-button" (click)="SignOut()">
               <p>Logout</p>
               <button ion-fab color="light" mini ><ion-icon name="arrow-forward"></ion-icon></button>
@@ -31,10 +32,10 @@
 <form  [formGroup]="profileForm" *ngIf="!isProfile">
     <ion-grid>
       <ion-row align-items-start>
-        <ion-col col-12>
+        <ion-col col-12 id="image">
             <div class="thumb" id="hide-div">
               <img *ngIf="profileImage"  src="{{profileImage}}">
-              <img *ngIf="!profileImage" width="2vh" src="../../assets/icon/Yakha-assets/_ionicons_svg_ios-person.svg" >
+              <img *ngIf="!profileImage" width="1.5vh" src="../../assets/icon/Yakha-assets/_ionicons_svg_ios-person.svg"  >
               <button color="light" ion-fab mini class="upload-image" (click)="selectImage()"><ion-icon name="create"></ion-icon></button>
             </div> 
         </ion-col>
@@ -69,8 +70,9 @@
               <p class="error" *ngIf="profileForm.get('address').hasError('required') && (profileForm.get('address').dirty || profileForm.get('address').touched)"> Please specify your Address.</p>
         </ion-col>
       </ion-row>
+
       <ion-row align-items-center>
-          <ion-col align-self-center>
+          <ion-col col-12 align-self-center>
               <button class="next" block round ion-button color="dark"  (click)="createprofile(profileForm)" [disabled]="!profileForm.valid">Done</button>
           </ion-col>
         </ion-row>
@@ -104,7 +106,7 @@
 
 </ion-content>
 
-<ion-footer no-border *ngIf="!hid">
+<ion-footer no-border  *ngIf="!hideElement">
   <ion-toolbar class="tools-footer" *ngIf="!isProfile">
     </ion-toolbar>
 </ion-footer>
