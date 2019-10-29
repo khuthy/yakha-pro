@@ -6,27 +6,103 @@
 -->
 
 
-<ion-content>
+<ion-content fullscreen>
+  <ion-slides pager>
+    <ion-slide class="slide-all">
+        <div class="house" *ngIf="toggle" padding>
+          <ion-fab top left>
+            <button  (click)="open()" ion-fab><ion-icon name="close"></ion-icon></button>
+          </ion-fab>
+            
+            <img src="../../assets/imgs/logo.png" alt="">
+          </div>
+        <ion-header no-border>
+            <ion-navbar class="tool-header">
+              <ion-buttons right end>
+                  <button ion-fab (click)="call()" color="customcall"><ion-icon name="call"></ion-icon></button>
+              </ion-buttons>
+              
+            </ion-navbar>
+            <img class="builder" src="../../assets/icon/BuilderShape2.svg" alt="builder">
+            <p text-center style="color: #fff;">Quotation Y001</p>
+          </ion-header>
+          <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
+            <button ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()" class="container-after-pseudo">Quotation details</button>
+            <div class="hide-div"></div>
+            <div class="content-info" *ngIf="drop">
+               <div class="bricks">
+                  <div class="brick-wrapper">
+                      <p>Brick Name</p>
+                      <p>Double Wall</p>
+                  </div>
+                  
+                    <img src="../../assets/imgs/Concrete brick.jpg" class="brick" alt="brick image">
+                  
+               </div>
+              <div class="quotesInfo">
+                  <div class="startDate">
+                    <h2 text-center>Start Date</h2>
+                    <p text-center>27 Jul, 2019</p>
+                  </div>
+                  <div class="endDate">
+                      <h2 text-center>End Date</h2>
+                      <p text-center>27 Jul, 2020</p>
+                  </div>
+              </div>
+              <div class="extras">
+                <h4 text-left>Extras</h4>
+                <div class="lists">
+                      <p class="extra">Doors</p> <!-- Put a forLoop on p tag not on the div -->
+                      <p class="extra">Electrinc</p> 
+                      <p class="extra">Electrinc</p> 
+                      <p class="extra">Electrinc</p> 
+                      <p class="extra">Electrinc</p> 
+                      <p class="extra">Electrinc</p> 
+                      <p class="extra">Electrinc</p> 
 
-      <ion-header no-border>
-        <ion-navbar class="tool-header">
-          <ion-buttons right end>
-              <button ion-fab (click)="call()" color="customcall"><ion-icon name="call"></ion-icon></button>
-          </ion-buttons>
-          
-        </ion-navbar>
-        <img class="builder" src="../../assets/icon/BuilderShape2.svg" alt="builder">
-      </ion-header>
-      <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'">
-        <button ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()" class="container-after-pseudo">Quotation details</button>
-      </div>
-      <div class="chats" padding>
-        <div class="messages">
-             <div class="chat left"></div>
-        <div class="chat right"></div>
-        </div>
-     
-      </div>
+                </div>
+            
+              </div>
+              <div class="comment">
+                <p text-left>Comment</p>
+                <p text-left>Come with your lunch box</p>
+              </div>
+              <div class="housePlan">
+                <button ion-button clear (click)="open()" block>SEE HOUSE PLAN</button>
+              </div>
+            </div>
+           
+
+          </div>
+          <div class="chats" padding>
+            <div class="messaging">
+               <div class="messages">
+                  <div class="chat right">
+                    <p>Please Respond Placeholder</p> <!-- Message -->
+
+                    <!-- Quotes Sent -->
+                    <div class="pdfContent">
+                      <!-- <button ion-button block (click)="DownloadPDF()"><ion-icon name="download"></ion-icon></button> -->
+                    </div>
+                    <p text-right>20:00AM</p>
+                  </div>
+              </div>
+            <div class="messages">
+                 <div class="chat left">
+                    <p>Yes CeO</p>
+                    <p text-left>20:00AM</p>
+                 </div>
+            </div>
+           
+            </div>
+             
+          </div>
+
+         
+    </ion-slide>
+  </ion-slides>
+
+      
   
     
       
@@ -34,14 +110,17 @@
 
 </ion-content>
 <ion-footer class="tool-footer">
-  <ion-grid>
-    <ion-row justify-content-center align-items-center>
-      <ion-col col-9 style="border-radius: 18px; background: #E5E5E5;">
-        <ion-textarea type="text" placeholder="Write your Message..."></ion-textarea>
-      </ion-col>
-      <ion-col col-2>
-        <button ion-fab color="customsend" (click)="send()"><ion-icon name="send"></ion-icon></button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-footer>
+    <ion-grid>
+      <ion-row justify-content-center align-items-center>
+        <ion-col col-8 style="border-radius: 18px; background: #E5E5E5;">
+          <ion-textarea type="text" placeholder="Write your Message..."></ion-textarea>
+        </ion-col>
+        <ion-col col-2>
+            <button ion-button clear (click)="send()"><ion-icon name="attach"></ion-icon></button>
+          </ion-col>
+        <ion-col col-2>
+          <button ion-fab color="customsend" (click)="send()"><ion-icon name="send"></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-footer>

@@ -671,6 +671,9 @@ export class HomePage {
   rShortcut(uid) {
     this.navCtrl.push(QuotationFormPage, uid);
   }
+  got(){
+    this.navCtrl.push(BuilderMessagesPage)
+  }
  
   getRequests() {
     let data = {info: {}, user: {}, id: {}}
