@@ -158,15 +158,21 @@ export class BuilderquotesPage {
         console.log('My extras......', this.extras);
       })
     }) */
-    // this.dbRequest.doc(this.userMsg).collection('extras').onSnapshot((res) => {
-    //   console.log(res.docs);
-    //   res.forEach((doc) => {
-    //     console.log(doc.data())
-    //     this.extras.push({ item: doc.id, data: doc.data() });
-    //     console.log(this.extras);
-    //   })
-    // })
-    this.dbRequest.doc(this.navParams.data.docID).onSnapshot((res) => {
+    this.dbRequest.doc(this.userMsg).collection('extras').onSnapshot((res) => {
+      console.log(res.docs);
+      res.forEach((doc) => {
+        console.log(doc.data())
+        this.extras.push({ item: doc.id, data: doc.data() });
+        console.log(this.extras);
+      })
+    })
+    /* docID: "v0r9u3oUPuLzuxg4XDCS"
+uid: "Na18VBBzV5aSuOEh7eARHj6jYeD2" */
+    this.dbChat.doc(this.navParams.data.uid).collection(this.uid).doc(this.navParams.data.docID).onSnapshot((res)=>{
+      console.log('Doc', res.data());
+      
+    })
+ /*    this.dbRequest.doc(this.navParams.data.docID).onSnapshot((res) => {
       this.quotes.hOwnerUID = res.data().hOwnerUid;
       this.dbUsers.doc(res.data().hOwnerUid).onSnapshot((res) => {
         if (res.data().builder == false) {
@@ -178,7 +184,7 @@ export class BuilderquotesPage {
           console.log('this is a builder, sorry');
         }
       })
-    })
+    }) */
     this.dbUsers.doc(this.uid).onSnapshot((doc) => {
       this.quotes.address = doc.data().address;
       this.quotes.fullName = doc.data().fullName;
