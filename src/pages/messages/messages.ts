@@ -78,6 +78,7 @@ export class MessagesPage {
   chat: number = Date.now();
   number: any;
   quoteStatus: string='';
+  drop: boolean = false;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
    // private fileOpener: FileOpener,
@@ -109,6 +110,14 @@ export class MessagesPage {
       this.footer = true;
     }
 
+  }
+
+  dropDown() {
+    if (this.drop == true) {
+      this.drop = false;
+    } else {
+      this.drop = true;
+    }
   }
   /* Tesing if chats works */
   chats = [];
