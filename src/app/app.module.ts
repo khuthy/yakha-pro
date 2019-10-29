@@ -74,7 +74,7 @@ import { ChannelsPage } from '../pages/channels/channels';
 import { TipsPage } from '../pages/tips/tips';
 import { MessagesPage } from '../pages/messages/messages';
 import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages';
-import { TipsPageModule } from '../pages/tips/tips.module';
+// import { TipsPageModule } from '../pages/tips/tips.module';
 //import { PasswordResetComponent } from '../components/password-reset/password-reset';
 
 @NgModule({
