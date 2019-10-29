@@ -40,9 +40,11 @@ page-account-setup {
       height: 13vw;
      width: 100%;
       border-radius: 50px 0 0 50px;
-  position: absolute;
-  top: 5%;
-  right: 0;
+      margin-left: 7px;
+      margin-top: 5px;
+//   position: absolute;
+//   top: 5%;
+//   right: 0;
     //   right: 0;
     //   left: 5.5%;
     //   top: 5%;
@@ -56,17 +58,17 @@ page-account-setup {
       p{
         margin: auto;
         padding-left: 5vw;
-        padding-right: 5vw;
+        padding-right: 2vw;
         color: #fff;
         font-size: 2.5vh;
-        //border: 1px solid white;
+       // border: 1px solid white;
       }
       
     }
 
-    #logout {
-        border: 2px solid yellow;
-    }
+    // #logout {
+    //     border: 2px solid yellow;
+    // }
     .scroll-content {
         display: flex;
         flex-direction: column;
@@ -372,12 +374,14 @@ page-account-setup {
                   width: 80%;
                   text-align: center;
                   position: relative;
-                
+                h4 {
+                    font-family: 'COCOMAT';
+                }
                   .contactInfo {
                       display: flex;
                       justify-content: space-between;
                       width: 100%;
-  
+                    font-family: 'Century Gothic';
                       //flex-wrap: wrap-reverse;
                       //border: 1px solid #ddd;
             
@@ -391,6 +395,7 @@ page-account-setup {
                       }
                       p {
                           white-space: nowrap;
+                          font-family: 'Century Gothic';
                       }
                   }
   
@@ -428,7 +433,8 @@ page-account-setup {
                       //border: 1px solid red;
                       text-align: center;
                       letter-spacing: 1px;;
-                      padding-bottom: 4%;;
+                      padding: 4%;;
+                      font-family: 'Century Gothic';
                   }
                 
               }
