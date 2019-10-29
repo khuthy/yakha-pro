@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Keyboard } from 'ionic-angular';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { LoginPage } from '../login/login';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -23,6 +23,7 @@ export class RegisterPage {
   userLoggingIn: string;
   signupForm: FormGroup;
    public loading: any;
+  hideElement: boolean;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,6 +31,7 @@ export class RegisterPage {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private formBuilder: FormBuilder,
+    private keyboard: Keyboard
     ) {
    this.signupForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -52,6 +54,13 @@ export class RegisterPage {
     }
   }
 
+  checkKeyBoardEvents() {
+    if(this.keyboard.isOpen()) {
+      this.hideElement = true;
+    }else {
+      this.hideElement = false;
+    }
+  }
   goLogin() {
     this.navCtrl.push(LoginPage);
   }
