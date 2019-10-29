@@ -6,9 +6,10 @@ page-messages {
     height: 25%;
     border-radius: 0 0 13px 13px;
     .back-button {
-      background: color($colors, primary);
+     // background: red;
       min-height: 45px;
       border-radius: 50px;
+      z-index: 7;
     }
    
    

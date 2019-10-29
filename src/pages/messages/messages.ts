@@ -1,3 +1,4 @@
+import { ChannelsPage } from './../channels/channels';
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, Slides, LoadingController } from 'ionic-angular';
 //import { ViewmessagePage } from '../viewmessage/viewmessage';
@@ -285,7 +286,9 @@ export class MessagesPage {
 
     this.callNumber.callNumber(number, true);
   }
-
+return(){
+  this.navCtrl.pop();
+}
 
   // viewMessages() {
   //   this.navCtrl.push(ViewmessagePage);

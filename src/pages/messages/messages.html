@@ -153,8 +153,16 @@
   
           <img src="{{item.data.houseImage}}" alt="plan-{{i}}">
         </div>
+
+
         <ion-header no-border>
-          <ion-navbar>
+          <ion-navbar >
+              <ion-buttons left start>
+                  <button ion-fab (click)="return()" color="ownerbutons">
+                    <ion-icon name="arrow-back" color="light"></ion-icon>
+                  </button>
+                </ion-buttons>
+
             <ion-buttons right end>
               <button ion-fab (click)="callJoint(item.user.personalNumber)" color="customcall">
                 <ion-icon name="call"></ion-icon>
@@ -165,6 +173,8 @@
           <img class="builder" src="../../assets/icon/ownerShape.svg" alt="builder">
           <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
         </ion-header>
+
+
         <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
           <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
             class="container-after-pseudo">Quotation details</button>
