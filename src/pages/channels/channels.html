@@ -34,10 +34,9 @@
         <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
       </div>
     </div>
-
-   
-    
- <!--    <p *ngIf="!owner">You have no requests yet</p> -->
+    <div class="no-messages">
+      <p *ngIf="respond.length == 0" style="text-align: center;">You have no responses yet</p>
+  </div>
     </div>
 
     <div class="nomessages" *ngIf="!respond">

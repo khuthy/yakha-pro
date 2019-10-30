@@ -1,4 +1,11 @@
 page-builder-messages {
+    .no-messages {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+      }
     .arrows {
         width: 10%;
         text-align: center;

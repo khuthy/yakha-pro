@@ -6,7 +6,13 @@ page-channels {
     //   min-height: 45px; 
      
     // }  
-   
+    .no-messages {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+    }
     
   .header {
     background: color($colors, transparentowner);

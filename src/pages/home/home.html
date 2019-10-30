@@ -35,7 +35,10 @@
           <button ion-fab mini color="light"><ion-icon name="arrow-forward"></ion-icon></button>
         </div>
       </div> 
-      <p *ngIf="!owner" style="text-align: center;">You have no requests yet</p>
+      <div class="no-messages">
+          <p *ngIf="owner.length == 0" style="text-align: center;">You have no requests yet</p>
+      </div>
+     
       </div>
   <div #map id="map" (ionFocus)="checkKeyboard('open')" (ionBlur)="checkKeyboard('close')">
 
