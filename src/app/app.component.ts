@@ -45,8 +45,7 @@ export class MyApp {
     public splashScreen: SplashScreen, private statusBar: StatusBar,
     public alert: AlertController) {
     // set status bar to white
-     this.statusBar.backgroundColorByHexString('#203959');
-    this.statusBar.overlaysWebView(false);
+     
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
    
@@ -71,7 +70,9 @@ export class MyApp {
   initializeApp() {
     
     this.platform.ready().then(() => {
-      
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.backgroundColorByHexString('#000');
+      this.statusBar.styleBlackOpaque();
       if(this.platform.is('cordova')) {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       }else {
