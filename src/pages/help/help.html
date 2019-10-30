@@ -1,12 +1,19 @@
+<ion-header no-border>
+    <ion-toolbar class="ownerHeader" >
+       <div id="topnav" [ngClass]="{'header' : builder, 'headerOwner' : !builder}">
+          <button id="bckbtn" ion-fab color="ownerbutons" (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
+          </div>
+    </ion-toolbar>
 
+  </ion-header>
 
 <ion-content>
 
   <div class="container">
-    
+<!--     
       <div id="topnav" [ngClass]="{'header' : builder, 'headerOwner' : !builder}">
           <button id="bckbtn" ion-fab (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
-          </div>
+          </div> -->
 
           <div class="logo">
               <img src="../../assets/icon/Group 180.svg" style="max-width: 70px; height: auto">

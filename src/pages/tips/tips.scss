@@ -2,6 +2,18 @@ page-tips {
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden;
+
+    .ownerHeader {
+      // background: red;
+       .toolbar-background {
+           background: url('../../assets/icon/ownerShape.svg');
+           background-position: top right;
+           background-size: 40%;
+           background-repeat: no-repeat;
+       }
+ 
+       
+   }
          .aboutus1 {
             height: auto;
             //border: solid red;
@@ -30,11 +42,18 @@ page-tips {
     align-content: center;
     align-items: center;
                   h4 {
-                   font-size: 4vw;
-                    //  border:1px solid blue;
+                   font-size: 2px;
+                     border:1px solid blue;
                       letter-spacing: 1px;
                       font-weight: 300;
-                      font-family:'Pass Through';
+                      font-family:'lato';
+                     
+                  }
+                  h3 {
+                    font-size: 3vw;
+                    color: whitesmoke;
+                    letter-spacing: 1px;
+                    font-family: 'lato';
                   }
             }
             .inform{
@@ -105,6 +124,7 @@ page-tips {
                 align-items: center;
                 justify-content: center;
                 align-content: center;
+                margin-top: 15%;
                // border: 1px solid rgb(0, 60, 255);
         }
     
@@ -219,7 +239,7 @@ page-tips {
              height:12%;
              background-position: bottom left;
              background-repeat: no-repeat;
-             background-size: 50%;
+             background-size: 37%;
              position: fixed;
              bottom:-2PX;
              left: -6%;

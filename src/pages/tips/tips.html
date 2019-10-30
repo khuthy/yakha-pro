@@ -1,12 +1,17 @@
+<ion-header no-border>
+    <ion-toolbar class="ownerHeader" >
+       <div id="topnav" [ngClass]="{'header' : builder, 'headerOwner' : !builder}">
+          <button id="bckbtn" ion-fab color="ownerbutons" (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
+          </div>
+    </ion-toolbar>
 
+  </ion-header>
 
 <ion-content>
 
   <div class="container">
     
-      <div id="topnav" [ngClass]="{'header' : builder, 'headerOwner' : !builder}">
-          <button id="bckbtn" ion-fab (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
-          </div>
+     
 
           <div class="logo">
               <img src="../../assets/icon/Group 180.svg" style="max-width: 70px; height: auto">
@@ -16,8 +21,26 @@
       
               <div [ngClass]="{'aboutus1': tsProperty=='about' , 'aboutus2': tsProperty!='about'}">
                   <div  class="aboutus" (click)="activate('about')">
-                      <h4 text-center>Type of house is key to your search</h4>
-                      <p style="font-size:2vh"></p>
+                      <h3 text-center>Type of house is key.</h3>
+                     
+                        </div>
+                        <p style =""> Builders may specialize in tract, spec or custom homes so learn the differences and figure out which one is right for you and your home-buying budget.</p>
+                
+              </div>
+
+              <div [ngClass]="{'aboutus1': tsProperty=='about' , 'aboutus2': tsProperty!='about'}">
+                  <div  class="aboutus" (click)="activate('about')">
+                      <h3 text-center>Tools to search for builder</h3>
+                     
+                        </div>
+                        <p style =""> Builders may specialize in tract, spec or custom homes so learn the differences and figure out which one is right for you and your home-buying budget.</p>
+                
+              </div>
+
+              <div [ngClass]="{'aboutus1': tsProperty=='about' , 'aboutus2': tsProperty!='about'}">
+                  <div  class="aboutus" (click)="activate('about')">
+                      <h3 text-center>Know your rights.</h3>
+                     
                         </div>
                         <p style =""> Builders may specialize in tract, spec or custom homes so learn the differences and figure out which one is right for you and your home-buying budget.</p>
                 
@@ -25,12 +48,12 @@
              
               <div [ngClass]="{'aboutus1': tsProperty=='terms' , 'aboutus2': tsProperty!='terms'}">
                   <div class="aboutus" (click)="activate('terms')">
-                      <h4 text-center>10 Tricks for the beginner handyman</h4>
+                      <h3 text-center>10 Tricks for negotiating.</h3>
                         </div>
                   
                   <p style="border:2px solid #203959">Being handy with tools is more than showing off. Being “that guy” in your circle of friends is nice—if not a little tiring, what with all the requests to fix everything—but for those of you who want to become the guy who knows how to fix little problems here and there, there’s usually one obstacle.
 
-                      How the hell do you learn? Watch reruns of Bob Vila on TV? (Who was not available, very unfortunately, for this piece.).
+                      How do you learn? Watch reruns of Bob Vila on TV? (Who was not available, very unfortunately, for this piece.).
                       
                       1. Pull the Ole Nintendo on Your Garbage Disposal
                       Before you begin, make sure you get under the sink and unplug the disposal unit itself (Many sinks have an outlet underneath them, just open the door and poke around for it.). If you can’t find that, flip the circuit breaker that gives power to the disposal. Seriously. You can’t skip this step because, if for some reason it turns on while you’re removing any stuck-on food in there, you will regret it..
