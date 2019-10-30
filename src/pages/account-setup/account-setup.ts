@@ -78,7 +78,7 @@ export class AccountSetupPage {
    // oneSignal: OneSignal,
     public actionSheetCtrl: ActionSheetController,
     public file: File,
-    public keyboard: Keyboard,
+    private keyboard: Keyboard,
     public plt: Platform
     // public readFile : FileReader
   ) {
@@ -121,7 +121,13 @@ export class AccountSetupPage {
     this.getProfile();
   }
 
- 
+  checkKeyBoardEvents() {
+    if(this.keyboard.isOpen()) {
+      this.hideElement = true;
+    }else {
+      this.hideElement = false;
+    }
+  }
   ionViewWillEnter() {
     this.menuCtrl.swipeEnable(false);
   }
@@ -241,13 +247,7 @@ export class AccountSetupPage {
      }
    })
  }
- checkKeyBoardEvents(){
-  if(this.keyboard.isOpen()) {
-       this.hideElement = true;
-  }else {
-     this.hideElement = false;
-  }
-}
+ 
 
   validation_messages = {
     'fullName': [
