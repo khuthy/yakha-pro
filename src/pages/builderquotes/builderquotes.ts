@@ -436,7 +436,7 @@ this.extras = [];
           address: '',
           dimension: '',
           total: 0,
-          price: 0,
+          price: null,
           uid: '',
           pdfLink: null,
           meter: 0,

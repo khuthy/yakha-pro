@@ -39,7 +39,7 @@ export class WelcomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WelcomePage');
-    this.statusBar.overlaysWebView(true); 
+    this.statusBar.overlaysWebView(true)
   }
   ionViewWillEnter(){
     this.menuCtrl.swipeEnable(false);

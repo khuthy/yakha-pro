@@ -45,10 +45,11 @@ export class MyApp {
     public splashScreen: SplashScreen, private statusBar: StatusBar,
     public alert: AlertController) {
     // set status bar to white
-    this.statusBar.backgroundColorByHexString('#203550');
+     this.statusBar.backgroundColorByHexString('#203550');
     this.statusBar.overlaysWebView(false);
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
+   
     // oneSignal.startInit(this.signal_app_id, this.firebase_id);
     // // oneSignal.getIds().then((userID) => {
     // //   console.log(userID.userId);
