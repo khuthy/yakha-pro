@@ -3,37 +3,37 @@
       <ion-slide *ngFor="let item of msgSent; let i=index;">
         <ion-header no-border>
           <ion-navbar> -->
-            <!-- background image of the builder -->
-            <!-- <div class="pickimage">
+<!-- background image of the builder -->
+<!-- <div class="pickimage">
               <img src="{{item.user.image}}" class="img-header" alt="">
             </div>
   
   
   
             <div class="buttons"> -->
-              <!-- backbutton -->
-             <!--  <ion-buttons left top id="backbtn">
+<!-- backbutton -->
+<!--  <ion-buttons left top id="backbtn">
                 <button ion-fab medium (click)="navCtrl.pop()">
                   <ion-icon name="arrow-back"></ion-icon>
                 </button>
               </ion-buttons> -->
-  
-              <!-- counter for quotaions -->
-             <!--  <div class="countQoutes">
+
+<!-- counter for quotaions -->
+<!--  <div class="countQoutes">
                 <span>{{i + 1 | number}}</span>
               </div> -->
-              <!-- callbtn -->
-             <!--  <ion-buttons right id="callbtn">
+<!-- callbtn -->
+<!--  <ion-buttons right id="callbtn">
                 <button ion-fab medium color="customcall" id="callbtn" (click)=" callJoint(item.user.personalNumber)">
                   <ion-icon name="call"></ion-icon>
                 </button>
               </ion-buttons>
             </div> -->
-  
-  
-  
-            <!--  -->
-          <!--   <ion-title start>Quotation-Y00{{i}}</ion-title>
+
+
+
+<!--  -->
+<!--   <ion-title start>Quotation-Y00{{i}}</ion-title>
   
             <div class="button-drop">
               <button ion-button clear color="light" (click)="open()">
@@ -43,8 +43,8 @@
   
           </ion-navbar>
         </ion-header> -->
-  
-        <!-- <div class="container">
+
+<!-- <div class="container">
           <div [ngClass]="{'pull-up' : !toggle, 'drop-down' : toggle}">
             <div class="container-request" *ngIf="toggle" padding>
               <div class="house-plan">
@@ -96,15 +96,15 @@
                     <button ion-fab color="dark" [style.backgroundColor]="quoteStatus == 'Accepted' ? 'green' : 'red'" mini (click)="downloadPDF(chat.chat.pdf)"><ion-icon name="download"></ion-icon></button>
                   </div>
                    -->
-                    <!-- <div id="buttons" *ngIf="quoteStatus">
+<!-- <div id="buttons" *ngIf="quoteStatus">
                      <p style="text-align: center; width: 100%;" [style.color]="quoteStatus == 'Accepted' ? 'green' : 'red'">{{quoteStatus}}</p>  
                     </div>
                     <div id="buttons" *ngIf="!quoteStatus">
                       <button ion-button small clear  color="danger" (click)="declineQoute()" round>Decline</button>
                       <button ion-button small color="customcall" (click)="acceptQoute()" round>Accept</button>
                    </div> -->
-  
-           <!--    </div>
+
+<!--    </div>
                 
                  <p id="content">{{chat.chat.chat | titlecase}}</p>
                  <p id="date">{{chat.chat.date | date:'hh:mm'}} </p>
@@ -132,7 +132,7 @@
       </ion-row>
     </ion-grid>
   </ion-footer> -->
-  
+
 <!--
   Generated template for the BuilderMessagesPage page.
 (ionSlideTap)="slideChanged($event)" (ionSlideDidChange)="slideChanged($event)"
@@ -142,127 +142,145 @@
 
 
 <ion-content fullscreen>
-    <ion-slides pager #slides (ionSlideDidChange)="slideChanged($event)">
-      <ion-slide class="slide-all" *ngFor="let item of msgSent; let i=index;">
-        <div class="house" *ngIf="toggle" padding>
-          <ion-fab top left>
-            <button (click)="open()" ion-fab>
-              <ion-icon name="close"></ion-icon>
-            </button>
-          </ion-fab>
-  
-          <img src="{{item.data.houseImage}}" alt="plan-{{i}}">
-        </div>
-        <ion-header no-border>
-          <ion-navbar>
-            <ion-buttons right end>
-              <button ion-fab (click)="callJoint(item.user.personalNumber)" color="customcall">
-                <ion-icon name="call"></ion-icon>
-              </button>
-            </ion-buttons>
-  
-          </ion-navbar>
-          <img class="builder" src="../../assets/icon/ownerShape.svg" alt="builder">
-          <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
-        </ion-header>
-        <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
-          <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
-            class="container-after-pseudo">Quotation details</button>
-            <button *ngIf="drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
-            class="container-after-pseudo">Close details</button>
-          <div class="hide-div"></div>
-          <div class="content-info" *ngIf="drop">
-            <div class="bricks">
-              <div class="brick-wrapper">
-                <p>{{item.data.brickType}}</p>
-                <p>{{item.data.wallType}}</p>
-              </div>
-  
-              <img  src="../../assets/imgs/{{item.data.brickType}}.jpg" class="brick" alt="brick image">
-  
-            </div>
-            <div class="quotesInfo">
-              <div class="startDate">
-                <h2 text-center>Start Date</h2>
-                <p text-center>{{item.data.startDate}}</p>
-              </div>
-              <div class="endDate">
-                <h2 text-center>End Date</h2>
-                <p text-center>{{item.data.endDate}}</p>
-              </div>
-            </div>
-            <div class="extras">
-              <h4 text-left>Extras</h4>
-              <div class="lists">
-                <p class="extra" *ngFor="let e of item.data.extras; let i=index">{{e.name}}</p>
-                <!-- Put a forLoop on p tag not on the div -->
-              </div>
-  
-            </div>
-            <div class="comment">
-              <p text-left>Comment</p>
-              <p text-left>{{item.data.comment}}</p>
-            </div>
-            <div class="housePlan">
-              <button ion-button clear (click)="open()" block>SEE HOUSE PLAN</button>
-            </div>
-          </div>
-  
-  
-        </div>
-        <div class="chats" padding>
-          <div class="messaging" *ngFor="let chat of messages;">
-            <div class="messages" *ngIf="!chat.chat.builder">
-              <div class="chat right">
-                <div class="texts">
-                  <p id="text-message" text-left> {{chat.chat.chat}}</p>
-                  <!-- Message -->
-                </div>
-  
-  
-                <!-- Quotes Sent -->
-                <div class="pdfContent">
-                  <!-- <button ion-button block (click)="DownloadPDF()"><ion-icon name="download"></ion-icon></button> -->
-                </div>
-                <div class="texts">
-                  <p id="time-message" text-right>{{chat.chat.date | date: "shortTime" : "GMT+2"}}</p>
-                </div>
-  
-              </div>
-            </div>
-            <div class="messages" *ngIf="chat.chat.builder">
-              <div class="chat left">
-                <div class="texts">
-                  <p id="text-message" text-right>{{chat.chat.chat}} </p>
-                  
-                </div>
-                <div class="texts">
-                  <p id="time-message" text-right>{{chat.chat.date | date: "shortTime" : "GMT+2"}}</p>
-                </div>
-  
-              </div>
-            </div>
-  
-          </div>
-  
-        </div>
-  
-  
-      </ion-slide>
-    </ion-slides>
-  
-  </ion-content>
-  <ion-footer class="tool-footer">
-    <ion-grid>
-      <ion-row justify-content-center align-items-center>
-        <ion-col col-9 style="border-radius: 18px; background: #E5E5E5;">
-          <ion-textarea type="text" [(ngModel)]="chatMessage"placeholder="Write your Message..."></ion-textarea>
-        </ion-col>
-        <ion-col col-2>
-          <button ion-fab color="customsend" (click)="getChats()">
-            <ion-icon name="send"></ion-icon>
+  <ion-slides pager #slides (ionSlideDidChange)="slideChanged($event)">
+    <ion-slide class="slide-all" *ngFor="let item of msgSent; let i=index;">
+      <div class="house" *ngIf="toggle" padding>
+        <ion-fab top left>
+          <button (click)="open()" ion-fab>
+            <ion-icon name="close"></ion-icon>
           </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-footer>
+        </ion-fab>
+
+        <img src="{{item.data.houseImage}}" alt="plan-{{i}}">
+      </div>
+      <ion-header no-border>
+        <ion-navbar>
+          <ion-buttons right end>
+            <button ion-fab (click)="callJoint(item.user.personalNumber)" color="customcall">
+              <ion-icon name="call"></ion-icon>
+            </button>
+          </ion-buttons>
+
+        </ion-navbar>
+        <img class="builder" src="../../assets/icon/ownerShape.svg" alt="builder">
+        <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
+      </ion-header>
+      <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
+        <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
+          class="container-after-pseudo">Quotation details</button>
+        <button *ngIf="drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
+          class="container-after-pseudo">Close details</button>
+        <div class="hide-div"></div>
+        <div class="content-info" *ngIf="drop">
+          <div class="bricks">
+            <div class="brick-wrapper">
+              <p>{{item.data.brickType}}</p>
+              <p>{{item.data.wallType}}</p>
+            </div>
+
+            <img src="../../assets/imgs/{{item.data.brickType}}.jpg" class="brick" alt="brick image">
+
+          </div>
+          <div class="quotesInfo">
+            <div class="startDate">
+              <h2 text-center>Start Date</h2>
+              <p text-center>{{item.data.startDate}}</p>
+            </div>
+            <div class="endDate">
+              <h2 text-center>End Date</h2>
+              <p text-center>{{item.data.endDate}}</p>
+            </div>
+          </div>
+          <div class="extras">
+            <h4 text-left>Extras</h4>
+            <div class="lists">
+              <p class="extra" *ngFor="let e of item.data.extras; let i=index">{{e.name}}</p>
+              <!-- Put a forLoop on p tag not on the div -->
+            </div>
+
+          </div>
+          <div class="comment">
+            <p text-left>Comment</p>
+            <p text-left>{{item.data.comment}}</p>
+          </div>
+          <div class="housePlan">
+            <button ion-button clear (click)="open()" block>SEE HOUSE PLAN</button>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="chats" padding>
+        <div class="messaging" *ngFor="let chat of messages;">
+          <div class="messages" *ngIf="!chat.chat.builder">
+            <div class="chat right">
+              <div class="texts">
+                <p id="text-message" text-left> {{chat.chat.chat}}</p>
+                <!-- Message -->
+              </div>
+
+
+              <!-- Quotes Sent -->
+              <div class="pdfContent">
+           
+              </div>
+              <div class="texts">
+                <p id="time-message" text-right>{{chat.chat.date | date: "shortTime" : "GMT+2"}}</p>
+              </div>
+            
+            </div>
+          </div>
+          <div class="messages" *ngIf="chat.chat.builder">
+
+            <div class="chat left">
+                <div *ngIf="chat.chat.pdf">
+
+                    <div class="pdf">
+                      <p></p>
+                      <p>Quotation-Y00{{i}}</p>
+                      <button ion-fab color="dark" [style.backgroundColor]="quoteStatus == 'Accepted' ? 'green' : 'red'" mini (click)="downloadPDF(chat.chat.pdf)"><ion-icon name="download"></ion-icon></button>
+                    </div>
+                    
+                      <div id="buttons" *ngIf="quoteStatus">
+                       <p style="text-align: center; width: 100%;" [style.color]="quoteStatus == 'Accepted' ? 'green' : 'red'">{{quoteStatus}}</p>  
+                      </div>
+                      <div id="buttons" *ngIf="!quoteStatus">
+                        <button ion-button small clear  color="danger" (click)="declineQoute()" round>Decline</button>
+                        <button ion-button small color="customcall" (click)="acceptQoute()" round>Accept</button>
+                     </div>
+    
+                </div>
+              <div class="texts">
+                <p id="text-message" text-right>{{chat.chat.chat}} </p>
+
+              </div>
+              <div class="texts">
+                <p id="time-message" text-right>{{chat.chat.date | date: "shortTime" : "GMT+2"}}</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
+<ion-footer class="tool-footer">
+  <ion-grid>
+    <ion-row justify-content-center align-items-center>
+      <ion-col col-9 style="border-radius: 18px; background: #E5E5E5;">
+        <ion-textarea type="text" [(ngModel)]="chatMessage" placeholder="Write your Message..."></ion-textarea>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-fab color="customsend" (click)="getChats()">
+          <ion-icon name="send"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

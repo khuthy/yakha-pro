@@ -1,5 +1,15 @@
 page-quotation-form {
-
+  .toolbar {
+     background:#203959;
+     .toolbar-background {
+         background: url('../../assets/icon/ownerShape.svg');
+         background-position: top right;
+         background-size: 40%;
+         background-repeat: no-repeat;
+     }
+  
+     
+  }
 
     .normal {
       display: none;
@@ -25,13 +35,18 @@ page-quotation-form {
       left: 10px;
   
     } */
-    .tools-header {
-      background:url(../../assets/imgs/ownerShape.svg);            
-      background-position: top right;
-      background-repeat: no-repeat;
-      background-size: 38%;
+   
+      // background: red;
+       .ownerHeader{
+           background: url('../../assets/icon/ownerShape.svg');
+           background-position: top right;
+           background-size: 40%;
+           background-repeat: no-repeat;
+           z-index: 5;
+       }
   
-     }
+       
+   
      ion-navbar {
        background: transparent;
      }

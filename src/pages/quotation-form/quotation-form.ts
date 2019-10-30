@@ -55,7 +55,7 @@ export class QuotationFormPage {
     extras: [],
     wallType: '',
     brickType: '',
-    houseImage: 'https://firebasestorage.googleapis.com/v0/b/yakha-bda91.appspot.com/o/QuatationForm%2FNa18VBBzV5aSuOEh7eARHj6jYeD2.jpg?alt=media&token=c7067285-2117-4db3-8d08-279f97d58d29',
+    houseImage: '',
     comment: '',
     date: Date(),
     view: false,
@@ -531,7 +531,7 @@ export class QuotationFormPage {
       this.alertContrl();
     } else {
 
-      if (!this.imageSelected) {
+      if (!this.HomeOwnerQuotation.houseImage) {
         this.toastCtrl.create({
           message: 'House plan is required',
           duration: 2000

@@ -1,11 +1,35 @@
 page-channels {
-    .back-button {
+    //  .back-button {
     
-      background: #cc9e14;
-      border-radius: 50px;
-      min-height: 45px; 
+    //   background: #cc9e14;
+    //   border-radius: 50px;
+    //   min-height: 45px; 
      
-    } 
+    // }  
+
+    
+  .header {
+    background: color($colors, secondary);
+    height: 25%;
+    border-radius: 0 0 13px 13px;
+    .back-button {
+      background: color($colors, ownerbutons);
+      min-height: 45px;
+      border-radius: 50px;
+    }
+   
+   
+}
+
+#owner {
+z-index: -1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: .2;
+    width: 70%;
+    height: 70%;
+}
     .channels {
       
         background: url('../../assets/imgs/OwnerShape.svg');
@@ -40,11 +64,11 @@ page-channels {
           display: flex;
           background: transparent;
           width: 100%;
-          
+          overflow-y: auto;
           flex-direction: column;
           .cards {
             margin-top: 5%;
-            //border: 1px solid #ddd;
+            border: 1px solid #ddd;
             box-shadow: 0 2px 6px  rgba(0, 0, 0, 0.233);
             border-radius: 5px;
              display: flex;
@@ -54,7 +78,7 @@ page-channels {
              padding-left: 1em;
              padding-top: .5em;
              padding-bottom: .5em;
-             
+             margin-top: 25vh;
             
              .images {
                .thumb-home-builder {
@@ -79,7 +103,7 @@ page-channels {
                justify-content: space-between;
                align-items: center;
                height: 5vh;
-               background: color($colors, primary);
+               background: color($colors, ownerbutons);
                border-radius: 50px 0 0 50px;
                padding-left: 10px;
                padding-top: 1vh;
