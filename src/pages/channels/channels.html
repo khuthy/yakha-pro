@@ -11,7 +11,7 @@
           <ion-icon name="call"></ion-icon>
         </button>
       </ion-buttons>  -->
-
+<p id="headtitle">Messages</p>
     </ion-navbar>
     <img class="builder" id="owner" src="../../assets/icon/ownerShape.svg" alt="builder">
     <!-- <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p> -->
@@ -29,14 +29,20 @@
         <h6 style="font-size: 2.5vh;padding-left: 5%">{{b.user.fullName}}</h6>
         <p style="font-size: 2vh;">{{b.user.date | date}} </p>
       </div>
-      <div class="button-group-name" (click)="gotoMessages(b.user.uid, b.user.fullName)">
+      <div  (click)="gotoMessages(b.user.uid, b.user.fullName)" class="button-group-name" >
         <p style="text-align: center; color: #fff;">View</p>
         <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
       </div>
     </div>
-    
- <!--    <p *ngIf="!owner">You have no requests yet</p> -->
+    <div class="no-messages">
+      <p *ngIf="respond.length == 0" style="text-align: center;">You have no responses yet</p>
+  </div>
     </div>
+
+    <div class="nomessages" *ngIf="!respond">
+      <p id="empty">You have no messages.</p>
+    </div>
+    
 </ion-content>
 <ion-footer no-border>
   <ion-toolbar class="tools-footer">

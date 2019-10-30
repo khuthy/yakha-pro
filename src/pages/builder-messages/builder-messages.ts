@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, Content, List } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides} from 'ionic-angular';
 import * as firebase from 'firebase';
 import { CallNumber } from '@ionic-native/call-number';
 import { BuilderquotesPage } from '../builderquotes/builderquotes';
@@ -21,7 +21,7 @@ export class BuilderMessagesPage {
   @ViewChild('slides') slides: Slides;
  
 
-  private mutationObserver: MutationObserver;
+ 
 
   dbChat = firebase.firestore().collection('chat_msg');
   dbChatting = firebase.firestore().collection('chatting');
