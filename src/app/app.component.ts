@@ -45,7 +45,7 @@ export class MyApp {
     public splashScreen: SplashScreen, private statusBar: StatusBar,
     public alert: AlertController) {
     // set status bar to white
-     this.statusBar.backgroundColorByHexString('#203550');
+     this.statusBar.backgroundColorByHexString('#203959');
     this.statusBar.overlaysWebView(false);
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
