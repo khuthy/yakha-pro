@@ -10,7 +10,14 @@
 
 
 <ion-content fullscreen>
-  <!-- back buton on first slide  -->
+    <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
+        <div class="maploader">
+          <div class="lds-facebook"><div></div><div></div><div></div></div>
+        </div>
+       <!--  <div class="loading-text">
+          <p>Loading Map</p>
+        </div> -->
+      </div>
   <button (click)="popForm()" *ngIf="steps=='stepone'" id="switchback"
     style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;height:13vw;width:13vw;z-index:5"
     ion-fab>
