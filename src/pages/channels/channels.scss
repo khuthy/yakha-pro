@@ -6,7 +6,7 @@ page-channels {
     //   min-height: 45px; 
      
     // }  
-
+   
     
   .header {
     background: color($colors, transparentowner);
@@ -17,7 +17,14 @@ page-channels {
       min-height: 45px;
       border-radius: 50px;
     }
-   
+   p {
+   //  border: 1px solid red;
+     margin-top: 20%;
+     font-size: 5vh;
+     color: white;
+     letter-spacing: 1px;
+     padding-left: 5%;
+   }
    
 }
 
@@ -126,6 +133,13 @@ z-index: -1;
            }
           
         }
-        
+        .nomessages {
+          background: aqua;
+    
+          p {
+            color: red;
+            font-size: 50%;
+          }
+        }
   }
   

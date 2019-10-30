@@ -11,7 +11,7 @@
           <ion-icon name="call"></ion-icon>
         </button>
       </ion-buttons>  -->
-
+<p id="headtitle">Messages</p>
     </ion-navbar>
     <img class="builder" id="owner" src="../../assets/icon/ownerShape.svg" alt="builder">
     <!-- <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p> -->
@@ -34,9 +34,16 @@
         <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
       </div>
     </div>
+
+   
     
  <!--    <p *ngIf="!owner">You have no requests yet</p> -->
     </div>
+
+    <div class="nomessages" *ngIf="!respond">
+      <p id="empty">You have no messages.</p>
+    </div>
+    
 </ion-content>
 <ion-footer no-border>
   <ion-toolbar class="tools-footer">
