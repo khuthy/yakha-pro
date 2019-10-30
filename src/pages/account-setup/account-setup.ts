@@ -50,10 +50,10 @@ export class AccountSetupPage {
     ownerAddress: '',
     tokenID: '',
 
-  
+
   }
 
-   
+
   options = {
     componentRestrictions: {
       country: ['ZA']
@@ -74,7 +74,7 @@ export class AccountSetupPage {
     private menuCtrl: MenuController,
     private callNumber: CallNumber,
     public popoverCtrl: PopoverController,
-   // oneSignal: OneSignal,
+    // oneSignal: OneSignal,
     public actionSheetCtrl: ActionSheetController,
     public file: File,
     private keyboard: Keyboard,
@@ -91,11 +91,11 @@ export class AccountSetupPage {
       About: [''],
       address: new FormControl('', Validators.compose([Validators.required]))
     });
-   /*  oneSignal.getIds().then((res) => {
-      this.HomeOwnerProfile.tokenID = res.userId;
-    }); */
+    /*  oneSignal.getIds().then((res) => {
+       this.HomeOwnerProfile.tokenID = res.userId;
+     }); */
     this.backButton()
-  
+
   }
   public handleAddressChange(addr: Address) {
     this.HomeOwnerProfile.ownerAddress = addr.formatted_address;
@@ -105,21 +105,21 @@ export class AccountSetupPage {
     console.log(this.authUser.getUser());
     console.log(this.navParams.data);
     firebase.firestore().collection('Users').doc(firebase.auth().currentUser.uid).onSnapshot((res) => {
-      if(res.data().isProfile == true) {
+      if (res.data().isProfile == true) {
         this.back = true;
-      }else {
+      } else {
         this.back = false;
       }
     })
-  
+
 
     this.getProfile();
   }
 
   checkKeyBoardEvents() {
-    if(this.keyboard.isOpen()) {
+    if (this.keyboard.isOpen()) {
       this.hideElement = true;
-    }else {
+    } else {
       this.hideElement = false;
     }
   }
@@ -137,7 +137,7 @@ export class AccountSetupPage {
       buttons: [{
         icon: 'images',
         text: 'Gallery',
-       
+
         handler: () => {
           this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY)
         }
@@ -150,29 +150,19 @@ export class AccountSetupPage {
         }
       },
       {
-        icon:'close',
+        icon: 'close',
         text: 'Cancel',
         role: 'cancel'
       }
       ]
     });
     await actionSheet.present();
-    }
-     
-   async createprofile(profileForm: FormGroup): Promise<void> {
-      if (!profileForm.valid) {
-        console.log(
-          'Need to complete the form, current value: ',
-          profileForm.value
-        );
-       }else {
-           
-      this.db.doc(this.uid).update(this.HomeOwnerProfile).then((res) => {
-        this.navCtrl.push(AccountSetupPage);
-        })
+  }
 
-        }
-
+  async createprofile(profileForm: FormGroup) {
+   await this.db.doc(this.uid).update(this.HomeOwnerProfile).then((res) => {
+      this.navCtrl.push(AccountSetupPage);
+    })
   }
   async takePicture(sourcetype: PictureSourceType) {
     const options: CameraOptions = {
@@ -186,7 +176,7 @@ export class AccountSetupPage {
       saveToPhotoAlbum: false,
       correctOrientation: true
     };
-   await this.camera.getPicture(options).then(res => {
+    await this.camera.getPicture(options).then(res => {
       let base64Image = 'data:image/jpeg;base64,' + res;
       this.profileImage = base64Image;
       let file = 'HomeOwner-Profile/' + this.authUser.getUser() + '.jpg';
@@ -214,14 +204,14 @@ export class AccountSetupPage {
     this.imageSelected = true;
     // })
   }
- backButton() {
-   this.plt.registerBackButtonAction(() => {
-     if(this.back == true) {
-       this.isProfile = true;
-     }
-   })
- }
- 
+  backButton() {
+    this.plt.registerBackButtonAction(() => {
+      if (this.back == true) {
+        this.isProfile = true;
+      }
+    })
+  }
+
 
   validation_messages = {
     'fullName': [
@@ -282,7 +272,7 @@ export class AccountSetupPage {
       // catch any errors that occur with the query.
       console.log("Query Results: ", err);
       // dismiss the loading
-    
+
     })
   }
   editProfile() {
@@ -307,14 +297,14 @@ export class AccountSetupPage {
   getProfileImageStyle() {
     return 'url(' + this.HomeOwnerProfile.image + ')'
   }
- 
+
   SignOut() {
-     let alert = this.alertCtrl.create({
+    let alert = this.alertCtrl.create({
       title: 'Are you sure you want to logout?',
       buttons: [
         {
           text: 'Cancel',
-          role:'cancel'
+          role: 'cancel'
         },
         {
           text: 'Okay',
@@ -322,17 +312,17 @@ export class AccountSetupPage {
             firebase.auth().signOut().then(() => {
               console.log('Signed Out');
               this.navCtrl.setRoot(LoginPage);
-        
+
             }).catch((err) => {
               console.log('error occured while signing out');
-        
+
             })
           }
         }
       ]
     })
     alert.present();
-   // alert.dismiss();
+    // alert.dismiss();
   }
   viewHouse(myEvent) {
     console.log('image', myEvent);
