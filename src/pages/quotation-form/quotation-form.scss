@@ -97,10 +97,10 @@ page-quotation-form {
    z-index:-2;
     }
      .topDecor {
-      background: url(../../assets/imgs/ownerShape.svg);
+      background: url('../../assets/icon/ownerShape.svg');
       position: absolute;
       top: 0;
-      right: 0;
+      right: -1px;
       width: 45vw;
       height: 20vw;
       opacity: 1;
@@ -251,8 +251,10 @@ page-quotation-form {
             text-align: center;
           //  background: #F5F5F5;
             padding: 5px 0px;
+            margin-top: 3vw;
             p{
                 margin: 0;
+                padding-top: 5px;
                 padding: 3px 0px;
                 font-size: 4vw;
                 letter-spacing: 1px;
@@ -333,6 +335,10 @@ page-quotation-form {
                     z-index: 5;
                     border-radius: 20px;
                     // pointer-events: none;
+
+                    h4, h5, p {
+                      padding-left: 5px;
+                    }
                     .closeB {
                         display: grid;
                         align-items: center;
@@ -831,8 +837,8 @@ page-quotation-form {
     z-index: 100;
     justify-content: space-between;
     align-items: center;
-    height: 45px;
-    width: 45%;
+    height: 14vw;
+    width: 45vw;
     float: right;
     border-radius: 50px 0 0 50px;
     p {
@@ -840,9 +846,12 @@ page-quotation-form {
         color: #fff;
         padding: 2px;
         padding-right:5px;
+        font-size: 5vw;
     }
     button {
       margin-right:5px;
+      height: 12vw;
+      width: 12vw;
     }
     &:active {
         background:#cc9e14;
@@ -867,9 +876,9 @@ page-quotation-form {
     z-index: 100;
     justify-content: space-between;
     align-items: center;
-    height: 45px;
+    height: 15vw;
     float: right;
-    width: 45%;
+    width: 45vw;
     border-radius:0 50px 50px 0;
     p {
       //border:1px solid red;
@@ -878,10 +887,13 @@ page-quotation-form {
         padding: 2px;
         margin-left:4%;
        text-align:center;
+       font-size: 5vw;
     }
     button {
       //margin-right:5px;
       background:white;
+      height: 12vw;
+      width: 12vw;
       ion-icon {
         color:black;
       }

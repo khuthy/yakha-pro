@@ -141,7 +141,8 @@
 -->
 
 
-<ion-content fullscreen>
+<ion-content fullscreen
+>
   <ion-slides pager #slides (ionSlideDidChange)="slideChanged($event)">
     <ion-slide class="slide-all" *ngFor="let item of msgSent; let i=index;">
       <div class="house" *ngIf="toggle" padding>
@@ -153,8 +154,15 @@
 
         <img src="{{item.data.houseImage}}" alt="plan-{{i}}">
       </div>
+
       <ion-header no-border>
         <ion-navbar>
+            <ion-buttons left start>
+                <button (click)=" viewMessages()" ion-fab color="ownerbutons">
+                  <ion-icon name="arrow-back" color="light"></ion-icon>
+                </button>
+              </ion-buttons>
+
           <ion-buttons right end>
             <button ion-fab (click)="callJoint(item.user.personalNumber)" color="customcall">
               <ion-icon name="call"></ion-icon>
@@ -170,6 +178,8 @@
           class="container-after-pseudo">Quotation details</button>
         <button *ngIf="drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
           class="container-after-pseudo">Close details</button>
+          <p class="arrows" *ngIf="!drop" (click)="dropDown()"><ion-icon name="ios-arrow-down"></ion-icon></p>
+          <p class="arrowsUp" *ngIf="drop" (click)="dropDown()"><ion-icon name="ios-arrow-up"></ion-icon></p>
         <div class="hide-div"></div>
         <div class="content-info" *ngIf="drop">
           <div class="bricks">
