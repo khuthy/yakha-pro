@@ -9,6 +9,14 @@
 
 
 <ion-content fullscreen>
+    <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
+        <div class="maploader">
+          <div class="lds-facebook"><div></div><div></div><div></div></div>
+        </div>
+       <!--  <div class="loading-text">
+          <p>Loading Map</p>
+        </div> -->
+      </div>
   <button (click)="popForm()" *ngIf="steps=='stepone'" id="switchback"
     style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;min-height:45px;width:45px;z-index:5"
     ion-fab>

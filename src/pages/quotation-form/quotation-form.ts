@@ -253,9 +253,6 @@ export class QuotationFormPage {
           this.nextbutton = true;
         }, 500)
       }
-
-
-
     } else if (this.steps == 'steptwo') {
       document.getElementById('step3').style.overflow = "auto";
       // document.getElementById('step2').style.display="none";
@@ -448,7 +445,7 @@ export class QuotationFormPage {
       correctOrientation: true
     };
     await this.camera.getPicture(options).then(res => {
-      console.log(res);
+     // console.log(res);
       const image = `data:image/jpeg;base64,${res}`;
       this.houseImage = image;
       let file = 'QuatationForm/' + this.authUser.getUser() + '.jpg';
@@ -457,17 +454,28 @@ export class QuotationFormPage {
       upload.on('state_changed', snapshot => {
         let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         this.uploadprogress = progress;
+        console.log('Upload', progress);
+       // setTimeout(() => {
+          this.loaderAnimate = true;
+        //}, 1000);
         if (progress == 100) {
-          this.isuploading = false;
+         // this.loaderAnimate = false;
+       //  setTimeout(() => {
+         
+       // }, 1000);
+           this.isuploading = false;
         }
       }, err => {
       }, () => {
         upload.snapshot.ref.getDownloadURL().then(downUrl => {
           this.HomeOwnerQuotation.houseImage = downUrl;
+          setTimeout(() => {
+            this.loaderAnimate = false;
+          }, 1000);
           this.quotationForm.get('firstCountValid').get('houseimage').patchValue({
             houseimage: downUrl
           })
-          console.log('Image downUrl', downUrl);
+        ///  console.log('Image downUrl', downUrl);
           this.isUploaded = true;
         })
       })
@@ -557,6 +565,7 @@ export class QuotationFormPage {
           /*   setTimeout(() => {
               this.hideHeader = true;
             }, 2000); */
+            // this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).onSnapshot
           this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).add(this.HomeOwnerQuotation).then((res) => {
             /*   this.HomeOwnerQuotation.extras.forEach((item) => {
                 this.Extra.push({ extra: item, price: 0, quatity: 0 });
