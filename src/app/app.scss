@@ -290,6 +290,14 @@
 
 }
 
+.ToastCtrl {
+    max-width: 80%;
+    margin: 0 auto;
+    background: color($colors, danger);
+    border-radius: 50px;
+    color: color($colors, light);
+}
+
 
 
 

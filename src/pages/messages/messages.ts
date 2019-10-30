@@ -1,6 +1,6 @@
 import { ChannelsPage } from './../channels/channels';
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, Slides, LoadingController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, Slides, LoadingController, Platform, ToastController } from 'ionic-angular';
 //import { ViewmessagePage } from '../viewmessage/viewmessage';
 import * as firebase from 'firebase';
 //import { FileOpener } from '@ionic-native/file-opener';
@@ -91,6 +91,7 @@ export class MessagesPage {
     public popoverCtrl: PopoverController,
     private callNumber: CallNumber,
     private file: File,
+    private toastCtrl: ToastController,
   //  public androidPermissions: AndroidPermissions,
     private downloader: Downloader,
     public loader: LoadingController,
@@ -202,14 +203,24 @@ export class MessagesPage {
     } */
   brick = 'Engineering brick' //demo
   getChats() {
-    this.dbChatting.doc(this.uid).collection(this.navParams.data.id).add({ chat: this.chatMessage, date: Date.now(), builder: false, id: this.currentUid }).then((res) => {
-      res.onSnapshot((doc) => {
-        this.chatMessage = '';
-        this.myMsg = doc.data().chat
-        //  console.log('This is what I sent now...', doc.data());
-        //  this.chatMessage = doc.data().chat
+    if(this.chatMessage !== '') {
+      this.dbChatting.doc(this.uid).collection(this.navParams.data.id).add({ chat: this.chatMessage, date: Date.now(), builder: false, id: this.currentUid }).then((res) => {
+        res.onSnapshot((doc) => {
+          this.chatMessage = '';
+          this.myMsg = doc.data().chat
+          //  console.log('This is what I sent now...', doc.data());
+          //  this.chatMessage = doc.data().chat
+        })
       })
-    })
+    }else {
+     this.toastCtrl.create({
+       position: 'top',
+       message: 'Please write a message...',
+       duration: 1000,
+       cssClass: 'ToastCtrl'
+     })
+    }
+   
   }
   /*  presentPopover(uid) {
      const popover = this.popoverCtrl.create(PopoverPage, { key1: uid });
