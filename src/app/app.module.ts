@@ -31,7 +31,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule, /* other http imports */ } from "@angular/common/http";
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
-
 import { IonicStorageModule } from '@ionic/storage';
 
 import { BuilderquotesPage } from '../pages/builderquotes/builderquotes';

@@ -10,7 +10,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { CallNumber } from '@ionic-native/call-number';
 import { File } from '@ionic-native/file';
 import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader';
-
+//import { AndroidPermissions } from '@ionic-native/android-permissions';
 //import pdfMake from 'pdfmake/build/pdfmake';
 //import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader';
 /**
