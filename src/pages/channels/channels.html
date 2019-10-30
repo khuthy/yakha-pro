@@ -23,7 +23,7 @@
 <div class="homebuilder" >
   <div class="cards" *ngFor =" let b of respond"> <!-- Put a forloop here -->
        <div class="images">
-        <img src="{{b.user.image}}" class="thumb-home-builder" (click)="viewProfile(b)" alt="profile">
+        <img src="{{b.user.image}}" class="thumb-home-builder"  alt="profile">
          </div>
       <div class="informative" >
         <h6 style="font-size: 2.5vh;padding-left: 5%">{{b.user.fullName}}</h6>

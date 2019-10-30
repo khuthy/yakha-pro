@@ -10,7 +10,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { CallNumber } from '@ionic-native/call-number';
 import { File } from '@ionic-native/file';
 import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
+
 //import pdfMake from 'pdfmake/build/pdfmake';
 //import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader';
 /**
@@ -91,7 +91,7 @@ export class MessagesPage {
     public popoverCtrl: PopoverController,
     private callNumber: CallNumber,
     private file: File,
-    public androidPermissions: AndroidPermissions,
+  //  public androidPermissions: AndroidPermissions,
     private downloader: Downloader,
     public loader: LoadingController,
     public pltform: Platform
@@ -254,9 +254,9 @@ return(){
   this.navCtrl.pop();
 }
 
-  // viewMessages() {
-  //   this.navCtrl.push(ViewmessagePage);
-  // }
+  viewMessages() {
+    this.navCtrl.pop();
+  }
   /*  itemSelected(item) {
      this.navCtrl.push(ViewmessagePage, item);
    } */
