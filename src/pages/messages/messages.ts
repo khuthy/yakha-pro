@@ -254,9 +254,9 @@ return(){
   this.navCtrl.pop();
 }
 
-  // viewMessages() {
-  //   this.navCtrl.push(ViewmessagePage);
-  // }
+  viewMessages() {
+    this.navCtrl.pop();
+  }
   /*  itemSelected(item) {
      this.navCtrl.push(ViewmessagePage, item);
    } */

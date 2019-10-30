@@ -1,8 +1,9 @@
 <ion-header *ngIf="steps=='steone'" [style.display]="!hideHeader ? 'none' : 'block' " no-border
-  style="background: transparent;">
-  <ion-navbar class="tools-header">
+  style="border: 1px solid green">
+  <ion-navbar class="tools-header" style="border: 1px solid green">
     <!--     <ion-title> <p style="border:1px solid gold;margin-left: -5px;margin-top:5px;"> {{homeBuilderPrice | currency: '&#82;'}}(p/&#13217;)<br>{{homeBuilderName}}</p></ion-title>
- -->
+ -->+++
+ 
   </ion-navbar>
 </ion-header>
 
@@ -18,12 +19,13 @@
         </div> -->
       </div>
   <button (click)="popForm()" *ngIf="steps=='stepone'" id="switchback"
-    style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;min-height:45px;width:45px;z-index:5"
+    style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;height:13vw;width:13vw;z-index:5"
     ion-fab>
     <ion-icon color="light" name="arrow-back"></ion-icon>
   </button>
+
   <button (click)="backSlide()" *ngIf="steps=='steptwo'" id="switchback"
-    style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;min-height:45px;width:45px;z-index:5"
+    style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;height:13vw;width:13vw;z-index:5"
     ion-fab>
     <ion-icon color="light" name="arrow-back"></ion-icon>
   </button>
@@ -40,7 +42,7 @@
 
       </button>
     </div>
-
+<!-- submit -->
     <div class="button-group" *ngIf="steps=='stepthree'" (click)="createQuations()">
       <p>Submit</p>
       <button class="send-quotes" (click)="createQuations()" ion-fab color="light">
@@ -80,7 +82,8 @@
         <p [class]="houseimage ? 'error' : 'normal'"
           *ngIf="!quotationForm.get('firstCountValid').get('houseimage').value">Please upload your house plan here</p>
       </div>
-      <div class="dates">
+
+      <div class="dates" >
         <p>I prefer the starting date to be around:</p>
         <ion-item no-lines>
           <ion-label style="padding-left:4px">Start</ion-label>
@@ -101,7 +104,8 @@
           Please specify the Ending date.</p>
 
       </div>
-      <p style="text-align:center; font-size:4vw;letter-spacing: 1px;padding-top:3px">Please select your brick type</p>
+
+      <p style="text-align:center;margin-top: 5px; font-size:4vw;letter-spacing: 1px;padding-top:3px">Please select your brick type</p>
       <div class="bricks">
 
         <div class="cards" *ngFor="let n of bricks" (click)="highlight(n, $event)">
