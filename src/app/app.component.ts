@@ -40,15 +40,18 @@ export class MyApp {
   messages = 0
   token: string;
 
-  constructor(public platform: Platform, 
+  constructor(
+    public platform: Platform, 
     private screenOrientation: ScreenOrientation, 
-    public splashScreen: SplashScreen, private statusBar: StatusBar,
-    public alert: AlertController) {
+    public splashScreen: SplashScreen, 
+    private statusBar: StatusBar,
+    public alert: AlertController
+    ) {
     // set status bar to white
      
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
-   
+    
     // oneSignal.startInit(this.signal_app_id, this.firebase_id);
     // // oneSignal.getIds().then((userID) => {
     // //   console.log(userID.userId);
@@ -71,8 +74,7 @@ export class MyApp {
     
     this.platform.ready().then(() => {
       this.statusBar.overlaysWebView(false);
-      this.statusBar.backgroundColorByHexString('#000');
-      this.statusBar.styleBlackOpaque();
+      this.statusBar.backgroundColorByHexString('#203959');
       if(this.platform.is('cordova')) {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       }else {

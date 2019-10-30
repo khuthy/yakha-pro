@@ -40,6 +40,7 @@ export class QuotationFormPage {
   selectedBrick = ""
   bricksContainer: any = document.getElementsByClassName('bricks');
   uid;
+  loaderMessages = 'Loading...';
   loaderAnimate = true;
   hide12 = 'qweqwerwrwr';
   houseImage;
@@ -48,6 +49,7 @@ export class QuotationFormPage {
   uploadprogress = 0;
   isuploading: false
   displayQuation;
+
   HomeOwnerQuotation = {
     hOwnerUid: '',
     startDate: '',
@@ -456,7 +458,9 @@ export class QuotationFormPage {
         this.uploadprogress = progress;
         console.log('Upload', progress);
        // setTimeout(() => {
+         this.loaderMessages = 'Uploading Image...';
           this.loaderAnimate = true;
+          
         //}, 1000);
         if (progress == 100) {
          // this.loaderAnimate = false;
@@ -533,6 +537,7 @@ export class QuotationFormPage {
     }).present()
   }
   createQuations() {
+    this.loaderMessages = 'Loading...';
     this.loaderAnimate = true;
     if (this.HomeOwnerQuotation.startDate == '' || this.HomeOwnerQuotation.houseImage == '' || this.HomeOwnerQuotation.endDate == '' || this.HomeOwnerQuotation.brickType == '' || this.HomeOwnerQuotation.wallType == ''
       || this.HomeOwnerQuotation.comment == '') {

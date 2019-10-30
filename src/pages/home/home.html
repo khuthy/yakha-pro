@@ -120,7 +120,7 @@
            
         <div class="button-group-l" (click)="rShortcut(b.uid)">
             <p>Request</p>   
-            <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
+            <button ion-fab mini color="light" (click)="rShortcut(b.uid)"><ion-icon name="arrow-forward"></ion-icon></button>
        
           </div>
       <!-- <div class="info">
