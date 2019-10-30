@@ -120,20 +120,14 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-  
-    setTimeout(() => {
-      this.loaderAnimate = false
-    }, 2000);
     this.db.doc(this.uid).onSnapshot((res) => {
       if (res.data().builder == false) {
         setTimeout(() => {
+          this.loaderAnimate = false;
           this.AutoComplete();
           this.getPosition();
         }, 3000);
-        //this.loadCtrl();
-        //document.getElementById('header').style.display = "none" 
         this.loadMap();
-
       }
       if (res.data().builder == true) {
         this.getRequests();
@@ -187,15 +181,6 @@ export class HomePage {
             this.total = this.total / 1000;
             //console.log(this.total);
 
-          }
-          else {
-            const alert = this.alertCtrl.create({
-              title: 'Address not found',
-              subTitle: 'This builder does not have the address',
-              buttons: ['OK']
-            });
-            alert.present();
-            // console.log('address not found.................');
           }
         });
     })
