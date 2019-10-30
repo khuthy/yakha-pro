@@ -1,12 +1,5 @@
 <ion-header no-border>
-  <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
-      <div class="maploader">
-        <div class="lds-facebook"><div></div><div></div><div></div></div>
-      </div>
-      <div class="loading-text">
-    
-      </div>
-    </div>
+
 
 <ion-toolbar class="tools-header" *ngIf="!isProfile">
   <ion-buttons left start>
@@ -66,7 +59,7 @@
               <p class="error" *ngIf="profileForm.get('personalNumber').hasError('required') && (profileForm.get('personalNumber').dirty || profileForm.get('personalNumber').touched)">Cell number is required.</p>
         </ion-col>
         <ion-col col-12 align-self-center>
-                 <input (focus)="checkKeyBoardEvents()" (blur)="checkKeyBoardEvents()" class="address" formControlName="address" ngx-google-places-autocomplete options='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+                 <input (focus)="checkKeyBoardEvents()" (blur)="checkKeyBoardEvents()" class="address" formControlName="address" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
               <p class="error" *ngIf="profileForm.get('address').hasError('required') && (profileForm.get('address').dirty || profileForm.get('address').touched)"> Please specify your Address.</p>
         </ion-col>
       </ion-row>
@@ -80,7 +73,7 @@
 </form>
 
 <div class="ViewContainer" *ngIf="isProfile">
-<div class="wrapper">
+<div class="wrapper" id="prof">
   <div class="wrap" [style.backgroundImage]="getProfileImageStyle()"></div>
   <div class="image-wrap">
       <img class="image-profile" src="{{HomeOwnerProfile.image}}" alt="{{HomeOwnerProfile.image}}">

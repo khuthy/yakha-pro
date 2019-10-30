@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController, MenuController, PopoverController,Slides, ActionSheetController, Keyboard } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController, MenuController, PopoverController, Slides, ActionSheetController, Keyboard } from 'ionic-angular';
 import * as firebase from 'firebase'
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
@@ -31,9 +31,9 @@ export class BaccountSetupPage {
   uid;
   icon: string;
   profileImage: any = "../../assets/imgs/team-avatar.jpg";
-  imageSelected= false;
-  isuploaded =false;
-  profileForm : FormGroup;
+  imageSelected = false;
+  isuploaded = false;
+  profileForm: FormGroup;
   uploadprogress = 0;
   isuploading: false
   displayProfile = [];
@@ -69,7 +69,7 @@ export class BaccountSetupPage {
   current: number = 1;
   back: boolean;
   hideElement: boolean;
-  
+
   get regNo() {
     return this.profileForm.get('profileFormSecondSlide').get('regNo');
   }
@@ -87,55 +87,55 @@ export class BaccountSetupPage {
     //public oneSignal: OneSignal, 
     public actionSheetCtrl: ActionSheetController,
     private keyboard: Keyboard
-   /*  public Slides: Slides */
+    /*  public Slides: Slides */
   ) {
     this.authUser.setUser(firebase.auth().currentUser.uid);
     this.profileForm = this.formBuilder.group({
-         profileFormFirstSlide: this.formBuilder.group({
-          fullName: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30)])),
-          gender: new FormControl('', Validators.compose([Validators.required])),
-          personalNumber: new  FormControl('', Validators.compose([Validators.required, Validators.maxLength(10)])),
-          address: new FormControl('', Validators.compose([Validators.required])),
-          builder: ['']
+      profileFormFirstSlide: this.formBuilder.group({
+        fullName: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30)])),
+        gender: new FormControl('', Validators.compose([Validators.required])),
+        personalNumber: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(10)])),
+        address: new FormControl('', Validators.compose([Validators.required])),
+        builder: ['']
       }),
       profileFormSecondSlide: this.formBuilder.group({
-          certified: [false],
-          experience: new FormControl('', Validators.compose([Validators.required])),
-          roof: new FormControl(false, Validators.compose([Validators.required])),
-          price: new FormControl('', Validators.compose([Validators.required])),
-          regNo: ['']
+        certified: [false],
+        experience: new FormControl('', Validators.compose([Validators.required])),
+        roof: new FormControl(false, Validators.compose([Validators.required])),
+        price: new FormControl('', Validators.compose([Validators.required])),
+        regNo: ['']
       })
-     
-     /*   this.slides.lockSwipes(true); */
+
+      /*   this.slides.lockSwipes(true); */
     });
 
     this.profileForm.get('profileFormSecondSlide').get('roof').clearValidators();
 
-     this.profileForm.get('profileFormSecondSlide').get('certified').valueChanges.subscribe((checkedValue) => {
-       const regNo = this.profileForm.get('profileFormSecondSlide').get('regNo');
-       if(checkedValue){
-         regNo.setValidators(Validators.required);
-         this.profileForm.get('profileFormSecondSlide').patchValue({
-           regNo: this.builderProfile.regNo
-         })
-       }else {
+    this.profileForm.get('profileFormSecondSlide').get('certified').valueChanges.subscribe((checkedValue) => {
+      const regNo = this.profileForm.get('profileFormSecondSlide').get('regNo');
+      if (checkedValue) {
+        regNo.setValidators(Validators.required);
+        this.profileForm.get('profileFormSecondSlide').patchValue({
+          regNo: this.builderProfile.regNo
+        })
+      } else {
         regNo.clearValidators();
-        
-       }
-       regNo.updateValueAndValidity();
-       
-     });
-   
+
+      }
+      regNo.updateValueAndValidity();
+
+    });
+
     // when the page loads
-    
+
   }
   ionViewDidLoad() {
     setTimeout(() => {
       this.loaderAnimate = false;
-       //  this.hide12='';
-       //this.HomeOwnerQuotation.extras = [];
-     }, 2000);
-   //this.slides.lockSwipes(true) // when the page loads
+      //  this.hide12='';
+      //this.HomeOwnerQuotation.extras = [];
+    }, 2000);
+    //this.slides.lockSwipes(true) // when the page loads
     /* this.oneSignal.getIds().then((res) => {
       this.builderProfile.tokenID = res.userId;
     }) */
@@ -147,35 +147,35 @@ export class BaccountSetupPage {
     console.log(this.slides.getActiveIndex);
     this.slides.lockSwipes(true);
 
-  firebase.firestore().collection('Users').doc(firebase.auth().currentUser.uid).onSnapshot((res) => {
-    if(res.data().isProfile == true) {
-      this.back = true;
-    }else {
-      this.back = false;
-    }
-  })
-   
+    firebase.firestore().collection('Users').doc(firebase.auth().currentUser.uid).onSnapshot((res) => {
+      if (res.data().isProfile == true) {
+        this.back = true;
+      } else {
+        this.back = false;
+      }
+    })
+
   }
 
   currentSlide() {
-      this.current = this.slides.getActiveIndex() + 1;
-      if(this.current >= 3) {
-        this.current = 2;
-      }
+    this.current = this.slides.getActiveIndex() + 1;
+    if (this.current >= 3) {
+      this.current = 2;
+    }
   }
 
- checkKeyBoardEvents(){
-   if(this.keyboard.isOpen()) {
-        this.hideElement = true;
-   }else {
+  checkKeyBoardEvents() {
+    if (this.keyboard.isOpen()) {
+      this.hideElement = true;
+    } else {
       this.hideElement = false;
-   }
- }
+    }
+  }
 
-  nextslides(){
-   this.slides.lockSwipes(false);
-   this.slides.slideNext(1);
-   this.slides.lockSwipes(true);
+  nextslides() {
+    this.slides.lockSwipes(false);
+    this.slides.slideNext(1);
+    this.slides.lockSwipes(true);
   }
   ionViewWillEnter() {
     this.menuCtrl.swipeEnable(false);
@@ -196,7 +196,7 @@ export class BaccountSetupPage {
       buttons: [{
         icon: 'images',
         text: 'Gallery',
-       
+
         handler: () => {
           this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY)
         }
@@ -209,66 +209,27 @@ export class BaccountSetupPage {
         }
       },
       {
-        icon:'close',
+        icon: 'close',
         text: 'Cancel',
         role: 'cancel'
       }
       ]
     });
     await actionSheet.present();
-    }
-    async takePicture(sourcetype: PictureSourceType) {
-      const options: CameraOptions = {
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE,
-        quality: 90,
-        targetHeight: 600,
-        targetWidth: 600,
-        sourceType: sourcetype,
-        saveToPhotoAlbum: false,
-        correctOrientation: true
-      };
-     await this.camera.getPicture(options).then(res => {
-      console.log('images', res);
-      const image = `data:image/jpeg;base64,${res}`;
-      this.profileImage = image;
-      let file = 'builder-Profile/' + this.authUser.getUser() + '.jpg';
-      const UserImage = this.storage.child(file);
-      const upload = UserImage.putString(image, 'data_url');
-      upload.on('state_changed', snapshot => {
-        let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        this.uploadprogress = progress;
-        if (progress == 100) {
-          this.isuploading = false;
-        }
-      }, err => {
-      }, () => {
-        upload.snapshot.ref.getDownloadURL().then(downUrl => {
-          this.builderProfile.image = downUrl;
-          this.profileImage = downUrl;
-          this.profileForm.patchValue({builder : downUrl});
-          console.log('Image downUrl', downUrl);
-          this.isuploaded = true;
-        })
-      })
-    }, err => {
-      console.log("Something went wrong: ", err);
-
-    })
-    this.imageSelected = true;
-      // })
-    }
- /*  async selectImage() {
-    let option: CameraOptions = {
-      quality: 100,
+  }
+  async takePicture(sourcetype: PictureSourceType) {
+    const options: CameraOptions = {
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-    }
-    await this.camera.getPicture(option).then(res => {
+      quality: 90,
+      targetHeight: 600,
+      targetWidth: 600,
+      sourceType: sourcetype,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    };
+    await this.camera.getPicture(options).then(res => {
       console.log('images', res);
       const image = `data:image/jpeg;base64,${res}`;
       this.profileImage = image;
@@ -286,7 +247,7 @@ export class BaccountSetupPage {
         upload.snapshot.ref.getDownloadURL().then(downUrl => {
           this.builderProfile.image = downUrl;
           this.profileImage = downUrl;
-          this.profileForm.patchValue({builder : downUrl});
+          this.profileForm.patchValue({ builder: downUrl });
           console.log('Image downUrl', downUrl);
           this.isuploaded = true;
         })
@@ -296,59 +257,39 @@ export class BaccountSetupPage {
 
     })
     this.imageSelected = true;
-  } */
+    // })
+  }
+
   async createprofile(profileForm: FormGroup): Promise<void> {
 
-    if(!profileForm.valid || this.builderProfile.address==""){
+    if (!profileForm.valid || this.builderProfile.address == "") {
       console.log(
         'Need to complete the form, current value: ',
         profileForm.value
       );
 
-      }else {
-        const load = this.loadingCtrl.create({
-          content: 'Creating Profile..'
-        });
-        load.present();
-        console.log(this.builderProfile.lat, this.builderProfile.lng);
-        console.log(this.builderProfile);
-        let num = parseFloat(this.builderProfile.price.toString())
-        this.builderProfile.price = num;
+    } else {
+      let num = parseFloat(this.builderProfile.price.toString())
+      this.builderProfile.price = num;
 
-        // upon success...
-        this.db.doc(firebase.auth().currentUser.uid).update(this.builderProfile).then(() => {
-          this.navCtrl.setRoot(HomePage)
-          this.toastCtrl.create({
-            message: 'User profile saved.',
-            duration: 2000,
-          }).present();
-          // ...get the profile that just got created...
-          // this.isProfile = true;
-          load.dismiss();
-          // catch any errors.
-
-        }).catch(err => {
-          this.toastCtrl.create({
-            message: 'Error creating Profile.',
-            duration: 2000
-          }).present();
-          this.isProfile = false;
-          load.dismiss();
-        })
-      }
-
+      // upon success...
+      this.db.doc(firebase.auth().currentUser.uid).update(this.builderProfile).then(() => {
+        this.navCtrl.push(BaccountSetupPage);
+      })
     }
-           // load the profile creation process
-           SignOut() {
-            firebase.auth().signOut().then(() => {
-              console.log('Signed Out');
-              this.navCtrl.setRoot(LoginPage);
-        
-            }).catch((err) => {
-              console.log('error occured while signing out');
-        
-            })
-          }
+
+  }
+  // load the profile creation process
+  SignOut() {
+    firebase.auth().signOut().then(() => {
+      console.log('Signed Out');
+      this.navCtrl.setRoot(LoginPage);
+
+    }).catch((err) => {
+      console.log('error occured while signing out');
+
+    })
+  }
 
 
   validation_messages = {
@@ -412,7 +353,7 @@ export class BaccountSetupPage {
           this.profileImage = doc.data().image;
           this.builderProfile.fullName = doc.data().fullName;
           this.builderProfile.gender = doc.data().gender;
-          this.builderProfile.personalNumber  = doc.data().personalNumber;
+          this.builderProfile.personalNumber = doc.data().personalNumber;
           this.builderProfile.certified = doc.data().certified;
           this.builderProfile.roof = doc.data().roof;
           this.builderProfile.experiences = doc.data().experiences;
@@ -466,7 +407,7 @@ export class BaccountSetupPage {
       ev: myEvent
     });
   }
- 
+
   getProfileImageStyle() {
     return 'url(' + this.builderProfile.image + ')';
   }
@@ -484,7 +425,7 @@ export interface builderProfile {
   image?: string;
   fullName: string,
   gender: string,
-  personalNumber :number,
+  personalNumber: number,
   certified: string,
   roof: string,
   experiences: string,

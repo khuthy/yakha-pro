@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ToastController, LoadingController
 import * as firebase from "firebase/app";
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { HomePage } from '../home/home';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera';
 import { CallNumber } from '@ionic-native/call-number';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
@@ -60,7 +59,7 @@ export class AccountSetupPage {
       country: ['ZA']
     }
   }
-  loaderAnimate = true;
+  //loaderAnimate = true;
   back: boolean;
   hid: string = '';
   hideElement: boolean;
@@ -112,11 +111,7 @@ export class AccountSetupPage {
         this.back = false;
       }
     })
-    setTimeout(() => {
-     this.loaderAnimate = false;
-      //  this.hide12='';
-      //this.HomeOwnerQuotation.extras = [];
-    }, 2000);
+  
 
     this.getProfile();
   }
@@ -171,32 +166,11 @@ export class AccountSetupPage {
           profileForm.value
         );
        }else {
-           // load the profile creation process
-             const load = this.loadingCtrl.create({
-              content: 'Proccessing...'
-            });
-            load.present();
-        const user = this.db.doc(firebase.auth().currentUser.uid).update(this.HomeOwnerProfile);
-        
-        // upon success...
-        user.then( () => {
-          this.navCtrl.push(HomePage)
-          this.toastCtrl.create({
-            message: 'User Profile is successful',
-            duration: 2000,
-          }).present();
-          // ...get the profile that just got created...
-          // this.isProfile = true;
-          load.dismiss();
-          // catch any errors.
-        }).catch( err=> {
-          this.toastCtrl.create({
-            message: 'Error creating Profile.',
-            duration: 2000
-          }).present();
-          this.isProfile = false;
-          load.dismiss();
+           
+      this.db.doc(this.uid).update(this.HomeOwnerProfile).then((res) => {
+        this.navCtrl.push(AccountSetupPage);
         })
+
         }
 
   }

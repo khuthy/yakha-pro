@@ -120,16 +120,22 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+  
+   
     this.db.doc(this.uid).onSnapshot((res) => {
       if (res.data().builder == false) {
         setTimeout(() => {
           this.loaderAnimate = false;
           this.AutoComplete();
-          this.getPosition();
+          
         }, 3000);
+       
         this.loadMap();
       }
       if (res.data().builder == true) {
+        setTimeout(() => {
+          this.loaderAnimate = false;
+        }, 2000);
         this.getRequests();
       }
     })
@@ -208,7 +214,7 @@ export class HomePage {
   }
 
   async getBuilders() {
-
+    this.getPosition();
     let numRated = 0;
     let arr = [];
     let avgSum = 0
@@ -514,7 +520,7 @@ export class HomePage {
       this.menuShow = true;
     });
     this.getBuilders();
-
+    
 
 
     setTimeout(() => {
