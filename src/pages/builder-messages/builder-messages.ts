@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, ToastController } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { CallNumber } from '@ionic-native/call-number';
 import { BuilderquotesPage } from '../builderquotes/builderquotes';
@@ -51,7 +51,8 @@ export class BuilderMessagesPage {
   constructor(public navCtrl: NavController,
     private callNumber: CallNumber,
     public navParams: NavParams,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private toastCtrl: ToastController
   ) {
     // this.imageBuilder = this.navParams.data.img;
     console.log('Nav params', this.navParams.data);
@@ -106,6 +107,11 @@ export class BuilderMessagesPage {
         })
       })
     })
+
+    this.getOwnerDetails() 
+  }
+  viewMessages() {
+    this.navCtrl.pop();
   }
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
@@ -125,6 +131,12 @@ export class BuilderMessagesPage {
         ///  this.hideCard = '';
         this.quoteStatus = doc.data().msgStatus;
         // console.log('Status............................', this.quoteStatus);
+        this.toastCtrl.create({
+          closeButtonText: 'Close',
+          message: 'Your quotes has been'+ this.quoteStatus,
+          cssClass: 'quotesjj',
+          position: 'top'
+        }).present();
       }
     })
   }

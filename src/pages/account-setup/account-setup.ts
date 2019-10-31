@@ -60,7 +60,7 @@ export class AccountSetupPage {
       country: ['ZA']
     }
   }
-  //loaderAnimate = true;
+  loaderAnimate = true;
   back: boolean;
   hid: string = '';
   hideElement: boolean;
@@ -102,6 +102,9 @@ export class AccountSetupPage {
     this.HomeOwnerProfile.ownerAddress = addr.formatted_address;
   }
   ionViewDidLoad() {
+    setTimeout(() => {
+      this.loaderAnimate = false;
+    }, 2000)
     console.log(this.uid)
     console.log(this.authUser.getUser());
     console.log(this.navParams.data);
@@ -161,9 +164,14 @@ export class AccountSetupPage {
   }
 
   async createprofile(profileForm: FormGroup) {
+    this.loaderAnimate = true
    await this.db.doc(this.uid).update(this.HomeOwnerProfile).then((res) => {
       this.navCtrl.push(AccountSetupPage);
+
     })
+    setTimeout(() => {
+      this.loaderAnimate = false;
+    }, 2000)
   }
   async takePicture(sourcetype: PictureSourceType) {
     const options: CameraOptions = {
@@ -238,12 +246,12 @@ export class AccountSetupPage {
 
     // ...query the profile that contains the uid of the currently logged in user...
     let query = this.db.doc(this.authUser.getUser());
-    query.get().then(doc => {
+    query.onSnapshot(doc => {
       // ...log the results of the document exists...
       if (doc.exists) {
         if (doc.data().isProfile == true) {
           console.log('Got data', doc.data());
-
+          this.displayProfile = [];
           console.log('Profile Document: ', doc.data(), doc.data())
           this.displayProfile.push(doc.data());
           this.HomeOwnerProfile.About = doc.data().About;
@@ -267,11 +275,6 @@ export class AccountSetupPage {
         this.isProfile = false;
         this.icon = 'image';
       }
-      // dismiss the loading
-
-    }).catch(err => {
-      // catch any errors that occur with the query.
-      console.log("Query Results: ", err);
       // dismiss the loading
 
     })

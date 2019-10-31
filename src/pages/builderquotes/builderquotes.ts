@@ -70,7 +70,7 @@ export class BuilderquotesPage {
     discountAmount: null,
     discountPrice: null,
     //ownerUID: null,
-    hOwnerUID: null,
+    hOwnerUID: '',
     subtotal: 0,
     dateCreated: Date(),
     viewed: false,
@@ -146,7 +146,7 @@ export class BuilderquotesPage {
 
     this.date = new Date();
     this.maxDate = this.formatDate(this.date);
- 
+  
     this.quotesForm.get('dimension').clearValidators();
 
   }
@@ -182,7 +182,7 @@ this.extras = [];
     //  console.log('Extras.....',this.extras);
     })
     this.dbRequest.doc(this.uid).onSnapshot((res) => {
-     // this.quotes.hOwnerUID = res.data().hOwnerUid;
+      this.quotes.hOwnerUID = res.data().hOwnerUid;
       this.dbUsers.doc(res.data().hOwnerUid).onSnapshot((res) => {
         if (res.data().builder == false) {
           // this.quotes.ownerUID = this.quotes.hOwnerUID;
@@ -255,9 +255,7 @@ this.extras = [];
 
   createPdf() {
     this.loaderAnimate = true;
-    setTimeout(() => {
-      this.loaderAnimate = false;
-    }, 4000);
+    
     /* calculations */
   
     /* discount amount of extras */
@@ -387,6 +385,9 @@ this.extras = [];
     };
     this.pdfObj = pdfMake.createPdf(docDefinition);
     //console.log(this.pdfObj);
+    setTimeout(() => {
+      this.loaderAnimate = false;
+    }, 2000);
     this.downloadUrl();
    
   }
@@ -424,10 +425,7 @@ this.extras = [];
     //console.log('pdf link............:', this.pdfDoc);
     this.dbRespond.doc(this.navParams.data.docID).set(this.quotes).then(()=>{
      // this.quotes.pdfLink = this.pdfDoc;
-     this.loaderAnimate = true;
-    setTimeout(() => {
-      this.loaderAnimate = false;
-    }, 2000);
+    
       this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, date: Date(), builder: true, id:this.navParams.data.docID }).then((res) => {
         
       })

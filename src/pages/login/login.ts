@@ -112,7 +112,7 @@ export class LoginPage {
       signIn.then((getUid) => {
         this.authService.setUser(getUid.user.uid);
         this.db.doc(this.authService.getUser()).onSnapshot((profile) => {
-          if (!profile.exists) {
+          if (!profile.data().isProfile) {
             this.alertCtrl.create({
               title: 'Create a profile',
               subTitle: 'Please create an account before we log you in.',

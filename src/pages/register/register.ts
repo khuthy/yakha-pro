@@ -91,18 +91,20 @@ export class RegisterPage {
 
 
 
-        },
-        error => {
-          this.loading.dismiss().then(async () => {
-            const alert = await this.alertCtrl.create({
-              message: error.message,
-              buttons: [{ text: 'Ok', role: 'cancel' }]
+        }).catch((error) => {
+            this.loading.dismiss().then(async () => {
+              const alert = await this.alertCtrl.create({
+                message: error.message,
+                buttons: [{ text: 'Ok', role: 'cancel' }]
+              });
+              await alert.present();
             });
-            await alert.present();
-          });
-        }
-      );
-      this.loading = await this.loadingCtrl.create();
+          }
+        );
+      this.loading = await this.loadingCtrl.create({
+        duration: 2000,
+        content: 'Loading...'
+      });
       await this.loading.present();
     }
   }

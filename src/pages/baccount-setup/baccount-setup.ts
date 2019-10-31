@@ -346,6 +346,7 @@ export class BaccountSetupPage {
       // ...log the results of the document exists...
       if (doc.exists) {
         if (doc.data().isProfile == true) {
+          this.displayProfile = [];
           console.log('Profile Document: ', doc.data())
           this.displayProfile.push(doc.data());
 

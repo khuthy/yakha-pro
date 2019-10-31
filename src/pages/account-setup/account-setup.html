@@ -22,6 +22,14 @@
 
 </ion-header>
 <ion-content fullscreen>
+    <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
+        <div class="maploader">
+          <div class="lds-facebook"><div></div><div></div><div></div></div>
+        </div>
+       <!--  <div class="loading-text">
+          <p>Loading Map</p>
+        </div> -->
+      </div>
 <form  [formGroup]="profileForm" *ngIf="!isProfile">
     <ion-grid>
       <ion-row align-items-start>
@@ -66,7 +74,7 @@
 
       <ion-row align-items-center>
           <ion-col col-12 align-self-center>
-              <button class="next" block round ion-button color="dark" (click)="createprofile(profileForm)">Done</button>
+              <button (click)="createprofile(profileForm)" class="next" block round ion-button color="dark" >Done</button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -99,7 +107,4 @@
 
 </ion-content>
 
-<ion-footer no-border  *ngIf="!hideElement">
-  <ion-toolbar class="tools-footer" *ngIf="!isProfile">
-    </ion-toolbar>
-</ion-footer>
+

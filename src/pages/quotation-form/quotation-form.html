@@ -35,13 +35,20 @@
   </div>
 
   <div class="footer" *ngIf="!hid">
-    <div class="button-group" *ngIf="steps=='steptwo'||steps=='stepone'" (click)="slideState()">
+    <div class="button-group" *ngIf="steps=='stepone'" (click)="slideState()">
       <p>Next step</p>
       <button (click)="slideState()" class="send-quotes" ion-fab color="light">
         <ion-icon name="arrow-forward"></ion-icon>
 
       </button>
     </div>
+    <div class="button-group" *ngIf="steps=='steptwo'" (click)="slideSecond()">
+        <p>Next step</p>
+        <button (click)="slideSecond()" class="send-quotes" ion-fab color="light">
+          <ion-icon name="arrow-forward"></ion-icon>
+  
+        </button>
+      </div>
 <!-- submit -->
     <div class="button-group" *ngIf="steps=='stepthree'" (click)="createQuations()">
       <p>Submit</p>

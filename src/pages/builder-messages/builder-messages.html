@@ -20,15 +20,21 @@
       </div>
       <ion-header no-border>
         <ion-navbar class="tool-header">
+            <ion-buttons left start>
+                <button (click)="viewMessages()" ion-fab color="ownerbutons">
+                  <ion-icon name="arrow-back" color="light"></ion-icon>
+                </button>
+              </ion-buttons>
+
           <ion-buttons right end>
-            <button ion-fab (click)="callJoint(item.user.personalNumber)" color="customcall">
+            <button ion-fab (click)="callJoint(getowners.personalNumber)" color="customcall">
               <ion-icon name="call"></ion-icon>
             </button>
           </ion-buttons>
 
         </ion-navbar>
         <img class="builder" src="../../assets/icon/BuilderShape2.svg" alt="builder">
-        <p text-center style="color: #fff;">Quotation Y001</p>
+        <p text-center style="color: #fff;">Quotation-Y00{{i}}</p>
       </ion-header>
       <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
           <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
@@ -109,9 +115,7 @@
           </div>
 
         </div>
-        <div class="no-messages " *ngIf="msgInfo.length == 0">
-          <p class="empty">You have no messages yet!</p>
-        </div>
+        
 
       </div>
 

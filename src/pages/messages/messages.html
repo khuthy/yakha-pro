@@ -171,7 +171,7 @@
 
         </ion-navbar>
         <img class="builder" src="../../assets/icon/ownerShape.svg" alt="builder">
-        <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
+        <p text-center style="color: #fff;">Quotation-Y00{{i}}</p>
       </ion-header>
       <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
         <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
@@ -228,12 +228,6 @@
                 <p id="text-message" text-left> {{chat.chat.chat}}</p>
                 <!-- Message -->
               </div>
-
-
-              <!-- Quotes Sent -->
-              <div class="pdfContent">
-           
-              </div>
               <div class="texts">
                 <p id="time-message" text-right>{{chat.chat.date | date: "shortTime" : "GMT+2"}}</p>
               </div>
@@ -243,24 +237,25 @@
           <div class="messages" *ngIf="chat.chat.builder">
 
             <div class="chat left">
-                <div *ngIf="chat.chat.pdf">
-
-                    <div class="pdf">
-                      <p></p>
-                      <p>Quotation-Y00{{i}}</p>
-                      <button ion-fab color="dark" [style.backgroundColor]="quoteStatus == 'Accepted' ? 'green' : 'red'" mini (click)="downloadPDF(chat.chat.pdf)"><ion-icon name="download"></ion-icon></button>
-                    </div>
-                    
-                      <div id="buttons" *ngIf="quoteStatus">
-                       <p style="text-align: center; width: 100%;" [style.color]="quoteStatus == 'Accepted' ? 'green' : 'red'">{{quoteStatus}}</p>  
-                      </div>
-                      <div id="buttons" *ngIf="!quoteStatus">
-                        <button ion-button small clear  color="danger" (click)="declineQoute()" round>Decline</button>
-                        <button ion-button small color="customcall" (click)="acceptQoute()" round>Accept</button>
-                     </div>
-    
-                </div>
+              
               <div class="texts">
+                  <div *ngIf="chat.chat.pdf">
+
+                      <div class="pdf">
+                        <p></p>
+                        <p>Quotation-Y00{{i}}</p>
+                        <button ion-fab color="dark" [style.backgroundColor]="quoteStatus == 'Accepted' ? 'green' : 'red'" mini (click)="downloadPDF(chat.chat.pdf)"><ion-icon name="download"></ion-icon></button>
+                      </div>
+                      
+                        <div id="buttons" *ngIf="quoteStatus">
+                         <p style="text-align: center; width: 100%;" [style.color]="quoteStatus == 'Accepted' ? 'green' : 'red'">{{quoteStatus}}</p>  
+                        </div>
+                        <div id="buttons" *ngIf="!quoteStatus">
+                          <button ion-button small clear  color="danger" (click)="declineQoute()" round>Decline</button>
+                          <button ion-button small color="customcall" (click)="acceptQoute()" round>Accept</button>
+                       </div>
+      
+                  </div>
                 <p id="text-message" text-right>{{chat.chat.chat}} </p>
 
               </div>

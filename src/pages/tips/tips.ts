@@ -139,11 +139,25 @@ constructor(public navCtrl: NavController, public navParams: NavParams, public a
 // }
 activate(cmd) {
   switch (cmd) {
-    case 'about':
-      if (this.tsProperty == 'about'){
+    case 'Key':
+      if (this.tsProperty == 'Key'){
         this.tsProperty = ""
       }else{
-        this.tsProperty = 'about';
+        this.tsProperty = 'Key';
+      }
+      break;
+      case 'tools':
+      if (this.tsProperty == 'tools'){
+        this.tsProperty = ""
+      }else{
+        this.tsProperty = 'tools';
+      }
+      break;
+      case 'rights':
+      if (this.tsProperty == 'rights'){
+        this.tsProperty = ""
+      }else{
+        this.tsProperty = 'rights';
       }
       break;
       case 'terms':
