@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { NavController } from 'ionic-angular';
-import { HomePage } from '../../pages/home/home';
-import { LoginPage } from '../../pages/login/login';
+
 
 
 @Injectable()

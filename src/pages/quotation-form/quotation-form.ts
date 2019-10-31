@@ -557,20 +557,21 @@ export class QuotationFormPage {
              })
            }) */
         this.db.collection('Request').doc(this.HomeOwnerQuotation.builderUID).set(this.HomeOwnerQuotation).then((res) => {
-          //  res.onSnapshot((doc)=>{
-          //  doc.exists
-          /*   this.db.collection('Request').doc(res.id).onSnapshot((query)=>{
-              if(query.data().builderUID == this.HomeOwnerQuotation.builderUID)
-              this.db.collection('Request').doc(query.id).delete().then((delRes)=>{
-                 console.log('Request deleted....');
-              })
-            })
-                */
-          // })
-          /*   setTimeout(() => {
-              this.hideHeader = true;
-            }, 2000); */
-            // this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).onSnapshot
+         
+          if(this.HomeOwnerQuotation.builderUID)
+          {
+            this.db.collection('Users').doc(this.HomeOwnerQuotation.builderUID).onSnapshot((out)=>{
+              if(out.data().tokenID){
+                var notificationObj = {
+                  contents: { en: "Hey " + out.data().fullName+" ," + "you have new request"},
+                  include_player_ids: [out.data().tokenID],
+                };
+                this.oneSignal.postNotification(notificationObj).then(res => {
+                 // console.log('After push notifcation sent: ' +res);
+                });
+                }
+          })
+          }
           this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).add(this.HomeOwnerQuotation).then((res) => {
             /*   this.HomeOwnerQuotation.extras.forEach((item) => {
                 this.Extra.push({ extra: item, price: 0, quatity: 0 });
