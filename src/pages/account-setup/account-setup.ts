@@ -11,6 +11,7 @@ import { ProfileComponent } from '../../components/profile/profile';
 import { LoginPage } from '../login/login';
 import { text } from '@angular/core/src/render3/instructions';
 import { File, FileEntry } from '@ionic-native/file';
+import { OneSignal } from '@ionic-native/onesignal';
 
 
 /**
@@ -74,7 +75,7 @@ export class AccountSetupPage {
     private menuCtrl: MenuController,
     private callNumber: CallNumber,
     public popoverCtrl: PopoverController,
-    // oneSignal: OneSignal,
+     public oneSignal: OneSignal,
     public actionSheetCtrl: ActionSheetController,
     public file: File,
     private keyboard: Keyboard,
@@ -91,9 +92,9 @@ export class AccountSetupPage {
       About: [''],
       address: new FormControl('', Validators.compose([Validators.required]))
     });
-    /*  oneSignal.getIds().then((res) => {
+      oneSignal.getIds().then((res) => {
        this.HomeOwnerProfile.tokenID = res.userId;
-     }); */
+     }); 
     this.backButton()
 
   }

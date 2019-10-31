@@ -9,7 +9,7 @@ import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { HomePage } from '../home/home';
 import { ProfileComponent } from '../../components/profile/profile';
-//import { OneSignal } from '@ionic-native/onesignal';
+import { OneSignal } from '@ionic-native/onesignal';
 import { LoginPage } from '../login/login';
 
 /**
@@ -84,7 +84,7 @@ export class BaccountSetupPage {
     private formBuilder: FormBuilder,
     private menuCtrl: MenuController,
     public popoverCtrl: PopoverController,
-    //public oneSignal: OneSignal, 
+    public oneSignal: OneSignal, 
     public actionSheetCtrl: ActionSheetController,
     private keyboard: Keyboard
     /*  public Slides: Slides */
@@ -136,9 +136,9 @@ export class BaccountSetupPage {
       //this.HomeOwnerQuotation.extras = [];
     }, 2000);
     //this.slides.lockSwipes(true) // when the page loads
-    /* this.oneSignal.getIds().then((res) => {
+     this.oneSignal.getIds().then((res) => {
       this.builderProfile.tokenID = res.userId;
-    }) */
+    }) 
     this.getStatus();
     console.log(this.authUser.getUser());
     this.builderProfile.price = 0;
