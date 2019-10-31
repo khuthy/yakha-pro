@@ -72,7 +72,8 @@ export class BuilderMessagesPage {
   }
 
   ionViewDidLoad() {
-
+    this.slides.lockSwipeToNext(true);
+    this.slides.lockSwipeToPrev(true);
     setTimeout(() => {
       this.slideChanged();
     }, 1000);
@@ -138,6 +139,8 @@ export class BuilderMessagesPage {
     
   }
   respond() {
+
+    
     this.navCtrl.push(BuilderquotesPage, { docID: this.currentUid, uid: this.navParams.data.uid });
   }
   getOwnerDetails() {

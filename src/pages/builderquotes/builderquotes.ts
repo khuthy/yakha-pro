@@ -11,9 +11,9 @@ import * as firebase from 'firebase';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete/ngx-google-places-autocomplete.directive';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-/* import { OneSignal } from '@ionic-native/onesignal';
-import { SMS } from '@ionic-native/sms';
-import { Downloader } from '@ionic-native/downloader'; */
+ import { OneSignal } from '@ionic-native/onesignal';
+/* import { SMS } from '@ionic-native/sms'; */
+import { Downloader } from '@ionic-native/downloader';
 
 
 
@@ -126,12 +126,12 @@ export class BuilderquotesPage {
     private loader: LoadingController,
     private cdRef: ChangeDetectorRef,
     public toastCtrl: ToastController,
-   /*  public oneSignal: OneSignal,
-    private sms: SMS, */
+     public oneSignal: OneSignal,
+ /*    private sms: SMS,  */
 
   ) {
     this.userMsg = this.navParams.data;
-    console.log('data =>', this.userMsg, '/',this.navParams.data.docID);
+   /*  console.log('data =>', this.userMsg, '/',this.navParams.data.docID); */
 
     this.uid = firebase.auth().currentUser.uid;
     this.authUser.setUser(this.uid);
@@ -181,7 +181,7 @@ this.extras = [];
       this.extras = res.data().extras
     //  console.log('Extras.....',this.extras);
     })
-    this.dbRequest.doc(this.navParams.data.docID).onSnapshot((res) => {
+    this.dbRequest.doc(this.uid).onSnapshot((res) => {
      // this.quotes.hOwnerUID = res.data().hOwnerUid;
       this.dbUsers.doc(res.data().hOwnerUid).onSnapshot((res) => {
         if (res.data().builder == false) {
@@ -451,7 +451,7 @@ this.extras = [];
           viewed: false,
           msgStatus: ''
         } 
-        /* resDoc.onSnapshot((doc)=>{
+         resDoc.onSnapshot((doc)=>{
           this.dbUsers.doc(doc.data().hOwnerUid).onSnapshot((resUser) => {
             if (resUser.data().tokenID) {
               var notificationObj = {
@@ -463,7 +463,7 @@ this.extras = [];
             }
     
           });
-        }) */
+        }) 
       
     })
    

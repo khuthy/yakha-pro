@@ -7,7 +7,7 @@
 
 
 <ion-content fullscreen>
-  <ion-slides pager #slides (ionSlideDidChange)="slideChanged($event)">
+  <ion-slides #slides (ionSlideDidChange)="slideChanged($event)">
     <ion-slide class="slide-all" *ngFor="let item of msgSent; let i=index;">
       <div class="house" *ngIf="toggle" padding>
         <ion-fab top left>

@@ -162,7 +162,8 @@ export class MessagesPage {
     });
   }
   ionViewDidLoad() {
-
+    this.slides.lockSwipeToNext(true);
+    this.slides.lockSwipeToPrev(true);
     setTimeout(() => {
       this.slideChanged()
     }, 1000);

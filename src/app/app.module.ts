@@ -51,7 +51,7 @@ import { ChannelsPage } from '../pages/channels/channels';
 import { TipsPage } from '../pages/tips/tips';
 import { MessagesPage } from '../pages/messages/messages';
 import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages';
-
+import { OneSignal } from '@ionic-native/onesignal';
 @NgModule({
   declarations: [
     MyApp,
@@ -120,6 +120,7 @@ import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages'
     CallNumber,
     GooglePlaceModule,
     Downloader,
+    OneSignal
     
 
   ]
