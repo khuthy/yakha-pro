@@ -13,7 +13,7 @@ import { brickType, wallTypes, Extras, comment } from '../../app/model/bricks.mo
 import { ProfileComponent } from '../../components/profile/profile';
 import { DescriptionComponent } from '../../components/description/description';
 import { SuccessPage } from '../success/success';
-// import { OneSignal } from '@ionic-native/onesignal';
+ import { OneSignal } from '@ionic-native/onesignal';
 /**
  * Generated class for the QuotationFormPage page.
  *
@@ -127,7 +127,7 @@ export class QuotationFormPage {
     public camera: Camera,
     public popoverCtrl: PopoverController,
     private formBuilder: FormBuilder,
-    // public oneSignal: OneSignal,
+     public oneSignal: OneSignal,
     private renderer: Renderer2,
     public menuCtrl: MenuController, public actionSheetCtrl: ActionSheetController) {
     this.uid = firebase.auth().currentUser.uid;

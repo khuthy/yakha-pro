@@ -2,7 +2,7 @@
   style="border: 1px solid green">
   <ion-navbar class="tools-header" style="border: 1px solid green">
     <!--     <ion-title> <p style="border:1px solid gold;margin-left: -5px;margin-top:5px;"> {{homeBuilderPrice | currency: '&#82;'}}(p/&#13217;)<br>{{homeBuilderName}}</p></ion-title>
- -->+++
+ -->
  
   </ion-navbar>
 </ion-header>
@@ -12,7 +12,7 @@
 <ion-content fullscreen>
     <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
         <div class="maploader">
-          <div class="lds-facebook"><div></div><div></div><div></div></div><p style="color:white;">{{loaderMessages}}</p>
+          <div class="lds-facebook"><div></div><div></div><div></div></div><p style="color:white; text-align: center;">{{loaderMessages}}</p>
         </div>
        <!--  <div class="loading-text">
           <p>Loading Map</p>

@@ -16,6 +16,7 @@ import { HelpPage } from '../pages/help/help';
 import { ChannelsPage } from '../pages/channels/channels';
 import { firebaseConfig } from './app.firebase.config';
 import { TipsPage } from '../pages/tips/tips';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,8 +28,8 @@ export class MyApp {
   db: any;
   predefined: string;
   pages: Array<{ title: string, component: any, icon: string }>;
-  /*  signal_app_id: string = 'e144f8b8-2305-4546-85dc-9b565d716dd2';
-   firebase_id: string = '587617081134'; */
+    signal_app_id: string = 'd5fca77d-17c0-46af-a473-071a32f00063';
+   firebase_id: string = '27383344134'; 
   userLoggedinNow = {
     fullname: '',
     email: '',
@@ -45,26 +46,27 @@ export class MyApp {
     private screenOrientation: ScreenOrientation, 
     public splashScreen: SplashScreen, 
     private statusBar: StatusBar,
-    public alert: AlertController
+    public alert: AlertController,
+    private oneSignal: OneSignal
     ) {
     // set status bar to white
      
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
     
-    // oneSignal.startInit(this.signal_app_id, this.firebase_id);
-    // // oneSignal.getIds().then((userID) => {
-    // //   console.log(userID.userId);
+    oneSignal.startInit(this.signal_app_id, this.firebase_id);
+    // oneSignal.getIds().then((userID) => {
+    //   console.log(userID.userId);
 
-    // // })
-    //    oneSignal.inFocusDisplaying(oneSignal.OSInFocusDisplayOption.InAppAlert);
-    //   oneSignal.handleNotificationReceived().subscribe((res) => {
+    // })
+       oneSignal.inFocusDisplaying(oneSignal.OSInFocusDisplayOption.InAppAlert);
+      oneSignal.handleNotificationReceived().subscribe((res) => {
 
-    //   })
-    //   oneSignal.handleNotificationOpened().subscribe((res) => {
+      })
+      oneSignal.handleNotificationOpened().subscribe((res) => {
 
-    //   })
-    //   oneSignal.endInit();
+      })
+      oneSignal.endInit();
 
    
 
@@ -103,7 +105,7 @@ export class MyApp {
   // exitApp() {
   //   this.platform.exitApp();
   // }
-  /*   setupPush(){
+     setupPush(){
       
         this.oneSignal.startInit(this.signal_app_id, this.firebase_id);
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
@@ -116,7 +118,7 @@ export class MyApp {
           this.token = token.userId;
         })
         this.oneSignal.endInit();
-    } */
+    } 
 
   openPage(page) {
     this.nav.push(page.component);
@@ -129,14 +131,17 @@ export class MyApp {
   } */
   userAuthentication(){
  
-    if (this.platform.is('cordova')) {
-      //  this.setupPush()
-    }
+   
    
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
          console.log('My uid', user.uid);
-         
+         if (this.platform.is('cordova')) {
+          this.setupPush()
+      }else{
+        console.log('you are running on a browser');
+        
+      }
           firebase.firestore().collection('Users').doc(user.uid).onSnapshot((profile) => {
         if (profile.exists) {
           // firebase.firestore().collection('Users').doc(user.uid).update({tokenID: this.token})

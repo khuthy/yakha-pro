@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { CallNumber } from '@ionic-native/call-number';
 import { BuilderquotesPage } from '../builderquotes/builderquotes';
@@ -19,9 +19,9 @@ export class BuilderMessagesPage {
   drop: boolean = false;
   imageBuilder: string;
   @ViewChild('slides') slides: Slides;
- 
 
- 
+
+
 
   dbChat = firebase.firestore().collection('chat_msg');
   dbChatting = firebase.firestore().collection('chatting');
@@ -52,7 +52,7 @@ export class BuilderMessagesPage {
     private callNumber: CallNumber,
     public navParams: NavParams,
     private elementRef: ElementRef
-    ) {
+  ) {
     // this.imageBuilder = this.navParams.data.img;
     console.log('Nav params', this.navParams.data);
     this.messages = [];
@@ -112,31 +112,32 @@ export class BuilderMessagesPage {
     this.currentUid = this.msgSent[currentIndex].id;
     console.log('Current doc id', this.currentUid);
     console.log('Nav params', this.navParams.data);
-    
-      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).where('id','==',this.msgSent[currentIndex].id).orderBy('date').onSnapshot((res) => {
-      this.msgInfo=[];
+
+    this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).where('id', '==', this.msgSent[currentIndex].id).orderBy('date').onSnapshot((res) => {
+      this.msgInfo = [];
       for (let i = 0; i < res.docs.length; i++) {
         this.msgInfo.push(res.docs[i].data())
       }
-      console.log('Message...', this.msgInfo);  
-    }) 
-    this.dbSent.doc(this.currentUid).onSnapshot((doc)=>{
-      if (doc.data().msgStatus!=="") {
-     ///  this.hideCard = '';
-       this.quoteStatus = doc.data().msgStatus;
-      // console.log('Status............................', this.quoteStatus);
-      } 
-    }) 
+      console.log('Message...', this.msgInfo);
+    })
+    this.dbSent.doc(this.currentUid).onSnapshot((doc) => {
+      if (doc.data().msgStatus !== "") {
+        ///  this.hideCard = '';
+        this.quoteStatus = doc.data().msgStatus;
+        // console.log('Status............................', this.quoteStatus);
+      }
+    })
   }
   getChats() {
-    this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: this.chatMessage, date: Date.now(), builder: true, id: this.currentUid }).then((res) => {
-      res.onSnapshot((doc) => {
-        this.chatMessage = '';
-        this.myMsg = doc.data().chat
-        console.log('This is what I sent now...', doc.data());
+    if (this.chatMessage != "") {
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: this.chatMessage, date: Date.now(), builder: true, id: this.currentUid }).then((res) => {
+        res.onSnapshot((doc) => {
+          this.chatMessage = '';
+          this.myMsg = doc.data().chat
+          console.log('This is what I sent now...', doc.data());
+        })
       })
-    })
-    
+    }
   }
   respond() {
 
