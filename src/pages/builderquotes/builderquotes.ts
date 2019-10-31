@@ -131,7 +131,7 @@ export class BuilderquotesPage {
 
   ) {
     this.userMsg = this.navParams.data;
-    console.log('data =>', this.userMsg);
+    console.log('data =>', this.userMsg, '/',this.navParams.data.docID);
 
     this.uid = firebase.auth().currentUser.uid;
     this.authUser.setUser(this.uid);
@@ -254,6 +254,10 @@ this.extras = [];
 
 
   createPdf() {
+    this.loaderAnimate = true;
+    setTimeout(() => {
+      this.loaderAnimate = false;
+    }, 4000);
     /* calculations */
   
     /* discount amount of extras */
@@ -384,7 +388,7 @@ this.extras = [];
     this.pdfObj = pdfMake.createPdf(docDefinition);
     //console.log(this.pdfObj);
     this.downloadUrl();
-  
+   
   }
 
   downloadUrl() {
@@ -411,20 +415,17 @@ this.extras = [];
         this.fileOpener.open(this.file.dataDirectory + 'quotation.pdf', 'application/pdf');
       })
     });
-    
+    this.navCtrl.setRoot(SuccessPage);
     this.pdfObj.download();
   }
 
   saveData() {
-    this.loaderAnimate = true;
-    setTimeout(() => {
-      this.loaderAnimate = false;
-    }, 3000);
+  
     //console.log('pdf link............:', this.pdfDoc);
     this.dbRespond.doc(this.navParams.data.docID).set(this.quotes).then(()=>{
      // this.quotes.pdfLink = this.pdfDoc;
       this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, date: Date(), builder: true, id:this.navParams.data.docID }).then((res) => {
-        this.navCtrl.setRoot(SuccessPage);
+        
       })
       this.dbChat.doc(this.uid).collection(this.navParams.data.uid).add(this.quotes).then((resDoc)=>{
         this.quotes = {
