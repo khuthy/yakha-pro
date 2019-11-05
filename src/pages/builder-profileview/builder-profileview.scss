@@ -27,6 +27,8 @@ page-builder-profileview {
     letter-spacing: 1px;
     font-family: 'Segoe';
     line-height: 1.5;
+    font-weight: 100;
+    font-size: 2.7vh;
   }
         .bottom {
             //border: 1px solid blue;
@@ -229,18 +231,18 @@ page-builder-profileview {
         letter-spacing: 1px;
         font-weight:400;
         margin-top:1%;
-        font-size:6vw;
+        font-size:4vh;
         color: rgb(70, 67, 67);
       }
       p {
-        font-size: 2.2vh;
+     
         color:rgb(110, 106, 106);
-        font-weight:400;
+        font-weight:100;
         padding-left: 4%;
        // border: 1px solid red;
         letter-spacing: 1px;
         margin-top:0%;
-        font-size:3vh;
+        font-size:2vh;
         font-family:'Lucida Sans Unicode';
       }
       h5 {
@@ -250,8 +252,8 @@ page-builder-profileview {
         letter-spacing: 1px;
         text-align: left;
         margin-top:-2%;
-        font-size: 4.2vw;
-        font-weight:600;
+        font-size: 3vh;
+        font-weight:100;
         font-family:'Lucida Sans Unicode';
   
       }
@@ -386,14 +388,15 @@ page-builder-profileview {
     }
     .button-request {
       position: sticky;
-      bottom: 2%;
+      bottom: 0%;
       right: 0;
       background: #cc9e14;
       padding-left: 15px;
+      padding-right: 5px;
+      height: 6vh;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 45px;
       float: right;
       border-radius: 50px 0 0 50px;
       p {
@@ -407,11 +410,9 @@ page-builder-profileview {
           background: #cc9e14;
       }
   button{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    margin-right: 5px;
+    width: 5vh;
+    height: 5vh;
+    
   }
   }
   .button-group2{

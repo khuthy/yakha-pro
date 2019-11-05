@@ -1,6 +1,5 @@
-<ion-header *ngIf="steps=='steone'" [style.display]="!hideHeader ? 'none' : 'block' " no-border
-  style="border: 1px solid green">
-  <ion-navbar class="tools-header" style="border: 1px solid green">
+<ion-header *ngIf="steps=='steone'" [style.display]="!hideHeader ? 'none' : 'block' " no-border>
+  <ion-navbar class="tools-header">
     <!--     <ion-title> <p style="border:1px solid gold;margin-left: -5px;margin-top:5px;"> {{homeBuilderPrice | currency: '&#82;'}}(p/&#13217;)<br>{{homeBuilderName}}</p></ion-title>
  -->
  
@@ -9,7 +8,7 @@
 
 
 
-<ion-content fullscreen>
+<ion-content>
     <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
         <div class="maploader">
           <div class="lds-facebook"><div></div><div></div><div></div></div><p style="color:white; text-align: center;">{{loaderMessages}}</p>
@@ -84,29 +83,29 @@
 
         <img *ngIf="HomeOwnerQuotation.houseImage" src="{{HomeOwnerQuotation.houseImage}}" class="image"
           (click)="selectImage()">
-        <ion-icon *ngIf="!HomeOwnerQuotation.houseImage" style="color:gray; font-size:8vh;text-align: center"
+        <ion-icon *ngIf="!HomeOwnerQuotation.houseImage" style="color:rgb(32, 32, 32); font-size:5vh;text-align: center"
           (click)="selectImage()" name="cloud-upload"></ion-icon>
         <p [class]="houseimage ? 'error' : 'normal'"
           *ngIf="!quotationForm.get('firstCountValid').get('houseimage').value">Please upload your house plan here</p>
       </div>
 
-      <div class="dates" >
-        <p>I prefer the starting date to be around:</p>
+      <div class="dates" padding>
+        <p>strong I prefer the starting date to be around:</p>
         <ion-item no-lines>
-          <ion-label style="padding-left:4px">Start</ion-label>
-          <ion-datetime name="startDate" formControlName="startDate" displayFormat="MMM DDD,YYYY"
+       
+          <ion-datetime placeholder="Starting date" name="startDate" formControlName="startDate" displayFormat="MMM DDD,YYYY"
             pickerFormat="MMM/DDD/YYYY" [min]="maxDate" max="2022-01-01" [(ngModel)]="HomeOwnerQuotation.startDate">
           </ion-datetime>
         </ion-item>
-        <p class="error"
+        <p class="errors"
           *ngIf="quotationForm.get('firstCountValid').get('startDate').hasError('required') && (quotationForm.get('firstCountValid').get('startDate').dirty || quotationForm.get('firstCountValid').get('startDate').touched)">
           Please specify the starting date.</p>
-        <ion-item no-lines style="margin-top:3%">
-          <ion-label>End</ion-label>
-          <ion-datetime formControlName="endDate" displayFormat="MMM DDD,YYYY" pickerFormat="MMM/DDD/YYYY"
+        <ion-item no-lines>
+    
+          <ion-datetime placeholder="Ending date" formControlName="endDate" displayFormat="MMM DDD,YYYY" pickerFormat="MMM/DDD/YYYY"
             [min]="maxDate" max="2022-01-01" [(ngModel)]="HomeOwnerQuotation.endDate"></ion-datetime>
         </ion-item>
-        <p class="error"
+        <p class="errors"
           *ngIf="quotationForm.get('firstCountValid').get('endDate').hasError('required') && (quotationForm.get('firstCountValid').get('endDate').dirty || quotationForm.get('firstCountValid').get('endDate').touched)">
           Please specify the Ending date.</p>
 
@@ -120,7 +119,7 @@
           <div class="details-inactive">
 
             <div class="closeB" (click)="viewProfile(n)">
-              <ion-icon color="custom" style="color: rgb(204, 158, 20)" name="information-circle"></ion-icon>
+              <ion-icon color="light" name="information-circle"></ion-icon>
             </div>
 
             <!-- <p>{{n.description}}</p> -->
@@ -151,7 +150,7 @@
             <ion-radio style="width:30px;" value="single"></ion-radio>
           </ion-item>
         </ion-list>
-        <p class="error"
+        <p class="errors"
           *ngIf="quotationForm.get('firstCountValid').get('wallType').hasError('required')  && (quotationForm.get('firstCountValid').get('wallType').dirty || quotationForm.get('firstCountValid').get('wallType').touched)">
           Please specify the Wall type</p>
 
@@ -198,7 +197,9 @@
     <!-- slide three starts here -->
     <div class="confirm" style="overflow:auto" id="step3">
       <div class="title">
-        <h4>CONFIRM</h4>
+        <ion-toolbar color="light" style="background: #fff;">
+          <h3 text-center style="font-weight: 100; color: #333; text-transform: uppercase;">Confirm</h3>
+        </ion-toolbar>
         <p>Please confirm if everything is <br> as you need it to be.</p>
       </div>
 
