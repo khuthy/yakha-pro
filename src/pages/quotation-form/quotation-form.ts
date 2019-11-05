@@ -13,7 +13,7 @@ import { brickType, wallTypes, Extras, comment } from '../../app/model/bricks.mo
 import { ProfileComponent } from '../../components/profile/profile';
 import { DescriptionComponent } from '../../components/description/description';
 import { SuccessPage } from '../success/success';
-// import { OneSignal } from '@ionic-native/onesignal';
+import { OneSignal } from '@ionic-native/onesignal';
 /**
  * Generated class for the QuotationFormPage page.
  *
@@ -127,7 +127,7 @@ export class QuotationFormPage {
     public camera: Camera,
     public popoverCtrl: PopoverController,
     private formBuilder: FormBuilder,
-    // public oneSignal: OneSignal,
+    public oneSignal: OneSignal,
     private renderer: Renderer2,
     public menuCtrl: MenuController, public actionSheetCtrl: ActionSheetController) {
     this.uid = firebase.auth().currentUser.uid;
@@ -232,7 +232,7 @@ export class QuotationFormPage {
   }
 
   slideState() {
-    if (this.steps == 'stepone' && this.quotationForm.get('firstCountValid').valid && (this.HomeOwnerQuotation.houseImage != '' || this.HomeOwnerQuotation.brickType != '')) {
+    if (this.steps == 'stepone' && this.quotationForm.get('firstCountValid').valid && this.HomeOwnerQuotation.houseImage != '' && this.HomeOwnerQuotation.brickType != '') {
       
         document.getElementById('step2').style.display = "flex";
         this.steps = 'steptwo';
@@ -242,12 +242,18 @@ export class QuotationFormPage {
           this.nextbutton = true;
         }, 500)
       
+    }else {
+      this.quotationForm.get('firstCountValid').get('startDate').markAsDirty();
+      this.quotationForm.get('firstCountValid').get('endDate').markAsDirty();
+      this.quotationForm.get('firstCountValid').get('houseimage').markAsDirty();
+      this.brickType = true;
+      this.houseimage = true;
     }
 
   }
   slideSecond(){
     this.steps = 'steptwo';
-    if (this.steps == 'steptwo') {
+    if (this.steps == 'steptwo' && this.HomeOwnerQuotation.extras != [] && this.HomeOwnerQuotation.comment != '') {
       document.getElementById('step3').style.overflow = "auto";
       // document.getElementById('step2').style.display="none";
       this.steps = 'stepthree';
@@ -255,6 +261,12 @@ export class QuotationFormPage {
         this.nextslide();
         this.nextbutton = false;
       }, 500)
+  }else {
+    this.toastCtrl.create({
+      message: 'Please select extras and then comment',
+      duration: 2000,
+      closeButtonText: 'X'
+    }).present();
   }
 }
   checkClicked(extra, event) {
@@ -367,6 +379,8 @@ export class QuotationFormPage {
   }
   highlight(brick, event) {
     this.HomeOwnerQuotation.brickType = brick.name;
+    console.log(this.HomeOwnerQuotation.brickType);
+    
     //console.log(this.HomeOwnerQuotation.brickType);
     for (let j = 0; j < this.bricksContainer[0].children.length; j++) {
       // console.log('bricks', this.bricksContainer[0].children[j].children);
@@ -553,6 +567,20 @@ export class QuotationFormPage {
              })
            }) */
         this.db.collection('Request').doc(this.HomeOwnerQuotation.builderUID).set(this.HomeOwnerQuotation).then((res) => {
+          if(this.HomeOwnerQuotation.builderUID)
+          {
+            this.db.collection('Users').doc(this.HomeOwnerQuotation.builderUID).onSnapshot((out)=>{
+              if(out.data().tokenID){
+                var notificationObj = {
+                  contents: { en: "Hey " + out.data().fullName+" ," + "you have new request"},
+                  include_player_ids: [out.data().tokenID],
+                };
+                this.oneSignal.postNotification(notificationObj).then(res => {
+                 // console.log('After push notifcation sent: ' +res);
+                });
+                }
+          })
+          }
           //  res.onSnapshot((doc)=>{
           //  doc.exists
           /*   this.db.collection('Request').doc(res.id).onSnapshot((query)=>{
@@ -567,6 +595,8 @@ export class QuotationFormPage {
               this.hideHeader = true;
             }, 2000); */
             // this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).onSnapshot
+            console.log(this.HomeOwnerQuotation.brickType);
+            
           this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).add(this.HomeOwnerQuotation).then((res) => {
             /*   this.HomeOwnerQuotation.extras.forEach((item) => {
                 this.Extra.push({ extra: item, price: 0, quatity: 0 });
@@ -621,6 +651,7 @@ export class QuotationFormPage {
       this.homeBuilderPrice = responding.data().price;
     });
 
+  
   }
   viewProfile(myEvent) {
     console.log(myEvent);

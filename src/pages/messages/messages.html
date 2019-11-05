@@ -141,9 +141,8 @@
 -->
 
 
-<ion-content fullscreen
->
-  <ion-slides pager #slides (ionSlideDidChange)="slideChanged($event)">
+<ion-content fullscreen>
+  <ion-slides #slides (ionSlideDidChange)="slideChanged($event)">
     <ion-slide class="slide-all" *ngFor="let item of msgSent; let i=index;">
       <div class="house" *ngIf="toggle" padding>
         <ion-fab top left>
@@ -251,8 +250,8 @@
                          <p style="text-align: center; width: 100%;" [style.color]="quoteStatus == 'Accepted' ? 'green' : 'red'">{{quoteStatus}}</p>  
                         </div>
                         <div id="buttons" *ngIf="!quoteStatus">
-                          <button ion-button small clear  color="danger" (click)="declineQoute()" round>Decline</button>
-                          <button ion-button small color="customcall" (click)="acceptQoute()" round>Accept</button>
+                          <button ion-button small clear  color="danger" [disabled]="disable" (click)="declineQoute()" round>Decline</button>
+                          <button ion-button small color="customcall" [disabled]="disable" (click)="acceptQoute()" round>Accept</button>
                        </div>
       
                   </div>
@@ -260,7 +259,7 @@
 
               </div>
               <div class="texts">
-                <p id="time-message" text-right>{{chat.chat.date | date: "shortTime" : "GMT+2"}}</p>
+                <p id="time-message" text-right>{{chat.chat.date | date: "shortTime"}}</p>
               </div>
 
             </div>

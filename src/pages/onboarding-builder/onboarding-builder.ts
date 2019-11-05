@@ -20,7 +20,18 @@ import { LoginPage } from '../login/login';
 export class OnboardingBuilderPage {
 @ViewChild('slides') slides: Slides;
 
-
+slide = [
+  {
+    title: "Welcome to the Yakha",
+    description: "Create an account and setup your profile to start using this application.",
+    image: "../../assets/imgs/login.svg",
+  },
+  {
+    title: "Find Builders at your Location",
+    description: "View all the request send by home-owners around your location.",
+    image: "../../assets/imgs/viewlist.svg",
+  }
+];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  private authService: AuthServiceProvider,private storage: Storage, private menuCtrl: MenuController) {
     this.storage.get('onboarding').then(val => {

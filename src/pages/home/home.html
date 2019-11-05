@@ -91,6 +91,7 @@
   <div class="main-slide">
 <ion-slides class="slide-moment" #slides spaceBetween="-65" centeredSlides="true"  (ionSlideDidChange)="moveMapEvent($event)">
   <ion-slide class="magic" *ngFor="let b of builder">
+    <p *ngIf="m" style="text-align: center;">There is no builder within this price range</p>
     <div class="card" >
 
         <div class="image" (click)="viewBuilderInfo(b)">

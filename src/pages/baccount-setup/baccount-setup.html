@@ -2,8 +2,10 @@
  
     <ion-toolbar class="tools-header" *ngIf="!isProfile">
       <ion-buttons left start>
-        <p color="dark" style="font-size: 22px; font-weight: 700;">{{current | number}}/2</p>
+          <button *ngIf="back" ion-fab (click)="cancelProfile()"><ion-icon name="arrow-back"></ion-icon></button>
+         
       </ion-buttons>
+      <ion-title>{{current | number}}/2</ion-title>
     </ion-toolbar>
     <ion-toolbar  *ngIf="isProfile">
       <ion-buttons left>
@@ -11,7 +13,7 @@
       </ion-buttons>
       <ion-buttons right>
          
-              <div class="group-button" (click)="SignOut()">
+              <div class="group-button" >
                   <p>Logout</p>
                   <button ion-fab color="light" (click)="SignOut()"><ion-icon name="arrow-forward"></ion-icon></button>
                 </div> 
@@ -33,7 +35,7 @@
                   <img *ngIf="!profileImage" src="../../assets/icon/Yakha-assets/_ionicons_svg_ios-person.svg" class="holder">
                 <button class="btn-create" ion-fab color="light" (click)="selectImage()"><ion-icon name="create"></ion-icon></button>
               </div>
-              <p class="error" *ngIf="!profileForm.get('profileFormFirstSlide').get('builder').value">Please Upload a profile image</p>
+              <p class="error" style="text-align: center;" *ngIf="!profileForm.get('profileFormFirstSlide').get('builder').value">Please Upload a profile image</p>
   
               <ion-grid padding>
                   <ion-row align-items-center>
@@ -65,6 +67,8 @@
                             <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" formControlName="personalNumber" name="personalNumber" [(ngModel)]="builderProfile.personalNumber" ngDefaultControl type="tel" maxlength="10" placeholder="Cell phone number"></ion-input>
                           </ion-item>
                           <p class="error" *ngIf="profileForm.get('profileFormFirstSlide').get('personalNumber').hasError('required') && (profileForm.get('profileFormFirstSlide').get('personalNumber').dirty || profileForm.get('profileFormFirstSlide').get('personalNumber').touched)">Phone number is required</p>
+                          <p class="error" *ngIf="profileForm.get('profileFormFirstSlide').get('personalNumber').hasError('minlength') && (profileForm.get('profileFormFirstSlide').get('personalNumber').dirty || profileForm.get('profileFormFirstSlide').get('personalNumber').touched)">Phone number must be equals to 10 digits </p>
+                          <p class="error" *ngIf="profileForm.get('profileFormFirstSlide').get('personalNumber').hasError('maxlength') && (profileForm.get('profileFormFirstSlide').get('personalNumber').dirty || profileForm.get('profileFormFirstSlide').get('personalNumber').touched)">Phone number must be equals to 10 digits</p>
                    
                     </ion-col>
                     <ion-col col-12>

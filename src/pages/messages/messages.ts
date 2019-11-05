@@ -48,6 +48,7 @@ export class MessagesPage {
   icon = 'arrow-dropdown';
   toggle = false;
   msg: any;
+  disable: boolean = false;
   /* testing */
   autoUid: any;
   homeOwner: any;
@@ -154,19 +155,21 @@ export class MessagesPage {
 
   /* Ends here */
   acceptQoute() {
+    this.disable = true;
     this.dbIncoming.doc(this.currentUid).update({ msgStatus: "Accepted" }).then((res) => {
     })
   }
   declineQoute() {
+    this.disable = true;
     this.dbIncoming.doc(this.currentUid).update({ msgStatus: "Declined" }).then((res) => {
     });
   }
   ionViewDidLoad() {
-    this.slides.lockSwipeToNext(true);
-    this.slides.lockSwipeToPrev(true);
+   
     setTimeout(() => {
-      this.slideChanged()
-    }, 1000);
+      this.slideChanged();
+      this.slides.lockSwipes(true);
+    }, 1000)
     this.dbIncoming.where('hOwnerUID', '==', this.uid).onSnapshot((res) => {
       res.forEach((doc) => {
         let pdf = doc.data().pdfLink;
@@ -174,7 +177,7 @@ export class MessagesPage {
       })
     })
     let info = { data: {}, id: {}, user: {} }
-    this.dbChat.doc(this.uid).collection(this.navParams.data.id).where('hOwnerUid', '==', this.uid).where('builderUID', '==', this.navParams.data.id).onSnapshot((res) => {
+    this.dbChat.doc(this.uid).collection(this.navParams.data.id).where('hOwnerUid', '==', this.uid).where('builderUID', '==', this.navParams.data.id).orderBy('date', 'desc').onSnapshot((res) => {
       // console.log('This doc ', doc.data());
       this.msgSent = [];
       res.forEach((doc) => {
@@ -205,11 +208,11 @@ export class MessagesPage {
   brick = 'Engineering brick' //demo
   getChats() {
     if(this.chatMessage !== '') {
-      this.dbChatting.doc(this.uid).collection(this.navParams.data.id).add({ chat: this.chatMessage, date: Date.now(), builder: false, id: this.currentUid }).then((res) => {
+      this.dbChatting.doc(this.uid).collection(this.navParams.data.id).add({ chat: this.chatMessage, date: new Date(Date.now()), builder: false, id: this.currentUid }).then((res) => {
         res.onSnapshot((doc) => {
           this.chatMessage = '';
           this.myMsg = doc.data().chat
-          //  console.log('This is what I sent now...', doc.data());
+          //  console.log('This is what I sent now...', doc.data()); 
           //  this.chatMessage = doc.data().chat
         })
       })

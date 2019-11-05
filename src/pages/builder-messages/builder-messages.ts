@@ -73,13 +73,12 @@ export class BuilderMessagesPage {
   }
 
   ionViewDidLoad() {
-    this.slides.lockSwipeToNext(true);
-    this.slides.lockSwipeToPrev(true);
     setTimeout(() => {
       this.slideChanged();
-    }, 1000);
+      this.slides.lockSwipes(true);
+    }, 1000)
     let info = { data: {}, id: {}, user: {} }
-    this.dbChat.doc(this.navParams.data.uid).collection(this.uid).where('hOwnerUid', '==', this.navParams.data.uid).where('builderUID', '==', this.uid).onSnapshot((res) => {
+    this.dbChat.doc(this.navParams.data.uid).collection(this.uid).where('hOwnerUid', '==', this.navParams.data.uid).where('builderUID', '==', this.uid).orderBy('date', 'desc').onSnapshot((res) => {
       //  console.log('This doc ', res.docs);
       this.msgSent = [];
       res.forEach((doc) => {
@@ -119,7 +118,7 @@ export class BuilderMessagesPage {
     console.log('Current doc id', this.currentUid);
     console.log('Nav params', this.navParams.data);
 
-    this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).where('id', '==', this.msgSent[currentIndex].id).orderBy('date').onSnapshot((res) => {
+    this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).where('id', '==', this.msgSent[currentIndex].id).orderBy('date', 'asc').onSnapshot((res) => {
       this.msgInfo = [];
       for (let i = 0; i < res.docs.length; i++) {
         this.msgInfo.push(res.docs[i].data())
@@ -134,15 +133,17 @@ export class BuilderMessagesPage {
         this.toastCtrl.create({
           closeButtonText: 'Close',
           message: 'Your quotes has been'+ this.quoteStatus,
-          cssClass: 'quotesjj',
-          position: 'top'
+         duration: 2000,
         }).present();
+      }else {
+        console.log('wait for responses');
+        
       }
     })
   }
   getChats() {
     if (this.chatMessage != "") {
-      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: this.chatMessage, date: Date.now(), builder: true, id: this.currentUid }).then((res) => {
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: this.chatMessage, date: new Date(Date.now()), builder: true, id: this.currentUid }).then((res) => {
         res.onSnapshot((doc) => {
           this.chatMessage = '';
           this.myMsg = doc.data().chat

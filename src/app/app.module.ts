@@ -52,6 +52,8 @@ import { TipsPage } from '../pages/tips/tips';
 import { MessagesPage } from '../pages/messages/messages';
 import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages';
 import { OneSignal } from '@ionic-native/onesignal';
+import { Device } from '@ionic-native/device';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 @NgModule({
   declarations: [
     MyApp,
@@ -120,7 +122,9 @@ import { OneSignal } from '@ionic-native/onesignal';
     CallNumber,
     GooglePlaceModule,
     Downloader,
-    OneSignal
+    OneSignal,
+    Device,
+    AndroidPermissions,
     
 
   ]

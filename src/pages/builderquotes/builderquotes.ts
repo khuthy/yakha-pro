@@ -138,10 +138,10 @@ export class BuilderquotesPage {
     this.quotes.uid = this.uid;
     this.quotesForm = this.forms.group({
       expiry: new FormControl('', Validators.compose([Validators.required])),
-      dimensions: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(9)])),
+      dimensions: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(5)])),
       dimension: [null],
-      discount: new FormControl('', Validators.compose([Validators.min(0), Validators.max(100)])),
-      extrasDiscount: new FormControl('', Validators.compose([Validators.min(0), Validators.max(100)]))
+      discount: new FormControl('', Validators.compose([Validators.min(0), Validators.maxLength(3)])),
+      extrasDiscount: new FormControl('', Validators.compose([Validators.min(0), Validators.maxLength(3)]))
     })
 
     this.date = new Date();
@@ -182,10 +182,12 @@ this.extras = [];
     //  console.log('Extras.....',this.extras);
     })
     this.dbRequest.doc(this.uid).onSnapshot((res) => {
+      console.log('data: =>',res.data());
+      
       this.quotes.hOwnerUID = res.data().hOwnerUid;
-      this.dbUsers.doc(res.data().hOwnerUid).onSnapshot((res) => {
+      this.dbUsers.doc(this.navParams.data.uid).onSnapshot((res) => {
         if (res.data().builder == false) {
-          // this.quotes.ownerUID = this.quotes.hOwnerUID;
+         // this.quotes.ownerUID = this.quotes.hOwnerUID;
           this.quotes.ownerAddress = res.data().ownerAddress;
           this.quotes.ownerName = res.data().fullName;
         
@@ -426,10 +428,21 @@ this.extras = [];
     this.dbRespond.doc(this.navParams.data.docID).set(this.quotes).then(()=>{
      // this.quotes.pdfLink = this.pdfDoc;
     
-      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, date: Date(), builder: true, id:this.navParams.data.docID }).then((res) => {
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, 
+       date: new Date(Date.now()), builder: true, id:this.navParams.data.docID }).then((res) => {
         
       })
       this.dbChat.doc(this.uid).collection(this.navParams.data.uid).add(this.quotes).then((resDoc)=>{
+        this.dbUsers.doc(this.navParams.data.uid).get().then((resUser) => {
+          if (resUser.data().tokenID) {
+            var notificationObj = {
+              contents: { en: "Hey " + resUser.data().fullName + " ," + "the builder has responded to your qoutation" },
+              include_player_ids: [resUser.data().tokenID],
+            };
+            this.oneSignal.postNotification(notificationObj).then(res => {
+            });
+          }
+        });
         this.quotes = {
           ownerName: '',
           overallHouse: 0,
@@ -453,19 +466,7 @@ this.extras = [];
           viewed: false,
           msgStatus: ''
         } 
-         resDoc.onSnapshot((doc)=>{
-          this.dbUsers.doc(doc.data().hOwnerUid).onSnapshot((resUser) => {
-            if (resUser.data().tokenID) {
-              var notificationObj = {
-                contents: { en: "Hey " + resUser.data().fullName + " ," + "the builder has responded to your qoutation" },
-                include_player_ids: [resUser.data().tokenID],
-              };
-              this.oneSignal.postNotification(notificationObj).then(res => {
-              });
-            }
-    
-          });
-        }) 
+        
       
     })
    

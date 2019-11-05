@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Keyboard } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Keyboard, LoadingController } from 'ionic-angular';
 //import { Storage } from '@ionic/storage';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { RegisterPage } from '../register/register';
@@ -40,9 +40,10 @@ export class LoginPage {
 
   }
   hideElement: boolean;
+  messages: string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthServiceProvider, private formBuilder: FormBuilder,
-    public alertCtrl: AlertController, private keyboard: Keyboard) {
+    public alertCtrl: AlertController, private keyboard: Keyboard,public loadingCtrl: LoadingController) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-.]+$')])),
       password: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(10)]))
@@ -95,8 +96,17 @@ export class LoginPage {
       this.hideElement = false;
     }
   }
+  presentLoading() {
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
+  }
   loginUser() {
-    this.loaderAnimate = true;
+//     setTimeout(()=>{
+// this.presentLoading()
+//     },1000)
+    
     if (!this.loginForm.valid) {
       this.alertCtrl.create({
         title: 'Incorrect entry!',
@@ -104,23 +114,21 @@ export class LoginPage {
         buttons: ['Ok']
       }).present();
     } else {
-      setTimeout(() => {
-        this.loaderAnimate = false;
-      }, 2000);
+      this.loaderAnimate = true;
+     
       let signIn = this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password);
    
       signIn.then((getUid) => {
         this.authService.setUser(getUid.user.uid);
         this.db.doc(this.authService.getUser()).onSnapshot((profile) => {
           if (!profile.data().isProfile) {
-            this.alertCtrl.create({
-              title: 'Create a profile',
-              subTitle: 'Please create an account before we log you in.',
-              buttons: ['Ok']
-            }).present();
+            this.loaderAnimate = true
             if (profile.data().builder == true) {
               this.navCtrl.setRoot(BaccountSetupPage);
              // loading.dismiss();
+             setTimeout(()=> {
+               this.loaderAnimate = false;
+             }, 1000);
             } else {
               this.navCtrl.setRoot(AccountSetupPage);
               //loading.dismiss();
@@ -130,14 +138,12 @@ export class LoginPage {
             //loading.dismiss();
           }
         })
-      }).catch( async (error) => {
-        const alert = await this.alertCtrl.create({
-          message: 'User does not exist.',
-          buttons: [{ text: 'Ok', role: 'cancel' }]
-        });
-        await alert.present();
-      })
-      
-    }
+      }).catch(() => {
+       this.messages = "User does not exists";
+    });
+    setTimeout(() => {
+      this.loaderAnimate = false;
+    }, 2000);
   }
+ }
 }

@@ -33,6 +33,9 @@
     <!-- inputs -->
     <ion-row id="inputrow" justify-content-center no-padding >
       <!-- <ion-item> -->
+        <ion-col col-10>
+          <p *ngIf="messages" class="error" style="text-align: center; font-weight: 500;">{{messages}}</p>
+        </ion-col>
         <ion-col col-10 class="inputs" id="email" >
           <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" [style.backgroundColor]="builder ? '#262014' : 'rgba(32, 57, 89, 0.336)'" placeholder="Email"
             formControlName="email" type="email"></ion-input>
@@ -64,7 +67,7 @@
     <ion-row no-padding>
 
       <ion-col id="signup" col-5 position="left">
-        <div class="button-group-l" [style.backgroundColor]="builder ?  '#A49078 ' : '#015272'" (click)="gotoRegister()">
+        <div class="button-group-l" [style.backgroundColor]="builder ?  '#A49078 ' : '#015272'">
           <button ion-fab mini color="light" (click)="gotoRegister()">
             <ion-icon name="arrow-back"></ion-icon>
           </button>
@@ -75,7 +78,7 @@
       <ion-col col-2></ion-col>
 
       <ion-col id="signin" col-5>
-        <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'" (click)="loginUser()">
+        <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'">
           <p>Sign-In</p>
           <button (click)="loginUser()" ion-fab mini color="light" >
             <ion-icon name="arrow-forward"></ion-icon>

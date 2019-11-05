@@ -12,6 +12,7 @@ import { LoginPage } from '../login/login';
 import { text } from '@angular/core/src/render3/instructions';
 import { File, FileEntry } from '@ionic-native/file';
 import { OneSignal } from '@ionic-native/onesignal';
+import { HomePage } from '../home/home';
 
 
 /**
@@ -88,7 +89,7 @@ export class AccountSetupPage {
     this.profileForm = this.formBuilder.group({
       fullName: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30)])),
       gender: new FormControl('', Validators.compose([Validators.required])),
-      personalNumber: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(10)])),
+      personalNumber: new FormControl('', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])),
       About: [''],
       address: new FormControl('', Validators.compose([Validators.required]))
     });
@@ -164,14 +165,28 @@ export class AccountSetupPage {
   }
 
   async createprofile(profileForm: FormGroup) {
-    this.loaderAnimate = true
-   await this.db.doc(this.uid).update(this.HomeOwnerProfile).then((res) => {
-      this.navCtrl.push(AccountSetupPage);
-
-    })
-    setTimeout(() => {
-      this.loaderAnimate = false;
-    }, 2000)
+    if(profileForm.valid) {
+      this.loaderAnimate = true;
+      if(this.back == true) {
+        await this.db.doc(this.uid).update(this.HomeOwnerProfile).then((res) => {
+          this.isProfile = true;
+    
+        })
+      }else {
+        await this.db.doc(this.uid).update(this.HomeOwnerProfile).then((res) => {
+          this.navCtrl.setRoot(HomePage);
+    
+        })
+      }
+     
+       setTimeout(() => {
+         this.loaderAnimate = false;
+       }, 2000)
+    }else {
+      console.log('please enter all inputs');
+      
+    }
+  
   }
   async takePicture(sourcetype: PictureSourceType) {
     const options: CameraOptions = {

@@ -39,15 +39,13 @@ export class WelcomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WelcomePage');
-    this.statusBar.overlaysWebView(true)
+   
   }
-  ionViewWillEnter(){
+  ionViewCanEnter(){
     this.menuCtrl.swipeEnable(false);
   }
   ionViewWillLeave(){
-    this.statusBar.overlaysWebView(false);
     this.menuCtrl.swipeEnable(false);
-    this.statusBar.backgroundColorByHexString('#203550'); 
   }
 
 
