@@ -423,14 +423,15 @@ this.extras = [];
   }
 
   saveData() {
-  
+    this.loaderAnimate = true;
     //console.log('pdf link............:', this.pdfDoc);
     this.dbRespond.doc(this.navParams.data.docID).set(this.quotes).then(()=>{
      // this.quotes.pdfLink = this.pdfDoc;
-    
-      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, 
-       date: new Date(Date.now()), builder: true, id:this.navParams.data.docID }).then((res) => {
-        
+      setTimeout(() => {
+        this.loaderAnimate = false;
+      }, 2000);
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, date: Date(), builder: true, id:this.navParams.data.docID }).then((res) => {
+        this.quotes.pdfLink= '';
       })
       this.dbChat.doc(this.uid).collection(this.navParams.data.uid).add(this.quotes).then((resDoc)=>{
         this.dbUsers.doc(this.navParams.data.uid).get().then((resUser) => {
