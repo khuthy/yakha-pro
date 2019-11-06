@@ -17,10 +17,11 @@ page-builderquotes {
 
       button {
         background: transparent;
-        color: transparent;
+        color: red;
         min-height: 45px;
         border-radius: 50px;
         display: none;
+        z-index: 10;
       }
     }
 
@@ -32,6 +33,7 @@ page-builderquotes {
 
   .content {
     background: color($colors, light);
+    font-family: 'Raleway';
   }
 
   .item {
@@ -39,12 +41,13 @@ page-builderquotes {
     box-shadow: 2px 1px 4px rgb(167, 167, 167);
     width: 90%;
     margin: auto;
-
+    font-family: 'Raleway';
 
   }
 
   form {
     margin-top: 10px;
+    font-family: 'Raleway';
   }
 
   .houseOverall {
@@ -112,6 +115,7 @@ page-builderquotes {
     p {
       margin: auto;
       color: #fff;
+      font-family: 'Raleway';
     }
 
     &:active {

@@ -6,7 +6,7 @@
 -->
 
 
-<ion-content fullscreen>
+<ion-content fullscreen style="font-family: 'Raleway';">
   <ion-slides #slides (ionSlideDidChange)="slideChanged($event)">
     <ion-slide class="slide-all" *ngFor="let item of msgSent; let i=index;">
       <div class="house" *ngIf="toggle" padding>
@@ -67,17 +67,17 @@
           <div class="extras">
             <h4 text-left>Extras</h4>
             <div class="lists">
-              <p class="extra" *ngFor="let e of item.data.extras; let i=index">{{e.name}}</p>
+              <p class="extra" style="font-size: 3vw" *ngFor="let e of item.data.extras; let i=index">{{e.name}}</p>
               <!-- Put a forLoop on p tag not on the div -->
             </div>
 
           </div>
           <div class="comment">
             <p text-left style="font-weight: bold; letter-spacing: 3px;;">Comment</p>
-            <p text-left>{{item.data.comment}}</p>
+            <p text-left style="font-size: 4vw">{{item.data.comment}}</p>
           </div>
           <div class="housePlan">
-            <button ion-button clear (click)="open()" block><u>SEE HOUSE PLAN</u></button>
+            <button ion-button clear (click)="open()" block style="font-size: 4vw; font-family: Raleway; font-weight: lighter;"><u>SEE HOUSE PLAN</u></button>
           </div>
         </div>
 
