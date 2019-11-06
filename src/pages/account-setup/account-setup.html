@@ -32,7 +32,7 @@
       </div>
 <form  [formGroup]="profileForm" *ngIf="!isProfile">
     <ion-grid>
-      <ion-row align-items-start>
+      <ion-row justify-content-center>
         <ion-col col-12 id="image">
             <div class="thumb" id="hide-div">
               <img *ngIf="profileImage"  src="{{profileImage}}">
@@ -41,7 +41,8 @@
             </div> 
         </ion-col>
         
-        <ion-col id="inputs" col-12 align-self-center>
+        <ion-col id="inputs" col-11 align-self-center>
+          
            <ion-item no-lines>
              <ion-input type="text" placeholder="Full Name" (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" formControlName="fullName" [(ngModel)]="HomeOwnerProfile.fullName" ngDefaultControl></ion-input>
            </ion-item>
@@ -51,7 +52,7 @@
            <p class="error"  *ngIf="profileForm.get('fullName').hasError('pattern') && (profileForm.get('fullName').dirty || profileForm.get('fullName').touched)">Your Name must not contain numbers and special characters. </p>
         
         </ion-col>
-        <ion-col col-12 align-self-center>
+        <ion-col col-11 align-self-center>
             <ion-item no-lines>
                     <ion-select  placeholder="Gender" formControlName="gender" name="gender" [(ngModel)]="HomeOwnerProfile.gender"  cancelText="Dismiss">
                   <ion-option value="Female">Female</ion-option>
@@ -60,7 +61,7 @@
               </ion-item>
               <p class="error" *ngIf="profileForm.get('gender').hasError('required') && (profileForm.get('gender').dirty || profileForm.get('gender').touched)">Gender is required. </p>
         </ion-col>
-        <ion-col col-12 align-self-center>
+        <ion-col col-11 align-self-center>
             <ion-item no-lines>
                 <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" type="tel" placeholder="Cell Phone Number" maxlength="10" formControlName="personalNumber"  [(ngModel)]="HomeOwnerProfile.personalNumber" ngDefaultControl></ion-input>
               </ion-item>
@@ -68,15 +69,15 @@
               <p class="error" *ngIf="profileForm.get('personalNumber').hasError('maxlength') && (profileForm.get('personalNumber').dirty || profileForm.get('personalNumber').touched)">Phone number must be equals to 10 digits</p>
               <p class="error" *ngIf="profileForm.get('personalNumber').hasError('minlength') && (profileForm.get('personalNumber').dirty || profileForm.get('personalNumber').touched)">Cell number must be equal to 10 digits</p>
         </ion-col>
-        <ion-col col-12 align-self-center>
+        <ion-col col-11 align-self-center>
                  <input (focus)="checkKeyBoardEvents()" (blur)="checkKeyBoardEvents()" class="address" formControlName="address" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
               <p class="error" *ngIf="profileForm.get('address').hasError('required') && (profileForm.get('address').dirty || profileForm.get('address').touched)"> Please specify your Address.</p>
         </ion-col>
       </ion-row>
 
-      <ion-row align-items-center>
-          <ion-col col-12 align-self-center>
-              <button (click)="createprofile(profileForm)" class="next" block round ion-button color="dark" >Done</button>
+      <ion-row justify-content-center>
+          <ion-col col-10>
+              <button class="next" block round ion-button color="dark" >Done</button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -108,5 +109,10 @@
 <!-- profile -->
 
 </ion-content>
+<ion-footer>
+    <ion-toolbar class="tools-footer">
+
+      </ion-toolbar>
+</ion-footer>
 
 

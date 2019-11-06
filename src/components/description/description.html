@@ -2,7 +2,7 @@
 
 <div>
     <button class="btn-close" ion-fab mini color="light" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
-    <ion-card *ngFor="let t of text">
+    <ion-card no-border *ngFor="let t of text">
       <img src="{{t.image}}"/>
       <ion-card-content>
         <ion-card-title>

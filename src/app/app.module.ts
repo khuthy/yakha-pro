@@ -81,7 +81,9 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
   imports: [
     BrowserModule,
     FormsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      pageTransition: 'ios-transition'
+    }),
     IonicStorageModule.forRoot(),
     GooglePlaceModule,
     HttpModule

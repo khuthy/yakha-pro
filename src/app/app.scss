@@ -20,6 +20,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+   
 
     
 }
@@ -46,9 +47,13 @@
     font-weight: 100;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
-    font-size: 16px;
-    margin-left: 10px;
+    margin: 0 auto;
+    width: 90%;
     
+}
+.quotesjj {
+    background: color($colors, primary);
+    color: #fff;
 }
 
 /* 
