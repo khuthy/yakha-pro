@@ -571,7 +571,7 @@ export class QuotationFormPage {
                })
              }) */
        
-          this.db.collection('Request').doc(this.HomeOwnerQuotation.builderUID).set(this.HomeOwnerQuotation).then((res) => {
+          this.db.collection('Request').add(this.HomeOwnerQuotation).then((res) => {
             if(this.HomeOwnerQuotation.builderUID)
             {
               this.db.collection('Users').doc(this.HomeOwnerQuotation.builderUID).onSnapshot((out)=>{

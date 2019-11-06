@@ -655,14 +655,19 @@ export class HomePage {
   getRequests() {
     let data = {info: {}, user: {}, id: {}}
     this.dbRequest.where('builderUID', '==', this.uid).onSnapshot(res => {
-      this.owner = [];
-      res.forEach((doc) => {
-        data.info = doc.data(); 
-        data.id = doc.id;
-        this.db.doc(doc.data().hOwnerUid).onSnapshot((res) => {
+     // console.log(res.size);
+    
+      res.forEach((bDoc) => {
+        this.db.doc(bDoc.data().hOwnerUid).get().then((res) => {
+          data.info = bDoc.data(); 
+        data.id = bDoc.id;
           data.user = res.data();
-        })
+        //  console.log(data);
+        
         this.owner.push(data)
+        data = {info: {}, user: {}, id: {}}
+        })
+        
       }) 
     })
     this.builder = [];

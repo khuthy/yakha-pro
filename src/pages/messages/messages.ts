@@ -239,7 +239,7 @@ export class MessagesPage {
   brick = 'Engineering brick' //demo
   getChats() {
     if (this.chatMessage !== '') {
-      this.dbChatting.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).collection("convo").add({ chat: this.chatMessage, date: new Date(Date.now()), builder: false, id: this.currentUid, status: "" }).then((res) => {
+      this.dbChatting.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).collection("convo").add({ chat: this.chatMessage, date: new Date().getTime(), builder: false, id: this.currentUid, status: "" }).then((res) => {
         res.onSnapshot((doc) => {
           this.chatMessage = '';
           this.myMsg = doc.data().chat

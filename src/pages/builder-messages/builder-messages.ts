@@ -123,7 +123,7 @@ export class BuilderMessagesPage {
       for (let i = 0; i < res.docs.length; i++) {
         if (!res.docs[i].data().pdfLink) {
         } else {
-        //  console.log('Not found.....');
+          //  console.log('Not found.....');
         }
         this.msgInfo.push(res.docs[i].data())
       }
@@ -161,8 +161,9 @@ export class BuilderMessagesPage {
       })
     } */
   getChats() {
+   
     if (this.chatMessage != "") {
-      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).doc(this.currentUid).collection("convo").add({ chat: this.chatMessage, date: new Date(Date.now()), builder: true, id: this.currentUid }).then((res) => {
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).doc(this.currentUid).collection("convo").add({ chat: this.chatMessage, date: new Date().getTime(), builder: true, id: this.currentUid }).then((res) => {
         res.onSnapshot((doc) => {
           this.chatMessage = '';
           this.myMsg = doc.data().chat
