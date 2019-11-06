@@ -11,14 +11,11 @@
           <ion-icon name="call"></ion-icon>
         </button>
       </ion-buttons>  -->
-<p id="headtitle">Messages</p>
+<p id="headtitle" style="font-size: 8vw; margin: 30px">Messages</p>
     </ion-navbar>
     <img class="builder" id="owner" src="../../assets/icon/ownerShape.svg" alt="builder">
     <!-- <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p> -->
   </ion-header>
-
-
-
 
 <div class="homebuilder" >
   <div class="cards" *ngFor =" let b of respond"> <!-- Put a forloop here -->
@@ -40,7 +37,7 @@
     </div>
 
     <div class="nomessages" *ngIf="!respond">
-      <p id="empty">You have no messages.</p>
+      <p id="empty" style="font-family: Raleway;">YOU HAVE NO MESSAGES.</p>
     </div>
     
 </ion-content>

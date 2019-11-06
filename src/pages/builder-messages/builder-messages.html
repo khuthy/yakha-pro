@@ -6,7 +6,7 @@
 -->
 
 
-<ion-content fullscreen>
+<ion-content fullscreen style="font-family: 'Raleway';">
   <ion-slides #slides (ionSlideDidChange)="slideChanged($event)">
     <ion-slide class="slide-all" *ngFor="let item of msgSent; let i=index;">
       <div class="house" *ngIf="toggle" padding>
@@ -34,15 +34,15 @@
 
         </ion-navbar>
         <img class="builder" src="../../assets/icon/BuilderShape2.svg" alt="builder">
-        <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
+        <p text-center style="color: #fff; text-transform: uppercase;">Quotation-Y00{{i + 1}}</p>
       </ion-header>
       <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
           <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
-          class="container-after-pseudo">Quotation details</button>
+          class="container-after-pseudo">View Quotation Details</button>
           <button *ngIf="drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
-          class="container-after-pseudo">Close details</button>
-          <p class="arrows" *ngIf="!drop" (click)="dropDown()"><ion-icon name="ios-arrow-down"></ion-icon></p>
-          <p class="arrowsUp" *ngIf="drop" (click)="dropDown()"><ion-icon name="ios-arrow-up"></ion-icon></p>
+          class="container-after-pseudo">Close Details</button>
+          <!-- <p class="arrows" *ngIf="!drop" (click)="dropDown()"><ion-icon name="ios-arrow-down"></ion-icon></p> -->
+          <!-- <p class="arrowsUp" *ngIf="drop" (click)="dropDown()"><ion-icon name="ios-arrow-up"></ion-icon></p> -->
         <div class="hide-div"></div>
         <div class="content-info" *ngIf="drop">
           <div class="bricks">
@@ -67,17 +67,17 @@
           <div class="extras">
             <h4 text-left>Extras</h4>
             <div class="lists">
-              <p class="extra" *ngFor="let e of item.data.extras; let i=index">{{e.name}}</p>
+              <p class="extra" style="font-size: 3vw" *ngFor="let e of item.data.extras; let i=index">{{e.name}}</p>
               <!-- Put a forLoop on p tag not on the div -->
             </div>
 
           </div>
           <div class="comment">
-            <p text-left>Comment</p>
-            <p text-left>{{item.data.comment}}</p>
+            <p text-left style="font-weight: bold; letter-spacing: 3px;;">Comment</p>
+            <p text-left style="font-size: 4vw">{{item.data.comment}}</p>
           </div>
           <div class="housePlan">
-            <button ion-button clear (click)="open()" block>SEE HOUSE PLAN</button>
+            <button ion-button clear (click)="open()" block style="font-size: 4vw; font-family: Raleway; font-weight: lighter;"><u>SEE HOUSE PLAN</u></button>
           </div>
         </div>
 
@@ -125,19 +125,18 @@
     </ion-slide>
   </ion-slides>
 
-
-
-
 <ion-footer class="tool-footer">
   <ion-grid>
     <ion-row justify-content-center align-items-center>
-      <ion-col col-8 style="border-radius: 18px; background: #E5E5E5;">
-        <ion-textarea type="text" [(ngModel)]="chatMessage" placeholder="Write your Message..."></ion-textarea>
-      </ion-col>
       <ion-col col-2>
-        <button ion-button clear (click)="respond()">
-          <ion-icon name="attach"></ion-icon>
-        </button>
+        
+          <button ion-fab color="customsend" (click)="respond()">
+              <ion-icon name="attach"></ion-icon>
+            </button>
+
+      </ion-col>
+      <ion-col col-8 style="border-radius: 18px; background: rgba(229, 229, 229, 0.452);">
+        <ion-textarea type="text" [(ngModel)]="chatMessage" placeholder="Write your Message..."></ion-textarea>
       </ion-col>
       <ion-col col-2>
         <button ion-fab color="customsend" (click)="getChats()">
