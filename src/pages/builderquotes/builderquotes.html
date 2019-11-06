@@ -131,11 +131,11 @@
           </div>
         </div>
       </div>
-      <div class="button-group">
+      <div class="button-group" *ngIf="!hide">
           <p>Send Quotes</p>
            <button [disabled]="!quotesForm.valid" (click)="createPdf()" class="send-quotes"  ion-fab  color="light">
             <ion-icon name="arrow-forward"></ion-icon>
-           
+        
           </button>
         </div>
     </form>

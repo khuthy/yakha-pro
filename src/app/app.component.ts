@@ -28,8 +28,8 @@ export class MyApp {
   db: any;
   predefined: string;
   pages: Array<{ title: string, component: any, icon: string }>;
-    signal_app_id: string = 'd5fca77d-17c0-46af-a473-071a32f00063';
-   firebase_id: string = '27383344134'; 
+  signal_app_id: string = 'd5fca77d-17c0-46af-a473-071a32f00063';
+  firebase_id: string = '27383344134';
   userLoggedinNow = {
     fullname: '',
     email: '',
@@ -42,49 +42,49 @@ export class MyApp {
   token: string;
 
   constructor(
-    public platform: Platform, 
-    private screenOrientation: ScreenOrientation, 
-    public splashScreen: SplashScreen, 
+    public platform: Platform,
+    private screenOrientation: ScreenOrientation,
+    public splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private oneSignal: OneSignal
-    ) {
+  ) {
     // set status bar to white
-     
+
     this.initializeApp();
     firebase.initializeApp(firebaseConfig);
-    
+
     oneSignal.startInit(this.signal_app_id, this.firebase_id);
     // oneSignal.getIds().then((userID) => {
     //   console.log(userID.userId);
 
     // })
-       oneSignal.inFocusDisplaying(oneSignal.OSInFocusDisplayOption.InAppAlert);
-      oneSignal.handleNotificationReceived().subscribe((res) => {
+    oneSignal.inFocusDisplaying(oneSignal.OSInFocusDisplayOption.InAppAlert);
+    oneSignal.handleNotificationReceived().subscribe((res) => {
 
-      })
-      oneSignal.handleNotificationOpened().subscribe((res) => {
+    })
+    oneSignal.handleNotificationOpened().subscribe((res) => {
 
-      })
-      oneSignal.endInit();
+    })
+    oneSignal.endInit();
 
-   
+
 
   }
 
   initializeApp() {
-    
+
     this.platform.ready().then(() => {
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString('#203959');
-      if(this.platform.is('cordova')) {
+      if (this.platform.is('cordova')) {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-      }else {
+      } else {
         console.log('cannot perform portrait');
       }
-     
-      this.userAuthentication(); 
+
+      this.userAuthentication();
       this.splashScreen.hide();
-      
+
     });
   }
   // exit() {
@@ -104,20 +104,20 @@ export class MyApp {
   // exitApp() {
   //   this.platform.exitApp();
   // }
-     setupPush(){
-      
-        this.oneSignal.startInit(this.signal_app_id, this.firebase_id);
-        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-        this.oneSignal.handleNotificationReceived().subscribe((res) => {
-      })
-        this.oneSignal.handleNotificationOpened().subscribe((res) => {
-        
-        })
-        this.oneSignal.getIds().then((token)=>{
-          this.token = token.userId;
-        })
-        this.oneSignal.endInit();
-    } 
+  setupPush() {
+
+    this.oneSignal.startInit(this.signal_app_id, this.firebase_id);
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    this.oneSignal.handleNotificationReceived().subscribe((res) => {
+    })
+    this.oneSignal.handleNotificationOpened().subscribe((res) => {
+
+    })
+    this.oneSignal.getIds().then((token) => {
+      this.token = token.userId;
+    })
+    this.oneSignal.endInit();
+  }
 
   openPage(page) {
     this.nav.push(page.component);
@@ -128,79 +128,79 @@ export class MyApp {
   viewProfileB() {
    this.nav.push(BaccountSetupPage);
   } */
-  userAuthentication(){
- 
-   
-   
+  userAuthentication() {
+
+
+
     firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
-         console.log('My uid', user.uid);
-         if (this.platform.is('cordova')) {
+      if (user) {
+        console.log('My uid', user.uid);
+        if (this.platform.is('cordova')) {
           this.setupPush()
-      }else{
-        console.log('you are running on a browser');
-        
-      }
-          firebase.firestore().collection('Users').doc(user.uid).onSnapshot((profile) => {
-        if (profile.exists) {
-          firebase.firestore().collection('Users').doc(user.uid).update({tokenID: this.token})
-                  firebase.firestore().collection('Request').where('hOwnerUid', '==', firebase.auth().currentUser.uid).onSnapshot((request)=>{
-                   if(!request.empty) {
-                     request.forEach(list => {
-                       firebase.firestore().collection('Respond').doc(list.id).onSnapshot(res => {
-                         if(res.exists) {
-                           if(res.data().viewed == false) {
-                             this.messages = res.data.length;
-                           }
-                          
-                         }
-                         })
-                     });
-                   }
-                 }) 
-         firebase.firestore().collection('Users').doc(user.uid).update({tokenID: this.token})
-          if (profile.data().isProfile == true && profile.data().status == true) {
-            if (profile.data().builder == true) {
-              this.rootPage = HomePage;
-              this.userLoggedinNow.image = profile.data().image
-              this.userLoggedinNow.fullname = profile.data().fullName
-              this.userLoggedinNow.email = user.email;
-              this.userLoggedinNow.builder = profile.data().builder;
-              this.pages = [
-                { title: 'View Profile', component: BaccountSetupPage, icon: 'ios-person' },
-                { title: 'Tips', component: TipsPage, icon: 'information-circle' },
-                { title: 'Help', component: HelpPage, icon: 'help' }
+        } else {
+          console.log('you are running on a browser');
 
-              ];
-            } else {
-              this.rootPage = HomePage;
-              this.pages = [
-                { title: 'View Profile', component: AccountSetupPage, icon: 'ios-person' },
-                { title: 'Messages', component: ChannelsPage, icon: 'chatbubbles' },
-                { title: 'Tips', component: TipsPage, icon: 'information-circle' },
-                { title: 'Help', component: HelpPage, icon: 'help' }
-              ];
-              this.userLoggedinNow.image = profile.data().image
-              this.userLoggedinNow.fullname = profile.data().fullName
-              this.userLoggedinNow.email = user.email;
-              this.userLoggedinNow.builder = false;
-            }
-
-          } else {
-            if (profile.data().builder == true) {
-              /// this.rootPage = BaccountSetupPage;
-            } else {
-              //  this.rootPage = AccountSetupPage;
-            }
-
-          }
         }
-      })
-      }else {
+        firebase.firestore().collection('Users').doc(user.uid).onSnapshot((profile) => {
+          if (profile.exists) {
+            // firebase.firestore().collection('Users').doc(user.uid).update({ tokenID: this.token })
+            firebase.firestore().collection('Request').where('hOwnerUid', '==', firebase.auth().currentUser.uid).onSnapshot((request) => {
+              if (!request.empty) {
+                request.forEach(list => {
+                  firebase.firestore().collection('Respond').doc(list.id).onSnapshot(res => {
+                    if (res.exists) {
+                      if (res.data().viewed == false) {
+                        this.messages = res.data.length;
+                      }
+
+                    }
+                  })
+                });
+              }
+            })
+            // firebase.firestore().collection('Users').doc(user.uid).update({ tokenID: this.token })
+            if (profile.data().isProfile == true && profile.data().status == true) {
+              if (profile.data().builder == true) {
+                this.rootPage = HomePage;
+                this.userLoggedinNow.image = profile.data().image
+                this.userLoggedinNow.fullname = profile.data().fullName
+                this.userLoggedinNow.email = user.email;
+                this.userLoggedinNow.builder = profile.data().builder;
+                this.pages = [
+                  { title: 'View Profile', component: BaccountSetupPage, icon: 'ios-person' },
+                  { title: 'Tips', component: TipsPage, icon: 'information-circle' },
+                  { title: 'Help', component: HelpPage, icon: 'help' }
+
+                ];
+              } else {
+                this.rootPage = HomePage;
+                this.pages = [
+                  { title: 'View Profile', component: AccountSetupPage, icon: 'ios-person' },
+                  { title: 'Messages', component: ChannelsPage, icon: 'chatbubbles' },
+                  { title: 'Tips', component: TipsPage, icon: 'information-circle' },
+                  { title: 'Help', component: HelpPage, icon: 'help' }
+                ];
+                this.userLoggedinNow.image = profile.data().image
+                this.userLoggedinNow.fullname = profile.data().fullName
+                this.userLoggedinNow.email = user.email;
+                this.userLoggedinNow.builder = false;
+              }
+
+            } else {
+              if (profile.data().builder == true) {
+                /// this.rootPage = BaccountSetupPage;
+              } else {
+                //  this.rootPage = AccountSetupPage;
+              }
+
+            }
+          }
+        })
+      } else {
         console.log('Logged out');
         this.rootPage = WelcomePage;
       }
-    
+
     });
   }
 }

@@ -25,11 +25,11 @@ export class ChannelsPage {
 
   ionViewDidLoad() {
     let data = { data: {}, user: {} }
+    this.respond = [];
     this.dbRequest.where('hOwnerUid','==',this.uid).onSnapshot((res) => {
-     // data = { data: {}, user: {} }
+      data = { data: {}, user: {} }
       this.respond = [];
     res.forEach((reqInfo)=>{    
-    //  data.data.forEach((b_uid)=>{
         this.dbUser.doc(reqInfo.data().builderUID).onSnapshot((userDoc) => {
           data.data = reqInfo.data();
           data.user = userDoc.data();
@@ -43,10 +43,8 @@ export class ChannelsPage {
     })
   }
   gotoMessages(id, name) {
-    /*  firebase.firestore().collection('Respond').doc(id).update('viewed',true).then(val=>{
-   }) */
     this.navCtrl.push(MessagesPage, { id, name });
-  // console.log('Info clicked..', data);
+    console.log('Info clicked..', id, name);
    
   }
 }

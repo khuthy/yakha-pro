@@ -170,7 +170,7 @@
 
         </ion-navbar>
         <img class="builder" src="../../assets/icon/ownerShape.svg" alt="builder">
-        <p text-center style="color: #fff;">Quotation-Y00{{i}}</p>
+        <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
       </ion-header>
       <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
         <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
@@ -233,7 +233,7 @@
             
             </div>
           </div>
-          <div class="messages" *ngIf="chat.chat.builder">
+          <div class="messages" *ngIf="chat.chat.builder;">
 
             <div class="chat left">
               
@@ -242,16 +242,16 @@
 
                       <div class="pdf">
                         <p></p>
-                        <p>Quotation-Y00{{i}}</p>
-                        <button ion-fab color="dark" [style.backgroundColor]="quoteStatus == 'Accepted' ? 'green' : 'red'" mini (click)="downloadPDF(chat.chat.pdf)"><ion-icon name="download"></ion-icon></button>
+                        <p>Quotation-Y00{{i + 1}}</p>
+                        <button ion-fab color="dark" [style.backgroundColor]="chat.chat.status== 'accepted' ? 'green' : 'declined'" mini (click)="downloadPDF(chat.chat.pdf)"><ion-icon name="download"></ion-icon></button>
                       </div>
                       
-                        <div id="buttons" *ngIf="quoteStatus">
-                         <p style="text-align: center; width: 100%;" [style.color]="quoteStatus == 'Accepted' ? 'green' : 'red'">{{quoteStatus}}</p>  
+                        <div id="buttons" *ngIf="chat.chat.status">
+                         <p style="text-align: center; width: 100%;" [style.color]="chat.chat.status == 'accepted' ? 'green' : 'declined'">{{quoteStatus}}</p>  
                         </div>
-                        <div id="buttons" *ngIf="!quoteStatus">
-                          <button ion-button small clear  color="danger" [disabled]="disable" (click)="declineQoute()" round>Decline</button>
-                          <button ion-button small color="customcall" [disabled]="disable" (click)="acceptQoute()" round>Accept</button>
+                        <div id="buttons" *ngIf="!chat.chat.status">
+                          <button ion-button small clear  color="danger" [disabled]="disable" (click)="declineQoute(chat.id)" round>Decline</button>
+                          <button ion-button small color="customcall" [disabled]="disable" (click)="acceptQoute(chat.id)" round>Accept</button>
                        </div>
       
                   </div>

@@ -306,8 +306,12 @@ this.AutocompleteMethod();
 
   async createprofile(profileForm: FormGroup): Promise<void> {
 
-    if (!profileForm.get('profileFormFirstSlide').valid && !profileForm.get('profileFormSecondSlide').valid) {
-      console.log('Need to complete the form, current value: ', profileForm.value);
+    if (!profileForm.get('profileFormFirstSlide').valid && !profileForm.get('profileFormSecondSlide').valid && this.builderProfile.lat==""
+    && this.builderProfile.lng=="")  {
+      this.alertCtrl.create({
+        title:"Unable to create account, confirm your inputs",
+        buttons: ["Try again"]
+      }).present();
       } else {
       let num = parseFloat(this.builderProfile.price.toString())
       this.builderProfile.price = num;
@@ -321,7 +325,6 @@ this.AutocompleteMethod();
         })
       } 
     }
-
   }
  async SignOut() {
     const alert = this.alertCtrl.create({

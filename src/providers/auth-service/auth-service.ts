@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-
+import { Http } from '@angular/http';
 
 
 @Injectable()
@@ -12,7 +12,7 @@ export class AuthServiceProvider {
  unreadMessages = []
  public userProfile: firebase.firestore.DocumentReference;
   user;
-  constructor() {}
+  constructor(public http: Http) {}
 
  /*  login() {
     this.isLoggedIn = true;
@@ -24,6 +24,10 @@ export class AuthServiceProvider {
 
   authenticated() : boolean {
     return this.isLoggedIn;
+  } */
+
+/* createIndex() {
+    return  this.http.get(this.url);
   } */
 
   manageUsers() {

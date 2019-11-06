@@ -120,9 +120,10 @@ export class HomePage {
       if (res.data().builder == false) {
         //this.loadCtrl();
         //document.getElementById('header').style.display = "none";
-        this.getPosition();
         this.loadMap();
-
+        setTimeout(() => {
+          this.getPosition();
+        }, 3000);
       }
       if (res.data().builder == true) {
         this.getRequests();
@@ -183,9 +184,7 @@ export class HomePage {
   }
 
   getPosition(): any {
-    
     this.geolocation.getCurrentPosition().then(resp => {
-      this.loadMap();
       this.setMapCenter(resp);
     })
   }
@@ -208,12 +207,11 @@ export class HomePage {
     await this.db.where('builder', '==', true).onSnapshot(async (res) => {
       this.builder = [];
       let info = { rate: {}, builder: {} };
-
       //>>>>>>> get the reviews made for this builder
       res.forEach(async (doc) => {
         //  console.log('All builders............', doc.data().lat);
 
-        if (doc.data().address != "") {
+        if (doc.data().address!=="" && doc.data().status==true) {
           data.builder = doc.data()
           this.builder.push(doc.data())
           // data.builder
@@ -600,22 +598,20 @@ export class HomePage {
     //     }
     //   })
   }
-  setPriceRange(param) {
+  async setPriceRange(param) {
     this.price = param;
+    this.builder = [];
     // console.log("Price range = "+ this.price);
     if (this.price >= 0) {
-      this.builder = [];
-      this.db.where('price', '>=', param)
+    await  this.db.where('price', '>=', param)
         .onSnapshot((res) => {
+          this.builder = [];
           // console.log(res.);
           res.forEach((doc) => {
             // this.db.collection('builderProfile').get().then(snapshot => {
             //   snapshot.forEach(doc => {
             this.builder.push(doc.data());
             this.bUID = doc.id;
-            //   });
-            //   console.log('Builders: ', this.builder);
-            // });
           })
         })
     }
@@ -642,7 +638,6 @@ export class HomePage {
   }
 
   viewRequest(docID, uid) {
-
     this.navCtrl.push(BuilderMessagesPage, { docID, uid });
     //  console.log('Doc id>>>>',docID,'user id===', uid);
   }

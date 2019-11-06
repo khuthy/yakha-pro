@@ -52,6 +52,7 @@ export class BuilderquotesPage {
       country: ['ZA']
     }
   }
+  hide=false
   quotesForm: FormGroup;
   quotes = {
     ownerName: '',
@@ -158,6 +159,7 @@ export class BuilderquotesPage {
   }
 
   ionViewDidLoad() {
+    
    /*  this.dbRequest.doc(this.navParams.data.docID).collection('extras').onSnapshot((res) => {
       res.forEach((doc) => {
         console.log(doc.data())
@@ -257,7 +259,7 @@ this.extras = [];
 
   createPdf() {
     this.loaderAnimate = true;
-    
+    this.hide=true
     /* calculations */
   
     /* discount amount of extras */
@@ -423,13 +425,14 @@ this.extras = [];
   }
 
   saveData() {
-    this.loaderAnimate = true;
+   
+    //this.loaderAnimate = true;
     //console.log('pdf link............:', this.pdfDoc);
     this.dbRespond.doc(this.navParams.data.docID).set(this.quotes).then(()=>{
      // this.quotes.pdfLink = this.pdfDoc;
       setTimeout(() => {
         this.loaderAnimate = false;
-      }, 2000);
+      }, 3000);
       this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, date: Date(), builder: true, id:this.navParams.data.docID }).then((res) => {
         this.quotes.pdfLink= '';
       })

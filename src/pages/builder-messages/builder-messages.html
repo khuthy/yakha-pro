@@ -34,7 +34,7 @@
 
         </ion-navbar>
         <img class="builder" src="../../assets/icon/BuilderShape2.svg" alt="builder">
-        <p text-center style="color: #fff;">Quotation-Y00{{i}}</p>
+        <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
       </ion-header>
       <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
           <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
@@ -89,14 +89,16 @@
             <div class="chat right">
               <div class="texts">
                 <p text-left id="text-message">{{chat.chat}}</p> <!-- Message -->
+                
               </div>
 
 
               <!-- Quotes Sent -->
               <div class="pdfContent">
-                <!-- <button ion-button block (click)="DownloadPDF()"><ion-icon name="download"></ion-icon></button> -->
+                  <p style="font-style: italic;font-size: 80%;color:rgb(133, 73, 33);">{{chat.status}}</p>
               </div>
               <div class="texts">
+               
                 <p text-right id="time-message">{{chat.date | date: "shortTime"}}</p>
               </div>
 

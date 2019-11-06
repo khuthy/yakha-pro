@@ -78,7 +78,7 @@ export class BuilderMessagesPage {
       this.slides.lockSwipes(true);
     }, 1000)
     let info = { data: {}, id: {}, user: {} }
-    this.dbChat.doc(this.navParams.data.uid).collection(this.uid).where('hOwnerUid', '==', this.navParams.data.uid).where('builderUID', '==', this.uid).orderBy('date', 'desc').onSnapshot((res) => {
+    this.dbChat.doc(this.navParams.data.uid).collection(this.uid).orderBy('date', 'asc').onSnapshot((res) => {
       //  console.log('This doc ', res.docs);
       this.msgSent = [];
       res.forEach((doc) => {
@@ -107,43 +107,62 @@ export class BuilderMessagesPage {
       })
     })
 
-    this.getOwnerDetails() 
+    this.getOwnerDetails()
   }
   viewMessages() {
     this.navCtrl.pop();
   }
-  slideChanged() {
+  async slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
     this.currentUid = this.msgSent[currentIndex].id;
-    console.log('Current doc id', this.currentUid);
-    console.log('Nav params', this.navParams.data);
-
-    this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).where('id', '==', this.msgSent[currentIndex].id).orderBy('date', 'asc').onSnapshot((res) => {
+    // let curr = this.messages[currentIndex];
+    //  console.log('Current...', this.currentUid);
+    const query = this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).doc(this.currentUid).collection("convo").orderBy('date', 'asc')
+    return await query.onSnapshot((res) => {
       this.msgInfo = [];
       for (let i = 0; i < res.docs.length; i++) {
+        if (!res.docs[i].data().pdfLink) {
+        } else {
+        //  console.log('Not found.....');
+        }
         this.msgInfo.push(res.docs[i].data())
       }
-      console.log('Message...', this.msgInfo);
-    })
-    this.dbSent.doc(this.currentUid).onSnapshot((doc) => {
-      if (doc.data().msgStatus !== "") {
-        ///  this.hideCard = '';
-        this.quoteStatus = doc.data().msgStatus;
-        // console.log('Status............................', this.quoteStatus);
-        this.toastCtrl.create({
-          closeButtonText: 'Close',
-          message: 'Your quotes has been'+ this.quoteStatus,
-         duration: 2000,
-        }).present();
-      }else {
-        console.log('wait for responses');
-        
-      }
-    })
+      console.log('Response data', this.msgInfo);
+
+    });
   }
+  /*   sslideChanged() {
+      let currentIndex = this.slides.getActiveIndex();
+      this.currentUid = this.msgSent[currentIndex].id;
+      console.log('Current doc id', this.currentUid);
+      console.log('Nav params', this.navParams.data);
+  
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).where('id', '==', this.msgSent[currentIndex].id).orderBy('date', 'asc').onSnapshot((res) => {
+        this.msgInfo = [];
+        for (let i = 0; i < res.docs.length; i++) {
+          this.msgInfo.push(res.docs[i].data())
+        }
+        console.log('Message...', this.msgInfo);
+      })
+      this.dbSent.doc(this.currentUid).onSnapshot((doc) => {
+        if (doc.data().msgStatus !== "") {
+          ///  this.hideCard = '';
+          this.quoteStatus = doc.data().msgStatus;
+          // console.log('Status............................', this.quoteStatus);
+          this.toastCtrl.create({
+            closeButtonText: 'Close',
+            message: 'Your quotes has been' + this.quoteStatus,
+            duration: 2000,
+          }).present();
+        } else {
+          console.log('wait for responses');
+  
+        }
+      })
+    } */
   getChats() {
     if (this.chatMessage != "") {
-      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: this.chatMessage, date: new Date(Date.now()), builder: true, id: this.currentUid }).then((res) => {
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).doc(this.currentUid).collection("convo").add({ chat: this.chatMessage, date: new Date(Date.now()), builder: true, id: this.currentUid }).then((res) => {
         res.onSnapshot((doc) => {
           this.chatMessage = '';
           this.myMsg = doc.data().chat
@@ -154,7 +173,7 @@ export class BuilderMessagesPage {
   }
   respond() {
 
-    
+
     this.navCtrl.push(BuilderquotesPage, { docID: this.currentUid, uid: this.navParams.data.uid });
   }
   getOwnerDetails() {

@@ -355,10 +355,10 @@ export class QuotationFormPage {
     }, 2000);
     // firebase.database().ref().child('hotels').
     // this.extras = firebase.firestore().collection('extras')
-    console.log(this.uid);
+  //  console.log(this.uid);
     // this. HomeOwnerQuotation.uid = this.authUser.getUser().uid;
     this.authUser.getUser();
-    console.log(this.authUser.getUser());
+  //  console.log(this.authUser.getUser());
   }
 
   //method to hide divs on keyboard show
@@ -535,111 +535,118 @@ export class QuotationFormPage {
       })
       this.imageSelected = true;
     } */
-  alertContrl() {
+  alertContrl(message) {
   
     return this.alertCtrl.create({
-      title: 'Empty field',
-      subTitle: 'Please check your information',
+      subTitle: message,
       buttons: ['Ok']
     }).present()
   }
   createQuations() {
-   
+  
     this.loaderMessages = 'Loading...';
-    
-
-    if (this.HomeOwnerQuotation.startDate == '' || this.HomeOwnerQuotation.houseImage == '' || this.HomeOwnerQuotation.endDate == '' || this.HomeOwnerQuotation.brickType == '' || this.HomeOwnerQuotation.wallType == ''
-      || this.HomeOwnerQuotation.comment == '') {
-      this.alertContrl();
-    } else {
-
-      if (!this.HomeOwnerQuotation.houseImage) {
-        this.toastCtrl.create({
-          message: 'House plan is required',
-          duration: 2000
-        }).present();
-      }
-      else {
-        this.loaderAnimate = true;
-        /*    this.db.collection('Request').where('builderUID','==',this.HomeOwnerQuotation.builderUID).onSnapshot((resReq)=>{
-             resReq.forEach((doc)=>{
-   
-             })
-           }) */
-        this.db.collection('Request').doc(this.HomeOwnerQuotation.builderUID).set(this.HomeOwnerQuotation).then((res) => {
-          if(this.HomeOwnerQuotation.builderUID)
-          {
-            this.db.collection('Users').doc(this.HomeOwnerQuotation.builderUID).onSnapshot((out)=>{
-              if(out.data().tokenID){
-                var notificationObj = {
-                  contents: { en: "Hey " + out.data().fullName+" ," + "you have new request"},
-                  include_player_ids: [out.data().tokenID],
-                };
-                this.oneSignal.postNotification(notificationObj).then(res => {
-                 // console.log('After push notifcation sent: ' +res);
-                });
-                }
-          })
-          }
-          //  res.onSnapshot((doc)=>{
-          //  doc.exists
-          /*   this.db.collection('Request').doc(res.id).onSnapshot((query)=>{
-              if(query.data().builderUID == this.HomeOwnerQuotation.builderUID)
-              this.db.collection('Request').doc(query.id).delete().then((delRes)=>{
-                 console.log('Request deleted....');
-              })
+    this.db.collection("Request").where("builderUID","==",this.HomeOwnerQuotation.builderUID)
+    .where("hOwnerUid","==",this.HomeOwnerQuotation.hOwnerUid).get().then((res)=>{
+      if(res.empty) {
+        if (this.HomeOwnerQuotation.startDate == '' || this.HomeOwnerQuotation.houseImage == '' || this.HomeOwnerQuotation.endDate == '' || this.HomeOwnerQuotation.brickType == '' || this.HomeOwnerQuotation.wallType == ''
+        || this.HomeOwnerQuotation.comment == '') {
+        
+        this.alertContrl("Some field(s) is empty..");
+      } else {
+  
+        if (!this.HomeOwnerQuotation.houseImage) {
+          this.toastCtrl.create({
+            message: 'House plan is required',
+            duration: 2000
+          }).present();
+        } 
+       
+        else {
+          this.loaderAnimate = true;
+          /*    this.db.collection('Request').where('builderUID','==',this.HomeOwnerQuotation.builderUID).onSnapshot((resReq)=>{
+               resReq.forEach((doc)=>{
+     
+               })
+             }) */
+       
+          this.db.collection('Request').doc(this.HomeOwnerQuotation.builderUID).set(this.HomeOwnerQuotation).then((res) => {
+            if(this.HomeOwnerQuotation.builderUID)
+            {
+              this.db.collection('Users').doc(this.HomeOwnerQuotation.builderUID).onSnapshot((out)=>{
+                if(out.data().tokenID){
+                  var notificationObj = {
+                    contents: { en: "Hey " + out.data().fullName+" ," + "you have new request"},
+                    include_player_ids: [out.data().tokenID],
+                  };
+                  this.oneSignal.postNotification(notificationObj).then(res => {
+                   // console.log('After push notifcation sent: ' +res);
+                  });
+                  }
             })
-                */
-          // })
-          /*   setTimeout(() => {
-              this.hideHeader = true;
-            }, 2000); */
-            // this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).onSnapshot
-            console.log(this.HomeOwnerQuotation.brickType);
-            
-          this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).add(this.HomeOwnerQuotation).then((res) => {
-            /*   this.HomeOwnerQuotation.extras.forEach((item) => {
-                this.Extra.push({ extra: item, price: 0, quatity: 0 });
-              }) */
-            // console.log('Extra000000', this.Extra);
-
-            //  res.update({ extras: this.Extra })
-            let extra = [];
-            this.HomeOwnerQuotation.extras.forEach((item) => {
-              console.log('Each item...', item);
+            }
+            //  res.onSnapshot((doc)=>{
+            //  doc.exists
+            /*   this.db.collection('Request').doc(res.id).onSnapshot((query)=>{
+                if(query.data().builderUID == this.HomeOwnerQuotation.builderUID)
+                this.db.collection('Request').doc(query.id).delete().then((delRes)=>{
+                   console.log('Request deleted....');
+                })
+              })
+                  */
+            // })
+            /*   setTimeout(() => {
+                this.hideHeader = true;
+              }, 2000); */
+              // this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).onSnapshot
+              console.log(this.HomeOwnerQuotation.brickType);
               
-              extra.push({item, price: 0, quantity: 0})
-              console.log('Array of extras..', extra);
-              console.log('Doc id....', res.id);
-              
-              this.db.collection('extras').doc(res.id).set({
-                extra: extra,
-                builder: this.HomeOwnerQuotation.builderUID,
-                owner: this.HomeOwnerQuotation.hOwnerUid,
-                docID: res.id
+            this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).add(this.HomeOwnerQuotation).then((res) => {
+              /*   this.HomeOwnerQuotation.extras.forEach((item) => {
+                  this.Extra.push({ extra: item, price: 0, quatity: 0 });
+                }) */
+              // console.log('Extra000000', this.Extra);
+  
+              //  res.update({ extras: this.Extra })
+              let extra = [];
+              this.HomeOwnerQuotation.extras.forEach((item) => {
+                console.log('Each item...', item);
+                
+                extra.push({item, price: 0, quantity: 0})
+                console.log('Array of extras..', extra);
+                console.log('Doc id....', res.id);
+                
+                this.db.collection('extras').doc(res.id).set({
+                  extra: extra,
+                  builder: this.HomeOwnerQuotation.builderUID,
+                  owner: this.HomeOwnerQuotation.hOwnerUid,
+                  docID: res.id
+                });
               });
-            });
-          })
-          this.HomeOwnerQuotation = {
-            hOwnerUid: '',
-            startDate: '',
-            endDate: '',
-            extras: [],
-            wallType: '',
-            brickType: '',
-            houseImage: '',
-            comment: '',
-            date: Date(),
-            view: false,
-            builderUID: '',
-            docID: ''
-          };
-          this.navCtrl.setRoot(SuccessPage);
-        });
-        this.isProfile = false;
+            })
+            this.HomeOwnerQuotation = {
+              hOwnerUid: '',
+              startDate: '',
+              endDate: '',
+              extras: [],
+              wallType: '',
+              brickType: '',
+              houseImage: '',
+              comment: '',
+              date: Date(),
+              view: false,
+              builderUID: '',
+              docID: ''
+            };
+            this.navCtrl.setRoot(SuccessPage);
+          });
+          this.isProfile = false;
+        }
       }
-    }
-
+      } 
+      if (res.size>=1) {
+        this.alertContrl("You have already requested..");
+      }
+    })
   }
   remove() {
     this.HomeOwnerQuotation.houseImage = "";

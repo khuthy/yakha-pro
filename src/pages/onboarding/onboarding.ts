@@ -34,7 +34,7 @@ export class OnboardingPage {
     }
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthServiceProvider,private storage: Storage, private menuCtrl: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private storage: Storage, private menuCtrl: MenuController) {
     this.storage.get('homeOwner').then(val => {
       if(val == true)  {
         console.log(val);
