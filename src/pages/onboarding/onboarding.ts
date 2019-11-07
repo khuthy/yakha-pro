@@ -19,9 +19,22 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
   templateUrl: 'onboarding.html',
 })
 export class OnboardingPage {
-  @ViewChild('slides') slides: Slides
+  @ViewChild('slides') slides: Slides;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: AuthServiceProvider,private storage: Storage, private menuCtrl: MenuController) {
+  slide = [
+    {
+      title: "Welcome to the Yakha",
+      description: "Create an account and setup your profile to start using this application,",
+      image: "../../assets/imgs/login.svg",
+    },
+    {
+      title: "Find Builders at your Location",
+      description: "Enable your location search for all the available builders around your area.",
+      image: "../../assets/imgs/maps.svg",
+    }
+  ];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,private storage: Storage, private menuCtrl: MenuController) {
     this.storage.get('homeOwner').then(val => {
       if(val == true)  {
         console.log(val);

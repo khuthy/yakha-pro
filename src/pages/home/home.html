@@ -30,7 +30,7 @@
               <img *ngIf="!o.user.image" src="../../assets/imgs/team-avatar.jpg" class="thumb-home-builder" alt="profile">
             </div>
             <div class="informative" >
-              <h6 style="font-size: 2.5vh;">{{o.user.fullName}} </h6>
+              <h6 style="font-family: Raleway; width: 40vw;">{{o.user.fullName}} </h6>
               <p style="font-size: 2vh;">{{o.user.date | date}}</p> 
            
             </div>
@@ -83,8 +83,8 @@
     <ion-item no-lines *ngIf="range">
       <ion-range pin=true min="0" max="1000" [(ngModel)]="price" (ionChange)="setPriceRange(price)">
       
-       <ion-label range-left color="primary" style="font-size: 2vh;">{{price | currency:'&#82;'}}</ion-label>
-       <ion-label range-right color="primary" style="font-size: 2vh;">{{1000 | currency:'&#82;'}}</ion-label>
+       <ion-label range-left color="primary" style="font-size: 2vh; margin: 5px;margin-right: 20px;">{{price | currency:'&#82;'}}</ion-label>
+       <ion-label range-right color="primary" style="font-size: 2vh; margin: 5px;">{{1000 | currency:'&#82;'}}</ion-label>
       </ion-range>
       </ion-item>
       <p *ngIf="!range" style="font-size: 1.6vh;letter-spacing: 0.2px; color: #0c1624;">These are the builders we found around this location</p> 
@@ -93,6 +93,7 @@
   <div class="main-slide">
 <ion-slides class="slide-moment" #slides spaceBetween="-65" centeredSlides="true"  (ionSlideDidChange)="moveMapEvent($event)">
   <ion-slide class="magic" *ngFor="let b of builder">
+    <p *ngIf="m" style="text-align: center;">There is no builder within this price range</p>
     <div class="card" >
 
         <div class="image" (click)="viewBuilderInfo(b)">
@@ -102,7 +103,7 @@
                 <p style="font-weight: 700; font-size: 2.7vh;">{{b.fullName}}</p>
                 <p class="price" style="color: #F2BE22;font-weight: 500;">{{b.price  | currency:'&#82;'}}(p/&#13217;)<span style="color: rgb(141, 141, 141); font-size: 2vh;"> excluding roofing</span> </p>
                 <p  class="stars" style="font-size: 2vh;">{{b.experiences}} years in building experience</p>
-                <p style="font-size:2vh; color:rgb(61, 61, 61);" *ngIf="total">{{total}} km away driving</p>
+                <p style="font-size:2vh; color:rgb(61, 61, 61);" *ngIf="total">{{total}} km away </p>
              </div>
         </div>
         <div class="rate" *ngIf="b.certified"><p style="font-size: 2.5vh;">C</p></div>
@@ -122,7 +123,7 @@
         
            
         <div class="button-group-l" (tap)="rShortcut(b.uid)">
-            <p>Request</p>   
+            <p style=" font-size: 4vw">Request</p>   
             <button (click)="rShortcut(b.uid)" ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
        
           </div>

@@ -4,10 +4,11 @@
           <ion-buttons left>
               <button ion-fab (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
             </ion-buttons>
-        <ion-title>
+        <ion-title id="title">
           Making a quote for <br>
           {{quotes.ownerName}} <br>
-          <p style="color: #FFD787;">Cost:{{((quotes.price * quotes.meter) - (quotes.price * quotes.meter) * (quotes.discount/100)) + (value - (value * quotes.discountAmount/100)) | currency:'&#82;'}}</p> </ion-title>
+          <p style="color: #FFD787;">Cost:{{((quotes.price * quotes.meter) - (quotes.price * quotes.meter) * (quotes.discount/100)) + (value - (value * quotes.discountAmount/100)) | currency:'&#82;'}}</p> 
+        </ion-title>
   
       </ion-toolbar>
     </ion-navbar>
@@ -47,7 +48,7 @@
           </ion-item>
           <br>
           <ion-item no-lines>
-            <ion-input placeholder="total of metres here" type="tel" minLength="0" maxLength="10" formControlName="dimensions" [(ngModel)]="quotes.meter"></ion-input>
+            <ion-input placeholder="total of metres here" type="tel" minLength="0" maxLength="5" formControlName="dimensions" [(ngModel)]="quotes.meter"></ion-input>
           </ion-item>
           <p class="error" *ngIf="BuilderQuotes.hasError('required') && (BuilderQuotes.dirty || BuilderQuotes.touched)">Please specify the dimension of  {{quotes.ownerName}}'s House</p>
           <p class="error" *ngIf="BuilderQuotes.hasError('maxlength') && (BuilderQuotes.dirty || BuilderQuotes.touched)">Opps!! too large</p>
@@ -55,10 +56,10 @@
           <br>              
           <ion-item no-lines>
            
-            <ion-input placeholder="Enter Discount (%) here" type="tel" formControlName="discount" min="0" maxlength="3" [(ngModel)]="quotes.discount"></ion-input>
+            <ion-input placeholder="Enter Discount (%) here" type="tel" formControlName="discount" min="0" maxlength="2" [(ngModel)]="quotes.discount"></ion-input>
           </ion-item>
-          <p class="error" *ngIf="quotesForm.get('discount').hasError('min') && (quotesForm.get('discount').dirty || quotesForm.get('discount').touched)">Discount cannot be less than {{0 | percent}}</p>
-          <p class="error" *ngIf="quotesForm.get('discount').hasError('max') && (quotesForm.get('discount').dirty || quotesForm.get('discount').touched)">Discount cannot be greater than {{1 | percent}}</p>
+          <p class="error" *ngIf="quotesForm.get('discount').hasError('minlength') && (quotesForm.get('discount').dirty || quotesForm.get('discount').touched)">Discount cannot be less than {{0 | percent}}</p>
+          <p class="error" *ngIf="quotesForm.get('discount').hasError('maxlength') && (quotesForm.get('discount').dirty || quotesForm.get('discount').touched)">Discount cannot be greater than {{1 | percent}}</p>
           <p style="padding: 3%;text-align: end;">Overall house price: <span style="color: #8D5729;">{{((quotes.price * quotes.meter) - (quotes.price * quotes.meter) * (quotes.discount/100)) | currency:'&#82;'}}</span> </p>
         </div>
   
@@ -121,11 +122,12 @@
         <div class="accumulatedAmount">
             <div class="discount">
                 <p style="text-align: center;"><strong>Discount(%) for Extras</strong></p>
+                <br>
                 <ion-item no-lines>
-                  <ion-input type="tel" formControlName="extrasDiscount" min="0" maxlength="3" [(ngModel)]="quotes.discountAmount"></ion-input>
+                  <ion-input type="tel" formControlName="extrasDiscount" min="0" maxlength="2" [(ngModel)]="quotes.discountAmount"></ion-input>
                 </ion-item>
-                <p class="error" *ngIf="quotesForm.get('extrasDiscount').hasError('min') && (quotesForm.get('extrasDiscount').dirty || quotesForm.get('extrasDiscount').touched)">Extras Discount cannot be less than {{0 | percent}}</p>
-                <p class="error" *ngIf="quotesForm.get('extrasDiscount').hasError('max') && (quotesForm.get('extrasDiscount').dirty || quotesForm.get('extrasDiscount').touched)">Extras Discount cannot be greater than {{1 | percent}}</p>      
+                <p class="error" *ngIf="quotesForm.get('extrasDiscount').hasError('minlength') && (quotesForm.get('extrasDiscount').dirty || quotesForm.get('extrasDiscount').touched)">Extras Discount cannot be less than {{0 | percent}}</p>
+                <p class="error" *ngIf="quotesForm.get('extrasDiscount').hasError('maxlength') && (quotesForm.get('extrasDiscount').dirty || quotesForm.get('extrasDiscount').touched)">Extras Discount cannot be greater than {{1 | percent}}</p>      
               </div>
           
           <div class="discountAmount" style="color: grey">
@@ -134,11 +136,11 @@
           </div>
         </div>
       </div>
-      <div class="button-group" (click)="createPdf()">
-          <p>Send Quotes</p>
-           <button (click)="createPdf()" class="send-quotes"  ion-fab  color="light">
+      <div class="button-group" *ngIf="!hide">
+          <p>Send Quote</p>
+           <button [disabled]="!quotesForm.valid" (click)="createPdf()" class="send-quotes"  ion-fab  color="light">
             <ion-icon name="arrow-forward"></ion-icon>
-           
+        
           </button>
         </div>
     </form>

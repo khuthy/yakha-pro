@@ -1,0 +1,23 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "builderUID",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "builderUID",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "hOwnerUid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "date",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

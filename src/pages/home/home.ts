@@ -1,25 +1,15 @@
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { NavController, MenuController, Platform, Slides, PopoverController, AlertController, NavParams, LoadingController } from 'ionic-angular';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
-//import { BuilderProfileviewPage } from '../builder-profileview/builder-profileview';
-import * as firebase from "firebase/app";
-//import { CallNumber } from '@ionic-native/call-number';
-//import { ProfileComponent } from '../../components/profile/profile';
-//import { ViewmessagePage } from '../viewmessage/viewmessage';
-import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { ProfileComponent } from '../../components/profile/profile';
-import { QuotationFormPage } from '../quotation-form/quotation-form';
 import { BuilderProfileviewPage } from '../builder-profileview/builder-profileview';
-//import { QuotationFormPage } from '../quotation-form/quotation-form';
+import * as firebase from 'firebase';
+import { CallNumber } from '@ionic-native/call-number';
+import { ProfileComponent } from '../../components/profile/profile';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { QuotationFormPage } from '../quotation-form/quotation-form';
+import { BuilderMessagesPage } from '../builder-messages/builder-messages';
 //import { TestPage } from '../test/test';
 declare var google;
-import { RegisterPage } from './../register/register';
-import { LoginPage } from './../login/login';
-import { BuilderMessagesPage } from '../builder-messages/builder-messages';
-//import { Component } from '@angular/core';
-//import { NavController } from 'ionic-angular';
-
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -120,25 +110,22 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-  
-   
+    setTimeout(() => {
+      this.AutoComplete()
+    }, 1000);
+    setTimeout(() => {
+      this.loaderAnimate = false
+    }, 2000);
     this.db.doc(this.uid).onSnapshot((res) => {
       if (res.data().builder == false) {
-        this.header = '';
-        setTimeout(() => {
-          this.loaderAnimate = false;
-          
-          this.AutoComplete();
-          
-        }, 3000);
-       
+        //this.loadCtrl();
+        //document.getElementById('header').style.display = "none";
         this.loadMap();
+        setTimeout(() => {
+          this.getPosition();
+        }, 3000);
       }
       if (res.data().builder == true) {
-        this.header = 'value';
-        setTimeout(() => {
-          this.loaderAnimate = false;
-        }, 2000);
         this.getRequests();
       }
     })
@@ -191,23 +178,15 @@ export class HomePage {
             //console.log(this.total);
 
           }
+          
         });
     })
   }
 
-  setMapCenter(position: Geoposition) {
-    let myLatLng = { lat: position.coords.latitude, lng: position.coords.longitude };
-    this.map.setCenter(myLatLng);
-
-    google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      let marker = new google.maps.Marker({
-        position: myLatLng,
-        map: this.map,
-        icon: 'https://img.icons8.com/nolan/40/000000/user-location.png'
-        //  title: 'Hello World!'
-      });
-      //  this.map.classList.add('map');
-    });
+  getPosition(): any {
+    this.geolocation.getCurrentPosition().then(resp => {
+      this.setMapCenter(resp);
+    })
   }
   loadCtrl() {
     this.loadingCtrl.create({
@@ -217,7 +196,7 @@ export class HomePage {
   }
 
   async getBuilders() {
-    this.getPosition();
+
     let numRated = 0;
     let arr = [];
     let avgSum = 0
@@ -228,12 +207,11 @@ export class HomePage {
     await this.db.where('builder', '==', true).onSnapshot(async (res) => {
       this.builder = [];
       let info = { rate: {}, builder: {} };
-
       //>>>>>>> get the reviews made for this builder
       res.forEach(async (doc) => {
         //  console.log('All builders............', doc.data().lat);
 
-        if (doc.data().address != "") {
+        if (doc.data().address!=="" && doc.data().status==true) {
           data.builder = doc.data()
           this.builder.push(doc.data())
           // data.builder
@@ -251,7 +229,7 @@ export class HomePage {
           });
           google.maps.event.addListener(marker, 'click', (resp) => {
             this.viewBuilderInfo(doc.data());
-          }) 
+          })
           // data = {builder: doc.data()}
 
           //>>>>>>>>>> push for display
@@ -331,12 +309,6 @@ export class HomePage {
       buttons: ['OK']
     });
     alert.present();
-  }
-  getPosition(): any {
-    this.geolocation.getCurrentPosition().then(resp => {
-      console.log('Response from get current position', resp);
-      this.setMapCenter(resp);
-    })
   }
   loadMap() {
 
@@ -523,7 +495,7 @@ export class HomePage {
       this.menuShow = true;
     });
     this.getBuilders();
-    
+
 
 
     setTimeout(() => {
@@ -586,7 +558,20 @@ export class HomePage {
     // this.directionsDisplay.setPanel(document.getElementById('right-panel'));
   }
 
+  setMapCenter(position: Geoposition) {
+    let myLatLng = { lat: position.coords.latitude, lng: position.coords.longitude };
+    this.map.setCenter(myLatLng);
 
+    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      let marker = new google.maps.Marker({
+        position: myLatLng,
+        map: this.map,
+        icon: 'https://img.icons8.com/nolan/40/000000/user-location.png'
+        //  title: 'Hello World!'
+      });
+      //  this.map.classList.add('map');
+    });
+  }
 
   search(event) {
     let searchKey: string = event;
@@ -613,22 +598,20 @@ export class HomePage {
     //     }
     //   })
   }
-  setPriceRange(param) {
+  async setPriceRange(param) {
     this.price = param;
+    this.builder = [];
     // console.log("Price range = "+ this.price);
     if (this.price >= 0) {
-      this.builder = [];
-      this.db.where('price', '>=', param)
+    await  this.db.where('price', '>=', param)
         .onSnapshot((res) => {
+          this.builder = [];
           // console.log(res.);
           res.forEach((doc) => {
             // this.db.collection('builderProfile').get().then(snapshot => {
             //   snapshot.forEach(doc => {
             this.builder.push(doc.data());
             this.bUID = doc.id;
-            //   });
-            //   console.log('Builders: ', this.builder);
-            // });
           })
         })
     }
@@ -638,39 +621,37 @@ export class HomePage {
     popover.present({
       ev: myEvent
     });
-  } 
-/*   viewHouse(myEvent) {
+  }
+  viewHouse(myEvent) {
     console.log('image', myEvent);
     let popover = this.popoverCtrl.create(ProfileComponent, { image: myEvent });
     popover.present({
       ev: myEvent
     });
-  } */
+  }
   // callJoint(phoneNumber) {
   //   this.callNumber.callNumber(phoneNumber, true);
   // }
   //viewmore
-   viewBuilderInfo(builder) {
+  viewBuilderInfo(builder) {
     this.navCtrl.push(BuilderProfileviewPage, builder);
-  } 
+  }
 
- viewRequest(docID, uid) {
-
+  viewRequest(docID, uid) {
     this.navCtrl.push(BuilderMessagesPage, { docID, uid });
-    console.log('Doc id>>>>',docID,'user id===', uid);
-  } 
+    //  console.log('Doc id>>>>',docID,'user id===', uid);
+  }
 
   requestForm() {
     this.navCtrl.push(QuotationFormPage)
   }
- 
+
   rShortcut(uid) {
     this.navCtrl.push(QuotationFormPage, uid);
   }
-  got(){
-    this.navCtrl.push(BuilderMessagesPage)
-  }
+
  
+
   getRequests() {
     let data = {info: {}, user: {}, id: {}}
     this.dbRequest.where('builderUID', '==', this.uid).onSnapshot(res => {

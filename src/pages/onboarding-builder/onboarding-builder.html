@@ -1,79 +1,31 @@
-<ion-content>
-  <div class="container">
-    <ion-slides #slides pager>
-  
-  
-      <ion-slide class="main">
-        
-            <div class="sliderOne">
-              <p (click)="skip()" class="skip">Skip</p>
-              <div class="image">
-                <img src="../../assets/imgs/login.svg" class="onboard" >
-              </div>
-              <p class="text">Create an account and setup your
-                profile to start using this application.
-            </p>
-            <div class="btn">
-              <button (click)="nextslides()" ion-button style="width: 70%;border-radius:10px;background:#F38D69;color:white;letter-spacing: 1px;">Next</button>
-         
-             </div>
-            </div>
-      </ion-slide>
-  
-      <ion-slide class="main">
-         
 
-            <div class="sliderOne">
-              <p (click)="skip()" class="skip">Skip</p>
-              <div class="image">
-                <img src="../../assets/imgs/viewlist.svg" class="onboard" >
-              </div>
-              <p class="text">View all the request send by home-owners 
-                around your location.
-            </p>
-            <div class="btn">
-              <button (click)="nextslides()" ion-button style="width: 70%;border-radius:10px;background:#F38D69;color:white;letter-spacing: 1px;">Next</button>
-         
-             </div>
-            </div>
-      </ion-slide>
+ 
+ <ion-header no-border>
+    <ion-navbar>
+      <ion-toolbar>
+          <ion-buttons end right>
+            <button ion-button color="primary" (click)="skip()">Skip</button>
+          </ion-buttons>
+        </ion-toolbar>
+    </ion-navbar>
+  </ion-header>
   
-      <ion-slide class="main">
-            <div class="sliderOne">
-              <p (click)="skip()" class="skip">Skip</p>
-              <div class="image">
-                <img src="../../assets/imgs/builder1.svg" class="onboard" >
-              </div>
-              <p class="text">Respond with a detailed quotation to home-owners 
-                you would like to work with.
-            </p>
-            <div class="btn">
-              <button (click)="nextslides()" ion-button style="width: 70%;border-radius:10px;background:#F38D69;color:white;letter-spacing: 1px;">Next</button>
-         
-             </div>
-            </div>
-      </ion-slide>
-
-      
-      <ion-slide class="main">
-     
-
-
-            <div class="sliderOne">
-              <!-- <p (click)="skip()" class="skip">Skip</p> -->
-              <div class="image">
-                <img src="../../assets/imgs/hands.svg" class="onboard" >
-              </div>
-              <p class="text">The beginning of working relationship :) .
-            </p>
-            <div class="btn">
-              <button (click)="getStarted()" ion-button style="width: 70%;border-radius:50px;background:#F38D69;color:white;letter-spacing: 1px;">Get Started</button>
-         
-             </div>
-            </div>
-      </ion-slide>
+  <ion-content class="tutorial-page">
   
+    <ion-slides pager>
+      <ion-slide *ngFor="let slide of slide">
+       
+        <img [src]="slide.image" class="slide-image"/>
+        <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+        <p [innerHTML]="slide.description"></p>
+      </ion-slide>
+      <ion-slide class="lastSlide">
+          <img src="../../assets/imgs/hands.svg" class="slide-image"/>
+          <div class="onboarding">
+        <h2 class="slide-title">Well done!</h2>
+        <p>The beginning of working relationship :) .</p>
+        <button (click)="getStarted()" ion-button round block style="width: 50%; margin: auto;">Get Started</button> 
+       </div>
+      </ion-slide>
     </ion-slides>
-  
-  </div>
   </ion-content>

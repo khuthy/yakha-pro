@@ -10,6 +10,7 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 import { CallNumber } from '@ionic-native/call-number';
 import { File } from '@ionic-native/file';
 import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader';
+import { OneSignal } from '@ionic-native/onesignal';
 //import { AndroidPermissions } from '@ionic-native/android-permissions';
 //import pdfMake from 'pdfmake/build/pdfmake';
 //import { Downloader, DownloadRequest, NotificationVisibility } from '@ionic-native/downloader';
@@ -48,6 +49,7 @@ export class MessagesPage {
   icon = 'arrow-dropdown';
   toggle = false;
   msg: any;
+  disable: boolean = false;
   /* testing */
   autoUid: any;
   homeOwner: any;
@@ -86,13 +88,13 @@ export class MessagesPage {
     public navParams: NavParams,
     // private fileOpener: FileOpener,
     public elementref: ElementRef,
+    public oneSignal: OneSignal,
     public renderer: Renderer2,
-    public authServes: AuthServiceProvider,
     public popoverCtrl: PopoverController,
     private callNumber: CallNumber,
     private file: File,
     private toastCtrl: ToastController,
-  //  public androidPermissions: AndroidPermissions,
+    //  public androidPermissions: AndroidPermissions,
     private downloader: Downloader,
     public loader: LoadingController,
     public pltform: Platform
@@ -101,6 +103,8 @@ export class MessagesPage {
     this.builderName = this.autoUid.name;
     this.imageBuilder = this.autoUid.img;
     this.personalNumber = this.autoUid.personalNumber;
+
+    
 
   }
 
@@ -121,52 +125,82 @@ export class MessagesPage {
 
 
 
-  slideChanged() {
+ async slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
     this.currentUid = this.msgSent[currentIndex].id;
     // let curr = this.messages[currentIndex];
-    console.log('Current...', this.currentUid);
-
-    this.dbChatting.doc(this.uid).collection(this.navParams.data.id).where('id', '==', this.currentUid).orderBy("date", "asc").onSnapshot((res) => {
-      this.messages = [];
-      for (let i = 0; i < res.docs.length; i++) {
-        if (!res.docs[i].data().pdfLink) {
-        } else {
-          console.log('Not found.....');
-        }
-        this.messages.push({ chat: res.docs[i].data() })
-      }
-      // console.log('Response data', this.messages);
-
-    })
-    this.dbIncoming.doc(this.currentUid).onSnapshot((doc) => {
-      if (doc.data().msgStatus !== "") {
-        this.hideCard = '';
-        this.quoteStatus = doc.data().msgStatus;
-        //  console.log('Status............................', this.quoteStatus);
+  //  console.log('Current...', this.currentUid);
+  this.dbChat.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).onSnapshot((doc) => {
+    this.hideCard = '';
+    this.quoteStatus = doc.data().status;
+  })
+  const query = this.dbChatting.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).collection("convo").orderBy('date', 'asc')
+  return await query.onSnapshot((res)=>{
+    this.messages = [];
+     for (let i = 0; i < res.docs.length; i++) {
+       if (!res.docs[i].data().pdfLink) {
+       } else {
+         console.log('Not found.....');
+       }
+       this.messages.push({ chat: res.docs[i].data(), id: res.docs[i].id })
+     }
+     console.log('Response data', this.messages);
+ 
+  });
+  /* return snapshot.docs.map((res) => {
+    this.messages = [];
+   // for (let i = 0; i < res.docs.length; i++) {
+      if (!res.data().pdfLink) {
       } else {
-        console.log('No message status found.....');
+        console.log('Not found.....');
       }
-    })
+      this.messages.push({ chat: res.data(), id: res.id })
+ //   }
+    console.log('Response data', this.messages);
+
+  }) */
+    
 
   }
-
 
   /* Ends here */
-  acceptQoute() {
-    this.dbIncoming.doc(this.currentUid).update({ msgStatus: "Accepted" }).then((res) => {
+  acceptQoute(id) {
+    this.disable = true;
+    this.dbChatting.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).collection("convo").doc(id).update({ status: "accepted" }).then((res) => {
+      this.dbProfile.doc(this.navParams.data.id).get().then((resUser) => {
+        if (resUser.data().tokenID) {
+          var notificationObj = {
+            contents: { en: "Hey " + resUser.data().fullName + " ," + "has accepted your quotation" },
+            include_player_ids: [resUser.data().tokenID],
+          };
+          this.oneSignal.postNotification(notificationObj).then(res => {
+          });
+        }
+      });
     })
   }
-  declineQoute() {
-    this.dbIncoming.doc(this.currentUid).update({ msgStatus: "Declined" }).then((res) => {
-    });
+  declineQoute(id) {
+    this.disable = true;
+    this.dbChatting.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).collection("convo").doc(id).update({ status: "declined" }).then((res) => {
+      this.dbProfile.doc(this.navParams.data.id).get().then((resUser) => {
+        if (resUser.data().tokenID) {
+          var notificationObj = {
+            contents: { en: "Hey " + resUser.data().fullName + " ," + "has declined your quotation" },
+            include_player_ids: [resUser.data().tokenID],
+          };
+          this.oneSignal.postNotification(notificationObj).then(res => {
+          });
+        }
+      });
+    })
   }
   ionViewDidLoad() {
-    this.slides.lockSwipeToNext(true);
-    this.slides.lockSwipeToPrev(true);
+    console.log('Nav Params', this.navParams.data);
+
     setTimeout(() => {
-      this.slideChanged()
-    }, 1000);
+      this.slideChanged();
+      this.slides.lockSwipes(true);
+    }, 1000)
     this.dbIncoming.where('hOwnerUID', '==', this.uid).onSnapshot((res) => {
       res.forEach((doc) => {
         let pdf = doc.data().pdfLink;
@@ -174,7 +208,7 @@ export class MessagesPage {
       })
     })
     let info = { data: {}, id: {}, user: {} }
-    this.dbChat.doc(this.uid).collection(this.navParams.data.id).where('hOwnerUid', '==', this.uid).where('builderUID', '==', this.navParams.data.id).onSnapshot((res) => {
+    this.dbChat.doc(this.uid).collection(this.navParams.data.id).onSnapshot((res) => {
       // console.log('This doc ', doc.data());
       this.msgSent = [];
       res.forEach((doc) => {
@@ -204,24 +238,24 @@ export class MessagesPage {
     } */
   brick = 'Engineering brick' //demo
   getChats() {
-    if(this.chatMessage !== '') {
-      this.dbChatting.doc(this.uid).collection(this.navParams.data.id).add({ chat: this.chatMessage, date: Date.now(), builder: false, id: this.currentUid }).then((res) => {
+    if (this.chatMessage !== '') {
+      this.dbChatting.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).collection("convo").add({ chat: this.chatMessage, date: new Date(Date.now()), builder: false, id: this.currentUid, status: "" }).then((res) => {
         res.onSnapshot((doc) => {
           this.chatMessage = '';
           this.myMsg = doc.data().chat
-          //  console.log('This is what I sent now...', doc.data());
+          //  console.log('This is what I sent now...', doc.data()); 
           //  this.chatMessage = doc.data().chat
         })
       })
-    }else {
-     this.toastCtrl.create({
-       position: 'top',
-       message: 'Please write a message...',
-       duration: 1000,
-       cssClass: 'ToastCtrl'
-     })
+    } else {
+      this.toastCtrl.create({
+        position: 'top',
+        message: 'Please write a message...',
+        duration: 1000,
+        cssClass: 'ToastCtrl'
+      })
     }
-   
+
   }
   /*  presentPopover(uid) {
      const popover = this.popoverCtrl.create(PopoverPage, { key1: uid });
@@ -262,9 +296,9 @@ export class MessagesPage {
 
     this.callNumber.callNumber(number, true)
   }
-return(){
-  this.navCtrl.pop();
-}
+  return() {
+    this.navCtrl.pop();
+  }
 
   viewMessages() {
     this.navCtrl.pop();

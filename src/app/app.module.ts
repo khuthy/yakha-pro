@@ -28,7 +28,7 @@ import { SuccessPage } from '../pages/success/success';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StatusBar } from '@ionic-native/status-bar';
-import { HttpClientModule, /* other http imports */ } from "@angular/common/http";
+import { HttpModule, /* other http imports */ } from "@angular/http";
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 import { IonicStorageModule } from '@ionic/storage';
@@ -52,6 +52,8 @@ import { TipsPage } from '../pages/tips/tips';
 import { MessagesPage } from '../pages/messages/messages';
 import { BuilderMessagesPage } from '../pages/builder-messages/builder-messages';
 import { OneSignal } from '@ionic-native/onesignal';
+import { Device } from '@ionic-native/device';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 @NgModule({
   declarations: [
     MyApp,
@@ -83,7 +85,8 @@ import { OneSignal } from '@ionic-native/onesignal';
       pageTransition: 'ios-transition',
     }),
     IonicStorageModule.forRoot(),
-    GooglePlaceModule
+    GooglePlaceModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -122,7 +125,9 @@ import { OneSignal } from '@ionic-native/onesignal';
     CallNumber,
     GooglePlaceModule,
     Downloader,
-    OneSignal
+    OneSignal,
+    Device,
+    AndroidPermissions,
     
 
   ]

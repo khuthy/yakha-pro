@@ -11,7 +11,7 @@ import { HomePage } from '../home/home';
 import { ProfileComponent } from '../../components/profile/profile';
 import { OneSignal } from '@ionic-native/onesignal';
 import { LoginPage } from '../login/login';
-
+declare var google
 /**
  * Generated class for the BaccountSetupPage page.
  *
@@ -48,7 +48,7 @@ export class BaccountSetupPage {
     certified: false,
     roof: false,
     experiences: '',
-    address: null,
+    address: '',
     price: 0,
     lng: null,
     lat: null,
@@ -57,6 +57,8 @@ export class BaccountSetupPage {
     tokenID: '',
     regNo: ''
   }
+  autocomplete;
+  autoCompSearch = document.getElementsByClassName('address');
   @ViewChild('slides') slides: Slides;
   @ViewChild("placesRef") placesRef: GooglePlaceDirective;
   formattedAddress = '';
@@ -80,7 +82,7 @@ export class BaccountSetupPage {
     public camera: Camera,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
+    private alertCtrl: AlertController,
     private formBuilder: FormBuilder,
     private menuCtrl: MenuController,
     public popoverCtrl: PopoverController,
@@ -94,7 +96,7 @@ export class BaccountSetupPage {
       profileFormFirstSlide: this.formBuilder.group({
         fullName: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(4), Validators.maxLength(30)])),
         gender: new FormControl('', Validators.compose([Validators.required])),
-        personalNumber: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(10)])),
+        personalNumber: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(10), Validators.minLength(10)])),
         address: new FormControl('', Validators.compose([Validators.required])),
         builder: ['']
       }),
@@ -129,6 +131,17 @@ export class BaccountSetupPage {
     // when the page loads
 
   }
+ /*  AutocompleteMethod(){
+    this.autocomplete =  new google.maps.places.Autocomplete(this.autoCompSearch[0], { types: ['geocode'] });
+    this.autocomplete.addListener('place_changed', () => {
+      let place = this.autocomplete.getPlace();
+      console.log(place);
+      let latLng = {
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      }
+    })
+  } */
   ionViewDidLoad() {
     setTimeout(() => {
       this.loaderAnimate = false;
@@ -136,6 +149,9 @@ export class BaccountSetupPage {
       //this.HomeOwnerQuotation.extras = [];
     }, 2000);
     //this.slides.lockSwipes(true) // when the page loads
+/*     setTimeout(()=>{
+this.AutocompleteMethod();
+    },1000) */
      this.oneSignal.getIds().then((res) => {
       this.builderProfile.tokenID = res.userId;
     }) 
@@ -147,7 +163,7 @@ export class BaccountSetupPage {
     console.log(this.slides.getActiveIndex);
     this.slides.lockSwipes(true);
 
-    firebase.firestore().collection('Users').doc(firebase.auth().currentUser.uid).onSnapshot((res) => {
+    this.db.doc(firebase.auth().currentUser.uid).onSnapshot((res) => {
       if (res.data().isProfile == true) {
         this.back = true;
       } else {
@@ -172,9 +188,36 @@ export class BaccountSetupPage {
     }
   }
 
+  cancelProfile() {
+    console.log('number',this.slides.getActiveIndex());
+     
+    if(this.slides.getActiveIndex() === 1) {
+      this.slides.lockSwipeToPrev(false);
+      this.slides.slidePrev(1);
+    }else {
+      if(this.isProfile == true) {
+        this.navCtrl.pop();
+      }else {
+        this.isProfile = true;
+      }
+    } 
+    
+  }
+
   nextslides() {
     this.slides.lockSwipes(false);
-    this.slides.slideNext(1);
+    
+    if(this.profileForm.get('profileFormFirstSlide').invalid) {
+      
+       this.profileForm.get('profileFormFirstSlide').get('fullName').markAsDirty();
+       this.profileForm.get('profileFormFirstSlide').get('gender').markAsDirty();
+       this.profileForm.get('profileFormFirstSlide').get('personalNumber').markAsDirty();
+       this.profileForm.get('profileFormFirstSlide').get('address').markAsDirty();
+
+    }else {
+      this.slides.slideNext(1);
+    }
+    
     this.slides.lockSwipes(true);
   }
   ionViewWillEnter() {
@@ -184,10 +227,11 @@ export class BaccountSetupPage {
     this.menuCtrl.swipeEnable(false);
   }
   public handleAddressChange(addr: Address) {
+    console.log('geopoint: ', addr.geometry.location.lat(), addr.geometry.location.lng())
     this.builderProfile.address = addr.formatted_address;
     this.builderProfile.lat = addr.geometry.location.lat();
     this.builderProfile.lng = addr.geometry.location.lng();
-    //console.log(this.location)
+   
   }
   async selectImage() {
     const actionSheet = await this.actionSheetCtrl.create({
@@ -247,7 +291,7 @@ export class BaccountSetupPage {
         upload.snapshot.ref.getDownloadURL().then(downUrl => {
           this.builderProfile.image = downUrl;
           this.profileImage = downUrl;
-          this.profileForm.patchValue({ builder: downUrl });
+          this.profileForm.get('profileFormFirstSlide').patchValue({ builder: this.profileImage });
           console.log('Image downUrl', downUrl);
           this.isuploaded = true;
         })
@@ -262,33 +306,53 @@ export class BaccountSetupPage {
 
   async createprofile(profileForm: FormGroup): Promise<void> {
 
-    if (!profileForm.valid || this.builderProfile.address == "") {
-      console.log(
-        'Need to complete the form, current value: ',
-        profileForm.value
-      );
-
-    } else {
+    if (!profileForm.get('profileFormFirstSlide').valid && !profileForm.get('profileFormSecondSlide').valid && this.builderProfile.lat==""
+    && this.builderProfile.lng=="")  {
+      this.alertCtrl.create({
+        title:"Unable to create account, confirm your inputs",
+        buttons: ["Try again"]
+      }).present();
+      } else {
       let num = parseFloat(this.builderProfile.price.toString())
       this.builderProfile.price = num;
-
-      // upon success...
-      this.db.doc(firebase.auth().currentUser.uid).update(this.builderProfile).then(() => {
-        this.navCtrl.push(BaccountSetupPage);
-      })
+      if(this.back == true) {
+        this.db.doc(firebase.auth().currentUser.uid).update(this.builderProfile).then(() => {
+          this.isProfile = true;
+        })
+      }else {
+        this.db.doc(firebase.auth().currentUser.uid).update(this.builderProfile).then(() => {
+          this.navCtrl.setRoot(HomePage);
+        })
+      } 
     }
-
   }
-  // load the profile creation process
-  SignOut() {
-    firebase.auth().signOut().then(() => {
-      console.log('Signed Out');
-      this.navCtrl.setRoot(LoginPage);
+ async SignOut() {
+    const alert = this.alertCtrl.create({
+      title: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Okay',
+          handler: data => {
+            firebase.auth().signOut().then(() => {
+              console.log('Signed Out');
+              this.navCtrl.setRoot(LoginPage);
 
-    }).catch((err) => {
-      console.log('error occured while signing out');
+            }).catch((err) => {
+              console.log('error occured while signing out');
 
+            })
+          }
+        }
+      ]
     })
+  //  console.log('Alert... ',alert);
+    
+   await alert.present();
+    // alert.dismiss();
   }
 
 
@@ -330,7 +394,7 @@ export class BaccountSetupPage {
   };
   getProfile() {
     // load the process
-    console.log('sharon');
+    //console.log('sharon');
 
     let load = this.loadingCtrl.create({
       content: 'Just a sec...',

@@ -63,9 +63,11 @@
         </ion-col>
         <ion-col col-11 align-self-center>
             <ion-item no-lines>
-                <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" type="text" placeholder="Cell Phone Number" maxlength="10" formControlName="personalNumber"  [(ngModel)]="HomeOwnerProfile.personalNumber" ngDefaultControl></ion-input>
+                <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" type="tel" placeholder="Cell Phone Number" maxlength="10" formControlName="personalNumber"  [(ngModel)]="HomeOwnerProfile.personalNumber" ngDefaultControl></ion-input>
               </ion-item>
               <p class="error" *ngIf="profileForm.get('personalNumber').hasError('required') && (profileForm.get('personalNumber').dirty || profileForm.get('personalNumber').touched)">Cell number is required.</p>
+              <p class="error" *ngIf="profileForm.get('personalNumber').hasError('maxlength') && (profileForm.get('personalNumber').dirty || profileForm.get('personalNumber').touched)">Phone number must be equals to 10 digits</p>
+              <p class="error" *ngIf="profileForm.get('personalNumber').hasError('minlength') && (profileForm.get('personalNumber').dirty || profileForm.get('personalNumber').touched)">Cell number must be equal to 10 digits</p>
         </ion-col>
         <ion-col col-11 align-self-center>
                  <input (focus)="checkKeyBoardEvents()" (blur)="checkKeyBoardEvents()" class="address" formControlName="address" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
