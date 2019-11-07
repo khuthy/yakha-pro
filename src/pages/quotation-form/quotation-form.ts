@@ -592,7 +592,8 @@ export class QuotationFormPage {
               });
             });
           })
-          this.HomeOwnerQuotation = {
+          this.HomeOwnerQuotation = 
+          {
             hOwnerUid: '',
             startDate: '',
             endDate: '',

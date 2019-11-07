@@ -1,26 +1,22 @@
 
 
-
-
-<ion-content padding fullscreen>
-<!-- top deco similar to builders -->
 <ion-header no-border id="header">
-    <ion-navbar>
-  <!-- <ion-buttons right end>
-        <button ion-fab (click)="callJoint(item.user.personalNumber)" color="customcall">
-          <ion-icon name="call"></ion-icon>
-        </button>
-      </ion-buttons>  -->
-<p id="headtitle">Messages</p>
-    </ion-navbar>
     <img class="builder" id="owner" src="../../assets/icon/ownerShape.svg" alt="builder">
+    <ion-navbar>
+      
+      <ion-toolbar>
+          <ion-title >Messages</ion-title>
+          <ion-buttons end right>
+              <button menuToggle ion-button clear ><ion-icon name="menu"></ion-icon></button>
+            </ion-buttons>
+      </ion-toolbar>
+    </ion-navbar>
+    
     <!-- <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p> -->
   </ion-header>
 
-
-
-
-<div class="homebuilder" >
+<ion-content padding>
+<div class="homebuilder">
   <div class="cards" *ngFor =" let b of respond"> <!-- Put a forloop here -->
        <div class="images">
         <img src="{{b.user.image}}" class="thumb-home-builder"  alt="profile">

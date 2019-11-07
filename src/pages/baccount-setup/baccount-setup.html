@@ -1,6 +1,6 @@
 <ion-header no-border>
  
-    <ion-toolbar class="tools-header" *ngIf="!isProfile">
+    <ion-toolbar *ngIf="!isProfile">
       <ion-buttons left start>
         <p color="dark" style="font-size: 22px; font-weight: 700;">{{current | number}}/2</p>
       </ion-buttons>
@@ -205,7 +205,7 @@
      
   </ion-content>
   <ion-footer no-border *ngIf="!hideElement">
-      <ion-toolbar class="tools-footer" *ngIf="!isProfile">
+      <ion-toolbar *ngIf="!isProfile">
         </ion-toolbar>
         <ion-toolbar *ngIf="isProfile">
             <ion-buttons right >

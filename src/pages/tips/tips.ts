@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, PopoverController } from 'ionic-angular';
 import * as firebase from 'firebase';
+import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 /**
  * Generated class for the TipsPage page.
@@ -17,6 +18,7 @@ import * as firebase from 'firebase';
 export class TipsPage {
   tsProperty = '';
   toggle: boolean = false;
+  builder;
   // db = firebase.firestore().collection('feedback');
   // dbU = firebase.firestore().collection('Users');
   // dbRequest = firebase.firestore().collection('Respond');
@@ -50,7 +52,7 @@ export class TipsPage {
   // }
 
 constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-  public toastCtrl: ToastController, public popoverCtrl: PopoverController) {
+  public toastCtrl: ToastController, public popoverCtrl: PopoverController, private authService: AuthServiceProvider) {
  // this.feed=[];
 //  this.dbRequest.onSnapshot((res)=>{
 //     res.forEach((doc)=>{
@@ -66,24 +68,11 @@ constructor(public navCtrl: NavController, public navParams: NavParams, public a
 //  })
 }
 
-// ionViewDidLoad() {
-//   // console.log('ionViewDidLoad FeedbackPage');  
-  
-//   this.db.onSnapshot((res)=> {
-//     this.feed=[];
-//     res.forEach((doc) => {
-//       this.dbU.doc(doc.data().uid).onSnapshot((res)=> {
-//         let info = doc.data();
-//         let img =  res.data();
-//         let data = {info, img}
-//         this.feed.push(data);
-//       // console.log(this.feed);
-       
-//       })
-      
-//     })
-//   })
-// }
+ionViewDidLoad() {
+this.builder = this.authService.manageUsers();
+console.log('builder ? =>', this.authService.manageUsers());
+
+}
 // logRatingChange(rating) {
 //   // console.log("changed rating: ",rating);
 //  // this.db.add({ rating: rating, uid: this.uid, date: Date() });

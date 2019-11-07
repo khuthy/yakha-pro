@@ -11,13 +11,15 @@
 <div class="header" *ngIf="header">
    <img src="../../assets/icon/Yakha-assets/BuilderShape2.svg" alt="" class="fixed-image"> 
 
-  <div class="title">
-    <div class="button" >
-       <button ion-button clear menuToggle> <ion-icon  name="menu"></ion-icon></button> 
-    </div> 
-    <div class="titlecase"><h3 style="font-size: 3.5vh;">REQUESTS</h3></div>
-    <p></p>
-  </div>
+ <ion-toolbar>
+   <ion-buttons start left>
+     <button menuToggle ion-button clear ><ion-icon name="menu"></ion-icon></button>
+   </ion-buttons>
+   <ion-title text-center>Requests</ion-title>
+   <ion-buttons end right>
+      <button menuToggle ion-button clear ></button>
+    </ion-buttons>
+ </ion-toolbar>
 </div>
 
 <div class="homebuilder" id="req">

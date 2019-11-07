@@ -1,7 +1,3 @@
-<ion-header no-border>
-  <ion-toolbar *ngIf="builder" class="builderHeader"></ion-toolbar>
-  <ion-toolbar *ngIf="!builder" class="ownerHeader"></ion-toolbar>
-</ion-header>
 
 <ion-content fullscreen [style.backgroundColor]="builder ? '#F2F2F2' : '#203959'">
     <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
@@ -64,7 +60,7 @@
     <ion-row no-padding>
 
       <ion-col id="signup" col-5 position="left">
-        <div class="button-group-l" [style.backgroundColor]="builder ?  '#A49078 ' : '#015272'" (click)="gotoRegister()">
+        <div class="button-group-l" [style.backgroundColor]="builder ?  '#A49078 ' : '#015272'">
           <button ion-fab mini color="light" (click)="gotoRegister()">
             <ion-icon name="arrow-back"></ion-icon>
           </button>
@@ -75,7 +71,7 @@
       <ion-col col-2></ion-col>
 
       <ion-col id="signin" col-5>
-        <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'" (click)="loginUser()">
+        <div class="button-group-l" [style.backgroundColor]="builder ?  '#262014' : '#F2BE22'">
           <p>Sign-In</p>
           <button (click)="loginUser()" ion-fab mini color="light" >
             <ion-icon name="arrow-forward"></ion-icon>
@@ -88,7 +84,3 @@
 </ion-content>
 
 <!-- footer -->
-<ion-footer no-border *ngIf="!hideElement">
-  <ion-toolbar *ngIf="!builder" class="footer"></ion-toolbar>
-  <ion-toolbar *ngIf="builder" class="footerBuilder"></ion-toolbar>
-</ion-footer>

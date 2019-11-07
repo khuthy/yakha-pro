@@ -1,4 +1,17 @@
 page-register {
+
+  .ownerClass {
+   background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.5)), url('../../assets/imgs/splash.png');
+   background-position: center;
+   background-size:cover;
+   background-repeat: no-repeat;
+  }
+  .builderClass{
+    background: linear-gradient(rgba(27, 56, 95, 0.65), rgba(32, 57, 89, 0.794)), url('../../assets/imgs/splash.png');
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+  }
   
   .builderHeader {
     // background: red;
@@ -23,6 +36,7 @@ page-register {
 
    
 }
+
 
  .scroll-content {
     display: flex;
@@ -57,7 +71,6 @@ page-register {
 }
 
 .input {
-   border: 1px solid rgb(207, 202, 202);
    border-radius: 50px;
    outline: none;
    color: rgb(255, 255, 255);

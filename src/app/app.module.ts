@@ -80,7 +80,7 @@ import { OneSignal } from '@ionic-native/onesignal';
     BrowserModule,
     FormsModule,
     IonicModule.forRoot(MyApp, {
-      pageTransition: 'ios-transition'
+      pageTransition: 'ios-transition',
     }),
     IonicStorageModule.forRoot(),
     GooglePlaceModule

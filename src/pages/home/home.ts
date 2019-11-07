@@ -54,7 +54,7 @@ export class HomePage {
   location = false;
   name = false;
   range = false;
-  header = 'value';
+  header;
   uid = firebase.auth().currentUser.uid;
   /* Search variebles */
   homeowner = false;
@@ -124,8 +124,10 @@ export class HomePage {
    
     this.db.doc(this.uid).onSnapshot((res) => {
       if (res.data().builder == false) {
+        this.header = '';
         setTimeout(() => {
           this.loaderAnimate = false;
+          
           this.AutoComplete();
           
         }, 3000);
@@ -133,6 +135,7 @@ export class HomePage {
         this.loadMap();
       }
       if (res.data().builder == true) {
+        this.header = 'value';
         setTimeout(() => {
           this.loaderAnimate = false;
         }, 2000);
@@ -338,7 +341,7 @@ export class HomePage {
   loadMap() {
 
     this.input = 'Message of the input search show';
-    this.header = '';
+    
     let SA_BOUNDS = {
       north: -22.0913127581,
       south: -34.8191663551,

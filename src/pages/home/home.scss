@@ -130,7 +130,7 @@ page-home {
         width: 100%;
         position: relative;
         background: color($colors, secondary);
-        border-radius: 0 0 20px 20px;
+        border-radius: 0 0 10px 10px;
         color: color($colors, light);
         //margin-bottom: 20px;
         position: fixed;
@@ -165,7 +165,9 @@ page-home {
           position: absolute;
           top: 0;
           right: 0;
-          opacity: .2;
+          width: 50%;
+          height: 50%;
+          opacity: .1;
         }
       }
   
