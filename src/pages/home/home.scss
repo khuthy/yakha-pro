@@ -130,51 +130,52 @@ page-home {
       }
      
     } */
-
-
-  /* Builder side */
-  .header {
-    height: 20%;
-    width: 100%;
-    position: relative;
-    background: color($colors, secondary);
-    border-radius: 0 0 20px 20px;
-    color: color($colors, light);
-    //margin-bottom: 20px;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-
-    .title {
-      display: flex;
-      width: 100%;
-      //border: 1px solid red;
-      padding: 20px;
-      align-items: center;
-      justify-content: space-between;
-      white-space: nowrap;
-
-      .button {
-        //border: 1px solid green;
-        width: auto;
-
-        .icon {
-          color: color($colors, light);
-          font-size: 25px;
-        }
-
-      }
-
-      .titlecase {
-        display: grid;
-        align-items: center;
+  
+  
+    /* Builder side */
+      .header {
+        height: 20%;
+        width: 100%;
         position: relative;
-        top: 30px;
-        right: 15px;
-
-        h3 {
-          letter-spacing: .2em;
-          font-weight: 200;
+        background: color($colors, secondary);
+        border-radius: 0 0 10px 10px;
+        color: color($colors, light);
+        //margin-bottom: 20px;
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        .title {
+          display: flex;
+          width: 100%;
+          //border: 1px solid red;
+          padding: 20px;
+          align-items: center;
+          justify-content: space-between;
+          white-space: nowrap;
+         .button {
+           //border: 1px solid green;
+           width: auto;
+             .icon {
+               color: color($colors, light);
+               font-size: 25px;
+             }
+           
+         }
+         .titlecase {
+           h3 {
+             letter-spacing: .2em;
+             font-weight: 200;
+           }
+           
+         }
+        }
+        .fixed-image {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 50%;
+          height: 50%;
+          opacity: .1;
         }
 
       }
@@ -186,7 +187,9 @@ page-home {
       right: 0;
       opacity: .2;
     }
-  }
+  
+  
+
 
   .homebuilder {
     top: 18%;
@@ -814,4 +817,5 @@ page-home {
       // transform: rotate(360deg);
     }
   }
-}
+
+

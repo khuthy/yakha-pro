@@ -1,18 +1,5 @@
 
-<ion-header no-border>
-    <ion-toolbar *ngIf="builder" class="builderHeader"></ion-toolbar>
-    <ion-toolbar *ngIf="!builder" class="ownerHeader"></ion-toolbar>
-    </ion-header>
-    
-    <ion-content [style.backgroundColor]="builder ? '#F2F2F2' : '#203959'">
-        <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
-            <div class="maploader">
-              <div class="lds-facebook"><div></div><div></div><div></div></div>
-            </div>
-            <div class="loading-text">
-          
-            </div>
-          </div>
+    <ion-content [class]="builder ? 'builderClass' : 'ownerClass'">
       <form [formGroup]="signupForm">
 
      
@@ -76,8 +63,3 @@
   </form> 
     </ion-content>
     
-    <!-- footer -->
-    <ion-footer  no-border *ngIf="!hideElement">
-        <ion-toolbar *ngIf="!builder" class="footer"></ion-toolbar>
-        <ion-toolbar *ngIf="builder" class="footerBuilder"></ion-toolbar>
-      </ion-footer>

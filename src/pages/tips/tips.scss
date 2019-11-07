@@ -7,10 +7,10 @@ page-tips {
       font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 
-    .ownerHeader {
+    .headerBuilder {
       // background: red;
        .toolbar-background {
-           background: url('../../assets/icon/ownerShape.svg');
+           background: url('../../assets/icon/BuilderShape2.svg');
            background-position: top right;
            background-size: 40%;
            background-repeat: no-repeat;
@@ -18,6 +18,17 @@ page-tips {
  
        
    }
+   .headerOwner {
+    // background: red;
+     .toolbar-background {
+         background: url('../../assets/icon/ownerShape.svg');
+         background-position: top right;
+         background-size: 40%;
+         background-repeat: no-repeat;
+     }
+
+     
+ }
          .aboutus1 {
             height: auto;
             //border: solid red;
