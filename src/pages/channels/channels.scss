@@ -1,150 +1,141 @@
 page-channels {
-    //  .back-button {
-    
-    //   background: #cc9e14;
-    //   border-radius: 50px;
-    //   min-height: 45px; 
-     
-    // }  
-    .no-messages {
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: 700;
-    }
-    
-  .header {
-    background: color($colors, transparentowner);
+  .no-messages {
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    display: flex;
+  
+  }  .header {
     height: 20%;
+    width: 100%;
+    position: relative;
+    background: color($colors, customsendowner);
     border-radius: 0 0 10px 10px;
- 
-   p {
-   //  border: 1px solid red;
-     margin-top: 20%;
-     font-size: 5vh;
-     color: white;
-     letter-spacing: 1px;
-     padding-left: 10%;
-   }
-   
-}
-
-#owner {
-    opacity: .2;
-    position: absolute;
-    right: -5%;
+    color: color($colors, light);
+    //margin-bottom: 20px;
+    position: fixed;
     top: 0;
-    opacity: .2;
+    z-index: 100;
+    .title {
+      display: flex;
+      width: 100%;
+      //border: 1px solid red;
+      padding: 20px;
+      align-items: center;
+      justify-content: space-between;
+      white-space: nowrap;
+     .button {
+       //border: 1px solid green;
+       width: auto;
+         .icon {
+           color: color($colors, light);
+           font-size: 25px;
+         }
+       
+     }
+     .titlecase {
+       h3 {
+         letter-spacing: .2em;
+         font-weight: 200;
+       }
+       
+     }
+    }
+   
+
+  }
+
+  .fixed-image {
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 50%;
     height: 50%;
-}
-    .channels {
-      
-        background: url('../../assets/imgs/OwnerShape.svg');
-        background-position: top right;
-        background-size: 50%;
-        background-repeat: no-repeat;
-        
-  
-  
-      .title {
-        .toolbar-title {
-          color: color($colors, dark);
-          font-weight: 100;
+    opacity: .1;
+  }
+
+  .homebuilder {
+    top: 18%;
+    height: 80vh;
+    position: fixed;
+    overflow: hidden;
+    overflow-y: scroll;
+    //border: 1px solid #4d90fe;
+    display: flex;
+    background: transparent;
+    padding: 20px;
+    width: 100%;
+
+    flex-direction: column;
+
+    .cards {
+      margin-top: 5%;
+      //border: 1px solid #ddd;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.233);
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      padding-left: 1em;
+      padding-top: .5em;
+      padding-bottom: .5em;
+
+
+      .images {
+        flex-basis: 30%;
+
+        .thumb-home-builder {
+          width: 9vh;
+          height: 9vh;
+          border-radius: 50%;
+          object-fit: cover;
         }
       }
-      
-      
-    }
-    // .tools-footer {
-    //   background: url('../../assets/imgs/OwnerShapes.svg');
-    //   background-position: bottom left;
-    //   background-size: 40%;
-    //   background-repeat: no-repeat;
-    // }
-   
-      
-      .homebuilder {
-        //  padding-top: 50%;
-          height: 100%;
-          position: relative;
-          top: 25%;
-          //border: 1px solid #4d90fe;
-          display: flex;
-          background: transparent;
-          width: 100%;
-          overflow-y: auto;
-          flex-direction: column;
-          
-          .cards {
-           // padding-top: 50%;
-            margin-top: 5%;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 6px  rgba(0, 0, 0, 0.233);
-            border-radius: 5px;
-             display: flex;
-             justify-content: space-between;
-             align-items: center;
-             position: relative;
-             padding-left: 1em;
-             padding-top: .5em;
-             padding-bottom: .5em;
-            margin-top: 25vh;
-            
-             .images {
-               .thumb-home-builder {
-                 width: 10vh;
-                 height: 10vh;
-                 border-radius: 50%;
-                 object-fit: cover;
-               }
-             }
-             .informative {
-              justify-self: flex-start;
-              flex: 2;
-             }
-             .informative p {
-               position: absolute;
-               top: 1%;
-               right: 1%;
-               color: #b8b8b8;
-             }
-             .button-group-name {
-               display: flex;
-               justify-content: space-between;
-               align-items: center;
-               height: 5vh;
-               background: color($colors, ownerbutons);
-               border-radius: 50px 0 0 50px;
-               padding-left: 10px;
-               padding-top: 1vh;
-               padding-bottom: 1vh;
-              
-               p {
-                 margin: auto;
-                 flex: 1;
-                 font-size: 2.5vh;
-               }
-               button {
-                 height: 4vh;
-                 width: 4vh;
-                 .icon {
-                   font-size: 2.4vh;
-                 }
-               }
-     
-             }
-           }
-          
+
+      .informative p {
+        position: absolute;
+        top: 1%;
+        right: 1%;
+        color: #b8b8b8;
+        font-family: 'Poiret One';
+
+      }
+
+      .button-group-name {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 5vh;
+        background: color($colors, ownerbutons);
+        border-radius: 50px 0 0 50px;
+        padding-left: 10px;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+
+        //border: 1px solid red;
+        p {
+          margin: auto;
+          flex: 1;
+          font-size: 2.5vh;
         }
-        .nomessages {
-          background: aqua;
-    
-          p {
-            color: red;
-            font-size: 50%;
+
+        button {
+          height: 4vh;
+          width: 4vh;
+
+          .icon {
+            font-size: 2.4vh;
           }
         }
+
+      }
+    }
+
+  }
+
+
   }
   
