@@ -44,7 +44,7 @@ export class HomePage {
   location = false;
   name = false;
   range = false;
-  header;
+  header='jasnfkfmks';
   uid = firebase.auth().currentUser.uid;
   /* Search variebles */
   homeowner = false;
@@ -349,7 +349,7 @@ export class HomePage {
    loadMap(coords) {
 
     this.input = 'Message of the input search show';
-    
+    this.header = '';
     let SA_BOUNDS = {
       north: -22.0913127581,
       south: -34.8191663551,
