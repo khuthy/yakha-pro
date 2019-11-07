@@ -1,25 +1,25 @@
-<ion-content padding fullscreen>
-  <!-- top deco similar to builders -->
-  <ion-header no-border id="header">
-    <ion-navbar>
-      <!-- <ion-buttons right end>
-        <button ion-fab (click)="callJoint(item.user.personalNumber)" color="customcall">
-          <ion-icon name="call"></ion-icon>
-        </button>
-      </ion-buttons>  -->
-      <p id="headtitle" style="font-size: 8vw; margin: 30px">Messages</p>
-    </ion-navbar>
-    
-    <!-- <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p> -->
-  </ion-header>
 
-  <div class="homebuilder">
-    <div class="cards" *ngFor=" let b of respond">
-      <!-- Put a forloop here -->
-      <div class="images">
-        <img src="{{b.user.image}}" class="thumb-home-builder" alt="profile">
-      </div>
-      <div class="informative">
+
+<ion-content>
+    <div class="header">
+        <img src="../../assets/icon/Yakha-assets/ownerShape.svg" alt="" class="fixed-image"> 
+     
+      <ion-toolbar>
+        <ion-buttons start left>
+          <button ion-fab style="border: none; box-shadow: none;" color="ownerbutons" (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+        </ion-buttons>
+        <ion-title text-center>Requests</ion-title>
+        <ion-buttons end right>
+           <button menuToggle ion-button clear ></button>
+         </ion-buttons>
+      </ion-toolbar>
+     </div>
+<div class="homebuilder" *ngIf="respond.length > 0">
+  <div class="cards" *ngFor =" let b of respond"> <!-- Put a forloop here -->
+       <div class="images">
+        <img src="{{b.user.image}}" class="thumb-home-builder"  alt="profile">
+         </div>
+      <div class="informative" >
         <h6 style="font-size: 2.5vh;padding-left: 5%">{{b.user.fullName}}</h6>
         <p style="font-size: 2vh;">{{b.user.date | date}} </p>
       </div>
@@ -28,17 +28,11 @@
         <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
       </div>
     </div>
-    <div class="no-messages">
-      <p *ngIf="respond.length == 0" style="text-align: center;">You have no responses yet</p>
-  </div>
-    </div> 
-
-    <div class="nomessages" *ngIf="!respond">
-      <p id="empty" style="font-family: Raleway;">YOU HAVE NO MESSAGES.</p>
+ 
     </div>
+    <div class="no-messages">
+        <p *ngIf="respond.length == 0" style="text-align: center;">You have no responses yet</p>
+      </div>
+ 
     
 </ion-content>
-<ion-footer no-border>
-  <ion-toolbar class="tools-footer">
-    </ion-toolbar>
-</ion-footer>

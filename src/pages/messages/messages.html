@@ -170,7 +170,7 @@
 
         </ion-navbar>
         <img class="builder" src="../../assets/icon/ownerShape.svg" alt="builder">
-        <p text-center style="color: #fff;">{{item.user.fullName}}</p>
+        <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
       </ion-header>
       <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
         <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
@@ -228,7 +228,7 @@
                 <!-- Message -->
               </div>
               <div class="texts">
-                <p id="time-message" text-right>{{chat.chat.date | date:"medium"}}</p>
+                <p id="time-message" text-right>{{chat.chat.date | date: "shortTime" : "GMT+2"}}</p>
               </div>
             
             </div>
@@ -242,7 +242,7 @@
 
                       <div class="pdf">
                         <p></p>
-                        <p>Quotation-Y00{{chat.count}}</p>
+                        <p>Quotation-Y00{{i + 1}}</p>
                         <button ion-fab color="dark" [style.backgroundColor]="chat.chat.status== 'accepted' ? 'green' : 'declined'" mini (click)="downloadPDF(chat.chat.pdf)"><ion-icon name="download"></ion-icon></button>
                       </div>
                       
@@ -259,7 +259,7 @@
 
               </div>
               <div class="texts">
-                <p id="time-message" text-right>{{chat.chat.date | date:"medium"}}</p>
+                <p id="time-message" text-right>{{chat.chat.date | date: "shortTime"}}</p>
               </div>
 
             </div>
@@ -267,10 +267,10 @@
 
         </div>
 
+      </div>
+ </ion-slide>
 
-
-
-    </ion-slide>
+ 
   </ion-slides>
 
 </ion-content>
