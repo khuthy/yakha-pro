@@ -1,8 +1,8 @@
 <ion-header no-border>
-    <ion-toolbar class="ownerHeader" >
-       <div id="topnav" [ngClass]="{'header' : builder, 'headerOwner' : !builder}">
-          <button id="bckbtn" ion-fab color="ownerbutons" (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
-          </div>
+    <ion-toolbar [class]="builder ? 'headerBuilder' : 'headerOwner'">
+        <ion-buttons left>
+            <button ion-fab mini (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+          </ion-buttons>
     </ion-toolbar>
 
   </ion-header>

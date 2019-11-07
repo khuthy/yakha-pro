@@ -1,6 +1,9 @@
 <ion-header no-border>
     <ion-navbar color="dark">
       <ion-toolbar>
+          <ion-buttons left>
+              <button ion-fab (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+            </ion-buttons>
         <ion-title id="title">
           Making a quote for <br>
           {{quotes.ownerName}} <br>

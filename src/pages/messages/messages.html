@@ -156,11 +156,11 @@
 
       <ion-header no-border>
         <ion-navbar>
-            <ion-buttons left start>
-                <button (click)=" viewMessages()" ion-fab color="ownerbutons">
-                  <ion-icon name="arrow-back" color="light"></ion-icon>
-                </button>
-              </ion-buttons>
+          <ion-buttons left start>
+            <button (click)=" viewMessages()" ion-fab color="ownerbutons">
+              <ion-icon name="arrow-back" color="light"></ion-icon>
+            </button>
+          </ion-buttons>
 
           <ion-buttons right end>
             <button ion-fab (click)="callJoint(item.user.personalNumber)" color="customcall">
@@ -177,8 +177,12 @@
           class="container-after-pseudo">Quotation details</button>
         <button *ngIf="drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
           class="container-after-pseudo">Close details</button>
-          <p class="arrows" *ngIf="!drop" (click)="dropDown()"><ion-icon name="ios-arrow-down"></ion-icon></p>
-          <p class="arrowsUp" *ngIf="drop" (click)="dropDown()"><ion-icon name="ios-arrow-up"></ion-icon></p>
+        <!-- <p class="arrows" *ngIf="!drop" (click)="dropDown()">
+          <ion-icon name="ios-arrow-down"></ion-icon>
+        </p>
+        <p class="arrowsUp" *ngIf="drop" (click)="dropDown()">
+          <ion-icon name="ios-arrow-up"></ion-icon>
+        </p> -->
         <div class="hide-div"></div>
         <div class="content-info" *ngIf="drop">
           <div class="bricks">
@@ -208,12 +212,13 @@
             </div>
 
           </div>
+
           <div class="comment">
-            <p text-left>Comment</p>
+            <p text-left><b>Comment</b></p>
             <p text-left>{{item.data.comment}}</p>
           </div>
           <div class="housePlan">
-            <button ion-button clear (click)="open()" block>SEE HOUSE PLAN</button>
+            <button ion-button clear (click)="open()" block style="font-weight: lighter; font-family: Raleway"><u>SEE HOUSE PLAN</u></button>
           </div>
         </div>
 
@@ -230,13 +235,13 @@
               <div class="texts">
                 <p id="time-message" text-right>{{chat.chat.date | date:"medium"}}</p>
               </div>
-            
+
             </div>
           </div>
           <div class="messages" *ngIf="chat.chat.builder;">
 
             <div class="chat left">
-              
+
               <div class="texts">
                   <div *ngIf="chat.chat.pdf">
                       <div class="pdf" >
@@ -254,7 +259,9 @@
                        </div>
       
                   </div>
-                <p id="text-message" text-right>{{chat.chat.chat}} </p>
+
+                </div>
+                <!-- <p id="text-message" text-right>{{chat.chat.chat}} </p> -->
 
               </div>
               <div class="texts">
