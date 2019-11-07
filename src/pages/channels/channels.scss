@@ -57,18 +57,19 @@ page-channels {
       
       
     }
-    .tools-footer {
-      background: url('../../assets/imgs/OwnerShapes.svg');
-      background-position: bottom left;
-      background-size: 40%;
-      background-repeat: no-repeat;
-    }
+    // .tools-footer {
+    //   background: url('../../assets/imgs/OwnerShapes.svg');
+    //   background-position: bottom left;
+    //   background-size: 40%;
+    //   background-repeat: no-repeat;
+    // }
    
       
       .homebuilder {
           
-          height: 100%;
+          // height: 100%;
           position: relative;
+          top: 25%;
           //border: 1px solid #4d90fe;
           display: flex;
           background: transparent;
