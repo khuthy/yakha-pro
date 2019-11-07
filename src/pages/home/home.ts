@@ -191,10 +191,34 @@ export class HomePage {
 
   getPosition(): any {
     this.geolocation.getCurrentPosition().then(resp => {
-      this.setMapCenter(resp);
+      let coords = {
+        lat: resp.coords.latitude,
+        lng: resp.coords.longitude
+      }
+      this.loadMap(coords);
+      //console.log('current loc', resp);
       
+      // add a marker, will be different from the driving schools
+      const marker = new google.maps.Marker({
+        position: coords,
+        map: this.map,
+        icon: 'https://img.icons8.com/nolan/40/000000/user-location.png'
+      })
+      // add an info window to the user marker
+      let infoWindow = new google.maps.InfoWindow({
+        content: `You`
+      });
+      marker.addListener('click', () => {
+        infoWindow.open(this.map, marker);
+      })
     }).catch(err => {
-      this.loadMap();
+      let coords = {
+        lat: 26.2041,
+        lng: 28.0473
+      }
+      console.log('current loc err',);
+      
+      this.loadMap(coords);
     })   
   }
   loadCtrl() {
@@ -227,9 +251,11 @@ export class HomePage {
 
           // this.errorMessage('User found',doc.id)
 
-          // console.log('>>>>>>>>>>>>>>>',doc.data());
+         // console.log('>>>>>>>>>>>>>>>',doc.data());
 
           let myLatLng = new google.maps.LatLng(doc.data().lat, doc.data().lng)
+          // console.log('builder pos', myLatLng);
+          
           let marker = new google.maps.Marker({
             position: myLatLng,
             map: this.map,
@@ -319,7 +345,8 @@ export class HomePage {
     });
     alert.present();
   }
-   loadMap() {
+
+   loadMap(coords) {
 
     this.input = 'Message of the input search show';
     
@@ -329,7 +356,7 @@ export class HomePage {
       west: 13.830120477,
       east: 32.830120477,
     };
-    let latlng = new google.maps.LatLng(26.2041, 28.0473);
+    let latlng = new google.maps.LatLng(coords.lat, coords.lng);
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       center: latlng,
       restriction: {
@@ -570,15 +597,11 @@ export class HomePage {
   setMapCenter(position: Geoposition) {
     let myLatLng = { lat: position.coords.latitude, lng: position.coords.longitude };
     this.map.setCenter(myLatLng);
-
-    google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      let marker = new google.maps.Marker({
-        position: myLatLng,
-        map: this.map,
-        icon: 'https://img.icons8.com/nolan/40/000000/user-location.png'
-        //  title: 'Hello World!'
-      });
-      //  this.map.classList.add('map');
+    let marker = new google.maps.Marker({
+      position: myLatLng,
+      map: this.map,
+      title: 'Hello World!',
+      icon: 'https://img.icons8.com/nolan/40/000000/user-location.png'
     });
   }
 
