@@ -170,7 +170,7 @@
 
         </ion-navbar>
         <img class="builder" src="../../assets/icon/ownerShape.svg" alt="builder">
-        <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
+        <p text-center style="color: #fff;">{{item.user.fullName}}</p>
       </ion-header>
       <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
         <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
@@ -239,10 +239,9 @@
               
               <div class="texts">
                   <div *ngIf="chat.chat.pdf">
-
-                      <div class="pdf">
+                      <div class="pdf" >
                         <p></p>
-                        <p>Quotation-Y00{{i + 1}}</p>
+                        <p>Quotation-Y00{{chat.count}}</p>
                         <button ion-fab color="dark" [style.backgroundColor]="chat.chat.status== 'accepted' ? 'green' : 'declined'" mini (click)="downloadPDF(chat.chat.pdf)"><ion-icon name="download"></ion-icon></button>
                       </div>
                       

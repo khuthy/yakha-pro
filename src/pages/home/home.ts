@@ -108,7 +108,15 @@ export class HomePage {
   RangeSearch() {
     this.range = !this.range;
   }
-
+/* ionViewWillEnter(){
+  this.db.doc(this.uid).onSnapshot((res) => {
+    if (res.data().builder == false) {
+      //this.loadCtrl();
+      //document.getElementById('header').style.display = "none";
+      this.getPosition();
+    }
+  })
+} */
   ionViewDidLoad() {
     setTimeout(() => {
       this.AutoComplete()
@@ -120,10 +128,8 @@ export class HomePage {
       if (res.data().builder == false) {
         //this.loadCtrl();
         //document.getElementById('header').style.display = "none";
-        this.loadMap();
-        setTimeout(() => {
-          this.getPosition();
-        }, 3000);
+       // this.loadMap();
+        this.getPosition();
       }
       if (res.data().builder == true) {
         this.getRequests();
@@ -178,7 +184,7 @@ export class HomePage {
             //console.log(this.total);
 
           }
-          
+
         });
     })
   }
@@ -186,7 +192,10 @@ export class HomePage {
   getPosition(): any {
     this.geolocation.getCurrentPosition().then(resp => {
       this.setMapCenter(resp);
-    })
+      
+    }).catch(err => {
+      this.loadMap();
+    })   
   }
   loadCtrl() {
     this.loadingCtrl.create({
@@ -211,7 +220,7 @@ export class HomePage {
       res.forEach(async (doc) => {
         //  console.log('All builders............', doc.data().lat);
 
-        if (doc.data().address!=="" && doc.data().status==true) {
+        if (doc.data().address !== "" && doc.data().status == true) {
           data.builder = doc.data()
           this.builder.push(doc.data())
           // data.builder
@@ -310,7 +319,7 @@ export class HomePage {
     });
     alert.present();
   }
-  loadMap() {
+   loadMap() {
 
     this.input = 'Message of the input search show';
     this.header = '';
@@ -320,14 +329,14 @@ export class HomePage {
       west: 13.830120477,
       east: 32.830120477,
     };
-    let latlng = new google.maps.LatLng(26.2708, 28.1123);
+    let latlng = new google.maps.LatLng(26.2041, 28.0473);
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       center: latlng,
       restriction: {
         latLngBounds: SA_BOUNDS,
         strictBounds: true,
       },
-      zoom: 11,
+      zoom: 9,
       disableDefaultUI: true,
       styles: [
         {
@@ -573,37 +582,12 @@ export class HomePage {
     });
   }
 
-  search(event) {
-    let searchKey: string = event;
-    // let firstLetter = searchKey;
-    // this.builder = [];
-    // this.db.where('fullName', '==', firstLetter)
-    //   .where('builder', '==', true)
-    //   .onSnapshot((res) => {
-    //     if (res.size > 0) {
-    //       this.builder = [];
-    //       res.forEach((doc) => {
-    //         this.builder.push(doc.data());
-    //       })
-    //     } else {
-    //       //  console.log(this.builder);
-    //       this.builder = [];
-    //       this.db.where("builder", "==", true).onSnapshot(snapshot => {
-    //         snapshot.forEach(doc => {
-    //           this.builder.push(doc.data());
-    //           this.bUID = doc.id;
-    //         });
-    //         //console.log('Builders: ', this.builder);
-    //       });
-    //     }
-    //   })
-  }
   async setPriceRange(param) {
     this.price = param;
     this.builder = [];
     // console.log("Price range = "+ this.price);
     if (this.price >= 0) {
-    await  this.db.where('price', '>=', param)
+      await this.db.where('price', '>=', param)
         .onSnapshot((res) => {
           this.builder = [];
           // console.log(res.);
@@ -650,25 +634,24 @@ export class HomePage {
     this.navCtrl.push(QuotationFormPage, uid);
   }
 
- 
+
 
   getRequests() {
-    let data = {info: {}, user: {}, id: {}}
+    let data = { info: {}, user: {}, id: {} }
     this.dbRequest.where('builderUID', '==', this.uid).onSnapshot(res => {
-     // console.log(res.size);
-    
+      // console.log(res.size);
       res.forEach((bDoc) => {
         this.db.doc(bDoc.data().hOwnerUid).get().then((res) => {
-          data.info = bDoc.data(); 
-        data.id = bDoc.id;
+          data.info = bDoc.data();
+          data.id = bDoc.id;
           data.user = res.data();
-        //  console.log(data);
-        
-        this.owner.push(data)
-        data = {info: {}, user: {}, id: {}}
+          //  console.log(data);
+
+          this.owner.push(data)
+          data = { info: {}, user: {}, id: {} }
         })
-        
-      }) 
+
+      })
     })
     this.builder = [];
   }

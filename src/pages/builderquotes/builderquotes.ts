@@ -179,7 +179,6 @@ export class BuilderquotesPage {
 uid: "Na18VBBzV5aSuOEh7eARHj6jYeD2" */
 this.extras = [];
     this.dbChat.doc(this.navParams.data.uid).collection(this.uid).doc(this.navParams.data.docID).onSnapshot((res)=>{
-     
       this.extras = res.data().extras
     //  console.log('Extras.....',this.extras);
     })
@@ -261,19 +260,22 @@ this.extras = [];
     this.loaderAnimate = true;
     this.hide=true
     /* calculations */
-  
     /* discount amount of extras */
     this.quotes.overallHouse = ((this.quotes.price * this.quotes.meter) - ((this.quotes.price * this.quotes.meter) * (this.quotes.discount / 100)));
     this.quotes.subtotal = this.value - (this.value * this.quotes.discountAmount / 100)
     this.quotes.total = ((this.quotes.price * this.quotes.meter) - ((this.quotes.price * this.quotes.meter) * (this.quotes.discount / 100))) + this.quotes.subtotal;
     this.quotes.discountPrice = (this.value) * this.quotes.discountAmount / 100;
     console.log('total with extras: ', this.quotes.total, 'total without extras:', this.quotes.subtotal);
-    var items = this.extras.map((item) => {
+    let items = this.extras.map((item) => {
       console.log('Extras in table...', item);
+      if (item.name.length>=1) {
+        return [item.name, item.quantity, 'R' + item.price + '.00'];
+      } else {
+        return ['*********', 0, 'R0.00']
+      }
       
-      return [item.name, item.quantity, 'R' + item.price + '.00'];
     });
-    var docDefinition = {
+    let docDefinition = {
       watermark: { text: "YAKHA", color: "gray", opacity: 0.3, bold: true, alignment: "right" },
       content: [
         {
@@ -299,7 +301,7 @@ this.extras = [];
         { text: 'Expiry', style: 'subheader' },
         { text: this.quotes.expiry },
 
-        { text: 'Items', style: 'subheader' },
+        { text: 'Extras', style: 'subheader' },
         {
           style: 'itemsTable',
           table: {
@@ -425,15 +427,14 @@ this.extras = [];
   }
 
   saveData() {
-   
-    //this.loaderAnimate = true;
+    this.loaderAnimate = true;
     //console.log('pdf link............:', this.pdfDoc);
     this.dbRespond.doc(this.navParams.data.docID).set(this.quotes).then(()=>{
      // this.quotes.pdfLink = this.pdfDoc;
       setTimeout(() => {
         this.loaderAnimate = false;
-      }, 3000);
-      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, date: Date(), builder: true, id:this.navParams.data.docID }).then((res) => {
+      }, 2000);
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).doc(this.navParams.data.docID).collection("convo").add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, date: new Date().getTime(), builder: true, id:this.navParams.data.docID }).then((res) => {
         this.quotes.pdfLink= '';
       })
       this.dbChat.doc(this.uid).collection(this.navParams.data.uid).add(this.quotes).then((resDoc)=>{

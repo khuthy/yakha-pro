@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { Http } from '@angular/http';
+
 
 
 @Injectable()
@@ -12,7 +12,15 @@ export class AuthServiceProvider {
  unreadMessages = []
  public userProfile: firebase.firestore.DocumentReference;
   user;
-  constructor(public http: Http) {}
+  n =[];
+  constructor() {
+    firebase.firestore().collection("Respond").onSnapshot((res)=>{
+      for (let y = 0; y < res.docs.length; y++) {
+        this.n.push(y);
+      }
+    })
+  }
+
 
  /*  login() {
     this.isLoggedIn = true;

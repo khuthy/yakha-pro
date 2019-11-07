@@ -77,7 +77,9 @@ export class MessagesPage {
   manageUser: boolean;
   chatting = [];
   msgRespond = [];
+  pdfMsg = [];
   pdf = '';
+  pdfIndex: {};
   //imageBuilder;
   currentUid = '';
   chat: number = Date.now();
@@ -104,7 +106,7 @@ export class MessagesPage {
     this.imageBuilder = this.autoUid.img;
     this.personalNumber = this.autoUid.personalNumber;
 
-    
+
 
   }
 
@@ -125,41 +127,37 @@ export class MessagesPage {
 
 
 
- async slideChanged() {
+  async slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
     this.currentUid = this.msgSent[currentIndex].id;
     // let curr = this.messages[currentIndex];
-  //  console.log('Current...', this.currentUid);
-  this.dbChat.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).onSnapshot((doc) => {
-    this.hideCard = '';
-    this.quoteStatus = doc.data().status;
-  })
-  const query = this.dbChatting.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).collection("convo").orderBy('date', 'asc')
-  return await query.onSnapshot((res)=>{
-    this.messages = [];
-     for (let i = 0; i < res.docs.length; i++) {
-       if (!res.docs[i].data().pdfLink) {
-       } else {
-         console.log('Not found.....');
-       }
-       this.messages.push({ chat: res.docs[i].data(), id: res.docs[i].id })
-     }
-     console.log('Response data', this.messages);
- 
-  });
-  /* return snapshot.docs.map((res) => {
-    this.messages = [];
-   // for (let i = 0; i < res.docs.length; i++) {
-      if (!res.data().pdfLink) {
-      } else {
-        console.log('Not found.....');
-      }
-      this.messages.push({ chat: res.data(), id: res.id })
- //   }
-    console.log('Response data', this.messages);
+    //  console.log('Current...', this.currentUid);
+    this.dbChat.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).onSnapshot((doc) => {
+      this.hideCard = '';
+      this.quoteStatus = doc.data().status;
+    })
 
-  }) */
-    
+    const query = this.dbChatting.doc(this.uid).collection(this.navParams.data.id).doc(this.currentUid).collection("convo").orderBy('date', 'asc')
+    return await query.onSnapshot((res) => {
+      this.messages = [];
+      // this.pdfMsg = [];
+      let files = 0;
+      for (let i = 0; i < res.docs.length; i++) {
+        if (res.docs[i].data().pdf) {
+          files = files + 1
+          this.messages.push({ chat: res.docs[i].data(), id: res.docs[i].id, count: files })
+        } else {
+          this.messages.push({ chat: res.docs[i].data(), id: res.docs[i].id })
+        }
+      }
+
+
+      /*   this.messages.forEach((item)=>{
+         console.log('Each response', item.chat.pdf);
+        }) */
+
+    });
+
 
   }
 

@@ -19,10 +19,6 @@ export class BuilderMessagesPage {
   drop: boolean = false;
   imageBuilder: string;
   @ViewChild('slides') slides: Slides;
-
-
-
-
   dbChat = firebase.firestore().collection('chat_msg');
   dbChatting = firebase.firestore().collection('chatting');
   dbIncoming = firebase.firestore().collection('Request');
@@ -173,8 +169,6 @@ export class BuilderMessagesPage {
     }
   }
   respond() {
-
-
     this.navCtrl.push(BuilderquotesPage, { docID: this.currentUid, uid: this.navParams.data.uid });
   }
   getOwnerDetails() {

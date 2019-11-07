@@ -143,7 +143,7 @@ export class MyApp {
         }
         firebase.firestore().collection('Users').doc(user.uid).onSnapshot((profile) => {
           if (profile.exists) {
-            // firebase.firestore().collection('Users').doc(user.uid).update({ tokenID: this.token })
+            //  firebase.firestore().collection('Users').doc(user.uid).update({ tokenID: this.token })
             firebase.firestore().collection('Request').where('hOwnerUid', '==', firebase.auth().currentUser.uid).onSnapshot((request) => {
               if (!request.empty) {
                 request.forEach(list => {
