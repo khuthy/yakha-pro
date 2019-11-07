@@ -194,7 +194,7 @@ export class HomePage {
       let coords = {
         lat: resp.coords.latitude,
         lng: resp.coords.longitude
-      }
+      } 
       this.loadMap(coords);
       //console.log('current loc', resp);
       
