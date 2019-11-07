@@ -24,9 +24,26 @@ export class ChannelsPage {
   }
 
   ionViewDidLoad() {
-    let data = { data: {}, user: {} }
+    let data = {info: {}, user: {}, id: {}}
+    this.dbRequest.where('hOwnerUid', '==', this.uid).onSnapshot(res => {
+     // console.log(res.size);
+    
+      res.forEach((bDoc) => {
+        this.dbUser.doc(bDoc.data().builderUID).get().then((res) => {
+          data.info = bDoc.data(); 
+        data.id = bDoc.id;
+          data.user = res.data();
+        //  console.log(data);
+        
+        this.respond.push(data)
+        data = {info: {}, user: {}, id: {}}
+        })
+        
+      }) 
+    })
+   /*  let data = { data: {}, user: {} }
     this.respond = [];
-    this.dbRequest.where('hOwnerUid','==',this.uid).onSnapshot((res) => {
+    this.dbChat.where('hOwnerUid','==',this.uid).onSnapshot((res) => {
       data = { data: {}, user: {} }
       this.respond = [];
     res.forEach((reqInfo)=>{    
@@ -40,7 +57,7 @@ export class ChannelsPage {
     })
     console.log('My messages', this.respond);
     
-    })
+    }) */
   }
   gotoMessages(id, name) {
     this.navCtrl.push(MessagesPage, { id, name });

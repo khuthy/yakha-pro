@@ -25,22 +25,24 @@
         <h6 style="font-size: 2.5vh;padding-left: 5%">{{b.user.fullName}}</h6>
         <p style="font-size: 2vh;">{{b.user.date | date}} </p>
       </div>
-      <div  (click)="gotoMessages(b.user.uid, b.user.fullName)" class="button-group-name" >
+      <div (click)="gotoMessages(b.user.uid, b.user.fullName)" class="button-group-name">
         <p style="text-align: center; color: #fff;">View</p>
-        <button ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
+        <button ion-fab mini color="light">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
       </div>
     </div>
-    <div class="no-messages">
-      <p *ngIf="respond.length == 0" style="text-align: center;">You have no responses yet</p>
+    <div *ngIf="respond.length == 0" class="no-messages">
+      <p  style="text-align: center;">You have no responses yet</p>
+    </div>
   </div>
-    </div>
 
-    <div class="nomessages" *ngIf="!respond">
-      <p id="empty" style="font-family: Raleway;">YOU HAVE NO MESSAGES.</p>
-    </div>
-    
+  <div class="nomessages" *ngIf="!respond">
+    <p id="empty" style="font-family: Raleway;">YOU HAVE NO MESSAGES.</p>
+  </div>
+
 </ion-content>
 <ion-footer no-border>
   <ion-toolbar class="tools-footer">
-    </ion-toolbar>
+  </ion-toolbar>
 </ion-footer>

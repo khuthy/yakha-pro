@@ -170,7 +170,7 @@
 
         </ion-navbar>
         <img class="builder" src="../../assets/icon/ownerShape.svg" alt="builder">
-        <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
+        <p text-center style="color: #fff;">{{item.user.fullName}}</p>
       </ion-header>
       <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
         <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
@@ -233,7 +233,7 @@
                 <!-- Message -->
               </div>
               <div class="texts">
-                <p id="time-message" text-right>{{chat.chat.date | date: "shortTime" : "GMT+2"}}</p>
+                <p id="time-message" text-right>{{chat.chat.date | date:"medium"}}</p>
               </div>
 
             </div>
@@ -243,32 +243,21 @@
             <div class="chat left">
 
               <div class="texts">
-                <div id="chat" *ngIf="chat.chat.pdf">
-
-                  <div class="pdf">
-                    <p></p>
-                    <p>Quotation-Y00{{i + 1}}</p>
-                    <button ion-button icon-right color="dark"
-                    [style.backgroundColor]="chat.chat.status== 'accepted' ? 'green' : 'declined'" mini
-                    (click)="downloadPDF(chat.chat.pdf)" >
-                      Download PDF
-                      <ion-icon name="download"></ion-icon>
-                    </button>
-                  </div>
-
-                  <div id="buttons" *ngIf="chat.chat.status">
-                    <p style="text-align: center; width: 100%;"
-                      [style.color]="chat.chat.status == 'accepted' ? 'green' : 'declined'">{{quoteStatus}}</p>
-                  </div>
-                  <div id="buttons" *ngIf="!chat.chat.status">
-                    <p>Accept the <br> quotation?</p>
-                    <button ion-fab small color="danger" [disabled]="disable" (click)="declineQoute(chat.id)" round>
-                      <ion-icon name="close"></ion-icon>
-                    </button>
-                    <button ion-fab small color="customcall" [disabled]="disable" (click)="acceptQoute(chat.id)"
-                      round>
-                      <ion-icon name="checkmark"></ion-icon>
-                    </button>
+                  <div *ngIf="chat.chat.pdf">
+                      <div class="pdf" >
+                        <p></p>
+                        <p>Quotation-Y00{{chat.count}}</p>
+                        <button ion-fab color="dark" [style.backgroundColor]="chat.chat.status== 'accepted' ? 'green' : 'declined'" mini (click)="downloadPDF(chat.chat.pdf)"><ion-icon name="download"></ion-icon></button>
+                      </div>
+                      
+                        <div id="buttons" *ngIf="chat.chat.status">
+                         <p style="text-align: center; width: 100%;" [style.color]="chat.chat.status == 'accepted' ? 'green' : 'declined'">{{quoteStatus}}</p>  
+                        </div>
+                        <div id="buttons" *ngIf="!chat.chat.status">
+                          <button ion-button small clear  color="danger" [disabled]="disable" (click)="declineQoute(chat.id)" round>Decline</button>
+                          <button ion-button small color="customcall" [disabled]="disable" (click)="acceptQoute(chat.id)" round>Accept</button>
+                       </div>
+      
                   </div>
 
                 </div>
@@ -276,7 +265,7 @@
 
               </div>
               <div class="texts">
-                <p id="time-message" text-right>{{chat.chat.date | date: "shortTime"}}</p>
+                <p id="time-message" text-right>{{chat.chat.date | date:"medium"}}</p>
               </div>
 
             </div>

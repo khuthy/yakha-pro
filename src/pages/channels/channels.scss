@@ -76,8 +76,10 @@ page-channels {
           width: 100%;
           overflow-y: auto;
           flex-direction: column;
+          
           .cards {
-            margin-top: 0%;
+           // padding-top: 50%;
+            margin-top: 5%;
             border: 1px solid #ddd;
             box-shadow: 0 2px 6px  rgba(0, 0, 0, 0.233);
             border-radius: 5px;

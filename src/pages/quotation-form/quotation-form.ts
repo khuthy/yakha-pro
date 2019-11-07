@@ -541,7 +541,14 @@ export class QuotationFormPage {
   
     return this.alertCtrl.create({
       subTitle: message,
-      buttons: ['Ok']
+      buttons: [
+      {
+        text: 'Ok',
+        handler: data => {
+         // console.log('Saved clicked');
+         this.navCtrl.setRoot(HomePage);
+        }
+      }]
     }).present()
   }
   createQuations() {
@@ -571,7 +578,7 @@ export class QuotationFormPage {
                })
              }) */
        
-          this.db.collection('Request').doc(this.HomeOwnerQuotation.builderUID).set(this.HomeOwnerQuotation).then((res) => {
+          this.db.collection('Request').add(this.HomeOwnerQuotation).then((res) => {
             if(this.HomeOwnerQuotation.builderUID)
             {
               this.db.collection('Users').doc(this.HomeOwnerQuotation.builderUID).onSnapshot((out)=>{
@@ -600,7 +607,7 @@ export class QuotationFormPage {
                 this.hideHeader = true;
               }, 2000); */
               // this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).onSnapshot
-              console.log(this.HomeOwnerQuotation.brickType);
+             // console.log(this.HomeOwnerQuotation.brickType);
               
             this.db.collection('chat_msg').doc(this.uid).collection(this.HomeOwnerQuotation.builderUID).add(this.HomeOwnerQuotation).then((res) => {
               /*   this.HomeOwnerQuotation.extras.forEach((item) => {

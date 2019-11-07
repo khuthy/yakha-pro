@@ -24,7 +24,7 @@
 <ion-content fullscreen>
     <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
         <div class="maploader">
-          <div class="lds-facebook"><div></div><div></div><div></div></div>
+          <div class="lds-facebook"><div></div><div></div><div></div></div><p style="color:white; text-align: center;">{{loaderMessages}}</p>
         </div>
        <!--  <div class="loading-text">
           <p>Loading Map</p>
@@ -35,8 +35,8 @@
       <ion-row justify-content-center>
         <ion-col col-12 id="image">
             <div class="thumb" id="hide-div">
-              <img *ngIf="profileImage"  src="{{profileImage}}">
-              <img *ngIf="!profileImage" width="1.5vh" src="../../assets/icon/Yakha-assets/_ionicons_svg_ios-person.svg"  >
+              <img *ngIf="HomeOwnerProfile.image"  src="{{HomeOwnerProfile.image}}">
+              <img *ngIf="!HomeOwnerProfile.image" width="1.5vh" src="../../assets/icon/Yakha-assets/_ionicons_svg_ios-person.svg"  >
               <button color="light" ion-fab mini class="upload-image" (click)="selectImage()"><ion-icon name="create"></ion-icon></button>
             </div> 
         </ion-col>
@@ -77,7 +77,7 @@
 
       <ion-row justify-content-center>
           <ion-col col-10>
-              <button class="next" block round ion-button color="dark" >Done</button>
+              <button (click)="createprofile(profileForm)" class="next" block round ion-button color="dark" >Done</button>
           </ion-col>
         </ion-row>
       </ion-grid>

@@ -28,7 +28,7 @@ import { SuccessPage } from '../pages/success/success';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StatusBar } from '@ionic-native/status-bar';
-import { HttpModule, /* other http imports */ } from "@angular/http";
+
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 import { IonicStorageModule } from '@ionic/storage';
@@ -85,8 +85,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
       pageTransition: 'ios-transition',
     }),
     IonicStorageModule.forRoot(),
-    GooglePlaceModule,
-    HttpModule
+    GooglePlaceModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

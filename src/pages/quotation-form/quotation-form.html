@@ -34,14 +34,14 @@
   </div>
 
   <div class="footer" *ngIf="!hid">
-    <div class="button-group" *ngIf="steps=='stepone'" (click)="slideState()">
+    <div class="button-group" *ngIf="steps=='stepone'">
       <p>Next step</p>
       <button (click)="slideState()" class="send-quotes" ion-fab color="light">
         <ion-icon name="arrow-forward"></ion-icon>
 
       </button>
     </div>
-    <div class="button-group" *ngIf="steps=='steptwo'" (click)="slideSecond()">
+    <div class="button-group" *ngIf="steps=='steptwo'" >
         <p>Next step</p>
         <button (click)="slideSecond()" class="send-quotes" ion-fab color="light">
           <ion-icon name="arrow-forward"></ion-icon>
@@ -56,7 +56,7 @@
       </button>
     </div>
     <!-- edit buttton -->
-    <div class="button-group" id="edit" *ngIf="steps=='stepthree'" (click)="editQuotes()">
+    <div class="button-group" id="edit" *ngIf="steps=='stepthree'" >
       <button class="send-quotes" (click)="editQuotes()" ion-fab color="light">
         <ion-icon name="arrow-back"></ion-icon>
 

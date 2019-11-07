@@ -31,8 +31,8 @@
          
   
               <div class="image-profile-builder">
-                  <img *ngIf="profileImage" src="{{profileImage}}" class="thumbnail-image" (click)="selectImage()">
-                  <img *ngIf="!profileImage" src="../../assets/icon/Yakha-assets/_ionicons_svg_ios-person.svg" class="holder">
+                  <img *ngIf="this.builderProfile.image" src="{{this.builderProfile.image}}" class="thumbnail-image" (click)="selectImage()">
+                  <img *ngIf="!this.builderProfile.image" src="../../assets/icon/Yakha-assets/_ionicons_svg_ios-person.svg" class="holder">
                 <button class="btn-create" ion-fab color="light" (click)="selectImage()"><ion-icon name="create"></ion-icon></button>
               </div>
               <p class="error" style="text-align: center;" *ngIf="!profileForm.get('profileFormFirstSlide').get('builder').value">Please Upload a profile image</p>

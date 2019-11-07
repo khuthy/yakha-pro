@@ -65,6 +65,7 @@ export class AccountSetupPage {
   back: boolean;
   hid: string = '';
   hideElement: boolean;
+  loaderMessages: string;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private authUser: AuthServiceProvider,
@@ -170,16 +171,18 @@ export class AccountSetupPage {
       if(this.back == true) {
         await this.db.doc(this.uid).update(this.HomeOwnerProfile).then((res) => {
           this.isProfile = true;
-    
+         // this.navCtrl.pop();
         })
       }else {
         await this.db.doc(this.uid).update(this.HomeOwnerProfile).then((res) => {
-          this.navCtrl.setRoot(HomePage);
-    
+         this.navCtrl.setRoot(HomePage)
+         // this.navCtrl.pop();
         })
       }
      
        setTimeout(() => {
+
+
          this.loaderAnimate = false;
        }, 2000)
     }else {
@@ -210,7 +213,8 @@ export class AccountSetupPage {
         let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         this.uploadprogress = progress;
         console.log('Uploading image..', progress);
-
+        this.loaderAnimate = true;
+        this.loaderMessages = 'Uploading Image...';
         if (progress == 100) {
           this.isuploading = false;
         }
@@ -218,7 +222,10 @@ export class AccountSetupPage {
       }, () => {
         upload.snapshot.ref.getDownloadURL().then(downUrl => {
           this.HomeOwnerProfile.image = downUrl;
-          console.log('Image downUrl.............', this.HomeOwnerProfile.image);
+         // console.log('Image downUrl.............', this.HomeOwnerProfile.image);
+         setTimeout(() => {
+          this.loaderAnimate = false;
+        }, 1000);
           this.isuploaded = true;
         })
       })
