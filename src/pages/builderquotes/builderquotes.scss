@@ -16,12 +16,9 @@ page-builderquotes {
       justify-content: flex-start;
 
       button {
-        background: transparent;
-        color: red;
+        background: color($colors, primary);
         min-height: 45px;
         border-radius: 50px;
-        display: none;
-        z-index: 10;
       }
     }
 

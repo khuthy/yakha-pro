@@ -6,6 +6,11 @@ page-builder-messages {
     align-items: center;
     font-weight: 700;
   }
+  .toolbar {
+    .back-button {
+      display: none;
+    }
+  }
 
   .arrows {
     width: 10%;
