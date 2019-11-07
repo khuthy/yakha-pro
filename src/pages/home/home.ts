@@ -216,7 +216,7 @@ export class HomePage {
         lat: 26.2041,
         lng: 28.0473
       }
-      console.log('current loc err',);
+      console.log('current loc err',err);
       
       this.loadMap(coords);
     })   
