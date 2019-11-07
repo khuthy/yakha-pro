@@ -182,19 +182,20 @@ this.extras = [];
       this.extras = res.data().extras
     //  console.log('Extras.....',this.extras);
     })
-    this.dbRequest.doc(this.uid).onSnapshot((res) => {
-      console.log('data: =>',res.data());
-      
-      this.quotes.hOwnerUID = res.data().hOwnerUid;
+  //  this.dbRequest.where("hOwnerUid","==",this.navParams.data.uid).onSnapshot((res) => {
+     // console.log('data: =>',res.data());
+     /*  res.forEach((doc)=>{
+        this.quotes.hOwnerUID = doc.data().hOwnerUid;
+      })
+       */
       this.dbUsers.doc(this.navParams.data.uid).onSnapshot((res) => {
         if (res.data().builder == false) {
-         // this.quotes.ownerUID = this.quotes.hOwnerUID;
+          this.quotes.hOwnerUID = res.data().uid;
           this.quotes.ownerAddress = res.data().ownerAddress;
           this.quotes.ownerName = res.data().fullName;
-        
         }
       })
-    })
+   // })
     this.dbUsers.doc(this.uid).onSnapshot((doc) => {
       this.quotes.address = doc.data().address;
       this.quotes.fullName = doc.data().fullName;
