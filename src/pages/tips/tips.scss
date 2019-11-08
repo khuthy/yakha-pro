@@ -3,32 +3,14 @@ page-tips {
     padding: 0 !important;
     overflow: hidden;
     
-    *{
+    p, h1, h2, h3, h4, h5, h6{
       font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 
-    .headerBuilder {
-      // background: red;
-       .toolbar-background {
-           background: url('../../assets/icon/BuilderShape2.svg');
-           background-position: top right;
-           background-size: 40%;
-           background-repeat: no-repeat;
-       }
  
-       
-   }
-   .headerOwner {
-    // background: red;
-     .toolbar-background {
-         background: url('../../assets/icon/ownerShape.svg');
-         background-position: top right;
-         background-size: 40%;
-         background-repeat: no-repeat;
-     }
 
      
- }
+ 
          .aboutus1 {
             height: auto;
             //border: solid red;
@@ -58,7 +40,7 @@ page-tips {
     align-items: center;
                   h4 {
                    font-size: 2px;
-                     border:1px solid blue;
+                     border:1px solid #203959;
                       letter-spacing: 1px;
                       font-weight: 300;
                       font-family:'lato';
@@ -73,11 +55,12 @@ page-tips {
             }
             .inform{
              // background:green;
-           width:90%;
+           width:100%;
            height: 70%;
           overflow-y: auto;
-          margin-top:3%;
-          margin-left:5%;
+         
+         /*  margin-top:3%;
+          margin-left:5%; */
           P {
             letter-spacing: 1PX;;
             padding-left: 3%;
@@ -251,10 +234,10 @@ page-tips {
              background-position: left;
              background-repeat: no-repeat;
              width:100%;
-             height:12%;
+             height:15%;
              background-position: bottom left;
              background-repeat: no-repeat;
-             background-size: 37%;
+             background-size: 40%;
              position: fixed;
              bottom:-2PX;
              left: -6%;
