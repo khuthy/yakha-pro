@@ -169,7 +169,9 @@ export class BuilderMessagesPage {
     }
   }
   respond() {
-    this.navCtrl.push(BuilderquotesPage, { docID: this.currentUid, uid: this.navParams.data.uid });
+
+    
+   this.navCtrl.push(BuilderquotesPage, { docID: this.currentUid, uid: this.navParams.data.uid });
   }
   getOwnerDetails() {
     this.dbProfile.doc(this.navParams.data.uid).onSnapshot(owners => {
