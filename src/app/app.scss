@@ -222,7 +222,7 @@
             &::after {
                height: 1px;
             
-               background: #707070;
+               background: #cee1ff;
                position: absolute;
                content: '';
                  bottom: -20%;
@@ -268,7 +268,8 @@
                 font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
                 }
               .icon {
-               font-size: 6.5vh
+               font-size: 6.5vh;
+               color: #707070;
                
             }
             .badge {
