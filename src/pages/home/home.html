@@ -157,7 +157,7 @@
 
 <!-- </ion-content> -->
 
-<ion-header no-border>
+<!-- <ion-header no-border>
     <ion-toolbar>
         <ion-buttons left start>
             <button icon-only ion-button menuToggle color="light">
@@ -171,7 +171,8 @@
       </button>
         </ion-buttons>
     </ion-toolbar>
-</ion-header>
+</ion-header> -->
+<!--
 <ion-content fullscreen>
     <div class="container">
         <div class="profile">
@@ -317,7 +318,7 @@
 
 
 </ion-content>  
-<!-- 
+-->
 <ion-header no-border>
   <ion-toolbar>
       <ion-buttons left start>
@@ -325,7 +326,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
       </ion-buttons>
-      <ion-searchbar *ngIf="activateSearch" (ionFocus)="keyboardListener($event)"></ion-searchbar>
+      <ion-searchbar class="searchbar" mode="ios" *ngIf="activateSearch" (ionFocus)="keyboardListener($event)"></ion-searchbar>
       <ion-buttons right end>
           <button icon-only ion-button (click)="openSearch()" color="light">
       <ion-icon [name]="icon"></ion-icon>
@@ -336,9 +337,68 @@
 <ion-content fullscreen>
     <main class="main"></main>
       <section class="container">
-        <div class="profile-container">d</div>
+        <div class="profile-container">
+          <div class="profile">
+            <img src="../../assets/imgs/builders.png">
+          </div>
+          <div class="profile-info">
+            <h4>Nkwe Justice</h4>
+            <p>Soweto, Johannesburg</p>
+          </div>
+        </div>
         <div class="slides">
-          <h3>Builders in Johannesburg 30</h3>
+           <section class="location">
+             <p>Builders in Soweto: 30</p>
+           </section>
+            <section class="overflow-slides">
+              <div class="slides-card">
+                <div class="slide">
+                  <div class="profile"><img src="../../assets/imgs/builders.png" alt=""></div>
+                  <div class="information">
+                    <p class="name">Khuthy</p>
+                    <p class="price">R400.00</p>
+                    <p class="experience">2 years Exp</p>
+                  </div>
+                  <div class="btn-request">
+                    <p>Request</p>
+                    <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="slides-card">
+                  <div class="slide">
+                    <div class="profile"><img src="../../assets/imgs/builders.png" alt=""></div>
+                    <div class="information">
+                      <p class="name">Khuthy Muenda</p>
+                      <p class="price">R400.00</p>
+                      <p class="experience">2 years Exp</p>
+                    </div>
+                    <div class="btn-request">
+                      <p>Request</p>
+                      <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="slides-card">
+                    <div class="slide">
+                      <div class="profile"><img src="../../assets/imgs/builders.png" alt=""></div>
+                      <div class="information">
+                        <p class="name">Khuthy</p>
+                        <p class="price">R400.00 p/m2</p>
+                        <p class="experience">2 years Exp</p>
+                      </div>
+                      <div class="btn-request">
+                        <p>Request</p>
+                        <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                      </div>
+                    </div>
+                    
+                  </div>
+             
+            </section>
+          <!-- <h3>Builders in Johannesburg 30</h3>
           <div class="slide">
                          <div class="home-builder-card" padding-bottom padding-left padding-right>
                             <div class="card-holder">
@@ -379,11 +439,51 @@
             <div class="card-holder">
               
             </div>
-          </div> 
+          </div>  -->
         </div>
-        <div class="cards" padding>
-          
+        <div class="cards">
+            <div class="viewSection">
+              <p>Other Builders</p>
+              <p class="all" (click)="showAllBuilders()">{{btnAll}} <ion-icon [name]="iconAll"></ion-icon></p>
+            </div>
+            <div class="all-builders">
+              <div class="cards-builders">
+                <div class="title">
+                  <p>Khuthy Builder</p>
+                </div>
+                <div class="image"><img src="../../assets/imgs/builders.png" alt="khuthy"></div>
+                <div class="info-card-builder">
+                    <p>R400.00 p/m2</p>
+                    <p>2year Exp</p>
+                    <p>Include Roofing</p>
+                </div>
+                <div class="londan"></div>
+                <div class="btn-request">
+                    <p>Request</p>
+                    <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                  </div>
+              </div>
+            
+             
+                
+                    <div class="cards-builders">
+                        <div class="title">
+                          <p>Khuthy Builder</p>
+                        </div>
+                        <div class="image"><img src="../../assets/imgs/builders.png" alt="khuthy"></div>
+                        <div class="info-card-builder">
+                            <p>R400.00 p/m2</p>
+                            <p>2year Exp</p>
+                            <p>Exclude Roofing</p>
+                        </div>
+                        <div class="londan"></div>
+                        <div class="btn-request">
+                            <p>Request</p>
+                            <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                          </div>
+                      </div>
+            </div>
         </div>
       </section>
 
-</ion-content>  -->
+</ion-content>  

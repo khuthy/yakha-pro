@@ -48,45 +48,41 @@ export class HomePage {
     }
   }
   showAllBuilders() {
-    let profile = this.elementRef.nativeElement.children[1].children[1].children[0].children[0];
-      let nearByBuilders = this.elementRef.nativeElement.children[1].children[1].children[0].children[1];
-      let allBuilders = this.elementRef.nativeElement.children[1].children[1].children[0].children[2];
-      let cards = this.elementRef.nativeElement.children[1].children[1].children[0].children[2].children[1].children.length;
 
-      console.log(cards);
+    console.log(this.elementRef.nativeElement.children[1].children[1].children[1].children[2]);
+  
+      let allBuilders = this.elementRef.nativeElement.children[1].children[1].children[1].children[2];
+      let cards = this.elementRef.nativeElement.children[1].children[1].children[1].children[2].children[1].children.length;
       
+
+     
+      console.log(cards, 'dfjdn')
 
       if(this.showBuilders == false) {
       this.showBuilders = true;
       
       this.btnAll = 'Hide'
-        this.iconAll = 'arrow-down'
-      this.renderer.setStyle(profile, 'display', 'none');
-      this.renderer.setStyle(profile, 'transition', 'all 1s');
-      this.renderer.setStyle(nearByBuilders, 'display', 'none');
-      this.renderer.setStyle(nearByBuilders, 'transition', 'all 1s');
-      this.renderer.setStyle(allBuilders, 'top', '10%');
-      this.renderer.setStyle(allBuilders, 'height', '90%');
-      this.renderer.setStyle(allBuilders, 'transition', 'all 500ms');
+      this.iconAll = 'arrow-down'
+      this.renderer.addClass(allBuilders, 'cards-expand');
       for(let i = 0; i < cards; i ++) {
-        let card = this.elementRef.nativeElement.children[1].children[1].children[0].children[2].children[1].children[i];
-        this.renderer.setStyle(card, 'height', '50%');
+        let card = this.elementRef.nativeElement.children[1].children[1].children[1].children[2].children[1].children[i];
+        this.renderer.setStyle(card, 'transition', 'all 500ms');
         
-      }
+        
+        
+      } 
     }else {
       this.showBuilders = false;
       this.btnAll = 'All'
       this.iconAll = 'arrow-up'
-      this.renderer.setStyle(profile, 'display', 'flex');
-      this.renderer.setStyle(nearByBuilders, 'display', 'block');
-      this.renderer.setStyle(allBuilders, 'top', '45%');
-      this.renderer.setStyle(allBuilders, 'height', '55%');
+     
+      this.renderer.removeClass(allBuilders, 'cards-expand');
       for(let i = 0; i < cards; i ++) {
-        let card = this.elementRef.nativeElement.children[1].children[1].children[0].children[2].children[1].children[i];
-        this.renderer.setStyle(card, 'height', '90%');
-      }
+        let card = this.elementRef.nativeElement.children[1].children[1].children[1].children[2].children[1].children[i];
+        this.renderer.setStyle(card, 'transition', 'all 500ms');
+      } 
 
-    }
+    } 
   }
 //   @ViewChild('slides') slides: Slides;
 //   @ViewChild("map") mapElement: ElementRef;
