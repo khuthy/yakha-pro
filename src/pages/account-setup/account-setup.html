@@ -9,14 +9,14 @@
 
 <ion-toolbar  *ngIf="isProfile">
   <ion-buttons left>
-    <button ion-fab color="ownerbutons" (click)="navCtrl.pop()"><ion-icon name="arrow-back" color="light"></ion-icon></button>
+    <button ion-button icon-only color="ownerbutons" (click)="navCtrl.pop()"><ion-icon name="arrow-back" color="light"></ion-icon></button>
   </ion-buttons>
 
   <ion-buttons right id="logout">
-          <div class="group-button" (click)="SignOut()">
-              <p>Logout</p>
-              <button ion-fab color="light" mini ><ion-icon name="arrow-forward"></ion-icon></button>
-            </div> 
+      <div class="btn-request" (click)="SignOut()">
+          <p>Logout</p>
+          <button ion-fab color="light"><ion-icon name="log-out"></ion-icon></button>
+        </div>
     </ion-buttons>
 </ion-toolbar>
 

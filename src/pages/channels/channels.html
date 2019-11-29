@@ -1,7 +1,17 @@
+<ion-header no-border>
+    <ion-toolbar>
+        <ion-buttons start left>
+          <button ion-button icon-only color="light" (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+        </ion-buttons>
+        <ion-title text-center>Messages</ion-title>
+        <ion-buttons end right>
+           <button menuToggle ion-button clear ></button>
+         </ion-buttons>
+      </ion-toolbar>
+</ion-header>
 
-
-<ion-content>
-    <div class="header">
+<ion-content fullscreen>
+  <!--   <div class="header">
         <img src="../../assets/icon/Yakha-assets/ownerShape.svg" alt="" class="fixed-image"> 
      
       <ion-toolbar>
@@ -15,7 +25,7 @@
       </ion-toolbar>
      </div>
 <div class="homebuilder" *ngIf="respond.length > 0">
-  <div class="cards" *ngFor =" let b of respond"> <!-- Put a forloop here -->
+  <div class="cards" *ngFor =" let b of respond"> Put a forloop here 
        <div class="images">
         <img src="{{b.user.image}}" class="thumb-home-builder"  alt="profile">
          </div>
@@ -33,6 +43,30 @@
     <div class="no-messages">
         <p *ngIf="respond.length == 0" style="text-align: center;">You have no responses yet</p>
       </div>
- 
+  -->
+    <main class="main"></main>
+    <div class="container">
+       <div class="no-messages"  *ngIf="respond.length == 0">
+        <p>You have no messages yet!</p>
+      </div> 
+
+   <div class="cards" *ngIf="respond.length > 0"  padding>
+   
+     <div class="card" *ngFor =" let b of respond">
+        <div class="profile">
+            <img src="{{b.user.image}}" alt="">
+          </div>
+          <div class="info-to-card">
+            <h4>{{b.user.fullName}}</h4>
+            <p>{{b.user.date | date}}</p>
+          </div>
+          <div class="btn-request">
+              <p>View</p>
+              <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+            </div>
+     </div>
+       
+      </div>
     
+    </div>
 </ion-content>

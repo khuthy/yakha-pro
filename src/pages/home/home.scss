@@ -310,15 +310,21 @@ page-home {
                     }
                     .info-card-builder {
                         flex-basis: 40%;
-                        
+                        flex-direction: column;
                         display: flex;
                         flex-wrap: wrap;
                         justify-content: space-evenly;
+                        align-items: center;
                         padding-top: .5em;
                         p {
                             font-size: 80%;
                             margin: 0 !important;
-                           
+                            
+                        }
+                        p:first-child {
+                            color: #ffd000;
+                            font-weight: bold;
+                            font-size: 100%;
                         }
 
                     }
