@@ -44,6 +44,7 @@ export class BuilderMessagesPage {
   extras = [];
   number: any;
   quoteStatus: any;
+  text: string;
   constructor(public navCtrl: NavController,
     private callNumber: CallNumber,
     public navParams: NavParams,
@@ -189,8 +190,13 @@ export class BuilderMessagesPage {
   dropDown() {
     if (this.drop == true) {
       this.drop = false;
+      this.icon = 'ios-arrow-down';
+      this.text = 'Hide';
+
     } else {
       this.drop = true;
+      this.icon = 'ios-arrow-up';
+      this.text = 'All';
     }
   }
 

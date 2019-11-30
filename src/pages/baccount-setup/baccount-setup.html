@@ -2,23 +2,21 @@
  
     <ion-toolbar *ngIf="!isProfile">
       <ion-buttons left start>
-          <button *ngIf="back" ion-fab (click)="cancelProfile()"><ion-icon name="arrow-back"></ion-icon></button>
+          <button *ngIf="back" ion-button clear color="dark" icon-only (click)="cancelProfile()"><ion-icon name="arrow-back"></ion-icon></button>
          
       </ion-buttons>
       <ion-title>{{current | number}}/2</ion-title>
     </ion-toolbar>
     <ion-toolbar  *ngIf="isProfile">
       <ion-buttons left>
-        <button ion-fab (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+        <button ion-button clear icon-only color="dark" (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
       </ion-buttons>
-      <ion-buttons right>
-         
-              <div class="group-button" >
-                  <p>Logout</p>
-                  <button ion-fab color="light" (click)="SignOut()"><ion-icon name="arrow-forward"></ion-icon></button>
-                </div> 
-          
-      </ion-buttons>
+      <ion-buttons right id="logout">
+          <div class="btn-request" (click)="SignOut()">
+              <p>Logout</p>
+              <button ion-fab color="light"><ion-icon name="log-out"></ion-icon></button>
+            </div>
+        </ion-buttons>
     </ion-toolbar>
   </ion-header>
   
@@ -26,20 +24,25 @@
  
   <form [style.display]="status ? 'block' : 'none'" [formGroup]="profileForm" *ngIf="!isProfile">
   
-     <ion-slides (ionSlideDidChange)="currentSlide($event)" #slides>
+     <ion-slides class="slider-man" (ionSlideDidChange)="currentSlide($event)" #slides>
       <ion-slide formGroupName="profileFormFirstSlide">
          
-  
-              <div class="image-profile-builder">
-                  <img *ngIf="this.builderProfile.image" src="{{this.builderProfile.image}}" class="thumbnail-image" (click)="selectImage()">
-                  <img *ngIf="!this.builderProfile.image" src="../../assets/icon/Yakha-assets/_ionicons_svg_ios-person.svg" class="holder">
-                <button class="btn-create" ion-fab color="light" (click)="selectImage()"><ion-icon name="create"></ion-icon></button>
-              </div>
-              <p class="error" style="text-align: center;" *ngIf="!profileForm.get('profileFormFirstSlide').get('builder').value">Please Upload a profile image</p>
+       
+              
   
               <ion-grid padding>
-                  <ion-row align-items-center>
-                    <ion-col col-12>
+                  <ion-row justify-content-center>
+                      <ion-col col-11 align-self-center id="image">
+                          <div class="thumb" id="hide-div">
+                            <img *ngIf="builderProfile.image"  src="{{builderProfile.image}}">
+                            <img *ngIf="!builderProfile.image" width="1.5vh" src="../../assets/icon/Yakha-assets/_ionicons_svg_ios-person.svg"  >
+                            <button color="light" ion-fab mini class="upload-image" (click)="selectImage()"><ion-icon name="create"></ion-icon></button>
+                          </div>
+                          <p class="error" style="text-align: center;" *ngIf="!profileForm.get('profileFormFirstSlide').get('builder').value">Please Upload a profile image</p> 
+                      </ion-col>
+                      
+
+                    <ion-col col-11 align-self-center>
                         <ion-item no-lines>
                             <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" formControlName="fullName" [(ngModel)]="builderProfile.fullName" ngDefaultControl type="text" name="fullName" placeholder="Full Name"></ion-input>
                             </ion-item>
@@ -50,7 +53,7 @@
                
                     </ion-col>
                       
-                    <ion-col col-12>
+                    <ion-col col-11 align-self-center>
                         <ion-item no-lines>
                             <ion-select formControlName="gender" name="gender" [(ngModel)]="builderProfile.gender"
                               cancelText="Dismiss">
@@ -62,7 +65,7 @@
                           <p class="error" *ngIf="profileForm.get('profileFormFirstSlide').get('gender').hasError('required') && (profileForm.get('profileFormFirstSlide').get('gender').dirty || profileForm.get('profileFormFirstSlide').get('gender').touched)">Gender is required</p>
                
                     </ion-col>
-                    <ion-col col-12>
+                    <ion-col col-11 align-self-center>
                         <ion-item no-lines>
                             <ion-input (ionFocus)="checkKeyBoardEvents()" (ionBlur)="checkKeyBoardEvents()" formControlName="personalNumber" name="personalNumber" [(ngModel)]="builderProfile.personalNumber" ngDefaultControl type="tel" maxlength="10" placeholder="Cell phone number"></ion-input>
                           </ion-item>
@@ -71,14 +74,12 @@
                           <p class="error" *ngIf="profileForm.get('profileFormFirstSlide').get('personalNumber').hasError('maxlength') && (profileForm.get('profileFormFirstSlide').get('personalNumber').dirty || profileForm.get('profileFormFirstSlide').get('personalNumber').touched)">Phone number must be equals to 10 digits</p>
                    
                     </ion-col>
-                    <ion-col col-12>
-                   <ion-item no-lines>
-                     <input placeholder="Address" formControlName="address" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" class="address">
-           
-                   </ion-item>
-                    <p class="error" *ngIf="profileForm.get('profileFormFirstSlide').get('address').hasError('required') && (profileForm.get('profileFormFirstSlide').get('address').dirty || profileForm.get('profileFormFirstSlide').get('address').touched)">Address is required</p>
-                   
-                    </ion-col>
+                 
+                  
+                    <ion-col col-10 align-self-center>
+                        <input (focus)="checkKeyBoardEvents()" class="address" (blur)="checkKeyBoardEvents()" formControlName="address" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+                        <p class="error" *ngIf="profileForm.get('profileFormFirstSlide').get('address').hasError('required') && (profileForm.get('profileFormFirstSlide').get('address').dirty || profileForm.get('profileFormFirstSlide').get('address').touched)">Address is required</p> 
+                      </ion-col>
   
                     
                   </ion-row>
@@ -214,11 +215,10 @@
         <ion-toolbar *ngIf="isProfile">
             <ion-buttons right >
          
-                <div style="background: #D98E04;" class="group-button" (click)="editProfile()">
+                <div class="btn-request" style="background: rgb(255, 199, 15);" (click)="editProfile()">
                     <p>Edit Profile</p>
-                    <button ion-fab color="light" (click)="editProfile()"><ion-icon name="arrow-forward"></ion-icon></button>
-                  </div> 
-            
+                    <button ion-fab color="light"><ion-icon name="create"></ion-icon></button>
+                  </div>
         </ion-buttons>
         </ion-toolbar>
         

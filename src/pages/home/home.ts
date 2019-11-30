@@ -20,10 +20,26 @@ export class HomePage {
   activateSearch: boolean = false;
   icon: string = 'search';
   showBuilders = false;
-  btnAll = 'All'
-  iconAll = 'arrow-up'
-   constructor(public keyboard: Keyboard, private renderer: Renderer2, private elementRef: ElementRef) {
+  btnAll = 'All';
+  iconAll = 'arrow-up';
+  uid = firebase.auth().currentUser.uid;
+  getUsers: boolean;
+   constructor(public keyboard: Keyboard, private renderer: Renderer2, private elementRef: ElementRef, public navCtrl: NavController, private authService: AuthServiceProvider, private popoverCtrl: PopoverController) {
+   
 
+    this.db.doc(this.uid).onSnapshot((res) => {
+      if (res.data().builder == false) {
+        this.getUsers = res.data().builder;
+        console.log(this.getUsers);
+        
+        this.getBuilders(); 
+      }else {
+        this.getUsers = res.data().builder;
+        console.log(this.getUsers);
+        this.getRequests();
+      }
+    });
+    
   }
 
  openSearch() {
@@ -45,15 +61,28 @@ export class HomePage {
   keyboardListener(ev) {
     console.log(ev);
     if(this.keyboard.isOpen()) {
-      this.content.setElementStyle('overflow','hidden');
+
+      if(!this.getUsers) {
+      console.log(this.elementRef.nativeElement.children[1].children[1].children[1]);
+      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1], 'overflow', 'hidden');
+      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[0], 'flex', '0 0 20%');
+      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[1], 'flex', '0 0 30%');
+      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[2], 'display', 'none'); 
+      }
+     
+      
+      
     }else {
-      return true;
+    
+      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1], 'overflow', 'unset');
+     /*  this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[0], 'flex-basis', '20%');
+      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[1], 'flex', '30%'); */
+      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[2], 'display', 'flex'); 
     }
   }
   showAllBuilders() {
 
-    console.log(this.elementRef.nativeElement.children[1].children[1].children[1].children[2]);
-  
+      console.log(this.elementRef.nativeElement.children[1].children[1].children[1].children[2]);
       let allBuilders = this.elementRef.nativeElement.children[1].children[1].children[1].children[2];
       let cards = this.elementRef.nativeElement.children[1].children[1].children[1].children[2].children[1].children.length;
       
@@ -92,17 +121,17 @@ export class HomePage {
 
 //   map: any;
 //   //input: any;
-//   db = firebase.firestore().collection('Users');
-//   dbRequest = firebase.firestore().collection('Request');
-//   dbFeeback = firebase.firestore().collection('Feedback');
+   db = firebase.firestore().collection('Users');
+   dbRequest = firebase.firestore().collection('Request');
+   dbFeeback = firebase.firestore().collection('Feedback');
 //   dbChat = firebase.firestore().collection('chat_msg');
 //   autoCompSearch = document.getElementsByClassName('searchbar-input');
 //   hideCard = document.getElementsByClassName('slider');
 //   items: any;
 //   info = false;
-//   builder = [];
-//   buildesAverage = []
-//   owner = [];
+   builder = [];
+   buildesAverage = []
+   owner = [];
 //   status: string = '';
 //   maps: boolean = false;
 //   request: boolean = false;
@@ -138,7 +167,7 @@ export class HomePage {
 //   fullName = '';
 //   userImg = '';
 //   // sumRate=0;
-//   noReviews = 'No reviews yet';
+     noReviews = 'No reviews yet';
 //   autocom: any;
 //   constructor(public navCtrl: NavController,
 //     public geolocation: Geolocation,
@@ -196,13 +225,13 @@ export class HomePage {
 //     setTimeout(() => {
 //       this.loaderAnimate = false
 //     }, 2000);
-//     this.db.doc(this.uid).onSnapshot((res) => {
-//       if (res.data().builder == false) {
-//         //this.loadCtrl();
-//         //document.getElementById('header').style.display = "none";
-//        // this.loadMap();
-//         this.getPosition();
-//       }
+    // this.db.doc(this.uid).onSnapshot((res) => {
+    //   if (res.data().builder == false) {
+    //     //this.loadCtrl();
+    //     //document.getElementById('header').style.display = "none";
+    //    // this.loadMap();
+    //     this.getPosition();
+    //   }
 //       if (res.data().builder == true) {
 //         this.getRequests();
 //       }
@@ -300,115 +329,115 @@ export class HomePage {
 //     }).present()
 //   }
 
-//   async getBuilders() {
+  async getBuilders() {
 
-//     let numRated = 0;
-//     let arr = [];
-//     let avgSum = 0
-//     let avgTotal = []
-//     let data = { builder: {}, rate: { average: null } }
+    let numRated = 0;
+    let arr = [];
+    let avgSum = 0
+    let avgTotal = []
+    let data = { builder: {}, rate: { average: null } }
 
-//     //>>>>>>> get the builder
-//     await this.db.where('builder', '==', true).onSnapshot(async (res) => {
-//       this.builder = [];
-//       let info = { rate: {}, builder: {} };
-//       //>>>>>>> get the reviews made for this builder
-//       res.forEach(async (doc) => {
-//         //  console.log('All builders............', doc.data().lat);
+    //>>>>>>> get the builder
+    await this.db.where('builder', '==', true).onSnapshot(async (res) => {
+      this.builder = [];
+      let info = { rate: {}, builder: {} };
+      //>>>>>>> get the reviews made for this builder
+      res.forEach(async (doc) => {
+        //  console.log('All builders............', doc.data().lat);
 
-//         if (doc.data().address !== "" && doc.data().status == true) {
-//           data.builder = doc.data()
-//           this.builder.push(doc.data())
-//           // data.builder
+        if (doc.data().address !== "" && doc.data().status == true) {
+          data.builder = doc.data()
+          this.builder.push(doc.data())
+          // data.builder
 
-//           // this.errorMessage('User found',doc.id)
+          // this.errorMessage('User found',doc.id)
 
-//          // console.log('>>>>>>>>>>>>>>>',doc.data());
+         // console.log('>>>>>>>>>>>>>>>',doc.data());
 
-//           let myLatLng = new google.maps.LatLng(doc.data().lat, doc.data().lng)
-//           // console.log('builder pos', myLatLng);
+          /* let myLatLng = new google.maps.LatLng(doc.data().lat, doc.data().lng) */
+          // console.log('builder pos', myLatLng);
           
-//           let marker = new google.maps.Marker({
-//             position: myLatLng,
-//             map: this.map,
-//             title: 'Hello World!',
-//             icon: "https://img.icons8.com/color/40/000000/worker-male--v2.png"
-//           });
-//           google.maps.event.addListener(marker, 'click', (resp) => {
-//             this.viewBuilderInfo(doc.data());
-//           })
-//           // data = {builder: doc.data()}
+         /*  let marker = new google.maps.Marker({
+            position: myLatLng,
+            map: this.map,
+            title: 'Hello World!',
+            icon: "https://img.icons8.com/color/40/000000/worker-male--v2.png"
+          }); */
+         /*  google.maps.event.addListener(marker, 'click', (resp) => {
+            this.viewBuilderInfo(doc.data());
+          }) */
+          // data = {builder: doc.data()}
 
-//           //>>>>>>>>>> push for display
-//           // console.log('DOC DISPLAY >>>>>>>>>', data);
-//           // this.builder.push(data);
+          //>>>>>>>>>> push for display
+          // console.log('DOC DISPLAY >>>>>>>>>', data);
+          // this.builder.push(data);
 
-//           // clear the stores
-//           avgSum = 0
-//           avgTotal.length = 0
-//           // data.builder = {}
-//           data.rate.average = null
+          // clear the stores
+          avgSum = 0
+          avgTotal.length = 0
+          // data.builder = {}
+          data.rate.average = null
 
-//         }
-
-
-//       })
-//       //   console.log('Loop 2 done');
-
-//       // console.log(this.builder);
-//       this.calcAvg()
-//     })
-//   }
-//   async calcAvg() {
-//     let avgTotal = []
-//     let avgSum = 0;
-//     let Average = 0;
-
-//     let arrBuild = [];
-//     let build = {
-//       uid: '',
-//       avg: null
-//     }
-//     for (let i = 0; i < this.builder.length; i++) {
-//       await this.dbFeeback.where('builder', '==', this.builder[i].uid).get().then((res1) => {
-//         if (!res1.empty) {
-//           res1.forEach((doc) => {
-
-//             //>>>>>>> store the total number of reviews made
-//             avgTotal.push(doc.data())
-
-//             //>>>>>>> store the sum of the ratings given by the user
-//             avgSum = avgSum + doc.data().rating;
-
-//             // this.ratingArr.push(doc.data().rating);
-//             // this.avgRate = this.sumRated / this.ratingArr.length;     
-//             build.uid = this.builder[i].uid
+        }
 
 
-//           })
-//           //  console.log('Loop 1 done');
-//           //>>>>>>> calculate the average
-//           Average = avgSum / avgTotal.length;
-//           build.avg = Average
-//           this.buildesAverage.push(build)
-//           Average = 0
-//           avgTotal = []
-//           avgSum = 0
-//           build = {
-//             uid: '',
-//             avg: null
-//           }
-//         } else {
-//           this.noReviews;
-//         }
+      })
+      //   console.log('Loop 2 done');
 
-//       })
+      // console.log(this.builder);
+      this.calcAvg()
+    })
+  }
+  async calcAvg() {
+    let avgTotal = []
+    let avgSum = 0;
+    let Average = 0;
 
-//       //  console.log('AVG CALCULATION >>>>>>>>>',this.buildesAverage);
+    let arrBuild = [];
+    let build = {
+      uid: '',
+      avg: null
+    }
+    for (let i = 0; i < this.builder.length; i++) {
+      await this.dbFeeback.where('builder', '==', this.builder[i].uid).get().then((res1) => {
+        if (!res1.empty) {
+          res1.forEach((doc) => {
 
-//     }
+            //>>>>>>> store the total number of reviews made
+            avgTotal.push(doc.data())
 
-//   }
+            //>>>>>>> store the sum of the ratings given by the user
+            avgSum = avgSum + doc.data().rating;
+
+            // this.ratingArr.push(doc.data().rating);
+            // this.avgRate = this.sumRated / this.ratingArr.length;     
+            build.uid = this.builder[i].uid
+
+
+          })
+          //  console.log('Loop 1 done');
+          //>>>>>>> calculate the average
+          Average = avgSum / avgTotal.length;
+          build.avg = Average
+          this.buildesAverage.push(build)
+          Average = 0
+          avgTotal = []
+          avgSum = 0
+          build = {
+            uid: '',
+            avg: null
+          }
+        } else {
+          this.noReviews;
+        }
+
+      })
+
+      //  console.log('AVG CALCULATION >>>>>>>>>',this.buildesAverage);
+
+    }
+
+  }
 //   errorMessage(errCode, errMsg) {
 //     const alert = this.alertCtrl.create({
 //       title: errCode,
@@ -695,12 +724,12 @@ export class HomePage {
 //         })
 //     }
 //   }
-//   viewProfile(myEvent) {
-//     let popover = this.popoverCtrl.create(ProfileComponent, { image: myEvent });
-//     popover.present({
-//       ev: myEvent
-//     });
-//   }
+  viewProfile(myEvent) {
+    let popover = this.popoverCtrl.create(ProfileComponent, { image: myEvent });
+    popover.present({
+      ev: myEvent
+    });
+  }
 //   viewHouse(myEvent) {
 //     console.log('image', myEvent);
 //     let popover = this.popoverCtrl.create(ProfileComponent, { image: myEvent });
@@ -712,44 +741,44 @@ export class HomePage {
 //   //   this.callNumber.callNumber(phoneNumber, true);
 //   // }
 //   //viewmore
-//   viewBuilderInfo(builder) {
-//     this.navCtrl.push(BuilderProfileviewPage, builder);
-//   }
+  viewBuilderInfo(builder) {
+    this.navCtrl.push(BuilderProfileviewPage, builder);
+  }
 
-//   viewRequest(docID, uid) {
-//     this.navCtrl.push(BuilderMessagesPage, { docID, uid });
-//     //  console.log('Doc id>>>>',docID,'user id===', uid);
-//   }
+  viewRequest(docID, uid) {
+    this.navCtrl.push(BuilderMessagesPage, { docID, uid });
+    //  console.log('Doc id>>>>',docID,'user id===', uid);
+  }
 
-//   requestForm() {
-//     this.navCtrl.push(QuotationFormPage)
-//   }
+  requestForm() {
+    this.navCtrl.push(QuotationFormPage)
+  }
 
-//   rShortcut(uid) {
-//     this.navCtrl.push(QuotationFormPage, uid);
-//   }
+  rShortcut(uid) {
+    this.navCtrl.push(QuotationFormPage, uid);
+  }
 
 
 
-//   getRequests() {
-//     let data = { info: {}, user: {}, id: {} }
-//     this.dbRequest.where('builderUID', '==', this.uid).onSnapshot(res => {
-//       // console.log(res.size);
-//       res.forEach((bDoc) => {
-//         this.db.doc(bDoc.data().hOwnerUid).get().then((res) => {
-//           data.info = bDoc.data();
-//           data.id = bDoc.id;
-//           data.user = res.data();
-//           //  console.log(data);
+  getRequests() {
+    let data = { info: {}, user: {}, id: {} }
+    this.dbRequest.where('builderUID', '==', this.uid).onSnapshot(res => {
+      // console.log(res.size);
+      res.forEach((bDoc) => {
+        this.db.doc(bDoc.data().hOwnerUid).get().then((res) => {
+          data.info = bDoc.data();
+          data.id = bDoc.id;
+          data.user = res.data();
+          //  console.log(data);
 
-//           this.owner.push(data)
-//           data = { info: {}, user: {}, id: {} }
-//         })
+          this.owner.push(data)
+          data = { info: {}, user: {}, id: {} }
+        })
 
-//       })
-//     })
-//     this.builder = [];
-//   }
+      })
+    })
+    this.builder = [];
+  }
 
 
 }

@@ -1,4 +1,25 @@
 page-builder-messages {
+
+  .main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-image: url('../../assets/imgs/splash.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -3;
+    transition: all 500ms;
+    animation-name: zoomIn;
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    transform: scale(0.5);
+   
+}
   .no-messages {
     height: 100%;
     display: flex;
@@ -70,13 +91,13 @@ page-builder-messages {
   }
 
   .container-fluid {
-    top: 0;
+    top: 15%;
     left: 0;
     width: 100%;
-    height: 40vw;
-    background: #FFFFFF;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.205);
-    border-radius: 0 0 13px 13px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.897);
+    box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.205);
+    border-radius: 2em 2em 0 0;
     position: absolute;
     transition-duration: 500ms;
     z-index: -1;
@@ -101,16 +122,24 @@ page-builder-messages {
   }
 
   .container-drop-fluid {
-    top: 0;
+    top: 10%;
     left: 0;
     width: 100%;
-    height: 80vh;
-    background: #FFFFFF;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.205);
+    height: 130vw;
+    background: rgba(255, 255, 255, 0.897);
+    box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.205);
     border-radius: 0 0 13px 13px;
+    border-radius: 2em 2em 0 0;
     position: absolute;
     transition-duration: 500ms;
-
+    animation-name: zoomIn;
+        animation-duration: 500ms;
+        animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        transform: scale(0.5);
+        overflow: auto;
+    
     .container-after-pseudo {
       position: absolute;
       height: 8%;
@@ -126,7 +155,7 @@ page-builder-messages {
       justify-content: center;
       align-items: center;
       transition-duration: 500ms;
-      z-index: -1;
+      z-index: 3;
     }
 
     .hide-div {
@@ -264,16 +293,19 @@ page-builder-messages {
   }
 
   .header {
-    background: color($colors, secondary);
-    height: 40vw;
-    border-radius: 0 0 13px 13px;
-
-    .back-button {
-      background: color($colors, primary);
-      min-height: 45px;
-      border-radius: 50px;
+    .toolbar-background {
+        background: transparent;
+         
+       
     }
-  }
+    .toolbar-content {
+     .title {
+        .toolbar-title {
+         color: color($colors, dark);
+        }
+     }
+    }
+}
 
   .builder {
     z-index: -1;
@@ -285,14 +317,49 @@ page-builder-messages {
     height: 70%;
   }
 
+  
+
   .chats {
-    height: 60%;
-    top: 30%;
+    height: 130vw;
+    //border: 1px solid red;
+    top: 20%;
     position: absolute;
     left: 0;
     width: 100%;
-    overflow: auto;
-    z-index: -2;
+    transition: all 500ms;
+    z-index: 1;
+    border-radius: 2em 2em 0 0;
+    background: rgba(255, 233, 109, 0.603);
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.397);
+    animation-name: zoomIn;
+        animation-duration: 500ms;
+        animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        transform: scale(0.5);
+        overflow: auto;
+
+        button {
+          position: static;
+          bottom: 0;
+          right: 40%;
+          left: 40%;
+          z-index: 100;
+          
+          
+          
+        }
+        .header-chat {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          height: 10vw;
+        }
+        .chat-man {
+          overflow: auto;
+          height: 95vw;
+       
+        }
 
     .messages {
       &::after {
@@ -352,6 +419,104 @@ page-builder-messages {
 
 
   }
+  .chat-twize {
+    height: 114vw;
+    //border: 1px solid red;
+    top: 70%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    opacity: .5;
+    z-index: 1;
+    border-radius: 2em 2em 0 0;
+    background: rgba(75, 75, 75, 0.274);
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.397);
+    animation-name: zoomIn;
+    transition: all 500ms;
+        animation-duration: 500ms;
+        animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        transform: scale(0.5);
+        overflow: auto;
+        button {
+          position: static;
+          bottom: 0;
+          right: 40%;
+          left: 40%;
+          z-index: 100;
+          
+          
+          
+        }
+        .header-chat {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          height: 10vw;
+        }
+        .chat-man {
+          overflow: auto;
+          height: 95vw;
+       
+        }
+
+    .messages {
+      &::after {
+        content: '';
+        display: block;
+        clear: both;
+        padding: 5px;
+      }
+
+      .chat {
+        padding: 5px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.13);
+        max-width: 100%;
+
+        .texts {
+          &::after {
+            content: '';
+            display: block;
+            clear: both;
+            padding-top: 5px;
+          }
+
+          #text-message {
+
+            font-size: 4vw;
+
+          }
+
+          #time-message {
+
+            font-size: 2.5vw;
+            color: rgb(136, 136, 136);
+          }
+        }
+
+
+
+      }
+
+      .left {
+        border-radius: 10px 10px 10px 0;
+        float: left;
+        background: #FFFFFF;
+
+
+      }
+
+      .right {
+        float: right;
+        border-radius: 10px 10px 0px 10px;
+        background: #FFE6CC;
+
+
+      }
+    }
+
+  } 
 
   .tool-footer {
     background: linear-gradient(#FFFFFF, #F1F1F1);
@@ -373,4 +538,15 @@ page-builder-messages {
       display: block;
     }
   }
+  @keyframes zoomIn {
+    0% {
+        transform: scale(0.5);
+        filter: saturate(0%);
+    }
+  
+    100% {
+        transform: scale(1);
+       
+    }
+}
 }

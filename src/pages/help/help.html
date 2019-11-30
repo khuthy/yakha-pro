@@ -1,15 +1,16 @@
 <ion-header no-border>
-    <ion-toolbar class="ownerHeader">
-      <ion-buttons start left>
-          <button ion-button clear icon-only color="light" (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
-      </ion-buttons>
-      <ion-title text-center>Help</ion-title>
-      <ion-buttons end right>
-          <button ion-button clear icon-only color="light" menuToggle (click)="navCtrl.pop()"></button>
-      </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar color="light">
+         <ion-buttons left start>
+            <button ion-button icon-only color="dark" clear (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+         </ion-buttons>
+          <ion-title text-center>Help</ion-title>
+          <ion-buttons right end>
+              <button ion-button menuToggle icon-only color="light" clear (click)="navCtrl.pop()"></button>
+          </ion-buttons>
+    </ion-toolbar>
 
   </ion-header>
+
 
 <ion-content fullscreen>
     <main class="main"></main>

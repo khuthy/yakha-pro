@@ -30,11 +30,9 @@ page-messages {
     left: 45%;
     //border: 1px solid pink;
   }
-
   .header {
     background: color($colors, transparentowner);
-    height: 44vw;
-    border-radius: 0 0 13px 13px;
+    /* border-radius: 0 0 13px 13px; */
 
     .back-button {
       background: color($colors, ownerbutons);
@@ -43,7 +41,7 @@ page-messages {
     }
 
 
-  }
+  } 
 
   .slide-all {
     z-index: -30;
