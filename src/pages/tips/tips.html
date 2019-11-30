@@ -1,16 +1,81 @@
 <ion-header no-border>
     <ion-toolbar>
-       <div id="topnav">
-          <button id="bckbtn" ion-fab color="ownerbutons" (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
-          </div>
+         <ion-buttons left start>
+            <button ion-button icon-only color="light" clear (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+         </ion-buttons>
+          <ion-title text-center>Tips</ion-title>
+          <ion-buttons right end>
+              <button ion-button menuToggle icon-only color="light" clear (click)="navCtrl.pop()"></button>
+          </ion-buttons>
     </ion-toolbar>
 
   </ion-header>
 
 
-<ion-content padding>
+<ion-content fullscreen>
 
+  <main class="main"></main>
   <div class="container">
+    <div class="tips" padding>
+        <div class="logo">
+            <img src="../../assets/icon/Group 180.svg" style="max-width: 70px;">
+           </div>
+      <div class="panel">
+        <div class="panel-header" (click)="activate('Key')">
+          <h3>Type of house is key.</h3>
+        </div>
+        <div class="panel-content" [style.transition]="tsProperty=='Key' ? 'all 500ms' : 'all 500ms'" *ngIf="tsProperty=='Key'">
+            <p> Builders may specialize in tract, spec or custom homes so learn the differences and figure out which one is right for you and your home-buying budget.</p>
+        </div>
+      </div>
+          <div class="panel">
+            <div class="panel-header" (click)="activate('tools')">
+              <h3>Tools to search for builder</h3>
+            </div>
+            <div class="panel-content" *ngIf="tsProperty=='tools'">
+                <p> Builders may specialize in tract, spec or custom homes so learn the differences and figure out which one is right for you and your home-buying budget.</p>
+            </div>
+          </div>
+          <div class="panel">
+              <div class="panel-header" (click)="activate('rights')">
+                <h3>Know your rights.</h3>
+              </div>
+              <div class="panel-content" *ngIf="tsProperty=='rights'">
+                  <p> Builders may specialize in tract, spec or custom homes so learn the differences and figure out which one is right for you and your home-buying budget.</p>
+              </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header" (click)="activate('terms')">
+                  <h3>10 Tricks for negotiating.</h3>
+                </div>
+                <div class="panel-content" *ngIf="tsProperty=='terms'">
+                    <p> 
+                      Being handy with tools is more than showing off. Being “that guy” in your circle of friends is nice—if not a little tiring, what with all the requests to fix everything—but for those of you who want to become the guy who knows how to fix little problems here and there, there’s usually one obstacle.
+                      How do you learn? Watch reruns of Bob Vila on TV? (Who was not available, very unfortunately, for this piece.). </p>
+                       <h4> 1. Pull the Ole Nintendo on Your Garbage Disposal</h4>
+                       <p>Before you begin, make sure you get under the sink and unplug the disposal unit itself (Many sinks have an outlet underneath them, just open the door and poke around for it.). If you can’t find that, flip the circuit breaker that gives power to the disposal. Seriously. You can’t skip this step because, if for some reason it turns on while you’re removing any stuck-on food in there, you will regret it..
+                        </p>
+                        <h4> 2. Stop a Toilet that Doesn’t Stop Running</h4>
+                        <p> That sound.  It’s a torturous sound that can keep a guy up at night. Sure, the severity varies (there was once a toilet in the basement of the apartment building in which I was living that blew something so hard – it was spraying water up with enough force that it hit the ceiling – and shook the floors of my first-floor apartment), but a toilet’s importance can never be understated.
+                          </p>
+                          <h4>3. Hammer a Nail—Not Your Hand</h4>
+                        <p>  There’s nothing like hammering a nail perfectly. There’s an art to it. Hitting the nail square on the head.
+                            The problem is, it might not happen all the time—just like the idiom suggests.
+                            To assuage your fear of bashing your fingertips while driving a nail into a harder material that requires some force, set the nail in place and hold the rod with pliers as you hammer away..
+                           </p>
+                           <h4> 4. Fix a Clogged Drain</h4>
+                      <p> Many clogs can be fixed with liquid or gel drain cleaners, but if you’re facing something that’s got the whole thing backed up, get ready for a potentially messy fix.
+                        </p>
+                        <h4>5. Know Your Homemade Cleaning Solutions</h4>
+                        <p> Before you go mixing all the industrial-strength chemicals you have under your sink to create a Frankenstein mega cleaner, know a few things about what you’re mixing first—you could go Walter Whiting yourself without realizing it.
+                          </p>
+                </div>
+              </div>
+             
+    </div>
+  
+  </div>
+ <!--  <div class="container">
 
      
 
@@ -60,6 +125,6 @@
     </div>
      
       </div>
-    
+     -->
 </ion-content>
 

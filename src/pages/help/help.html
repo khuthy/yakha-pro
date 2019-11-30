@@ -1,21 +1,81 @@
 <ion-header no-border>
-    <ion-toolbar class="ownerHeader" >
-       <div id="topnav" [ngClass]="{'header' : builder, 'headerOwner' : !builder}">
-          <button id="bckbtn" ion-fab color="ownerbutons" (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
-          </div>
-    </ion-toolbar>
+    <ion-toolbar class="ownerHeader">
+      <ion-buttons start left>
+          <button ion-button clear icon-only color="light" (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
+      </ion-buttons>
+      <ion-title text-center>Help</ion-title>
+      <ion-buttons end right>
+          <button ion-button clear icon-only color="light" menuToggle (click)="navCtrl.pop()"></button>
+      </ion-buttons>
+  </ion-toolbar>
 
   </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
+    <main class="main"></main>
+    <div class="container">
+      <div class="tips" padding>
+          <div class="logo">
+              <img src="../../assets/icon/Group 180.svg" style="max-width: 70px;">
+             </div>
+        <div class="panel">
+          <div class="panel-header" (click)="activate('about')">
+            <h3>About us</h3>
+          </div>
+          <div class="panel-content" *ngIf="tsProperty=='about'">
+              <p text-left> yakha application is a platform where homeOwners and Builders meet.
+                  The homeOwner  create a request quotation to the homeBuilder Off their choice that they will find registered in the application,
+                    The homeBuilder will receive request form from homeOwner and respond  to the requested quotation in form off pdf.</p>
+          </div>
+        </div>
+            <div class="panel">
+              <div class="panel-header" (click)="activate('terms')">
+                <h3>Terms of Use</h3>
+              </div>
+              <div class="panel-content" *ngIf="tsProperty=='terms'">
+                  <p text-left> You need to accept our terms Once you have access to our Application,
+                      you are required to abide by our policies and regulations and include our Privacy Policy.</p>
+              </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header" (click)="activate('contact')">
+                  <h3>Contact</h3>
+                </div>
+                <div class="panel-content" *ngIf="tsProperty=='contact'">
+                    <p text-center style="font-weight: bold;">Contact us: (015)-610-6358.</p>
+                </div>
+              </div>
+              <div class="panel">
+                  <div class="panel-header" (click)="activate('disclaimer')">
+                    <h3>Disclaimer</h3>
+                  </div>
+                  <div class="panel-content" *ngIf="tsProperty=='disclaimer'">
+                      <p text-left> 
+                          Several fantastic pieces of free and open-source software have really helped get Spotify to where it is today.
+                          A few require that we include their licence Agreements within our product. </p>
+                  </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header" (click)="activate('safety')">
+                      <h3>Safety information</h3>
+                    </div>
+                    <div class="panel-content" *ngIf="tsProperty=='safety'">
+                        <p text-left> 
+                            We keep your personal information private and safe and put you in control </p>
+                    </div>
+                  </div>
+               
+      </div>
+    
+    </div>
 
-  <div class="container">
+  <!-- <div class="container"> -->
 <!--     
       <div id="topnav" [ngClass]="{'header' : builder, 'headerOwner' : !builder}">
           <button id="bckbtn" ion-fab (click)="navCtrl.pop()"><ion-icon color="light" name="arrow-back"></ion-icon></button>
           </div> -->
 
-          <div class="logo">
+          <!-- <div class="logo">
               <img src="../../assets/icon/Group 180.svg" style="max-width: 70px; height: auto">
              </div>
 
@@ -73,14 +133,14 @@
     
     </div>
       
-      
+       -->
       
       
           
       
       
-      </div>
-    
+      
+    <!-- </div> -->
       
     
 </ion-content>

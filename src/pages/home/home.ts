@@ -28,13 +28,16 @@ export class HomePage {
 
  openSearch() {
    if(this.activateSearch) {
+
+    
      this.activateSearch = false;
      this.icon = 'search';
-
+     
    }else {
+    
      this.activateSearch = true;
+     
      this.icon = 'close';
-
    }
  }
 

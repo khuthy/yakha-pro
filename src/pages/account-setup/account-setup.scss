@@ -1,4 +1,22 @@
 page-account-setup {
+
+  form {
+    transition: all 1s;
+    animation-duration: 500ms;
+     animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+     animation-iteration-count: 1;
+     animation-fill-mode: forwards;
+     animation-name: dropDown;
+     transform: translate(0,-100%);
+  }
+  @keyframes dropDown {
+    0% {
+      transform: translate(0%,-100%);
+    }
+    100% {
+      transform: translate(0%,0%);
+    }
+  }
     .address {
       min-width: 93%;
       border-radius: 50px;
@@ -7,8 +25,11 @@ page-account-setup {
       color: #333;
       padding: 15px;
       position: relative;
-      left: 5%;
+      transform: translate(5%,0);
       border: 1px solid #ddd;
+    }
+    @media only screen and (min-width: 600px){
+      min-width: 100%;
     }
     #inputs {
        // border: 1px solid red;
@@ -33,7 +54,7 @@ page-account-setup {
       
      }
      .btn-request {
-      height: 4vh;
+      height: 5vh;
       width: 100%;
       background: color($colors, danger);
       display: flex;
@@ -53,12 +74,12 @@ page-account-setup {
       }
 
       button {
-          height: 4vh;
-          width: 4vh;
+          height: 5vh;
+          width: 5vh;
           box-shadow: none;
 
           .icon {
-              font-size: 2vh;
+              font-size: 2.7vh;
           }
       }
      
@@ -67,12 +88,16 @@ page-account-setup {
     // #logout {
     //     border: 2px solid yellow;
     // }
+  /*   */
+
+  @media only screen and (min-width: 300px) {
     .scroll-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-     }
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+   } 
+  }
    
      .tools-header {
       background:url(../../assets/icon/ownerShape.svg);            
@@ -112,8 +137,8 @@ page-account-setup {
        z-index: 5;
    }
      .thumb {
-         height: 45vw;
-         width: 45vw;
+         height: 150px;
+         width: 150px;
          border-radius: 50%;
          border: 1px solid #ddd;
          margin: 0 auto;
@@ -300,11 +325,14 @@ page-account-setup {
          left: 0;
          width: 100%;
          background: color($colors, light);
-         transition-property: all;
-         transition-duration: 2s;
-         transition-timing-function: ease-in-out;
-         -o-transition-timing-function: ease-in-out;
-         -moz-transition-timing-function: ease-in-out;
+         animation-duration: 500ms;
+         animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+         animation-iteration-count: 1;
+         animation-fill-mode: forwards;
+         animation-name: dropUp;
+         transform: translate(0,100%);
+      
+     
           
       
          .wrapper {
@@ -322,9 +350,19 @@ page-account-setup {
              left: 0;
              background-position: center;
              background-size: cover;
-             filter: sepia(30%);
+              filter: saturate(3deg);
+
+             img {
+               position: absolute;
+               top: 0;
+               height: 100%;
+               width: 100%;
+               object-fit: cover;
+               z-index: 1;
+               filter: blur(5px);
+             }
              //background-color: #0000001f;
-             filter: blur(2px);
+             
                 
              &::before {
                  top: 0;
@@ -354,21 +392,43 @@ page-account-setup {
               width: 25vh;
               height: 25vh;
               object-fit: cover;
-              border: 4px solid color($colors, light);
-              box-shadow: 0 3px 2% #FFFFFF;
+              border: 4px solid rgba(255, 255, 255, 0.288);
+              box-shadow: 0 3px 2% rgba(255, 255, 255, 0.267);
+              position: relative;
+              z-index: 10;
           }
          }
          .homeOwner-info {
-              height: 50%;
+              height: 0%;
               width: 100%;
               background: #FFFFFF;
               position: absolute;
-              top: 50%;
+              top: 100%;
               left: 0;
               display: flex;
               flex-direction: column;
               align-items: center;
               justify-content: center;
+              border-radius: 1em 1em 0 0;
+              z-index: 3;
+              animation-name: slideUp;
+              animation-duration: 500ms;
+              animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+              animation-iteration-count: 1;
+              animation-fill-mode: forwards;
+              animation-delay: 500ms;
+
+              @keyframes slideUp {
+                  0% {
+                    top: 100%;
+                  }
+                  100% {
+                    top: 45%;
+                    height: 55%;
+                  }
+              }
+              
+
   
               .btn-edit {
                   position: absolute;
@@ -463,6 +523,14 @@ page-account-setup {
          } 
          }
      }
+     @keyframes dropUp {
+      0% {
+        transform: translate(0%,100%);
+      }
+      100% {
+        transform: translate(0%,0%);
+      }
+    }
      .loader {
         position: absolute;
         top: 0;
