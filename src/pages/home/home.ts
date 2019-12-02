@@ -57,11 +57,14 @@ export class HomePage {
     
      this.activateSearch = false;
      this.icon = 'search';
+     this.showBuilders = true;
+        this.showAllBuilders();
      
    }else {
     
-     this.activateSearch = true;
-     
+      this.activateSearch = true;
+      this.showBuilders = false;
+        this.showAllBuilders();
      this.icon = 'close';
    }
  }
@@ -112,7 +115,7 @@ export class HomePage {
 
       if(this.showBuilders == false) {
       this.showBuilders = true;
-      
+      this.activateSearch = true;
       this.btnAll = 'Hide'
       this.iconAll = 'arrow-down'
       this.renderer.addClass(allBuilders, 'cards-expand');
