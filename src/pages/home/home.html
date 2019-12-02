@@ -337,6 +337,7 @@
 <ion-content fullscreen no-bounce>
     <main class="main"></main>
       <section class="container" *ngIf="!getUsers">
+        
         <div class="profile-container">
           <div class="profile">
             <img src="{{profile.image}}">
@@ -345,13 +346,14 @@
             <h4>{{profile.name}}</h4>
             <p>{{profile.address}}</p>
           </div>
+          <div id="mapContainer"></div>
         </div>
         <div class="slides">
            <section class="location">
              <p>Builders in Soweto: 30</p>
            </section>
             <section class="overflow-slides">
-              <div class="slides-card">
+              <div class="slides-card" *ngFor="let near of myNearBuilder">
                 <div class="slide">
                   <div class="profile"><img src="../../assets/imgs/builders.png" alt=""></div>
                   <div class="information">
@@ -448,7 +450,7 @@
             </div>
             <div class="all-builders">
               <div class="card-content-container" *ngFor="let b of builder">
-                  <div class="cards-builders" (click)="viewBuilderInfo(b)">
+                  <div class="cards-builders">
                       <div class="title">
                         <p>{{b.fullName}}</p>
                       </div>
@@ -460,7 +462,7 @@
                       </div>
                       <div class="londan"></div>
                       <div class="btn-request">
-                          <p>Request</p>
+                          <p (click)="viewBuilderInfo(b)">Request</p>
                           <button ion-fab color="light" (click)="rShortcut(b.uid)"><ion-icon name="arrow-forward"></ion-icon></button>
                         </div>
                     </div>
