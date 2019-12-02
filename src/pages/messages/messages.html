@@ -155,30 +155,30 @@
       </div>
 
       <ion-header no-border>
-        <ion-navbar>
+        <ion-toolbar color="light">
             <ion-buttons left start>
-                <button (click)=" viewMessages()" ion-fab color="ownerbutons">
-                  <ion-icon name="arrow-back" color="light"></ion-icon>
+                <button (click)=" viewMessages()" ion-button icon-only color="ownerbutons">
+                  <ion-icon name="arrow-back" color="dark"></ion-icon>
                 </button>
               </ion-buttons>
-
+              <ion-title>Quotation-Y00{{i + 1}}</ion-title>
           <ion-buttons right end>
-            <button ion-fab (click)="callJoint(item.user.personalNumber)" color="customcall">
+            <button ion-button icon-only (click)="callJoint(item.user.personalNumber)" color="dark">
               <ion-icon name="call"></ion-icon>
             </button>
           </ion-buttons>
 
-        </ion-navbar>
-        <img class="builder" src="../../assets/icon/ownerShape.svg" alt="builder">
-        <p text-center style="color: #fff;">Quotation-Y00{{i + 1}}</p>
+        </ion-toolbar>
+      <!--   <img class="builder" src="../../assets/icon/ownerShape.svg" alt="builder"> -->
       </ion-header>
+      <main class="main"></main>
       <div [class]="drop ?  'container-drop-fluid' : 'container-fluid'" padding>
-        <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
+      <!--   <button *ngIf="!drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
           class="container-after-pseudo">Quotation details</button>
         <button *ngIf="drop" ion-button style="background-color: #FFF; color: #000;" (click)="dropDown()"
           class="container-after-pseudo">Close details</button>
           <p class="arrows" *ngIf="!drop" (click)="dropDown()"><ion-icon name="ios-arrow-down"></ion-icon></p>
-          <p class="arrowsUp" *ngIf="drop" (click)="dropDown()"><ion-icon name="ios-arrow-up"></ion-icon></p>
+          <p class="arrowsUp" *ngIf="drop" (click)="dropDown()"><ion-icon name="ios-arrow-up"></ion-icon></p> -->
         <div class="hide-div"></div>
         <div class="content-info" *ngIf="drop">
           <div class="bricks">
@@ -277,11 +277,11 @@
 <ion-footer class="tool-footer">
   <ion-grid>
     <ion-row justify-content-center align-items-center>
-      <ion-col col-9 style="border-radius: 18px; background: #E5E5E5;">
+      <ion-col col-10 style="border-radius: 18px; background: #E5E5E5;">
         <ion-textarea type="text" [(ngModel)]="chatMessage" placeholder="Write your Message..."></ion-textarea>
       </ion-col>
       <ion-col col-2>
-        <button ion-fab color="customsendowner" (click)="getChats()">
+        <button ion-button icon-only clear color="light" color="customsendowner" (click)="getChats()">
           <ion-icon name="send"></ion-icon>
         </button>
       </ion-col>

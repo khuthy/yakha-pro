@@ -83,11 +83,11 @@ export class HomePage {
     if(this.keyboard.isOpen()) {
 
       if(!this.getUsers) {
-      console.log(this.elementRef.nativeElement.children[1].children[1].children[1]);
-      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1], 'overflow', 'hidden');
-      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[0], 'flex', '0 0 20%');
-      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[1], 'flex', '0 0 30%');
-      this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[2], 'display', 'none'); 
+        this.showBuilders = false;
+        this.showAllBuilders();
+      }else {
+        this.showBuilders = true;
+        this.showAllBuilders();
       }
      
       

@@ -2,14 +2,14 @@
  
     <ion-toolbar *ngIf="!isProfile">
       <ion-buttons left start>
-          <button *ngIf="back" ion-button clear color="dark" icon-only (click)="cancelProfile()"><ion-icon name="arrow-back"></ion-icon></button>
+          <button *ngIf="back" ion-button clear color="light" icon-only (click)="cancelProfile()"><ion-icon name="arrow-back"></ion-icon></button>
          
       </ion-buttons>
       <ion-title>{{current | number}}/2</ion-title>
     </ion-toolbar>
     <ion-toolbar  *ngIf="isProfile">
       <ion-buttons left>
-        <button ion-button clear icon-only color="dark" (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+        <button ion-button clear icon-only color="light" (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
       </ion-buttons>
       <ion-buttons right id="logout">
           <div class="btn-request" (click)="SignOut()">
@@ -21,7 +21,7 @@
   </ion-header>
   
   <ion-content fullscreen>
- 
+      <main class="main"></main>
   <form [style.display]="status ? 'block' : 'none'" [formGroup]="profileForm" *ngIf="!isProfile">
   
      <ion-slides class="slider-man" (ionSlideDidChange)="currentSlide($event)" #slides>

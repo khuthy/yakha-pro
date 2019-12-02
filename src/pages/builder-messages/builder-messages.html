@@ -10,8 +10,8 @@
   <ion-slides #slides (ionSlideDidChange)="slideChanged($event)">
     <ion-slide class="slide-all" *ngFor="let item of msgSent; let i=index;">
       <div class="house" *ngIf="toggle" padding>
-        <ion-fab top left>
-          <button (click)="open()" ion-fab>
+        <ion-fab top right>
+          <button color="secondary" (click)="open()" ion-fab>
             <ion-icon name="close"></ion-icon>
           </button>
         </ion-fab>
@@ -83,7 +83,7 @@
       <div [class]="drop ? 'chat-twize' : 'chats'"  #chats padding>
         <div class="header-chat">
             <p text-center> Chats</p>
-            <p (click)="dropDown()">all <ion-icon [name]="icon"></ion-icon></p>
+            <p (click)="dropDown()" style="font-size: 1rem;">{{text}} <ion-icon [name]="icon"></ion-icon></p>
         </div>
         
         <div class="chat-man">

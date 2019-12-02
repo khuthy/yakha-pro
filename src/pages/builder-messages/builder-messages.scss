@@ -20,7 +20,7 @@ page-builder-messages {
     transform: scale(0.5);
    
 }
-  .no-messages {
+  .no-messages { 
     height: 100%;
     display: flex;
     justify-content: center;
@@ -72,15 +72,21 @@ page-builder-messages {
       position: fixed;
       z-index: 1000 !important;
       left: 0;
-
-      top: 0;
+      transition: all 500ms;
+      bottom: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.472);
+      background: rgba(0, 0, 0, 0.572);
       display: flex;
       flex-direction: column;
       align-content: center;
       justify-content: center;
+      animation-name: zoomIn;
+      animation-duration: 500ms;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      transform: scale(0);
 
 
     }
@@ -95,9 +101,9 @@ page-builder-messages {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.897);
+    background-color: rgba(255, 255, 255, 0.795);
     box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.205);
-    border-radius: 2em 2em 0 0;
+    border-radius: 1em 1em 0 0;
     position: absolute;
     transition-duration: 500ms;
     z-index: -1;
@@ -112,7 +118,7 @@ page-builder-messages {
       background-color: #FFFFFF;
       text-align: center;
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.205);
-      border-radius: 0 0 13px 13px;
+      border-radius: 1em 1em 0 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -125,11 +131,10 @@ page-builder-messages {
     top: 10%;
     left: 0;
     width: 100%;
-    height: 130vw;
-    background: rgba(255, 255, 255, 0.897);
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.795);
     box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.205);
-    border-radius: 0 0 13px 13px;
-    border-radius: 2em 2em 0 0;
+    border-radius: 1em 1em 0 0;
     position: absolute;
     transition-duration: 500ms;
     animation-name: zoomIn;
@@ -147,7 +152,7 @@ page-builder-messages {
       left: 20%;
       right: 20%;
       bottom: -8%;
-      background-color: #FFFFFF;
+      background-color: rgba(255, 255, 255, 0.795);
       text-align: center;
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.205);
       border-radius: 0 0 13px 13px;
@@ -166,11 +171,12 @@ page-builder-messages {
     }
 
     .content-info {
-      height: 90%;
+      height: 60%;
       width: 100%;
       overflow: auto;
       transition-delay: 1s;
       transition-duration: 700ms;
+      //border: 1px solid red;
 
       .bricks {
         height: 10vh;
@@ -320,7 +326,7 @@ page-builder-messages {
   
 
   .chats {
-    height: 130vw;
+    height: 80%;
     //border: 1px solid red;
     top: 20%;
     position: absolute;
@@ -328,8 +334,8 @@ page-builder-messages {
     width: 100%;
     transition: all 500ms;
     z-index: 1;
-    border-radius: 2em 2em 0 0;
-    background: rgba(255, 233, 109, 0.603);
+    border-radius: 1em 1em 0 0;
+    background: #fff;
     box-shadow: -2px 0 4px rgba(0, 0, 0, 0.397);
     animation-name: zoomIn;
         animation-duration: 500ms;
@@ -353,11 +359,11 @@ page-builder-messages {
           display: flex;
           justify-content: space-between;
           width: 100%;
-          height: 10vw;
+          height: 5vw;
         }
         .chat-man {
           overflow: auto;
-          height: 95vw;
+          height: 100vw;
        
         }
 
@@ -420,16 +426,16 @@ page-builder-messages {
 
   }
   .chat-twize {
-    height: 114vw;
+    height: 30%;
     //border: 1px solid red;
     top: 70%;
     position: absolute;
     left: 0;
     width: 100%;
-    opacity: .5;
+    opacity: .9;
     z-index: 1;
-    border-radius: 2em 2em 0 0;
-    background: rgba(75, 75, 75, 0.274);
+    border-radius: 1em 1em 0 0;
+    background: #fff;
     box-shadow: -2px 0 4px rgba(0, 0, 0, 0.397);
     animation-name: zoomIn;
     transition: all 500ms;
