@@ -116,6 +116,7 @@ export class HomePage {
       if(this.showBuilders == false) {
       this.showBuilders = true;
       this.activateSearch = true;
+      this.icon = 'close';
       this.btnAll = 'Hide'
       this.iconAll = 'arrow-down'
       this.renderer.addClass(allBuilders, 'cards-expand');

@@ -389,7 +389,10 @@ export class QuotationFormPage {
         if (this.HomeOwnerQuotation.brickType != this.bricksContainer[0].children[j].children[1].innerText) {
           this.renderer.setStyle(this.bricksContainer[0].children[j].children[1], 'background', 'white');
           this.renderer.setStyle(this.bricksContainer[0].children[j].children[1], 'color', 'black');
-        
+          this.renderer.setStyle(this.bricksContainer[0].children[j], 'filter', 'saturate(0%)');
+          this.renderer.setStyle(this.bricksContainer[0].children[j], 'transform', 'scale(.8)');
+          this.renderer.setStyle(this.bricksContainer[0].children[j], 'transition', 'all 500ms');
+          
         }
 
       }
@@ -404,7 +407,13 @@ export class QuotationFormPage {
         this.renderer.setStyle(event.path[i].children[1], 'background', '#cc9e14');
         this.renderer.setStyle(event.path[i].children[1], 'background', '#cc9e14');
         this.renderer.setStyle(event.path[i].children[1], 'color', '#fff');
-        this.renderer.setStyle(this.bricksContainer, 'transform', 'scale(1.5)');
+        this.renderer.setStyle(event.path[i], 'filter', 'saturate(100%)');
+        this.renderer.setStyle(event.path[i], 'transform', 'scale(1)');
+        this.renderer.setStyle(event.path[i], 'transform', 'translate(0, -100%)');
+        this.renderer.setStyle(event.path[i], 'transition', 'all 500ms');
+        this.renderer.setStyle(event.path[i], 'transform', 'translate(0, 0%)');
+        this.renderer.setStyle(event.path[i], 'position', 'relative');
+        this.renderer.setStyle(event.path[i], 'z-index', '10');
         //console.log(event.path[i].children[1].innerText);
         // console.log(event.path[i].children);
       }
