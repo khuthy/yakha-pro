@@ -24,8 +24,17 @@ export class HomePage {
   iconAll = 'arrow-up';
   uid = firebase.auth().currentUser.uid;
   getUsers: boolean;
+  db = firebase.firestore().collection('Users');
+  dbRequest = firebase.firestore().collection('Request');
+  dbFeeback = firebase.firestore().collection('Feedback');
+  profile = {
+    image: '',
+    name: '',
+    address: ''
+  };
    constructor(public keyboard: Keyboard, private renderer: Renderer2, private elementRef: ElementRef, public navCtrl: NavController, private authService: AuthServiceProvider, private popoverCtrl: PopoverController) {
-   
+    /* Profile of logged in user */
+    this. getUserProfile();
 
     this.db.doc(this.uid).onSnapshot((res) => {
       if (res.data().builder == false) {
@@ -55,6 +64,17 @@ export class HomePage {
      
      this.icon = 'close';
    }
+ }
+
+
+ getUserProfile() {
+   this.db.doc(this.uid).onSnapshot((usersLoggedIn) => {
+     this.profile.image = usersLoggedIn.data().image;
+     this.profile.name = usersLoggedIn.data().fullName;
+     this.profile.address = usersLoggedIn.data().address
+     console.log(this.profile);
+     
+   })
  }
 
 
@@ -121,9 +141,7 @@ export class HomePage {
 
 //   map: any;
 //   //input: any;
-   db = firebase.firestore().collection('Users');
-   dbRequest = firebase.firestore().collection('Request');
-   dbFeeback = firebase.firestore().collection('Feedback');
+  
 //   dbChat = firebase.firestore().collection('chat_msg');
 //   autoCompSearch = document.getElementsByClassName('searchbar-input');
 //   hideCard = document.getElementsByClassName('slider');

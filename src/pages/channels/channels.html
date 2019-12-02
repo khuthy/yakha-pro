@@ -60,9 +60,9 @@
             <h4>{{b.user.fullName}}</h4>
             <p>{{b.user.date | date}}</p>
           </div>
-          <div class="btn-request">
+          <div class="btn-request" >
               <p>View</p>
-              <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+              <button (click)="gotoMessages(b.user.uid, b.user.fullName)" ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
             </div>
      </div>
        

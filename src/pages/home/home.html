@@ -339,11 +339,11 @@
       <section class="container" *ngIf="!getUsers">
         <div class="profile-container">
           <div class="profile">
-            <img src="../../assets/imgs/builders.png">
+            <img src="{{profile.image}}">
           </div>
           <div class="profile-info">
-            <h4>Nkwe Justice</h4>
-            <p>Soweto, Johannesburg</p>
+            <h4>{{profile.name}}</h4>
+            <p>Soweto, Johanesbugr</p>
           </div>
         </div>
         <div class="slides">
@@ -479,7 +479,7 @@
            <p>You have no messages yet!</p>
          </div>  -->
    
-      <div class="cards-builders"  padding>
+      <div class="cards-builders-homebuilder-side"  padding>
       
         <div class="card-builders" *ngFor="let o of owner" (click)="viewRequest(o.id, o.user.uid)">
            <div class="profile-builders">
