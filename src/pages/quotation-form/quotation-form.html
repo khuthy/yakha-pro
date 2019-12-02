@@ -31,7 +31,7 @@
         
             <ion-title text-center>Request quotes</ion-title>
 
-            <ion-buttons right end>
+            <ion-buttons right end *ngIf="steps=='steptwo' && steps=='stepone'">
                 <button ion-button menuToggle icon-only color="light" clear (click)="navCtrl.pop()"></button>
             </ion-buttons>
       </ion-toolbar>
@@ -210,10 +210,10 @@
       </div>
 
       <!-- div containing houseplan and details -->
-      <div class="plan">
+      <div class="plan" padding>
         <!-- houseplan -->
         <div class="houseplan" style="margin: 0px 3px 0px 0px;">
-          <img src="{{HomeOwnerQuotation.houseImage}}" class="image">
+          <img (click)="viewProfileNow(HomeOwnerQuotation.houseImage)" src="{{HomeOwnerQuotation.houseImage}}" class="image">
         </div>
 
         <!-- request details -->

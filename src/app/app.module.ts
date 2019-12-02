@@ -75,7 +75,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     MessagesPage,
     DescriptionComponent,
     BuilderquotesPage,
-    BuilderMessagesPage
+    BuilderMessagesPage,
+    ProfileComponent
 
   ],
   imports: [
@@ -109,7 +110,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     MessagesPage,
     DescriptionComponent,
     BuilderquotesPage,
-    BuilderMessagesPage
+    BuilderMessagesPage,
+    ProfileComponent
     
   ],
   providers: [

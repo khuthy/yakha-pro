@@ -57,7 +57,7 @@ export class QuotationFormPage {
     extras: [],
     wallType: '',
     brickType: '',
-    houseImage: '',
+    houseImage: '../../assets/icon/splash.png',
     comment: '',
     date: Date(),
     view: false,
@@ -229,6 +229,13 @@ export class QuotationFormPage {
     } else {
       this.steps = 'stepone';
     }
+  }
+
+  viewProfileNow(myEvent) {
+    let popover = this.popoverCtrl.create(ProfileComponent, { image: myEvent });
+    popover.present({
+      ev: myEvent
+    });
   }
 
   slideState() {
@@ -409,9 +416,8 @@ export class QuotationFormPage {
         this.renderer.setStyle(event.path[i].children[1], 'color', '#fff');
         this.renderer.setStyle(event.path[i], 'filter', 'saturate(100%)');
         this.renderer.setStyle(event.path[i], 'transform', 'scale(1)');
-        this.renderer.setStyle(event.path[i], 'transform', 'translate(0, -100%)');
+        /* this.renderer.setStyle(event.path[i], 'transform', 'skew(10deg)'); */
         this.renderer.setStyle(event.path[i], 'transition', 'all 500ms');
-        this.renderer.setStyle(event.path[i], 'transform', 'translate(0, 0%)');
         this.renderer.setStyle(event.path[i], 'position', 'relative');
         this.renderer.setStyle(event.path[i], 'z-index', '10');
         //console.log(event.path[i].children[1].innerText);

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the ProfileComponent component.
@@ -14,9 +15,14 @@ export class ProfileComponent {
 
   text: string;
 
-  constructor() {
+  constructor(private navCtrl: NavController, private navParam: NavParams, private viewCtrl: ViewController) {
     console.log('Hello ProfileComponent Component');
-    this.text = 'Hello World';
+    this.text = this.navParam.get('image');
   }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
+  
+    }
 
 }
