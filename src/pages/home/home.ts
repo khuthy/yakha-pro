@@ -71,7 +71,7 @@ export class HomePage {
    this.db.doc(this.uid).onSnapshot((usersLoggedIn) => {
      this.profile.image = usersLoggedIn.data().image;
      this.profile.name = usersLoggedIn.data().fullName;
-     this.profile.address = usersLoggedIn.data().address
+     this.profile.address = usersLoggedIn.data().ownerAddress;
      console.log(this.profile);
      
    })
@@ -780,6 +780,7 @@ export class HomePage {
 
   getRequests() {
     let data = { info: {}, user: {}, id: {} }
+    this.owner = [];
     this.dbRequest.where('builderUID', '==', this.uid).onSnapshot(res => {
       // console.log(res.size);
       res.forEach((bDoc) => {
@@ -796,6 +797,7 @@ export class HomePage {
       })
     })
     this.builder = [];
+    this.owner = [];
   }
 
 
