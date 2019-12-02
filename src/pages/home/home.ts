@@ -1,6 +1,5 @@
 import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { NavController, MenuController, Platform, Slides, PopoverController, AlertController, NavParams, LoadingController, Keyboard, Content, App } from 'ionic-angular';
-import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { BuilderProfileviewPage } from '../builder-profileview/builder-profileview';
 import * as firebase from 'firebase';
 import { CallNumber } from '@ionic-native/call-number';
@@ -38,23 +37,24 @@ export class HomePage {
   lat = 23.3563;
   distance: number;
   lng = 27.24455;
-  myBuilders = [];
+  //myBuilders = [];
   map;
   platform = new H.service.Platform({
     "apikey": "2FROFxq1yLRV3jW4FzF2ZtSvWPP7LYQpBeZQXjhOelo"
   });
   latitude;
   longitude;
+  nearest=[];
   constructor(public keyboard: Keyboard, private renderer: Renderer2, private elementRef: ElementRef, public navCtrl: NavController, private authService: AuthServiceProvider, private popoverCtrl: PopoverController) {
     this.getUserType();
   }
 
   ionViewWillEnter() {
     this.getPosition();
-    // this.getBuilders();
-    this.getBuilder();
-
+    this.getBuilders();
+    this.getUserProfile();
   }
+  
   showMyMap(latitude, longitude) {
     var defaultLayers = this.platform.createDefaultLayers();
     var svg = 'https://img.icons8.com/cotton/40/000000/place-marker.png';
@@ -83,6 +83,7 @@ export class HomePage {
     this.map.setCenter(coords);
     setTimeout(() => {
       this.addMarker(this.map);
+      console.log(this.nearest); 
     }, 1000);
 
     /*  window.addEventListener('resize', () => this.mapContainer.getViewPort().resize());
@@ -95,21 +96,14 @@ export class HomePage {
     //  this.restrictMap(this.mapContainer);
     //}, 1000);
   }
-  
-  getBuilder() {
-    this.db.where('builder', '==', true).onSnapshot((res) => {
-      this.myBuilders = [];
-      res.forEach((doc) => {
-        this.myBuilders.push(doc.data());
-      })
-      //console.log(this.myBuilders);
-    })
-  }
+ 
+ 
   getBuilderDistance(map, lat,lng) {
     // console.log(lat);
   }
   addMarker(map) {
-    this.myBuilders.forEach((res) => {
+    this.builder.forEach((res) => {
+
       this.searchText = res.address;
       var geocodingParams = {
         searchText: '' + this.searchText
@@ -134,6 +128,8 @@ export class HomePage {
           });
           map.addObject(marker);
         }
+        this.nearest.push(result.Response.View[0].Result[0].Location.Address.City)
+        //
       };
       // Get an instance of the geocoding service:
       var geocoder = this.platform.getGeocodingService();
@@ -221,7 +217,6 @@ export class HomePage {
         
         router.calculateRoute(routingParameters, onResult,(success)=>{
           console.log('success');
-          
         },
            (error) => {
             alert(error.message);
@@ -239,6 +234,10 @@ export class HomePage {
       navigator.geolocation.getCurrentPosition(resp => {
         this.showMyMap(resp.coords.latitude, resp.coords.longitude);
       });
+      navigator.geolocation.watchPosition((res)=>{
+        console.log('My position',res);
+        
+      })
     } else {
       console.log('Error getting your position');
       //myCurrentLocation = "Geolocation is not supported by this browser.";
@@ -279,11 +278,14 @@ export class HomePage {
     
      this.activateSearch = false;
      this.icon = 'search';
+     this.showBuilders = true;
+        this.showAllBuilders();
      
    }else {
     
-     this.activateSearch = true;
-     
+      this.activateSearch = true;
+      this.showBuilders = false;
+        this.showAllBuilders();
      this.icon = 'close';
    }
  }
@@ -294,7 +296,7 @@ export class HomePage {
      this.profile.image = usersLoggedIn.data().image;
      this.profile.name = usersLoggedIn.data().fullName;
      this.profile.address = usersLoggedIn.data().ownerAddress;
-     console.log(this.profile);
+     //console.log(this.profile);
      
    })
  }
@@ -334,7 +336,7 @@ export class HomePage {
 
     if (this.showBuilders == false) {
       this.showBuilders = true;
-
+      this.activateSearch = true;
       this.btnAll = 'Hide'
       this.iconAll = 'arrow-down'
       this.renderer.addClass(allBuilders, 'cards-expand');

@@ -389,6 +389,7 @@ export class QuotationFormPage {
         if (this.HomeOwnerQuotation.brickType != this.bricksContainer[0].children[j].children[1].innerText) {
           this.renderer.setStyle(this.bricksContainer[0].children[j].children[1], 'background', 'white');
           this.renderer.setStyle(this.bricksContainer[0].children[j].children[1], 'color', 'black');
+        
         }
 
       }
@@ -400,9 +401,10 @@ export class QuotationFormPage {
       if (event.path[i].className == 'cards') {
 
         this.selectedBrick = event.path[i].children[1].innerText
-
+        this.renderer.setStyle(event.path[i].children[1], 'background', '#cc9e14');
         this.renderer.setStyle(event.path[i].children[1], 'background', '#cc9e14');
         this.renderer.setStyle(event.path[i].children[1], 'color', '#fff');
+        this.renderer.setStyle(this.bricksContainer, 'transform', 'scale(1.5)');
         //console.log(event.path[i].children[1].innerText);
         // console.log(event.path[i].children);
       }
