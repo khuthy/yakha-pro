@@ -319,7 +319,7 @@
 
 </ion-content>  
 -->
-<ion-header no-border>
+<!-- <ion-header no-border>
   <ion-toolbar color="dark">
       <ion-buttons left start>
           <button icon-only ion-button menuToggle color="dark">
@@ -333,9 +333,9 @@
           <button icon-only ion-button menuToggle  *ngIf="getUsers" color="dark"></button>
       </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 <ion-content fullscreen>
-    <main class="main"></main>
+    <!-- <main class="main"></main>
       <section class="container" *ngIf="!getUsers">
         <div class="profile-container">
           <div class="profile">
@@ -397,7 +397,7 @@
                     
                   </div>
              
-            </section>
+            </section> -->
           <!-- <h3>Builders in Johannesburg 30</h3>
           <div class="slide">
                          <div class="home-builder-card" padding-bottom padding-left padding-right>
@@ -440,7 +440,7 @@
               
             </div>
           </div>  -->
-        </div>
+        <!-- </div>
         <div class="cards">
             <div class="viewSection">
               <p>Other Builders</p>
@@ -474,12 +474,12 @@
 
 
 
-       <div class="container-builders" *ngIf="getUsers">
+       <div class="container-builders" *ngIf="getUsers"> -->
          <!--  <div class="no-messages-builders">
            <p>You have no messages yet!</p>
          </div>  -->
    
-      <div class="cards-builders"  padding>
+      <!-- <div class="cards-builders"  padding>
       
         <div class="card-builders" *ngFor="let o of owner" (click)="viewRequest(o.id, o.user.uid)">
            <div class="profile-builders">
@@ -497,6 +497,6 @@
           
          </div>
        
-       </div> 
-
+       </div>  -->
+       <div style="width:100%; height: 100%" id="mapContainer"></div>
 </ion-content>  
