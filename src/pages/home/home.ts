@@ -31,6 +31,7 @@ export class HomePage {
     name: '',
     address: ''
   };
+  myNearBuilder = [];
   //@ViewChild("mapContainer") mapElement: ElementRef;
   searchText: string = '';
   //mapContainer: any
@@ -45,6 +46,7 @@ export class HomePage {
   latitude;
   longitude;
   nearest=[];
+  myLocation;
   constructor(public keyboard: Keyboard, private renderer: Renderer2, private elementRef: ElementRef, public navCtrl: NavController, private authService: AuthServiceProvider, private popoverCtrl: PopoverController) {
     this.getUserType();
   }
@@ -85,7 +87,7 @@ export class HomePage {
       this.addMarker(this.map);
       console.log(this.nearest); 
     }, 1000);
-
+    
     /*  window.addEventListener('resize', () => this.mapContainer.getViewPort().resize());
     // var ui = H.ui.UI.createDefault(this.mapContainer, defaultLayers);
      window.onload = () => {
@@ -95,11 +97,6 @@ export class HomePage {
 
     //  this.restrictMap(this.mapContainer);
     //}, 1000);
-  }
- 
- 
-  getBuilderDistance(map, lat,lng) {
-    // console.log(lat);
   }
   addMarker(map) {
     this.builder.forEach((res) => {
@@ -138,6 +135,8 @@ export class HomePage {
         console.log(e);
       });
     })
+    
+    
     //this.getDirections(map);
   }
   getDirections(map, lat, lng) {
@@ -233,15 +232,54 @@ export class HomePage {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(resp => {
         this.showMyMap(resp.coords.latitude, resp.coords.longitude);
+        this.convertCoordToAddress(resp.coords.latitude, resp.coords.longitude);
       });
-      navigator.geolocation.watchPosition((res)=>{
-        console.log('My position',res);
-        
-      })
     } else {
       console.log('Error getting your position');
       //myCurrentLocation = "Geolocation is not supported by this browser.";
     }
+  }
+  convertCoordToAddress(lat,lng) {
+  var reverseGeocodingParameters = {
+    prox: ''+lat+','+lng,
+    mode: 'retrieveAddresses',
+    maxresults: 1
+  };
+
+// Define a callback function to process the response:
+const onSuccess=(result)=> {
+ // console.log(this.nearest);
+ setTimeout(() => {
+ //  this.nearest=[];
+  this.nearest.forEach((item)=>{
+    if (result.Response.View[0].Result[0].Location.Address.City === item) {
+     // this.myNearBuilder.push(item)
+      console.log('My nearest builders ', item);
+    }
+  }) 
+ }, 1500);
+  
+ //this.myLocation = result.Response.View[0].Result[0].Location.Address.City;
+  //console.log(location);
+  
+  // Create an InfoBubble at the returned location with
+  // the address as its contents:
+ /*  ui.addBubble(new H.ui.InfoBubble({
+    lat: location.Location.DisplayPosition.Latitude,
+    lng: location.Location.DisplayPosition.Longitude
+   }, { content: location.Location.Address.Label })); */
+};
+
+// Get an instance of the geocoding service:
+var geocoder = this.platform.getGeocodingService();
+
+// Call the geocode method with the geocoding parameters,
+// the callback and an error callback function (called if a
+// communication error occurs):
+geocoder.reverseGeocode(
+  reverseGeocodingParameters,
+  onSuccess,
+  function(e) { alert(e); });
   }
   /* openSearch() {
     if (this.activateSearch) {
