@@ -16,7 +16,7 @@ import { BuilderquotesPage } from '../builderquotes/builderquotes';
   templateUrl: 'builder-messages.html',
 })
 export class BuilderMessagesPage {
-  drop: boolean = false;
+  drop: boolean = true;
   imageBuilder: string;
   @ViewChild('slides') slides: Slides;
   dbChat = firebase.firestore().collection('chat_msg');
@@ -40,11 +40,11 @@ export class BuilderMessagesPage {
   chat = [];
 
   toggle: boolean = false;
-  icon: string = 'ios-arrow-down';
+  icon: string = 'ios-arrow-up';
   extras = [];
   number: any;
   quoteStatus: any;
-  text: string;
+  text: string = "All";
   constructor(public navCtrl: NavController,
     private callNumber: CallNumber,
     public navParams: NavParams,

@@ -103,20 +103,23 @@ export class AccountSetupPage {
   public handleAddressChange(addr: Address) {
     this.HomeOwnerProfile.ownerAddress = addr.formatted_address;
   }
+  ionViewWillEnter() {
+    this.menuCtrl.swipeEnable(false);
+    firebase.firestore().collection('Users').doc(firebase.auth().currentUser.uid).onSnapshot((res) => {
+     this.back = res.data().isProfile; 
+    })
+
+  }
   ionViewDidLoad() {
+
+   
     setTimeout(() => {
       this.loaderAnimate = false;
     }, 2000)
     console.log(this.uid)
     console.log(this.authUser.getUser());
     console.log(this.navParams.data);
-    firebase.firestore().collection('Users').doc(firebase.auth().currentUser.uid).onSnapshot((res) => {
-      if (res.data().isProfile == true) {
-        this.back = true;
-      } else {
-        this.back = false;
-      }
-    })
+   
 
 
     this.getProfile();
@@ -129,9 +132,7 @@ export class AccountSetupPage {
       this.hideElement = false;
     }
   }
-  ionViewWillEnter() {
-    this.menuCtrl.swipeEnable(false);
-  }
+
   ionViewWillLeave() {
     this.menuCtrl.swipeEnable(false);
   }
@@ -175,7 +176,7 @@ export class AccountSetupPage {
         })
       }else {
         await this.db.doc(this.uid).update(this.HomeOwnerProfile).then((res) => {
-         this.navCtrl.setRoot(HomePage)
+         this.navCtrl.setRoot(HomePage);
          // this.navCtrl.pop();
         })
       }

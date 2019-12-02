@@ -24,6 +24,14 @@ export class HomePage {
   iconAll = 'arrow-up';
   uid = firebase.auth().currentUser.uid;
   getUsers: boolean;
+  db = firebase.firestore().collection('Users');
+  dbRequest = firebase.firestore().collection('Request');
+  dbFeeback = firebase.firestore().collection('Feedback');
+  profile = {
+    image: '',
+    name: '',
+    address: ''
+  };
   //@ViewChild("mapContainer") mapElement: ElementRef;
   searchText: string = '';
   //mapContainer: any
@@ -236,7 +244,7 @@ export class HomePage {
       //myCurrentLocation = "Geolocation is not supported by this browser.";
     }
   }
-  openSearch() {
+  /* openSearch() {
     if (this.activateSearch) {
 
 
@@ -249,7 +257,7 @@ export class HomePage {
 
       this.icon = 'close';
     }
-  }
+  } */
   getUserType() {
     this.db.doc(this.uid).onSnapshot((res) => {
       if (res.data().builder == false) {
@@ -265,16 +273,43 @@ export class HomePage {
     });
   }
 
+ openSearch() {
+   if(this.activateSearch) {
+
+    
+     this.activateSearch = false;
+     this.icon = 'search';
+     
+   }else {
+    
+     this.activateSearch = true;
+     
+     this.icon = 'close';
+   }
+ }
+
+
+ getUserProfile() {
+   this.db.doc(this.uid).onSnapshot((usersLoggedIn) => {
+     this.profile.image = usersLoggedIn.data().image;
+     this.profile.name = usersLoggedIn.data().fullName;
+     this.profile.address = usersLoggedIn.data().ownerAddress;
+     console.log(this.profile);
+     
+   })
+ }
+
+
   keyboardListener(ev) {
     console.log(ev);
-    if (this.keyboard.isOpen()) {
+    if(this.keyboard.isOpen()) {
 
-      if (!this.getUsers) {
-        console.log(this.elementRef.nativeElement.children[1].children[1].children[1]);
-        this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1], 'overflow', 'hidden');
-        this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[0], 'flex', '0 0 20%');
-        this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[1], 'flex', '0 0 30%');
-        this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[2], 'display', 'none');
+      if(!this.getUsers) {
+        this.showBuilders = false;
+        this.showAllBuilders();
+      }else {
+        this.showBuilders = true;
+        this.showAllBuilders();
       }
 
 
@@ -323,218 +358,216 @@ export class HomePage {
 
     }
   }
-  //   @ViewChild('slides') slides: Slides;
-  //   @ViewChild("map") mapElement: ElementRef;
+//   @ViewChild('slides') slides: Slides;
+//   @ViewChild("map") mapElement: ElementRef;
 
-  //   map: any;
-  //   //input: any;
-  db = firebase.firestore().collection('Users');
-  dbRequest = firebase.firestore().collection('Request');
-  dbFeeback = firebase.firestore().collection('Feedback');
-  //   dbChat = firebase.firestore().collection('chat_msg');
-  //   autoCompSearch = document.getElementsByClassName('searchbar-input');
-  //   hideCard = document.getElementsByClassName('slider');
-  //   items: any;
-  //   info = false;
-  builder = [];
-  buildesAverage = []
-  owner = [];
-  //   status: string = '';
-  //   maps: boolean = false;
-  //   request: boolean = false;
-  //   loaderAnimate = true
-  //   ownerUID: string;
-  //   ownerName;
-  //   ownerImage: any;
-  //   bUID: string;
-  //   price = 0;
-  //   /* Search variables */
-  //   location = false;
-  //   name = false;
-  //   range = false;
-  //   header='jasnfkfmks';
-  //   uid = firebase.auth().currentUser.uid;
-  //   /* Search variebles */
-  //   homeowner = false;
-  //   message = '';
-  //   isBuilder;
-  //   input = '';
-  //   menuShow: boolean = true;
-  //   directionsService = new google.maps.DirectionsService();
-  //   directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
-  //   geoData = {
-  //     lat: 0,
-  //     lng: 0
-  //   }
-  //   msgStatus;
-  //   total: number;
-  //   avgRate: number;
-  //   ratingArr = [];
-  //   sumRated = 0;
-  //   fullName = '';
-  //   userImg = '';
-  //   // sumRate=0;
-  noReviews = 'No reviews yet';
-  //   autocom: any;
-  //   constructor(public navCtrl: NavController,
-  //     public geolocation: Geolocation,
-  //     public navParams: NavParams,
-  //     public platform: Platform,
-  //     public popoverCtrl: PopoverController,
-  //     public elementref: ElementRef,
-  //     public alertCtrl: AlertController, public loadingCtrl: LoadingController, public renderer: Renderer2) {
+//   map: any;
+//   //input: any;
+  
+//   dbChat = firebase.firestore().collection('chat_msg');
+//   autoCompSearch = document.getElementsByClassName('searchbar-input');
+//   hideCard = document.getElementsByClassName('slider');
+//   items: any;
+//   info = false;
+   builder = [];
+   buildesAverage = []
+   owner = [];
+//   status: string = '';
+//   maps: boolean = false;
+//   request: boolean = false;
+//   loaderAnimate = true
+//   ownerUID: string;
+//   ownerName;
+//   ownerImage: any;
+//   bUID: string;
+//   price = 0;
+//   /* Search variables */
+//   location = false;
+//   name = false;
+//   range = false;
+//   header='jasnfkfmks';
+//   uid = firebase.auth().currentUser.uid;
+//   /* Search variebles */
+//   homeowner = false;
+//   message = '';
+//   isBuilder;
+//   input = '';
+//   menuShow: boolean = true;
+//   directionsService = new google.maps.DirectionsService();
+//   directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
+//   geoData = {
+//     lat: 0,
+//     lng: 0
+//   }
+//   msgStatus;
+//   total: number;
+//   avgRate: number;
+//   ratingArr = [];
+//   sumRated = 0;
+//   fullName = '';
+//   userImg = '';
+//   // sumRate=0;
+     noReviews = 'No reviews yet';
+//   autocom: any;
+//   constructor(public navCtrl: NavController,
+//     public geolocation: Geolocation,
+//     public navParams: NavParams,
+//     public platform: Platform,
+//     public popoverCtrl: PopoverController,
+//     public elementref: ElementRef,
+//     public alertCtrl: AlertController, public loadingCtrl: LoadingController, public renderer: Renderer2) {
 
 
-  //   }
-  //   checkKeyboard(data) {
-  //     if (data == 'open') {
-  //       //this.hid='value';
-  //       this.renderer.setStyle(this.hideCard[0], 'transform', 'translateY(40vh)');
-  //       this.menuShow = false;
+//   }
+//   checkKeyboard(data) {
+//     if (data == 'open') {
+//       //this.hid='value';
+//       this.renderer.setStyle(this.hideCard[0], 'transform', 'translateY(40vh)');
+//       this.menuShow = false;
 
-  //     } else {
-  //       this.renderer.setStyle(this.hideCard[0], 'transform', 'translateY(0)');
-  //       this.menuShow = true
-  //     }
-  //     // console.log(data);
+//     } else {
+//       this.renderer.setStyle(this.hideCard[0], 'transform', 'translateY(0)');
+//       this.menuShow = true
+//     }
+//     // console.log(data);
 
-  //   }
-  //   AutoComplete() {
+//   }
+//   AutoComplete() {
 
-  //     this.autocom = new google.maps.places.Autocomplete(this.autoCompSearch[0], { types: ['geocode'] });
-  //     this.autocom.addListener('place_changed', () => {
-  //       let place = this.autocom.getPlace();
-  //       console.log(place);
-  //       let latLng = {
-  //         lat: place.geometry.location.lat(),
-  //         lng: place.geometry.location.lng(),
-  //       }
-  //       this.map.panTo(latLng);
-  //     });
+//     this.autocom = new google.maps.places.Autocomplete(this.autoCompSearch[0], { types: ['geocode'] });
+//     this.autocom.addListener('place_changed', () => {
+//       let place = this.autocom.getPlace();
+//       console.log(place);
+//       let latLng = {
+//         lat: place.geometry.location.lat(),
+//         lng: place.geometry.location.lng(),
+//       }
+//       this.map.panTo(latLng);
+//     });
 
-  //   }
-  //   RangeSearch() {
-  //     this.range = !this.range;
-  //   }
-  // /* ionViewWillEnter(){
-  //   this.db.doc(this.uid).onSnapshot((res) => {
-  //     if (res.data().builder == false) {
-  //       //this.loadCtrl();
-  //       //document.getElementById('header').style.display = "none";
-  //       this.getPosition();
-  //     }
-  //   })
-  // } */
-  //   ionViewDidLoad() {
-  //     setTimeout(() => {
-  //       this.AutoComplete()
-  //     }, 1000);
-  //     setTimeout(() => {
-  //       this.loaderAnimate = false
-  //     }, 2000);
-  // this.db.doc(this.uid).onSnapshot((res) => {
-  //   if (res.data().builder == false) {
-  //     //this.loadCtrl();
-  //     //document.getElementById('header').style.display = "none";
-  //    // this.loadMap();
-  //     this.getPosition();
-  //   }
-  //       if (res.data().builder == true) {
-  //         this.getRequests();
-  //       }
-  //     })
+//   }
+//   RangeSearch() {
+//     this.range = !this.range;
+//   }
+// /* ionViewWillEnter(){
+//   this.db.doc(this.uid).onSnapshot((res) => {
+//     if (res.data().builder == false) {
+//       //this.loadCtrl();
+//       //document.getElementById('header').style.display = "none";
+//       this.getPosition();
+//     }
+//   })
+// } */
+//   ionViewDidLoad() {
+//     setTimeout(() => {
+//       this.AutoComplete()
+//     }, 1000);
+//     setTimeout(() => {
+//       this.loaderAnimate = false
+//     }, 2000);
+    // this.db.doc(this.uid).onSnapshot((res) => {
+    //   if (res.data().builder == false) {
+    //     //this.loadCtrl();
+    //     //document.getElementById('header').style.display = "none";
+    //    // this.loadMap();
+    //     this.getPosition();
+    //   }
+//       if (res.data().builder == true) {
+//         this.getRequests();
+//       }
+//     })
 
-  //     // console.log(this.navParams.data);
+//     // console.log(this.navParams.data);
 
-  //     // this.getRequests();
-  //     // this.loadMap();
-  //     this.isBuilder = firebase.auth().currentUser.uid;
-  //     console.log('check if the user is a builder: ', this.isBuilder);
-  //     // if (this.authService.manageUsers() == true) {
-  //     //   this.getUser = "Home Builder";
-  //     // } else {
-  //     //   this.getUser = "Aspiring Home Owner"
+//     // this.getRequests();
+//     // this.loadMap();
+//     this.isBuilder = firebase.auth().currentUser.uid;
+//     console.log('check if the user is a builder: ', this.isBuilder);
+//     // if (this.authService.manageUsers() == true) {
+//     //   this.getUser = "Home Builder";
+//     // } else {
+//     //   this.getUser = "Aspiring Home Owner"
 
-  //     // }
-  //   }
+//     // }
+//   }
 
-  //   moveMapEvent() {
+//   moveMapEvent() {
 
-  //     let currentIndex = this.slides.getActiveIndex();
-  //     let currentEvent = this.builder[currentIndex];
-  //     // this.map.setCenter({ lat: currentEvent.lat, lng: currentEvent.lng })
-  //     //this.loadCtrl();
-  //     this.geolocation.getCurrentPosition().then((resp) => {
-  //       let geoData = {
-  //         lat: resp.coords.latitude,
-  //         lng: resp.coords.longitude
-  //       }
+//     let currentIndex = this.slides.getActiveIndex();
+//     let currentEvent = this.builder[currentIndex];
+//     // this.map.setCenter({ lat: currentEvent.lat, lng: currentEvent.lng })
+//     //this.loadCtrl();
+//     this.geolocation.getCurrentPosition().then((resp) => {
+//       let geoData = {
+//         lat: resp.coords.latitude,
+//         lng: resp.coords.longitude
+//       }
 
-  //       let start = new google.maps.LatLng(geoData.lat, geoData.lng);
-  //       let end = new google.maps.LatLng(currentEvent.lat, currentEvent.lng)
-  //       const that = this;
-  //       this.directionsService.route({
-  //         origin: start,
-  //         destination: end,
-  //         travelMode: 'DRIVING',
-  //         unitSystem: google.maps.UnitSystem.METRIC,
-  //         // icon: 'https://img.icons8.com/color/24/000000/worker-male--v2.png'
-  //       },
-  //         (response, status) => {
-  //           if (status === 'OK') {
-  //             that.directionsDisplay.setDirections(response);
-  //             this.total = 0;
-  //             let myroute = response.routes[0];
-  //             for (let i = 0; i < myroute.legs.length; i++) {
-  //               this.total += myroute.legs[i].distance.value;
-  //             }
-  //             this.total = this.total / 1000;
-  //             //console.log(this.total);
+//       let start = new google.maps.LatLng(geoData.lat, geoData.lng);
+//       let end = new google.maps.LatLng(currentEvent.lat, currentEvent.lng)
+//       const that = this;
+//       this.directionsService.route({
+//         origin: start,
+//         destination: end,
+//         travelMode: 'DRIVING',
+//         unitSystem: google.maps.UnitSystem.METRIC,
+//         // icon: 'https://img.icons8.com/color/24/000000/worker-male--v2.png'
+//       },
+//         (response, status) => {
+//           if (status === 'OK') {
+//             that.directionsDisplay.setDirections(response);
+//             this.total = 0;
+//             let myroute = response.routes[0];
+//             for (let i = 0; i < myroute.legs.length; i++) {
+//               this.total += myroute.legs[i].distance.value;
+//             }
+//             this.total = this.total / 1000;
+//             //console.log(this.total);
 
-  //           }
+//           }
 
-  //         });
-  //     })
-  //   }
+//         });
+//     })
+//   }
 
-  //   getPosition(): any {
-  //     this.geolocation.getCurrentPosition().then(resp => {
-  //       let coords = {
-  //         lat: resp.coords.latitude,
-  //         lng: resp.coords.longitude
-  //       } 
-  //       this.loadMap(coords);
-  //       //console.log('current loc', resp);
-
-  //       // add a marker, will be different from the driving schools
-  //       const marker = new google.maps.Marker({
-  //         position: coords,
-  //         map: this.map,
-  //         icon: 'https://img.icons8.com/nolan/40/000000/user-location.png'
-  //       })
-  //       // add an info window to the user marker
-  //       let infoWindow = new google.maps.InfoWindow({
-  //         content: `You`
-  //       });
-  //       marker.addListener('click', () => {
-  //         infoWindow.open(this.map, marker);
-  //       })
-  //     }).catch(err => {
-  //       let coords = {
-  //         lat: 26.2041,
-  //         lng: 28.0473
-  //       }
-  //       console.log('current loc err',err);
-
-  //       this.loadMap(coords);
-  //     })   
-  //   }
-  //   loadCtrl() {
-  //     this.loadingCtrl.create({
-  //       content: 'Please wait..',
-  //       duration: 2000
-  //     }).present()
-  //   }
+//   getPosition(): any {
+//     this.geolocation.getCurrentPosition().then(resp => {
+//       let coords = {
+//         lat: resp.coords.latitude,
+//         lng: resp.coords.longitude
+//       } 
+//       this.loadMap(coords);
+//       //console.log('current loc', resp);
+      
+//       // add a marker, will be different from the driving schools
+//       const marker = new google.maps.Marker({
+//         position: coords,
+//         map: this.map,
+//         icon: 'https://img.icons8.com/nolan/40/000000/user-location.png'
+//       })
+//       // add an info window to the user marker
+//       let infoWindow = new google.maps.InfoWindow({
+//         content: `You`
+//       });
+//       marker.addListener('click', () => {
+//         infoWindow.open(this.map, marker);
+//       })
+//     }).catch(err => {
+//       let coords = {
+//         lat: 26.2041,
+//         lng: 28.0473
+//       }
+//       console.log('current loc err',err);
+      
+//       this.loadMap(coords);
+//     })   
+//   }
+//   loadCtrl() {
+//     this.loadingCtrl.create({
+//       content: 'Please wait..',
+//       duration: 2000
+//     }).present()
+//   }
 
   async getBuilders() {
 
@@ -965,6 +998,7 @@ export class HomePage {
 
   getRequests() {
     let data = { info: {}, user: {}, id: {} }
+    this.owner = [];
     this.dbRequest.where('builderUID', '==', this.uid).onSnapshot(res => {
       // console.log(res.size);
       res.forEach((bDoc) => {
@@ -981,6 +1015,7 @@ export class HomePage {
       })
     })
     this.builder = [];
+    this.owner = [];
   }
 
 

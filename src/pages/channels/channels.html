@@ -1,7 +1,7 @@
 <ion-header no-border>
-    <ion-toolbar>
+    <ion-toolbar color="light">
         <ion-buttons start left>
-          <button ion-button icon-only color="light" (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
+          <button ion-button icon-only color="dark" (click)="navCtrl.pop()"><ion-icon name="arrow-back"></ion-icon></button>
         </ion-buttons>
         <ion-title text-center>Messages</ion-title>
         <ion-buttons end right>
@@ -60,11 +60,13 @@
             <h4>{{b.user.fullName}}</h4>
             <p>{{b.user.date | date}}</p>
           </div>
-          <div class="btn-request">
+          <div class="btn-request" >
               <p>View</p>
-              <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+              <button (click)="gotoMessages(b.user.uid, b.user.fullName)" ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
             </div>
+            
      </div>
+     
        
       </div>
     

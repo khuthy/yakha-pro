@@ -11,6 +11,11 @@ page-account-setup {
      animation-name: dropDown;
      transform: translate(0,-100%);
   }
+  .header {
+    .toolbar-background {
+        background: linear-gradient(rgba(0, 0, 0, 0.308), rgba(0, 0, 0, 0.041));
+    }
+}
   @keyframes dropDown {
     0% {
       transform: translate(0%,-100%);

@@ -2,6 +2,31 @@ page-baccount-setup {
  .slider-man {
     display: block;
   }
+  .header {
+    .toolbar-background {
+        background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1));
+    }
+}
+.main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-image: url('../../assets/imgs/splash.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all 500ms;
+  animation-name: zoomIn;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  transform: scale(0.5);
+ 
+}
+
   form {
     transition: all 1s;
     animation-duration: 500ms;
@@ -10,6 +35,7 @@ page-baccount-setup {
      animation-fill-mode: forwards;
      animation-name: dropDown;
      transform: translate(0,-100%);
+     
   }
   @keyframes dropDown {
     0% {
