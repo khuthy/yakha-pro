@@ -449,7 +449,7 @@
               <p class="all" (click)="showAllBuilders()">{{btnAll}} <ion-icon [name]="iconAll"></ion-icon></p>
             </div>
             <div class="all-builders">
-              <div class="card-content-container" *ngFor="let b of builder">
+              <div class="card-content-container" *ngFor="let b of builder; let i = index">
                   <div class="cards-builders">
                       <div class="title">
                         <p>{{b.fullName}}</p>
@@ -458,11 +458,11 @@
                       <div class="info-card-builder">
                           <p>{{b.price  | currency:'&#82;'}}(p/&#13217;)</p>
                           <p>{{b.experiences}} year Exp</p>
-                          <p>Include Roofing</p>
+                          <p>{{distance[i]}} km away</p>
                       </div>
                       <div class="londan"></div>
                       <div class="btn-request">
-                          <p (click)="viewBuilderInfo(b)">Request</p>
+                          <p (click)="viewBuilderInfo(b,i)">Request</p>
                           <button ion-fab color="light" (click)="rShortcut(b.uid)"><ion-icon name="arrow-forward"></ion-icon></button>
                         </div>
                     </div>

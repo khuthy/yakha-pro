@@ -36,7 +36,7 @@ export class HomePage {
   searchText: string = '';
   //mapContainer: any
   lat = 23.3563;
-  distance: number;
+  distance=[];
   lng = 27.24455;
   //myBuilders = [];
   map;
@@ -47,6 +47,7 @@ export class HomePage {
   longitude;
   nearest=[];
   myLocation;
+  myNearB:string;
   constructor(public keyboard: Keyboard, private renderer: Renderer2, private elementRef: ElementRef, public navCtrl: NavController, private authService: AuthServiceProvider, private popoverCtrl: PopoverController) {
     this.getUserType();
   }
@@ -85,6 +86,9 @@ export class HomePage {
     this.map.setCenter(coords);
     setTimeout(() => {
       this.addMarker(this.map);
+    /*   this.builder.forEach((i)=>{
+        this.getDirections(this.map, i.lat, i.lng);
+      }) */
       console.log(this.nearest); 
     }, 1000);
     
@@ -100,7 +104,6 @@ export class HomePage {
   }
   addMarker(map) {
     this.builder.forEach((res) => {
-
       this.searchText = res.address;
       var geocodingParams = {
         searchText: '' + this.searchText
@@ -134,12 +137,18 @@ export class HomePage {
         // alert(e);
         console.log(e);
       });
+      setTimeout(() => {
+        this.getDistance(map, res.lat, res.lng)
+      }, 1000);
+      
     })
-    
-    
     //this.getDirections(map);
   }
+  getDistance(map,lat,lng) {
+    this.getDirections(map,lat,lng);
+  }
   getDirections(map, lat, lng) {
+    let arr = [];
     this.latitude = lat;
     this.longitude = lng;
     if (navigator.geolocation) {
@@ -175,7 +184,7 @@ export class HomePage {
             linestring = new H.geo.LineString();
            // linestring=[];
             // Push all the points in the shape into the linestring:
-            routeShape.forEach( (point)=> {
+            routeShape.forEach((point)=> {
               let parts = point.split(',');
               linestring.pushLatLngAlt(parts[0], parts[1]);
             });
@@ -196,15 +205,18 @@ export class HomePage {
               lat: endPoint.latitude,
               lng: endPoint.longitude
             });
-            this.distance = result.response.route[0].summary.distance;
-            console.log(this.distance);
-            
+            //this.distance=result.response.route[0].summary.distance/1000;
+            arr.push(result.response.route[0].summary.distance/1000);
+           // arr.forEach((i)=>{
+              this.distance.push(result.response.route[0].summary.distance/1000);
+           // })
+            // console.log(this.distance);
             // Add the route polyline and the two markers to the map:
             map.addObjects([routeLine, startMarker, endMarker]);
 
-            
             // Set the map's viewport to make the whole route visible:
             map.getViewModel().setLookAtData({ bounds: routeLine.getBoundingBox() });
+            
           }
         };
         // Get an instance of the routing service:
@@ -214,9 +226,7 @@ export class HomePage {
         // communication error occurs):
         //console.log(router);
         
-        router.calculateRoute(routingParameters, onResult,(success)=>{
-          console.log('success');
-        },
+        router.calculateRoute(routingParameters, onResult,
            (error) => {
             alert(error.message);
           });
@@ -239,6 +249,9 @@ export class HomePage {
       //myCurrentLocation = "Geolocation is not supported by this browser.";
     }
   }
+ /*  getSorroundedBuilder() {
+    
+  } */
   convertCoordToAddress(lat,lng) {
   var reverseGeocodingParameters = {
     prox: ''+lat+','+lng,
@@ -253,10 +266,11 @@ const onSuccess=(result)=> {
  //  this.nearest=[];
   this.nearest.forEach((item)=>{
     if (result.Response.View[0].Result[0].Location.Address.City === item) {
-     // this.myNearBuilder.push(item)
-      console.log('My nearest builders ', item);
-    }
-  }) 
+      // this.getSorroundedBuilder();
+
+      }
+  })
+  //console.log('My nearest builders ', this.myNearBuilder);
  }, 1500);
   
  //this.myLocation = result.Response.View[0].Result[0].Location.Address.City;
@@ -611,53 +625,21 @@ geocoder.reverseGeocode(
 //   }
 
   async getBuilders() {
-
     let avgTotal = []
     let data = { builder: {}, rate: { average: null } }
-
     //>>>>>>> get the builder
     await this.db.where('builder', '==', true).onSnapshot(async (res) => {
       this.builder = [];
       let info = { rate: {}, builder: {} };
       //>>>>>>> get the reviews made for this builder
       res.forEach(async (doc) => {
-        //  console.log('All builders............', doc.data().lat);
-        if (doc.data().address !== "" && doc.data().status == true) {
+        if (doc.data().status==true) { 
           data.builder = doc.data()
           this.builder.push(doc.data())
-          // data.builder
-
-          // this.errorMessage('User found',doc.id)
-
-          // console.log('>>>>>>>>>>>>>>>',doc.data());
-
-          /* let myLatLng = new google.maps.LatLng(doc.data().lat, doc.data().lng) */
-          // console.log('builder pos', myLatLng);
-
-          /*  let marker = new google.maps.Marker({
-             position: myLatLng,
-             map: this.map,
-             title: 'Hello World!',
-             icon: "https://img.icons8.com/color/40/000000/worker-male--v2.png"
-           }); */
-          /*  google.maps.event.addListener(marker, 'click', (resp) => {
-             this.viewBuilderInfo(doc.data());
-           }) */
-          // data = {builder: doc.data()}
-
-          //>>>>>>>>>> push for display
-          // console.log('DOC DISPLAY >>>>>>>>>', data);
-          // this.builder.push(data);
-
-          // clear the stores
-          // avgSum = 0
           avgTotal.length = 0
           // data.builder = {}
           data.rate.average = null
-
-        }
-
-
+        } 
       })
       //   console.log('Loop 2 done');
 
@@ -1018,8 +1000,9 @@ geocoder.reverseGeocode(
   //   //   this.callNumber.callNumber(phoneNumber, true);
   //   // }
   //   //viewmore
-  viewBuilderInfo(builder) {
-    this.navCtrl.push(BuilderProfileviewPage, builder);
+  viewBuilderInfo(builder, index) {
+    console.log('Builder ',builder,'Index ', index);
+    //this.navCtrl.push(BuilderProfileviewPage, builder);
   }
 
   viewRequest(docID, uid) {
