@@ -57,7 +57,7 @@ export class QuotationFormPage {
     extras: [],
     wallType: '',
     brickType: '',
-    houseImage: '../../assets/icon/splash.png',
+    houseImage: '',
     comment: '',
     date: Date(),
     view: false,
