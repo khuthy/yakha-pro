@@ -1,14 +1,13 @@
-
-<ion-content >
+<!-- <ion-content >
   <div [ngClass]="{'loader': loaderAnimate, 'loader-hide': !loaderAnimate}">
       <div class="maploader">
         <div class="lds-facebook"><div></div><div></div><div></div></div><p style="color:white;">Loading..</p>
-      </div>
-     <!--  <div class="loading-text">
+      </div> -->
+<!--  <div class="loading-text">
         <p>Loading Map</p>
       </div> -->
-    </div>
-<div class="header" *ngIf="header">
+<!--     </div> -->
+<!-- <div class="header" *ngIf="header">
    <img src="../../assets/icon/Yakha-assets/BuilderShape2.svg" alt="" class="fixed-image"> 
 
  <ion-toolbar>
@@ -59,9 +58,7 @@
   <ion-searchbar class="input-bar-search" placeholder="Search by location" (ionFocus)="checkKeyboard('open')" (ionBlur)="checkKeyboard('close')">
 </ion-searchbar>
 </div> 
-</div> 
-
-
+</div>  -->
 <!-- <div class="control" *ngIf="!header">
 
 <div class="searchBar">
@@ -77,7 +74,7 @@
     <button style="background-color: transparent;box-shadow: none;" ion-fab (click)="RangeSearch()"><img src="../../assets/icon/filter-solid.svg" alt=""></button>
 </div>
 </div> -->
-<div class="slider" *ngIf="!header">
+<!-- <div class="slider" *ngIf="!header">
   <div class="searchRange">
       <button class="btn1" ion-fab mini (click)="getPosition()"><ion-icon name="pin" style="color:#203959"></ion-icon></button>
     <ion-item no-lines *ngIf="range">
@@ -105,8 +102,8 @@
                 <p style="font-size:2vh; color:rgb(61, 61, 61);" *ngIf="total">{{total}} km away driving</p>
              </div>
         </div>
-        <div class="rate" *ngIf="b.certified"><p style="font-size: 2.5vh;">C</p></div>
-      <!--   <div *ngFor="let a of buildesAverage" >
+        <div class="rate" *ngIf="b.certified"><p style="font-size: 2.5vh;">C</p></div> -->
+<!--   <div *ngFor="let a of buildesAverage" >
           <ionic3-star-rating #rating id="ratings" *ngIf="b.uid==a.uid"
           activeIcon = "ios-star"
           defaultIcon = "ios-star-outline"
@@ -119,32 +116,27 @@
         </ionic3-star-rating>
       
         </div> -->
-        
-           
+<!--         
         <div class="button-group-l" (tap)="rShortcut(b.uid)">
             <p>Request</p>   
             <button (click)="rShortcut(b.uid)" ion-fab mini color="light" ><ion-icon name="arrow-forward"></ion-icon></button>
        
-          </div>
-      <!-- <div class="info">
+          </div> -->
+<!-- <div class="info">
         
         <div class="button-group">
           <p>Request</p>
         </div>
 
       </div> -->
-      
-</div> 
+<!-- </div> 
 </ion-slide>
 </ion-slides>  
   </div>
 
 </div>
-
-
-
-
-    <!-- <input *ngIf="!header" class="controls" (ngModelChange)="search($event)" placeholder="Search by Name">
+ -->
+<!-- <input *ngIf="!header" class="controls" (ngModelChange)="search($event)" placeholder="Search by Name">
 
 <ion-fab *ngIf="!header" right style="align-self:center; justify-self: flex-end" >
  <button class="searching" ion-fab><ion-icon name="search"></ion-icon></button>
@@ -163,7 +155,350 @@
 </ion-range>
 </ion-item> -->
 
-</ion-content>
+<!-- </ion-content> -->
 
-<!-- <button ion-button clear style="font-size: 25px;float: right;top:5px;" (click)="callJoint(o.hOwnerPhone)"><ion-icon name="call"></ion-icon> </button>
+<!-- <ion-header no-border>
+    <ion-toolbar>
+        <ion-buttons left start>
+            <button icon-only ion-button menuToggle color="light">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+        </ion-buttons>
+        <ion-searchbar *ngIf="activateSearch" (ionFocus)="keyboardListener($event)"></ion-searchbar>
+        <ion-buttons right end>
+            <button icon-only ion-button (click)="openSearch()" color="light">
+        <ion-icon [name]="icon"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header> -->
+<!--
+<ion-content fullscreen>
+    <div class="container">
+        <div class="profile">
+            <div class="profile-image">
+                <img src="../../assets/imgs/maps.svg" alt="builders" class="img">
+            </div>
+            <div class="profile-information">
+                <h1 style="font-size: 3vh;font-weight: 500;">Mokoena bakwena</h1>
+                <p style="font-size: 2.2vh;font-weight: 400;"><small>codetribe, soweto, Johannesburg</small></p>
+            </div>
+        </div>
+
+        <div class="nearby-builders">
+            <h1 text-center style="font-size: 3vh;font-weight: 500;">Builders in Soweto</h1>
+            <div class="slide-view">
+              <div class="card">
+                 <div class="profile">
+                   <img src="../../assets/imgs/builders.png" alt="">
+                 </div>
+                 <div class="info">
+                   <h4>Khuthy builder</h4>
+                   <p style="color: #ffd000; font-weight: bold;">R500.00</p>
+                   <p>2 years Exp</p>
+                 </div>
+                <div class="btn-body" style="background: #ffd000;">
+                  <p style="color: #fff">Request</p>
+                  <button ion-fab color="light" (click)="fab()"><ion-icon style="font-size: 2.8vh;" name="arrow-forward"></ion-icon></button>
+              </div>
+              </div>  
+              <div class="card">
+                <div class="btn-body" style="background: #ffd000;">
+                  <p style="color: #fff">Request</p>
+                  <button ion-fab color="light" (click)="fab()"><ion-icon style="font-size: 2.8vh;" name="arrow-forward"></ion-icon></button>
+              </div>
+              </div>  
+              <div class="card">
+                <div class="btn-body" style="background: #ffd000;">
+                  <p style="color: #fff">Request</p>
+                  <button ion-fab color="light" (click)="fab()"><ion-icon style="font-size: 2.8vh;" name="arrow-forward"></ion-icon></button>
+              </div>
+              </div>  
+            </div>
+        </div>
+        <div class="all-builders">
+            <div class="other-builders" padding-top padding-left padding-right>
+                <p>Other Builders</p>
+                <button clear color="light" (click)="showAllBuilders()" ion-button>{{btnAll}}
+                <ion-icon  [name]="iconAll"></ion-icon>
+              </button>
+            </div>
+            <div class="cards" padding>
+                <div class="card">
+                    <div class="builder-name">
+                            <p text-center>Muenda Khuthy</p>
+                    </div>
+                    <div class="builder-image">
+                        <img src="../../assets/imgs/builders.png" alt="" class="img">
+                    </div>
+                    <div class="builder-info">
+                        <p text-left style="font-weight: 700; color: #ffd000;">{{400 | currency : '&#82;'}}</p>
+                        <p text-right>2 Exp</p>
+                        <p text-center style="font-size: 1.5vh;">Include Roofing</p>
+                    </div>
+                    <div class="btn-body" style="background: #ffd000;">
+                        <p style="color: #fff">Request</p>
+                        <button ion-fab color="light" (click)="fab()"><ion-icon style="font-size: 2.8vh;" name="arrow-forward"></ion-icon></button>
+                    </div>
+                </div>
+               
+                <div class="card">
+                        <div class="builder-name">
+                                <p text-center>Muenda Khuthy</p>
+                        </div>
+                        <div class="builder-image">
+                            <img src="../../assets/imgs/builders.png" alt="" class="img">
+                        </div>
+                        <div class="builder-info">
+                            <p text-left style="font-weight: 700; color: #ffd000;">{{400 | currency}}</p>
+                            <p text-right>2 Exp</p>
+                            <p text-center style="font-size: 1.5vh;">Include Roofing</p>
+                        </div>
+                        <div class="btn-body" style="background: #ffd000;">
+                            <p style="color: #fff">Request</p>
+                            <button ion-fab color="light" (click)="fab()"><ion-icon style="font-size: 2.8vh;" name="arrow-forward"></ion-icon></button>
+                        </div>
+                    </div>
+                    <div class="card">
+                      <div class="builder-name">
+                              <p text-center>Muenda Khuthy</p>
+                      </div>
+                      <div class="builder-image">
+                          <img src="../../assets/imgs/builders.png" alt="" class="img">
+                      </div>
+                      <div class="builder-info">
+                          <p text-left style="font-weight: 700; color: #ffd000;">{{400 | currency}}</p>
+                          <p text-right>2 Exp</p>
+                          <p text-center style="font-size: 1.5vh;">Include Roofing</p>
+                      </div>
+                      <div class="btn-body" style="background: #ffd000;">
+                          <p style="color: #fff">Request</p>
+                          <button ion-fab color="light" (click)="fab()"><ion-icon style="font-size: 2.8vh;" name="arrow-forward"></ion-icon></button>
+                      </div>
+                  </div>
+                  <div class="card">
+                    <div class="builder-name">
+                            <p text-center>Muenda Khuthy</p>
+                    </div>
+                    <div class="builder-image">
+                        <img src="../../assets/imgs/builders.png" alt="" class="img">
+                    </div>
+                    <div class="builder-info">
+                        <p text-left style="font-weight: 700; color: #ffd000;">{{400 | currency}}</p>
+                        <p text-right>2 Exp</p>
+                        <p text-center style="font-size: 1.5vh;">Include Roofing</p>
+                    </div>
+                    <div class="btn-body" style="background: #ffd000;">
+                        <p style="color: #fff">Request</p>
+                        <button ion-fab color="light" (click)="fab()"><ion-icon style="font-size: 2.8vh;" name="arrow-forward"></ion-icon></button>
+                    </div>
+                </div>
+
+                    <div class="card">
+                            <div class="builder-name">
+                                    <p text-center>Muenda Khuthy</p>
+                            </div>
+                            <div class="builder-image">
+                                <img src="../../assets/imgs/builders.png" alt="" class="img">
+                            </div>
+                            <div class="builder-info">
+                                <p text-left style="font-weight: 700; color: #ffd000;">{{400 | currency}}</p>
+                                <p text-right>2 Exp</p>
+                                <p text-center style="font-size: 1.5vh;">Include Roofing</p>
+                            </div>
+                            <div class="btn-body" style="background: #ffd000;">
+                                <p style="color: #fff">Request</p>
+                                <button ion-fab color="light" (click)="fab()"><ion-icon style="font-size: 2.8vh;" name="arrow-forward"></ion-icon></button>
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>  
 -->
+<ion-header no-border>
+  <ion-toolbar color="dark">
+      <ion-buttons left start>
+          <button icon-only ion-button menuToggle color="dark">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+      </ion-buttons>
+      <ion-title text-center *ngIf="getUsers" color="dark">Sent Request</ion-title>
+      <ion-searchbar class="searchbar" mode="ios" *ngIf="activateSearch" (ionFocus)="keyboardListener($event)" (ionBlur)="keyboardListener($event)"></ion-searchbar>
+      <ion-buttons right end>
+          <button icon-only ion-button *ngIf="!getUsers" (click)="openSearch()" color="dark"> <ion-icon [name]="icon"></ion-icon> </button>
+          <button icon-only ion-button menuToggle  *ngIf="getUsers" color="dark"></button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen no-bounce>
+    <main class="main"></main>
+      <section class="container" *ngIf="!getUsers">
+        
+        <div class="profile-container">
+          <div class="profile">
+            <img src="{{profile.image}}">
+          </div>
+          <div class="profile-info">
+            <h4>{{profile.name}}</h4>
+            <p>{{profile.address}}</p>
+          </div>
+          <div id="mapContainer"></div>
+        </div>
+        <div class="slides">
+           <section class="location">
+             <p>Builders in Soweto: 30</p>
+           </section>
+            <section class="overflow-slides">
+              <div class="slides-card" *ngFor="let near of myNearBuilder">
+                <div class="slide">
+                  <div class="profile"><img src="../../assets/imgs/builders.png" alt=""></div>
+                  <div class="information">
+                    <p class="name">Khuthy</p>
+                    <p class="price">R400.00</p>
+                    <p class="experience">2 years Exp</p>
+                  </div>
+                  <div class="btn-request">
+                    <p>Request</p>
+                    <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="slides-card">
+                  <div class="slide">
+                    <div class="profile"><img src="../../assets/imgs/builders.png" alt=""></div>
+                    <div class="information">
+                      <p class="name">Khuthy Muenda</p>
+                      <p class="price">R400.00</p>
+                      <p class="experience">2 years Exp</p>
+                    </div>
+                    <div class="btn-request">
+                      <p>Request</p>
+                      <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="slides-card">
+                    <div class="slide">
+                      <div class="profile"><img src="../../assets/imgs/builders.png" alt=""></div>
+                      <div class="information">
+                        <p class="name">Khuthy</p>
+                        <p class="price">R400.00 p/m2</p>
+                        <p class="experience">2 years Exp</p>
+                      </div>
+                      <div class="btn-request">
+                        <p>Request</p>
+                        <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                      </div>
+                    </div>
+                    
+                  </div>
+             
+            </section>
+          <!-- <h3>Builders in Johannesburg 30</h3>
+          <div class="slide">
+                         <div class="home-builder-card" padding-bottom padding-left padding-right>
+                            <div class="card-holder">
+                            <div class="profile-image">
+                          <img src="../../assets/imgs/builders.png" alt="">
+                       </div>
+                    <div class="info">
+                    </div>
+                    <div class="btn-request">
+                      <p>Request</p>
+                      <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                    </div>
+              </div>
+            </div>
+          </div>
+          <div class="home-builder-card" padding>
+            <div class="card-holder">
+              <div class="profile-image">
+                <img src="../../assets/imgs/builders.png" alt="">
+              </div>
+              <div class="info">
+
+              </div>
+           <div class="btn-request">
+                <p>Request</p>
+                <button ion-fab mini color="light" (click)="request()">
+                  <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+              </div> 
+            </div>
+          </div>
+          <div class="home-builder-card" padding>
+            <div class="card-holder">
+              
+            </div>
+          </div>
+          <div class="home-builder-card" padding>
+            <div class="card-holder">
+              
+            </div>
+          </div>  -->
+        </div>
+        <div class="cards">
+            <div class="viewSection">
+              <p>Other Builders</p>
+              <p class="all" (click)="showAllBuilders()">{{btnAll}} <ion-icon [name]="iconAll"></ion-icon></p>
+            </div>
+            <div class="all-builders">
+              <div class="card-content-container" *ngFor="let b of builder; let i = index">
+                  <div class="cards-builders">
+                      <div class="title">
+                        <p>{{b.fullName}}</p>
+                      </div>
+                      <div class="image"><img src="{{b.image}}" alt="khuthy"></div>
+                      <div class="info-card-builder">
+                          <p>{{b.price  | currency:'&#82;'}}(p/&#13217;)</p>
+                          <p>{{b.experiences}} year Exp</p>
+                          <p>{{distance[i]}} km away</p>
+                      </div>
+                      <div class="londan"></div>
+                      <div class="btn-request">
+                          <p (click)="viewBuilderInfo(b,i)">Request</p>
+                          <button ion-fab color="light" (click)="rShortcut(b.uid)"><ion-icon name="arrow-forward"></ion-icon></button>
+                        </div>
+                    </div>
+              </div>
+           
+              
+            </div>
+        </div>
+      </section>
+
+
+
+
+       <div class="container-builders" *ngIf="getUsers">
+         <!--  <div class="no-messages-builders">
+           <p>You have no messages yet!</p>
+         </div>  -->
+   
+      <div class="cards-builders-homebuilder-side"  padding>
+      
+        <div class="card-builders" *ngFor="let o of owner" (click)="viewRequest(o.id, o.user.uid)">
+           <div class="profile-builders">
+               <img src="{{o.user.image}}" alt="" (click)="viewProfile(o.user.image)">
+             </div>
+             <div class="info-to-card-builders">
+               <h4>{{o.user.fullName}}</h4>
+               <p>{{o.user.date | date}}</p>
+             </div>
+             <div class="btn-request-builders">
+                 <p>View</p>
+                 <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+               </div>
+        </div>
+          
+         </div>
+       
+       </div> 
+
+</ion-content>  

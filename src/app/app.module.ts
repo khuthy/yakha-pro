@@ -75,7 +75,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     MessagesPage,
     DescriptionComponent,
     BuilderquotesPage,
-    BuilderMessagesPage
+    BuilderMessagesPage,
+    ProfileComponent
 
   ],
   imports: [
@@ -83,6 +84,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     FormsModule,
     IonicModule.forRoot(MyApp, {
       pageTransition: 'ios-transition',
+     
     }),
     IonicStorageModule.forRoot(),
     GooglePlaceModule
@@ -108,7 +110,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     MessagesPage,
     DescriptionComponent,
     BuilderquotesPage,
-    BuilderMessagesPage
+    BuilderMessagesPage,
+    ProfileComponent
     
   ],
   providers: [

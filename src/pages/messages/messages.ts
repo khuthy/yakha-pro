@@ -46,7 +46,7 @@ export class MessagesPage {
   honwerUID;
   hownerName;
   homebuilder: boolean; //testing if the css is working
-  icon = 'arrow-dropdown';
+  icon = 'ios-arrow-up';
   toggle = false;
   msg: any;
   disable: boolean = false;
@@ -85,7 +85,8 @@ export class MessagesPage {
   chat: number = Date.now();
   number: any;
   quoteStatus: string = '';
-  drop: boolean = false;
+  drop: boolean = true;
+  text: string = 'All';
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     // private fileOpener: FileOpener,
@@ -311,8 +312,13 @@ export class MessagesPage {
   dropDown() {
     if (this.drop == true) {
       this.drop = false;
+      this.icon = 'ios-arrow-down';
+      this.text = 'Hide';
+
     } else {
       this.drop = true;
+      this.icon = 'ios-arrow-up';
+      this.text = 'All';
     }
   }
 

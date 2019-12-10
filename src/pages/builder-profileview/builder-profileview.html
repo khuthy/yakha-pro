@@ -1,9 +1,12 @@
-<!--    <ion-header no-border>
-        <ion-navbar>
-          <ion-title></ion-title>
-        </ion-navbar>
-      </ion-header> -->
-      <ion-content fullscreen >
+  <ion-header no-border>
+      <ion-toolbar>
+          <ion-buttons left start>
+              <button (click)="navCtrl.pop()"  ion-button icon-only><ion-icon name="arrow-back" ></ion-icon></button>
+          </ion-buttons>
+          
+      </ion-toolbar>
+      </ion-header> 
+      <ion-content fullscreen>
  
         <!--   <div class="container">
             <div class="image-holder" [style.backgroundImage]="getProfileImageStyle()">
@@ -45,8 +48,6 @@
               <div class="propic">
                   <img *ngIf="dat.image" src="{{dat.image}}" class="thumbavatar" >
                   <img *ngIf="!dat.image" src="../../assets/imgs/team-avatar.jpg" class="thumbavatar" >
-                  <button (click)="navCtrl.pop()" style="position:absolute;top:10px;left:10px;z-index:5;background:rgb(204, 158, 20)" ion-fab ><ion-icon name="arrow-back" ></ion-icon></button>
-      
                   <div class="names">
             
                        <h4>{{dat.fullName}}</h4>
@@ -71,7 +72,7 @@
               <h5 *ngIf="dat.roof">Yes</h5>
               <h5 *ngIf="!dat.roof">No</h5>
               </div>
-      
+    
          <!--      <div class="button">
                   <button slot="start" ion-button (click)="presentPopover()">Review</button>
                 <div class="btn" (click)="next()">
@@ -84,13 +85,17 @@
                   
                 
               </div> -->
-              <div class="button-request" (click)="next()">
+              <!-- <div class="button-request" (click)="next()">
                   <p>Request Quote</p>
                    <button class="send-quotes" ion-fab color="light">
                     <ion-icon name="arrow-forward"></ion-icon>
                    
                   </button>
-                </div>
+                </div> -->
+                <div class="btn-request" (click)="next()">
+                    <p>Request a Quotes</p>
+                    <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                  </div>
       
                 <div class="button-group2" *ngIf="hideButtonReview" (click)="presentPopover()">
                    <button class="send-quotes" ion-fab (click)="presentPopover()" color="light">

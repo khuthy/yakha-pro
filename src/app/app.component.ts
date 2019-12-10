@@ -143,7 +143,10 @@ export class MyApp {
         }
         firebase.firestore().collection('Users').doc(user.uid).onSnapshot((profile) => {
           if (profile.exists) {
+            if(this.platform.is('cordova')) {
               firebase.firestore().collection('Users').doc(user.uid).update({ tokenID: this.token })
+            }
+             
             firebase.firestore().collection('Request').where('hOwnerUid', '==', firebase.auth().currentUser.uid).onSnapshot((request) => {
               if (!request.empty) {
                 request.forEach(list => {
@@ -158,7 +161,9 @@ export class MyApp {
                 });
               }
             })
-             firebase.firestore().collection('Users').doc(user.uid).update({ tokenID: this.token })
+             if(this.platform.is('cordova')) {
+              firebase.firestore().collection('Users').doc(user.uid).update({ tokenID: this.token })
+             }
             if (profile.data().isProfile == true && profile.data().status == true) {
               if (profile.data().builder == true) {
                 this.rootPage = HomePage;

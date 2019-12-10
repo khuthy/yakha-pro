@@ -17,21 +17,29 @@
           <p>Loading Map</p>
         </div> -->
       </div>
-  <button (click)="popForm()" *ngIf="steps=='stepone'" id="switchback"
-    style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;height:13vw;width:13vw;z-index:5"
-    ion-fab>
-    <ion-icon color="light" name="arrow-back"></ion-icon>
-  </button>
 
-  <button (click)="backSlide()" *ngIf="steps=='steptwo'" id="switchback"
-    style="border:none;background: rgb(204, 158, 20);position:absolute;top:10px;left:10px;height:13vw;width:13vw;z-index:5"
-    ion-fab>
-    <ion-icon color="light" name="arrow-back"></ion-icon>
-  </button>
+      <ion-toolbar color="dark">
+        <ion-buttons left>
+            <button (click)="popForm()" *ngIf="steps=='stepone'" ion-button clear icon-only color="dark">
+                <ion-icon name="arrow-back"></ion-icon>
+              </button>
+              
+              <button (click)="backSlide()" *ngIf="steps=='steptwo'"  ion-button clear icon-only color="dark">
+                  <ion-icon name="arrow-back"></ion-icon>
+                </button>
+        </ion-buttons>
+        
+            <ion-title text-center>Request quotes</ion-title>
 
-  <div class="topDecor">
+            <ion-buttons right end *ngIf="steps=='steptwo' && steps=='stepone'">
+                <button ion-button menuToggle icon-only color="light" clear (click)="navCtrl.pop()"></button>
+            </ion-buttons>
+      </ion-toolbar>
 
-  </div>
+
+ 
+
+
 
   <div class="footer" *ngIf="!hid">
     <div class="button-group" *ngIf="steps=='stepone'">
@@ -132,10 +140,9 @@
 
 
         </div>
-    <p [class]="brickType ? 'error': 'normal'" *ngIf="!HomeOwnerQuotation.brickType">Please Specify the type of brick
-        Type</p>
+ 
       </div>
-     
+      <p [class]="brickType ? 'error': 'normal'" *ngIf="!HomeOwnerQuotation.brickType">Please Specify the type of brick Type</p>
       <div class="walltype">
         <p>Select wall type</p>
         <ion-list radio-group class="inputs" formControlName="wallType" [(ngModel)]="HomeOwnerQuotation.wallType">
@@ -203,10 +210,10 @@
       </div>
 
       <!-- div containing houseplan and details -->
-      <div class="plan">
+      <div class="plan" padding>
         <!-- houseplan -->
         <div class="houseplan" style="margin: 0px 3px 0px 0px;">
-          <img src="{{HomeOwnerQuotation.houseImage}}" class="image">
+          <img (click)="viewProfileNow(HomeOwnerQuotation.houseImage)" src="{{HomeOwnerQuotation.houseImage}}" class="image">
         </div>
 
         <!-- request details -->
