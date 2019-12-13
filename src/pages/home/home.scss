@@ -84,7 +84,7 @@ page-home {
             align-items: center;
             //border: 1px solid red;
             .profile {
-                 height: 70%; 
+                 height: 50%; 
                 flex-basis: 50%;
                 border-radius: 0 50px 50px 0;
                 overflow: hidden;
@@ -152,11 +152,11 @@ page-home {
                     flex: 0 0 80%;
                     padding: .5em;
                     display: flex;
-                    align-items: center;
+                    align-items: flex-start;
                     justify-content: center;
                    .slide {
                     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.027), 0 3px 6px rgba(0, 0, 0, 0.11);
-                    height: 80%;
+                    height: 50%;
                     width: 100%;
                     border-radius: 9px;
                     display: flex;
@@ -164,6 +164,7 @@ page-home {
                     
                     .profile {
                         flex-basis: 40%;
+                     /*    height: 40%; */
                         overflow: hidden;
                         border-radius: 9px;
                         img {
