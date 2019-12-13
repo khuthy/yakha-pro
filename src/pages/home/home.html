@@ -327,7 +327,13 @@
     </button>
       </ion-buttons>
       <ion-title text-center *ngIf="getUsers" color="dark">Sent Request</ion-title>
-      <ion-searchbar class="searchbar" mode="ios" *ngIf="activateSearch" (ionFocus)="keyboardListener($event)" (ionBlur)="keyboardListener($event)"></ion-searchbar>
+     <ion-item class="searchbar" no-lines *ngIf="activateSearch">
+    <ion-range pin=true min="0" max="1000" [(ngModel)]="price" (ionChange)="setPriceRange(price)">
+
+<ion-label range-left color="primary">{{0 | currency:'&#82;'}}</ion-label>
+<ion-label range-right color="primary">{{1000 | currency:'&#82;'}}</ion-label>
+</ion-range>
+</ion-item>
       <ion-buttons right end>
           <button icon-only ion-button *ngIf="!getUsers" (click)="openSearch()" color="dark"> <ion-icon [name]="icon"></ion-icon> </button>
           <button icon-only ion-button menuToggle  *ngIf="getUsers" color="dark"></button>

@@ -17,7 +17,7 @@ export class HomePage {
   @ViewChild(Content) content: Content;
   scrollContent: boolean = true;
   activateSearch: boolean = false;
-  icon: string = 'search';
+  icon: string = 'options';
   showBuilders = false;
   btnAll = 'All';
   iconAll = 'arrow-up';
@@ -26,6 +26,7 @@ export class HomePage {
   db = firebase.firestore().collection('Users');
   dbRequest = firebase.firestore().collection('Request');
   dbFeeback = firebase.firestore().collection('Feedback');
+  price = 0;
   profile = {
     image: '',
     name: '',
@@ -334,7 +335,7 @@ geocoder.reverseGeocode(
 
     
      this.activateSearch = false;
-     this.icon = 'search';
+     this.icon = 'options';
      this.showBuilders = true;
         this.showAllBuilders();
      
@@ -439,8 +440,8 @@ geocoder.reverseGeocode(
 //   ownerUID: string;
 //   ownerName;
 //   ownerImage: any;
-//   bUID: string;
-//   price = 0;
+   bUID: string;
+
 //   /* Search variables */
 //   location = false;
 //   name = false;
@@ -973,24 +974,24 @@ geocoder.reverseGeocode(
   //     });
   //   }
 
-  //   async setPriceRange(param) {
-  //     this.price = param;
-  //     this.builder = [];
-  //     // console.log("Price range = "+ this.price);
-  //     if (this.price >= 0) {
-  //       await this.db.where('price', '>=', param)
-  //         .onSnapshot((res) => {
-  //           this.builder = [];
-  //           // console.log(res.);
-  //           res.forEach((doc) => {
-  //             // this.db.collection('builderProfile').get().then(snapshot => {
-  //             //   snapshot.forEach(doc => {
-  //             this.builder.push(doc.data());
-  //             this.bUID = doc.id;
-  //           })
-  //         })
-  //     }
-  //   }
+    async setPriceRange(param) {
+      this.price = param;
+      this.builder = [];
+      // console.log("Price range = "+ this.price);
+      if (this.price >= 0) {
+        await this.db.where('price', '>=', param)
+          .onSnapshot((res) => {
+            this.builder = [];
+            // console.log(res.);
+            res.forEach((doc) => {
+              // this.db.collection('builderProfile').get().then(snapshot => {
+              //   snapshot.forEach(doc => {
+              this.builder.push(doc.data());
+              this.bUID = doc.id;
+            })
+          })
+      }
+    }
   viewProfile(myEvent) {
     let popover = this.popoverCtrl.create(ProfileComponent, { image: myEvent });
     popover.present({
