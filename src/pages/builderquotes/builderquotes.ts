@@ -11,7 +11,7 @@ import * as firebase from 'firebase';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete/ngx-google-places-autocomplete.directive';
 import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
- import { OneSignal } from '@ionic-native/onesignal';
+import { OneSignal } from '@ionic-native/onesignal';
 /* import { SMS } from '@ionic-native/sms'; */
 import { Downloader } from '@ionic-native/downloader';
 
@@ -30,7 +30,7 @@ import { Downloader } from '@ionic-native/downloader';
   templateUrl: 'builderquotes.html',
 })
 export class BuilderquotesPage {
- // pdfDoc='';
+  // pdfDoc='';
   length;
   height;
   width;
@@ -52,7 +52,7 @@ export class BuilderquotesPage {
       country: ['ZA']
     }
   }
-  hide=false
+  hide = false
   quotesForm: FormGroup;
   quotes = {
     ownerName: '',
@@ -109,9 +109,9 @@ export class BuilderquotesPage {
 
   }
 
- get BuilderQuotes() {
-   return this.quotesForm.get('dimensions');
- }
+  get BuilderQuotes() {
+    return this.quotesForm.get('dimensions');
+  }
 
   userUID = firebase.auth().currentUser.uid;
   chatMessage: string;
@@ -127,12 +127,12 @@ export class BuilderquotesPage {
     private loader: LoadingController,
     private cdRef: ChangeDetectorRef,
     public toastCtrl: ToastController,
-     public oneSignal: OneSignal,
- /*    private sms: SMS,  */
+    public oneSignal: OneSignal,
+    /*    private sms: SMS,  */
 
   ) {
     this.userMsg = this.navParams.data;
-   /*  console.log('data =>', this.userMsg, '/',this.navParams.data.docID); */
+    /*  console.log('data =>', this.userMsg, '/',this.navParams.data.docID); */
 
     this.uid = firebase.auth().currentUser.uid;
     this.authUser.setUser(this.uid);
@@ -147,7 +147,7 @@ export class BuilderquotesPage {
 
     this.date = new Date();
     this.maxDate = this.formatDate(this.date);
-  
+
     this.quotesForm.get('dimension').clearValidators();
 
   }
@@ -159,43 +159,43 @@ export class BuilderquotesPage {
   }
 
   ionViewDidLoad() {
-    
-   /*  this.dbRequest.doc(this.navParams.data.docID).collection('extras').onSnapshot((res) => {
-      res.forEach((doc) => {
-        console.log(doc.data())
-        this.extras.push({ item: doc.id, data: doc.data() });
-        console.log('My extras......', this.extras);
-      })
-    }) */
-  /*   this.dbRequest.doc(this.userMsg).collection('extras').onSnapshot((res) => {
-      console.log(res.docs);
-      res.forEach((doc) => {
-        console.log(doc.data())
-        this.extras.push({ item: doc.id, data: doc.data() });
-        console.log(this.extras);
-      })
-    }) */
+
+    /*  this.dbRequest.doc(this.navParams.data.docID).collection('extras').onSnapshot((res) => {
+       res.forEach((doc) => {
+         console.log(doc.data())
+         this.extras.push({ item: doc.id, data: doc.data() });
+         console.log('My extras......', this.extras);
+       })
+     }) */
+    /*   this.dbRequest.doc(this.userMsg).collection('extras').onSnapshot((res) => {
+        console.log(res.docs);
+        res.forEach((doc) => {
+          console.log(doc.data())
+          this.extras.push({ item: doc.id, data: doc.data() });
+          console.log(this.extras);
+        })
+      }) */
     /* docID: "v0r9u3oUPuLzuxg4XDCS"
 uid: "Na18VBBzV5aSuOEh7eARHj6jYeD2" */
-this.extras = [];
-    this.dbChat.doc(this.navParams.data.uid).collection(this.uid).doc(this.navParams.data.docID).onSnapshot((res)=>{
+    this.extras = [];
+    this.dbChat.doc(this.navParams.data.uid).collection(this.uid).doc(this.navParams.data.docID).onSnapshot((res) => {
       this.extras = res.data().extras
-    //  console.log('Extras.....',this.extras);
+      //  console.log('Extras.....',this.extras);
     })
-  //  this.dbRequest.where("hOwnerUid","==",this.navParams.data.uid).onSnapshot((res) => {
-     // console.log('data: =>',res.data());
-     /*  res.forEach((doc)=>{
-        this.quotes.hOwnerUID = doc.data().hOwnerUid;
-      })
-       */
-      this.dbUsers.doc(this.navParams.data.uid).onSnapshot((res) => {
-        if (res.data().builder == false) {
-          this.quotes.hOwnerUID = res.data().uid;
-          this.quotes.ownerAddress = res.data().ownerAddress;
-          this.quotes.ownerName = res.data().fullName;
-        }
-      })
-   // })
+    //  this.dbRequest.where("hOwnerUid","==",this.navParams.data.uid).onSnapshot((res) => {
+    // console.log('data: =>',res.data());
+    /*  res.forEach((doc)=>{
+       this.quotes.hOwnerUID = doc.data().hOwnerUid;
+     })
+      */
+    this.dbUsers.doc(this.navParams.data.uid).onSnapshot((res) => {
+      if (res.data().builder == false) {
+        this.quotes.hOwnerUID = res.data().uid;
+        this.quotes.ownerAddress = res.data().ownerAddress;
+        this.quotes.ownerName = res.data().fullName;
+      }
+    })
+    // })
     this.dbUsers.doc(this.uid).onSnapshot((doc) => {
       this.quotes.address = doc.data().address;
       this.quotes.fullName = doc.data().fullName;
@@ -259,22 +259,21 @@ this.extras = [];
 
   createPdf() {
     this.loaderAnimate = true;
-    this.hide=true
+    this.hide = true
     /* calculations */
     /* discount amount of extras */
     this.quotes.overallHouse = ((this.quotes.price * this.quotes.meter) - ((this.quotes.price * this.quotes.meter) * (this.quotes.discount / 100)));
     this.quotes.subtotal = this.value - (this.value * this.quotes.discountAmount / 100)
     this.quotes.total = ((this.quotes.price * this.quotes.meter) - ((this.quotes.price * this.quotes.meter) * (this.quotes.discount / 100))) + this.quotes.subtotal;
     this.quotes.discountPrice = (this.value) * this.quotes.discountAmount / 100;
-    console.log('total with extras: ', this.quotes.total, 'total without extras:', this.quotes.subtotal);
+    //console.log('total with extras: ', this.quotes.total, 'total without extras:', this.quotes.subtotal);
     let items = this.extras.map((item) => {
-      console.log('Extras in table...', item);
-      if (item.name.length>=1) {
+      //console.log('Extras in table...', item);
+      if (item.name.length >= 1) {
         return [item.name, item.quantity, 'R' + item.price + '.00'];
       } else {
         return ['*********', 0, 'R0.00']
       }
-      
     });
     let docDefinition = {
       watermark: { text: "YAKHA", color: "gray", opacity: 0.3, bold: true, alignment: "right" },
@@ -396,7 +395,7 @@ this.extras = [];
       this.loaderAnimate = false;
     }, 2000);
     this.downloadUrl();
-   
+
   }
 
   downloadUrl() {
@@ -411,12 +410,12 @@ this.extras = [];
         // results.downloadURL
         firebase.storage().ref('Quotations/').child(results.metadata.name).getDownloadURL().then((url) => {
           // console.log(results);
-         // this.pdfDoc = url;
-           this.quotes.pdfLink = url;
-           this.saveData();
+          // this.pdfDoc = url;
+          this.quotes.pdfLink = url;
+          this.saveData();
           //console.log('pdf link from storage............:', this.pdfDoc);
-          
-        
+
+
         })
       })
       this.file.writeFile(this.file.dataDirectory, 'quotation.pdf', blob, { replace: true }).then(fileEntry => {
@@ -430,15 +429,15 @@ this.extras = [];
   saveData() {
     this.loaderAnimate = true;
     //console.log('pdf link............:', this.pdfDoc);
-    this.dbRespond.doc(this.navParams.data.docID).set(this.quotes).then(()=>{
-     // this.quotes.pdfLink = this.pdfDoc;
+    this.dbRespond.doc(this.navParams.data.docID).set(this.quotes).then(() => {
+      // this.quotes.pdfLink = this.pdfDoc;
       setTimeout(() => {
         this.loaderAnimate = false;
       }, 2000);
-      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).doc(this.navParams.data.docID).collection("convo").add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, date: new Date().getTime(), builder: true, id:this.navParams.data.docID }).then((res) => {
-        this.quotes.pdfLink= '';
+      this.dbChatting.doc(this.navParams.data.uid).collection(this.uid).doc(this.navParams.data.docID).collection("convo").add({ chat: 'Quotation file', pdf: this.quotes.pdfLink, date: new Date().getTime(), builder: true, id: this.navParams.data.docID }).then((res) => {
+        this.quotes.pdfLink = '';
       })
-      this.dbChat.doc(this.uid).collection(this.navParams.data.uid).add(this.quotes).then((resDoc)=>{
+      this.dbChat.doc(this.uid).collection(this.navParams.data.uid).add(this.quotes).then((resDoc) => {
         this.dbUsers.doc(this.navParams.data.uid).get().then((resUser) => {
           if (resUser.data().tokenID) {
             var notificationObj = {
@@ -471,13 +470,13 @@ this.extras = [];
           dateCreated: null,
           viewed: false,
           msgStatus: ''
-        } 
-        
-      
+        }
+
+
+      })
+
     })
-   
-    })
-    
+
   }
-  
+
 }

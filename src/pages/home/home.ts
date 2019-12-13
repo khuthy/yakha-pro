@@ -48,6 +48,7 @@ export class HomePage {
   nearest=[];
   myLocation;
   myNearB:string;
+  myCity;
   constructor(public keyboard: Keyboard, private renderer: Renderer2, private elementRef: ElementRef, public navCtrl: NavController, private authService: AuthServiceProvider, private popoverCtrl: PopoverController) {
     this.getUserType();
   }
@@ -56,6 +57,16 @@ export class HomePage {
     this.getPosition();
     this.getBuilders();
     this.getUserProfile();
+   setTimeout(() => {
+    for (let j = 0; j < this.builder.length; j++) {
+      setTimeout(() => {
+        if (this.distance[j]<=20) {
+          this.myNearBuilder.push(this.builder[j])
+        }
+       // console.log("my index ",);
+      }, 1000);
+    }
+   }, 2000);
   }
   
   showMyMap(latitude, longitude) {
@@ -209,6 +220,8 @@ export class HomePage {
             arr.push(result.response.route[0].summary.distance/1000);
            // arr.forEach((i)=>{
               this.distance.push(result.response.route[0].summary.distance/1000);
+              
+              
            // })
             // console.log(this.distance);
             // Add the route polyline and the two markers to the map:
@@ -245,7 +258,7 @@ export class HomePage {
         this.convertCoordToAddress(resp.coords.latitude, resp.coords.longitude);
       });
     } else {
-      console.log('Error getting your position');
+      //console.log('Error getting your position');
       //myCurrentLocation = "Geolocation is not supported by this browser.";
     }
   }
@@ -267,29 +280,21 @@ const onSuccess=(result)=> {
   this.nearest.forEach((item)=>{
     if (result.Response.View[0].Result[0].Location.Address.City === item) {
       // this.getSorroundedBuilder();
-
+      this.myCity = item;
+      /// console.log('My nearest builders ', item);
+      
+      /*   this.builder.forEach((j)=>{
+         // console.log('Each builder ',j.address);
+          
+        }) */
       }
   })
-  //console.log('My nearest builders ', this.myNearBuilder);
  }, 1500);
-  
- //this.myLocation = result.Response.View[0].Result[0].Location.Address.City;
-  //console.log(location);
-  
-  // Create an InfoBubble at the returned location with
-  // the address as its contents:
- /*  ui.addBubble(new H.ui.InfoBubble({
-    lat: location.Location.DisplayPosition.Latitude,
-    lng: location.Location.DisplayPosition.Longitude
-   }, { content: location.Location.Address.Label })); */
+ 
 };
 
-// Get an instance of the geocoding service:
 var geocoder = this.platform.getGeocodingService();
 
-// Call the geocode method with the geocoding parameters,
-// the callback and an error callback function (called if a
-// communication error occurs):
 geocoder.reverseGeocode(
   reverseGeocodingParameters,
   onSuccess,
@@ -313,12 +318,12 @@ geocoder.reverseGeocode(
     this.db.doc(this.uid).onSnapshot((res) => {
       if (res.data().builder == false) {
         this.getUsers = res.data().builder;
-        console.log(this.getUsers);
+       // console.log(this.getUsers);
 
         this.getBuilders();
       } else {
         this.getUsers = res.data().builder;
-        console.log(this.getUsers);
+      //  console.log(this.getUsers);
         this.getRequests();
       }
     });
@@ -641,11 +646,14 @@ geocoder.reverseGeocode(
           data.rate.average = null
         } 
       })
+      
+   
       //   console.log('Loop 2 done');
 
       // console.log(this.builder);
       this.calcAvg()
     })
+    
   }
   async calcAvg() {
     let avgTotal = []

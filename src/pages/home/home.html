@@ -350,25 +350,40 @@
         </div>
         <div class="slides">
            <section class="location">
-             <p>Builders in Soweto: 30</p>
+             <p>Builders in {{myCity}}: {{myNearBuilder.length}}</p>
            </section>
             <section class="overflow-slides">
-              <div class="slides-card" *ngFor="let near of myNearBuilder">
+              <div class="slides-card" *ngFor="let near of myNearBuilder; let i = index">
                 <div class="slide">
-                  <div class="profile"><img src="../../assets/imgs/builders.png" alt=""></div>
+                  <div class="profile"><img src="{{near.image}}" alt=""></div>
                   <div class="information">
-                    <p class="name">Khuthy</p>
-                    <p class="price">R400.00</p>
-                    <p class="experience">2 years Exp</p>
+                    <p class="name">{{near.fullName}}</p>
+                    <p class="price">{{near.price  | currency:'&#82;'}}(p/&#13217;)</p>
+                    <p class="experience">{{near.experiences}}</p>
                   </div>
                   <div class="btn-request">
                     <p>Request</p>
                     <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
                   </div>
+
+                  <!-- <div class="title">
+                    <p>{{b.fullName}}</p>
+                  </div>
+                  <div class="image"><img src="{{b.image}}" alt="khuthy"></div>
+                  <div class="info-card-builder">
+                      <p>{{b.price  | currency:'&#82;'}}(p/&#13217;)</p>
+                      <p>{{b.experiences}} year Exp</p>
+                      <p>{{distance[i]}} km away</p>
+                  </div>
+                  <div class="londan"></div>
+                  <div class="btn-request">
+                      <p (click)="viewBuilderInfo(b,i)">Request</p>
+                      <button ion-fab color="light" (click)="rShortcut(b.uid)"><ion-icon name="arrow-forward"></ion-icon></button>
+                    </div> -->
                 </div>
                 
               </div>
-              <div class="slides-card">
+         <!--      <div class="slides-card">
                   <div class="slide">
                     <div class="profile"><img src="../../assets/imgs/builders.png" alt=""></div>
                     <div class="information">
@@ -397,7 +412,7 @@
                       </div>
                     </div>
                     
-                  </div>
+                  </div> -->
              
             </section>
           <!-- <h3>Builders in Johannesburg 30</h3>
