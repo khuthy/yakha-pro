@@ -368,8 +368,8 @@
                     <p class="experience">{{near.experiences}}</p>
                   </div>
                   <div class="btn-request">
-                    <p>Request</p>
-                    <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                    <p (click)="viewBuilderInfo(near,i)">Request</p>
+                    <button ion-fab color="light" (click)="rShortcut(near.uid)"><ion-icon name="arrow-forward"></ion-icon></button>
                   </div>
 
                   <!-- <div class="title">
