@@ -70,7 +70,7 @@
               <p class="error" *ngIf="profileForm.get('personalNumber').hasError('minlength') && (profileForm.get('personalNumber').dirty || profileForm.get('personalNumber').touched)">Cell number must be equal to 10 digits</p>
         </ion-col>
         <ion-col col-11 align-self-center>
-                 <input (focus)="checkKeyBoardEvents()" (blur)="checkKeyBoardEvents()" class="address" formControlName="address" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+                 <input (focus)="checkKeyBoardEvents()" (blur)="checkKeyBoardEvents()" class="address" formControlName="address"/>
               <p class="error" *ngIf="profileForm.get('address').hasError('required') && (profileForm.get('address').dirty || profileForm.get('address').touched)"> Please specify your Address.</p>
         </ion-col>
       </ion-row>
