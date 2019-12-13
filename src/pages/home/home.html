@@ -327,7 +327,7 @@
     </button>
       </ion-buttons>
       <ion-title text-center *ngIf="getUsers" color="dark">Sent Request</ion-title>
-      <ion-searchbar class="searchbar" mode="ios" *ngIf="activateSearch" (ionFocus)="keyboardListener($event)" (ionBlur)="keyboardListener($event)"></ion-searchbar>
+      <ion-searchbar class="searchbar" mode="ios" *ngIf="activateSearch" (ionInput)="keyboardListener($event)" (ionBlur)="keyboardListener($event)"></ion-searchbar>
       <ion-buttons right end>
           <button icon-only ion-button *ngIf="!getUsers" (click)="openSearch()" color="dark"> <ion-icon [name]="icon"></ion-icon> </button>
           <button icon-only ion-button menuToggle  *ngIf="getUsers" color="dark"></button>
@@ -362,8 +362,8 @@
                     <p class="experience">{{near.experiences}}</p>
                   </div>
                   <div class="btn-request">
-                    <p>Request</p>
-                    <button ion-fab color="light"><ion-icon name="arrow-forward"></ion-icon></button>
+                    <p (click)="viewBuilderInfo(near,i)">Request</p>
+                    <button ion-fab color="light" (click)="rShortcut(near.uid)"><ion-icon name="arrow-forward"></ion-icon></button>
                   </div>
 
                   <!-- <div class="title">

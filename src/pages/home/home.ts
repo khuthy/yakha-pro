@@ -100,7 +100,7 @@ export class HomePage {
     /*   this.builder.forEach((i)=>{
         this.getDirections(this.map, i.lat, i.lng);
       }) */
-      console.log(this.nearest); 
+      //console.log(this.nearest); 
     }, 1000);
     
     /*  window.addEventListener('resize', () => this.mapContainer.getViewPort().resize());
@@ -362,7 +362,6 @@ geocoder.reverseGeocode(
   keyboardListener(ev) {
     console.log(ev);
     if(this.keyboard.isOpen()) {
-
       if(!this.getUsers) {
         this.showBuilders = false;
         this.showAllBuilders();
@@ -370,11 +369,7 @@ geocoder.reverseGeocode(
         this.showBuilders = true;
         this.showAllBuilders();
       }
-
-
-
     } else {
-
       this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1], 'overflow', 'unset');
       /*  this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[0], 'flex-basis', '20%');
        this.renderer.setStyle(this.elementRef.nativeElement.children[1].children[1].children[1].children[1], 'flex', '30%'); */
@@ -1009,8 +1004,8 @@ geocoder.reverseGeocode(
   //   // }
   //   //viewmore
   viewBuilderInfo(builder, index) {
-    console.log('Builder ',builder,'Index ', index);
-    //this.navCtrl.push(BuilderProfileviewPage, builder);
+    //console.log('Builder ',builder,'Index ', index);
+    this.navCtrl.push(BuilderProfileviewPage, builder);
   }
 
   viewRequest(docID, uid) {
